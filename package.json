@@ -1,0 +1,22 @@
+{
+    "name": "typed-adventureland",
+    "version": "0.0.1",
+    "description": "Strong TypeScript declarations for the game AdventureLand",
+    "repository": "adventureland-community/typed-adventureland",
+    "types": "./dist/**/*.d.ts",
+    "files": [
+      "dist/**/*.d.ts",
+      "index.d.ts"
+    ],
+    "keywords": [
+      "AdventureLand",
+      "API",
+      "Typescript",
+      "Autocomplete"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+      "typescript": "^4.6.3"
+    }
+  }
