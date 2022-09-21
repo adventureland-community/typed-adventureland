@@ -1,6 +1,6 @@
-type HealthPotion = "hpot0" | "hpot1" | "hpotx";
+export type HealthPotion = "hpot0" | "hpot1" | "hpotx";
 
-type ManaPotions = "mpot0" | "mpot1" | "mpotx";
+export type ManaPotions = "mpot0" | "mpot1" | "mpotx";
 
 // TODO: each category should have its own type
 

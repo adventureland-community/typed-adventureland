@@ -1986,3 +1986,5 @@ export type EventName = "abtesting" | "goobrawl" | "icegolem" | "crabxx" | "fran
 export * from "./skills";
 export * from "./npc";
 export * from "./dungeon";
+export * from "./codemessage";
+export * from "./items";
