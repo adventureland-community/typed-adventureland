@@ -75,6 +75,8 @@ declare global {
         max_hp: number;
         /** The character name that the monster is currently attacking */
         target?: string;
+        x?:number;
+        y?:number
       };
     } & {
       valentines?: boolean;
@@ -876,6 +878,8 @@ export type GItem = {
   type: ItemType;
   wtype: WeaponType;
   gives?: Array<[StatType, number]>;
+  skin:string;
+  size:number;
 } & { [T in StatType]?: number };
 
 /**
@@ -1218,10 +1222,12 @@ export type StatType =
   | "frequency"
   | "gold"
   | "hp"
+  | "mp"
   | "int"
   | "lifesteal"
   | "luck"
   | "mp_cost"
+  | "mp_reduction"
   | "range"
   | "resistance"
   | "speed"
@@ -1326,6 +1332,7 @@ export type MonsterName =
   | "spider"
   | "squig"
   | "squigtoad"
+  | "slenderman"
   | "stompy"
   | "stoneworm"
   | "target"
@@ -1981,7 +1988,16 @@ export type ServerIdentifier = "I" | "II" | "III" | "PVP";
 
 export type ServerRegion = "ASIA" | "US" | "EU";
 
-export type EventName = "abtesting" | "goobrawl" | "icegolem" | "crabxx" | "franky";
+export type EventName =
+  | "abtesting"
+  | "goobrawl"
+  | "icegolem"
+  | "crabxx"
+  | "franky"
+  | "halloween"
+  | "mrgreen"
+  | "mrpumpkin"
+  | "slenderman";
 
 export * from "./skills";
 export * from "./npc";
