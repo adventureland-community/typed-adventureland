@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Strong TypeScript declarations for the game AdventureLand",
   "repository": "adventureland-community/typed-adventureland",
-  "types": "./dist/**/*.d.ts",
+  "main": "dist/src/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "files": [
     "dist/**/*.d.ts",
     "index.d.ts"
@@ -15,5 +16,14 @@
     "Autocomplete"
   ],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build:declaration": "tsc && echo Emitted declaration files"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "prettier": "^2.0.2",
+    "ts-node": "^8.8.1",
+    "typescript": "4.8.4"
+  }
 }
