@@ -1,5 +1,13 @@
 import { ItemName } from "./generated";
 
+declare global {
+    /** 0 = normal, 1 = high, 2 = rare */
+  function item_grade(item: ItemInfo | { name: ItemName }): -1 | 0 | 1 | 2;
+  
+  /** Returns the inventory position of the item, or -1 if it's not found */
+  function locate_item(item: ItemName): number; // should this live in "inventory"?
+}
+
 export type HealthPotion = "hpot0" | "hpot1" | "hpotx";
 
 export type ManaPotion = "mpot0" | "mpot1" | "mpotx";

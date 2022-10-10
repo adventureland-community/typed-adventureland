@@ -1,4 +1,12 @@
 import { ItemName } from "./generated";
+declare global {
+    /** 0 = normal, 1 = high, 2 = rare */
+    function item_grade(item: ItemInfo | {
+        name: ItemName;
+    }): -1 | 0 | 1 | 2;
+    /** Returns the inventory position of the item, or -1 if it's not found */
+    function locate_item(item: ItemName): number;
+}
 export declare type HealthPotion = "hpot0" | "hpot1" | "hpotx";
 export declare type ManaPotion = "mpot0" | "mpot1" | "mpotx";
 /** the item instance used different places, your inventory, merchant stand, bank and other places */

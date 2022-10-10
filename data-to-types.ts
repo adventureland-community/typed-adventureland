@@ -81,7 +81,7 @@ function generateMonsterNames(G: any) {
   console.log(`Generating ${Object.keys(G.monsters).length} monster names`);
   const monsters: Array<[string, any]> = Object.entries(G.monsters);
   // maps can have instance = true, they can have event
-  let output = "export type MonsterName = ";
+  let output = "export type MonsterName = "; // TODO: strictly speaking, this is their monster type / key, not their name, it's used in mtype as well in parent.entities
   for (const [monsterName, monster] of monsters.sort((a, b) => a[0].localeCompare(b[0]))) {
     output += `| '${monsterName}' // ${monster.name}\n`;
   }
