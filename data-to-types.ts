@@ -12,6 +12,10 @@ export function updateData() {
       json.timestamp = new Date();
 
       generateItemNames(json);
+      generateMapNames(json);
+      generateMonsterNames(json);
+      // TODO: Generate skill names
+      // TODO: not all event names exist in G.events e.g. mrgreen, mrpumpkin,slenderman
     })
     .catch(function (error) {
       // handle error
@@ -26,19 +30,14 @@ updateData();
 // npx ts-node data-to-types.ts
 
 function generateItemNames(G: any) {
-  const items: Array<[string, any]> = Object.entries(G.items);
-  const itemTypes = {};
-  for (const [itemName, item] of items) {
-    if (!itemTypes[item.type]) {
-      itemTypes[item.type] = {};
-    }
-    itemTypes[item.type][itemName] = item;
-  }
+  // TODO: generate ItemType, WeaponType
+
+  const itemsByType = groupBy(G.items, "type");
   let output = "";
   let itemNamesType = "export type ItemName =\n";
-  const types: Array<[string, any]> = Object.entries(itemTypes);
+  const types: Array<[string, any]> = Object.entries(itemsByType);
   for (const [type, value] of types) {
-    const typeName = type.charAt(0).toUpperCase() + type.slice(1) + 'Name'
+    const typeName = type.charAt(0).toUpperCase() + type.slice(1) + "Name";
     output += `\nexport type ${typeName} = \n`;
     itemNamesType += `| ${typeName}\n`;
     const itemsByType: Array<[string, any]> = Object.entries(value);
@@ -49,5 +48,48 @@ function generateItemNames(G: any) {
 
   output += itemNamesType;
 
-  writeFileSync(join(__dirname, "src/generated-item-names.ts"), output, { flag: "w" });
+  writeFileSync(join(__dirname, "src/generated/item-names.ts"), output, {
+    flag: "w",
+  });
+}
+
+function generateMapNames(G: any) {
+  const maps: Array<[string, any]> = Object.entries(G.maps);
+  // maps can have instance = true, they can have event
+  let output = "export type MapName = \n";
+  for (const [mapName, map] of maps) {
+    output += `${map.ignore ? "// " : ""}| '${mapName}' // ${map.name}${
+      map.instance ? " [instance]" : ""
+    }${map.event ? ` [event:${map.event}]` : ""}\n`;
+  }
+
+  writeFileSync(join(__dirname, "src/generated/map-names.ts"), output, {
+    flag: "w",
+  });
+}
+
+function generateMonsterNames(G: any) {
+  const monsters: Array<[string, any]> = Object.entries(G.monsters);
+  // maps can have instance = true, they can have event
+  let output = "export type MonsterName = ";
+  for (const [monsterName, monster] of monsters) {
+    output += `| '${monsterName}' // ${monster.name}\n`;
+  }
+
+  writeFileSync(join(__dirname, "src/generated/monster.ts"), output, {
+    flag: "w",
+  });
+}
+
+function groupBy(obj, propertyName) {
+  const entries: Array<[string, any]> = Object.entries(obj);
+  const grouped = {};
+  for (const [key, entry] of entries) {
+    const keyValue = entry[propertyName];
+    if (!grouped[keyValue]) {
+      grouped[keyValue] = {};
+    }
+    grouped[keyValue][key] = entry;
+  }
+  return grouped;
 }
