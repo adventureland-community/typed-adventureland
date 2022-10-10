@@ -2,6 +2,8 @@ import axios from "axios";
 import { writeFileSync } from "fs";
 import { join } from "path";
 export function updateData() {
+  console.log("Downloading data.js");
+
   axios
     .get<string>("https://adventure.land/data.js")
     .then(function (response) {
@@ -11,11 +13,14 @@ export function updateData() {
       const json = JSON.parse(data);
       json.timestamp = new Date();
 
+      console.log(`data.js v${json.version} fetched`);
+
       generateItemNames(json);
       generateMapNames(json);
       generateMonsterNames(json);
       generateSkillNames(json);
-      // TODO: not all event names exist in G.events e.g. mrgreen, mrpumpkin,slenderman
+      // TODO: not all event names exist in G.events e.g. mrgreen, mrpumpkin, slenderman
+      console.log("Done");
     })
     .catch(function (error) {
       // handle error
@@ -30,6 +35,7 @@ updateData();
 // npx ts-node data-to-types.ts
 
 function generateItemNames(G: any) {
+  console.log(`Generating ${Object.keys(G.items).length} item names`);
   // TODO: generate ItemType, WeaponType
 
   const itemsByType = groupBy(G.items, "type");
@@ -54,6 +60,7 @@ function generateItemNames(G: any) {
 }
 
 function generateMapNames(G: any) {
+  console.log(`Generating ${Object.keys(G.maps).length} map names`);
   const maps: Array<[string, any]> = Object.entries(G.maps);
   // maps can have instance = true, they can have event
   let output = "export type MapName = \n";
@@ -69,6 +76,7 @@ function generateMapNames(G: any) {
 }
 
 function generateMonsterNames(G: any) {
+  console.log(`Generating ${Object.keys(G.monsters).length} monster names`);
   const monsters: Array<[string, any]> = Object.entries(G.monsters);
   // maps can have instance = true, they can have event
   let output = "export type MonsterName = ";
@@ -76,30 +84,58 @@ function generateMonsterNames(G: any) {
     output += `| '${monsterName}' // ${monster.name}\n`;
   }
 
-  writeFileSync(join(__dirname, "src/generated/monster.ts"), output, {
+  writeFileSync(join(__dirname, "src/generated/monster-names.ts"), output, {
     flag: "w",
   });
 }
 
 function generateSkillNames(G: any) {
-  // TODO: generate class specific types? some skills are class specific
-  // TODO: there are also utility skills like move_up, snippet and so forth
+  console.log(`Generating ${Object.keys(G.skills).length} skill names`);
   const skillsByType = groupBy(G.skills, "type");
 
-  let output = "";
+  const output: { [key: string]: Array<[string, any]> } = {};
 
   const skills: Array<[string, any]> = Object.entries(skillsByType);
   for (const [type, value] of skills) {
-    const typePostfix = `${type === "skill" ? "Name" : "SkillName"}`;
-    const typeName = type.charAt(0).toUpperCase() + type.slice(1) + typePostfix;
-    output += `\nexport type ${typeName} = \n`;
     const skillsByType: Array<[string, any]> = Object.entries(value);
     for (const [skillName, skill] of skillsByType) {
-      output += `| '${skillName}' // ${skill.name}\n`;
+      if (skill.class) {
+        if (Array.isArray(skill.class)) {
+          for (const className of skill.class) {
+            if (!output[className]) {
+              output[className] = [];
+            }
+
+            output[className].push([skillName, skill]);
+          }
+        } else {
+          if (!output[skill.class]) {
+            output[skill.class] = [];
+          }
+
+          output[skill.class].push([skillName, skill]);
+        }
+      } else {
+        if (!output[type]) {
+          output[type] = [];
+        }
+        output[type].push([skillName, skill]);
+      }
     }
   }
 
-  writeFileSync(join(__dirname, "src/generated/skill.ts"), output, {
+  let stringOutput = "";
+  for (const [type, skills] of Object.entries(output)) {
+    const typePostfix = `${type === "skill" ? "Name" : "SkillName"}`;
+    const typeName = type.charAt(0).toUpperCase() + type.slice(1) + typePostfix;
+
+    stringOutput += `\nexport type ${typeName} = \n`;
+    for (const [skillName, skill] of skills) {
+      stringOutput += `| '${skillName}' // ${skill.name}\n`;
+    }
+  }
+
+  writeFileSync(join(__dirname, "src/generated/skill-names.ts"), stringOutput, {
     flag: "w",
   });
 }
@@ -109,10 +145,13 @@ function groupBy(obj, propertyName) {
   const grouped = {};
   for (const [key, entry] of entries) {
     const keyValue = entry[propertyName];
+
     if (!grouped[keyValue]) {
       grouped[keyValue] = {};
     }
+
     grouped[keyValue][key] = entry;
   }
+
   return grouped;
 }

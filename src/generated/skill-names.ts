@@ -6,70 +6,85 @@ export type AbilitySkillName =
 | 'use_mp' // Use MP Potion
 | 'use_hp' // Use HP Potion
 | 'attack' // Attack
-| 'heal' // Heal
 | 'travel' // Travel!
 | 'regen_mp' // Regenerate MP
 
-export type SkillName = 
-| 'fishing' // Fishing
+export type PriestSkillName = 
+| 'heal' // Heal
 | 'darkblessing' // Dark Blessing
 | 'phaseout' // Phase Out
-| 'alchemy' // Alchemy
 | 'partyheal' // Party Heal
-| '3shot' // 3-Shot
-| 'taunt' // Taunt
-| 'stomp' // Stomp
-| 'snowball' // Snowball
-| 'blink' // Blink
-| 'smash' // Smash
-| 'shadowstrike' // Shadow Strike
-| 'massproduction' // Mass Production
-| 'cburst' // Controlled Mana Burst
-| 'mfrenzy' // Merchant's Frenzy
-| 'burst' // Mana Burst
-| 'agitate' // Agitate
-| 'poisonarrow' // Poison Arrow
-| 'mentalburst' // Mental Burst
-| 'mcourage' // Merchant's Courage
 | 'curse' // Curse
-| '5shot' // 5-Shot
-| 'power' // Power
-| 'selfheal' // Heal
-| 'throw' // Throw Stuff
-| 'invis' // Assassin's Smoke
-| 'cleave' // Cleave
-| '4fingers' // 4 Finger Technique
-| 'charm' // Charm
-| 'scare' // Scare
 | 'revive' // Revive!
-| 'mluck' // Merchant's Luck
-| 'tangle' // Tangle
-| 'charge' // Charge
-| 'quickpunch' // Quick Punch
-| 'mining' // Mining
-| 'rspeed' // Rogue Swiftness
-| 'warp' // Warp
-| 'xpower' // Power
-| 'entangle' // Entangle
-| 'mshield' // Mana Shield
-| 'huntersmark' // Hunter's Mark
-| 'warcry' // War Cry
-| 'hardshell' // Hard Shell
-| 'massproductionpp' // Mass Production++
-| 'pickpocket' // Pickpocket
-| 'dash' // Dash
-| 'piercingshot' // Piercing Shot
-| 'supershot' // Supershot
-| 'zapperzap' // Zap
-| 'track' // Track
 | 'absorb' // Absorb Sins
+
+export type MerchantSkillName = 
+| 'fishing' // Fishing
+| 'massproduction' // Mass Production
+| 'mfrenzy' // Merchant's Frenzy
+| 'mcourage' // Merchant's Courage
+| 'throw' // Throw Stuff
+| 'mluck' // Merchant's Luck
+| 'mining' // Mining
+| 'massproductionpp' // Mass Production++
+
+export type MageSkillName = 
+| 'alchemy' // Alchemy
+| 'blink' // Blink
+| 'cburst' // Controlled Mana Burst
+| 'burst' // Mana Burst
+| 'entangle' // Entangle
 | 'reflection' // Reflective Shield
 | 'energize' // Energize
 | 'light' // Light
-| 'purify' // Purify
-| 'quickstab' // Quick Stab
 | 'magiport' // Magiport
+
+export type RangerSkillName = 
+| '3shot' // 3-Shot
+| 'poisonarrow' // Poison Arrow
+| '5shot' // 5-Shot
+| '4fingers' // 4 Finger Technique
+| 'huntersmark' // Hunter's Mark
+| 'piercingshot' // Piercing Shot
+| 'supershot' // Supershot
+| 'track' // Track
+
+export type WarriorSkillName = 
+| 'taunt' // Taunt
+| 'stomp' // Stomp
+| 'agitate' // Agitate
+| 'cleave' // Cleave
+| 'charge' // Charge
+| 'warcry' // War Cry
+| 'hardshell' // Hard Shell
+| 'dash' // Dash
+
+export type SkillName = 
+| 'snowball' // Snowball
+| 'power' // Power
+| 'charm' // Charm
+| 'scare' // Scare
+| 'tangle' // Tangle
+| 'warp' // Warp
+| 'xpower' // Power
+| 'zapperzap' // Zap
+
+export type PaladinSkillName = 
+| 'smash' // Smash
+| 'selfheal' // Heal
+| 'mshield' // Mana Shield
+| 'purify' // Purify
+
+export type RogueSkillName = 
+| 'shadowstrike' // Shadow Strike
+| 'mentalburst' // Mental Burst
+| 'invis' // Assassin's Smoke
+| 'quickpunch' // Quick Punch
+| 'rspeed' // Rogue Swiftness
+| 'pickpocket' // Pickpocket
+| 'quickstab' // Quick Stab
 | 'pcoat' // A Poisonous Touch
+| 'stack' // Stacked Damage
 
 export type GmSkillName = 
 | 'gm' // GM Abilities
@@ -111,6 +126,3 @@ export type MonsterSkillName =
 export type UndefinedSkillName = 
 | 'toggle_run_code' // Engage/Disengage Code
 | 'toggle_code' // Toggle Code
-
-export type PassiveSkillName = 
-| 'stack' // Stacked Damage
