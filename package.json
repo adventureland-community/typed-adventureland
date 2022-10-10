@@ -21,9 +21,11 @@
     "build:declaration": "tsc && echo Emitted declaration files"
   },
   "devDependencies": {
+    "axios": "^1.1.2",
+    "@types/node": "^18.8.3",
     "eslint": "^6.8.0",
     "prettier": "^2.0.2",
-    "ts-node": "^8.8.1",
+    "ts-node": "^8.10.2",
     "typescript": "4.8.4"
   }
 }

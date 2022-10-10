@@ -16,6 +16,7 @@
         "removeComments": false,
         "resolveJsonModule": true,
         "skipLibCheck": true,
+        "esModuleInterop": true,
         "sourceMap": true,
         "strict": true,
         "strictFunctionTypes": false,

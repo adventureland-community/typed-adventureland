@@ -1,4 +1,4 @@
-import { SkillName } from "./skills";
+import type { SkillName } from "./skills";
 
 declare global {
     interface Window {
