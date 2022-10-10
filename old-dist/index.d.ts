@@ -30,20 +30,6 @@ export {};
 
 declare global {
 
-
-
-
-  const character: {
-    // TODO: Get a list of events
-    /**
-     * Sets up an event listener for the character. See http://adventure.land/docs/code/character/events for more info.
-     * @param event The event name to listen to
-     * @param callback The function that gets called when the event triggers
-     */
-    on(event: string, callback?: (data: any) => void): void;
-    all(callback?: (name: any, data: any) => void): void;
-  } & CharacterEntity;
-
   const game: {
     // TODO: Get a list of events
     /**
@@ -486,170 +472,10 @@ declare global {
 
 }
 
-/**
- * For the current character
- */
-export type CharacterEntity = Entity & {
-  /** visual width */
-  awidth: number;
-  /** visual height */
-  aheight: number;
-  bank: {
-    [T in BankPackType]: ItemInfo[];
-  } & {
-    gold: number;
-  };
-  /** Channeling actions */
-  c: {
-    [T in import("./skills").SkillName]?: { ms: number }; // TODO: could probably type it specifically for only channeling actions
-  } & {
-    revival?: {
-      /** name of the priest trying to revive you. */
-      f: string;
-    };
-    fishing?: {
-      drop: any; //GDrops;
-    };
-  };
-  ctype: CharacterType;
-  items: Array<ItemInfo | null>;
-  /** Amount of gold the player has in its inventory */
-  gold: number;
-  /** Gold multiplier */
-  goldm: number;
-  /** Luck multiplier. */
-  luckm: number;
-  ping: number;
-  /**
-   * the name of the current open stand or false
-   */
-  stand: string | boolean;
-  // TODO: Actually figure this out
-  q: {
-    compound?: {};
-    upgrade?: {
-      ms: number;
-      len: number;
-      num: number;
-    };
-    exchange?: {};
-  };
-  /** A bit of extra range that we can use to attack further monsters. It's variable. If you attack a monster using this extra range, it decreases for the next attack. */
-  xrange: number;
-  /**
-   * The name of the current party leader
-   */
-  party?: string;
-
-  /** the amount of inventory slots left */
-  esize: number;
-
-  /** The total amount of inventory slots */
-  isize: number;
-
-  /** The team you are on in the abtesting event. */
-  team: "A" | "B";
-
-  /**
-   * Which instance your character is in
-   * If you are in a dungeon, it's a unique ID, otherwise it's the map you are in
-   * */
-  in: MapName | string;
-};
-
-type EntityBase = {
-  h: number;
-  v: number;
-  vn: number;
-};
-
-export type Entity = PositionMovable & {
-  width: number;
-
-  height: number;
-
-  mscale?: number;
-
-  /** If set, attacks only do 1 damage */
-  "1hp": number;
-  /** Only set if the entity is a monster */
-  aggro: number;
-  apiercing: number;
-  armor: number;
-  attack: number;
-  base: EntityBase;
-  cooperative: boolean;
-  ctype: CharacterType | import("./npc").NPCType;
-  damage_type?: DamageType;
-  /** A percent chance to avoid physical attacks */
-  evasion: number;
-  /** Related to attack speed, I think it's equal to attacks per second */
-  frequency: number;
-  hp: number;
-  xp: number;
-  /** This value is also the key for the object in parent.entities */
-  id: string;
-  immune: boolean;
-  /** When were the ms values last updated? */
-  last_ms: Date;
-  level: number;
-  max_hp: number;
-  max_mp: number;
-  /** Is the character currently moving? */
-  moving: boolean;
-  mp: number;
-  /** The MP cost for doing an attack */
-  mp_cost: number;
-  /** how much manacost is reduced */
-  mp_reduction: number;
-  /** If the entity is a monster, it is set */
-  mtype?: MonsterName;
-  /** Contains the full name of the monster */
-  name: string;
-  /** Is set if the entity is an NPC, undefined otherwise */
-  npc?: string;
-  /** Attack range */
-  range: number;
-  real_x: number;
-  real_y: number;
-  resistance: number;
-  /** Only set if the entity is a character. If true, the player is dead. */
-  rip?: boolean;
-  rpiercing: number;
-  s: StatusInfo;
-  /** Set if the entity is a player */
-  slots: {
-    [T in SlotType]: ItemInfo;
-  } & {
-    [T in TradeSlotType]?: ItemInfo & {
-      /** Number of minutes remaining for giveaway items */
-      giveaway?: number;
-      /** List of character IDs that are in the giveaway */
-      list: string[];
-      price: number;
-      rid: string;
-    };
-  };
-  speed: number;
-  // TODO: Add the parameters to this object
-  /** If set, the merchant has a stand open */
-  standed?: any;
-  /** Set if we are under the status effect "stoned" */
-  stoned?: boolean;
-  /** Set if the player or monster is targeting something */
-  target: string;
-  type: "character" | "monster";
-  vx: number;
-  vy: number;
-  dead?: boolean | string; // monster only attribute
-};
-
 export type ChestInfo = PositionReal & {
   alpha: number;
   skin: "chest3" | string;
 };
-
-
 
 /**
  * Contains elements that describe a door
@@ -706,42 +532,15 @@ export type StatusInfo = {
   };
 };
 
-export type PositionReal = IPosition & {
-  map: MapName;
-  real_x: number;
-  real_y: number;
-};
 
-export type PositionMovable = PositionReal & {
-  from_x?: number;
-  from_y?: number;
-  going_x: number;
-  going_y: number;
-};
 
-export type PositionSmart = IPosition & {
-  map: MapName;
-  transport?: boolean;
-  i?: number;
-  s?: number;
-};
 
-export type IPosition = {
-  /**
-   * Contains the name of the map
-   */
-  map?: MapName;
-  x: number;
-  y: number;
-};
 
 // TODO: Get all types (from G?)
 export type CharacterType = "mage" | "merchant" | "paladin" | "priest" | "ranger" | "rogue" | "warrior";
 
 // TODO: Get all types (from G?)
 export type DamageType = "magical" | "physical";
-
-
 
 export type SlotType =
   | "amulet"
@@ -827,19 +626,3 @@ export type ConditionName =
   | "xshotted"
   | "invis";
 
-export type EventName =
-  | "abtesting"
-  | "goobrawl"
-  | "icegolem"
-  | "crabxx"
-  | "franky"
-  | "halloween"
-  | "mrgreen"
-  | "mrpumpkin"
-  | "slenderman";
-
-export * from "./skills";
-export * from "./npc";
-export * from "./dungeon";
-export * from "./codemessage";
-export * from "./items";
