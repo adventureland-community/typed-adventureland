@@ -20,7 +20,8 @@ export function updateData() {
       generateMonsterNames(json);
       generateSkillNames(json);
       // TODO: not all event names exist in G.events e.g. mrgreen, mrpumpkin, slenderman
-      // TODO: NPCName, NPCType, NPCRole
+      generateNPCNames(json);
+
       console.log("Done");
     })
     .catch(function (error) {
@@ -42,12 +43,12 @@ function generateItemNames(G: any) {
   const itemsByType = groupBy(G.items, "type");
   let output = "";
   let itemNamesType = "export type ItemName =\n";
-  const types: Array<[string, any]> = Object.entries(itemsByType);
+  const types: Array<[string, any]> = Object.entries(itemsByType).sort((a, b) => a[0].localeCompare(b[0]));
   for (const [type, value] of types) {
     const typeName = type.charAt(0).toUpperCase() + type.slice(1) + "Name";
     output += `\nexport type ${typeName} = \n`;
     itemNamesType += `| ${typeName}\n`;
-    const itemsByType: Array<[string, any]> = Object.entries(value);
+    const itemsByType: Array<[string, any]> = Object.entries(value).sort((a, b) => a[0].localeCompare(b[0]));
     for (const [itemName, item] of itemsByType) {
       output += `| '${itemName}' // ${item.name}\n`;
     }
@@ -65,7 +66,7 @@ function generateMapNames(G: any) {
   const maps: Array<[string, any]> = Object.entries(G.maps);
   // maps can have instance = true, they can have event
   let output = "export type MapName = \n";
-  for (const [mapName, map] of maps) {
+  for (const [mapName, map] of maps.sort((a, b) => a[0].localeCompare(b[0]))) {
     output += `${map.ignore ? "// " : ""}| '${mapName}' // ${map.name}${
       map.instance ? " [instance]" : ""
     }${map.event ? ` [event:${map.event}]` : ""}\n`;
@@ -81,7 +82,7 @@ function generateMonsterNames(G: any) {
   const monsters: Array<[string, any]> = Object.entries(G.monsters);
   // maps can have instance = true, they can have event
   let output = "export type MonsterName = ";
-  for (const [monsterName, monster] of monsters) {
+  for (const [monsterName, monster] of monsters.sort((a, b) => a[0].localeCompare(b[0]))) {
     output += `| '${monsterName}' // ${monster.name}\n`;
   }
 
@@ -126,13 +127,13 @@ function generateSkillNames(G: any) {
   }
   let allSkills = "\n export type AllSkillNames = \n";
   let stringOutput = "";
-  for (const [type, skills] of Object.entries(output)) {
+  for (const [type, skills] of Object.entries(output).sort((a, b) => a[0].localeCompare(b[0]))) {
     const typePostfix = `${type === "skill" ? "Name" : "SkillName"}`;
     const typeName = type.charAt(0).toUpperCase() + type.slice(1) + typePostfix;
 
     stringOutput += `\nexport type ${typeName} = \n`;
     allSkills += `| ${typeName}\n`;
-    for (const [skillName, skill] of skills) {
+    for (const [skillName, skill] of skills.sort((a, b) => a[0].localeCompare(b[0]))) {
       stringOutput += `| '${skillName}' // ${skill.name}\n`;
     }
   }
@@ -140,6 +141,42 @@ function generateSkillNames(G: any) {
   stringOutput += allSkills;
 
   writeFileSync(join(__dirname, "src/generated/skill-names.ts"), stringOutput, {
+    flag: "w",
+  });
+}
+
+// TODO: NPCName, NPCType, NPCRole
+function generateNPCNames(G: any) {
+  console.log(`Generating ${Object.keys(G.npcs).length} npc names`);
+
+  const types: { [key: string]: Array<[string, any]> } = {
+    NPCName: [],
+    NPCKey: [],
+    NPCRole: [],
+  };
+
+  const npcs: Array<[string, any]> = Object.entries(G.npcs);
+  for (const [npcKey, npc] of npcs) {
+    types.NPCKey.push([npcKey, npc]);
+
+    if (npc.name) {
+      types.NPCName.push([npc.name, { name: npcKey }]);
+    }
+
+    if (npc.role && !types.NPCRole.some(([role, _]) => role === npc.role)) {
+      types.NPCRole.push([npc.role, {}]);
+    }
+  }
+
+  let output = "";
+  for (const [type, npcs] of Object.entries(types)) {
+    output += `\nexport type ${type} = \n`;
+    for (const [key, npc] of npcs.sort((a, b) => a[0].localeCompare(b[0]))) {
+      output += `| '${key}'${npc.name ? ` // ${npc.name}` : ""}\n`;
+    }
+  }
+
+  writeFileSync(join(__dirname, "src/generated/npc.ts"), output, {
     flag: "w",
   });
 }
