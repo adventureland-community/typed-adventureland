@@ -1,5 +1,3 @@
-import type { SkillName } from "./skills";
-
 declare global {
     interface Window {
     //   $: JQueryStatic;
@@ -20,7 +18,7 @@ declare global {
     //     [id: string]: ChestInfo;
     //   };
     //   entities: { [id: string]: Entity | CharacterEntity };
-      next_skill: { [T in SkillName]?: Date };
+       next_skill: { [T in import('./generated/').AllSkillNames]?: Date };
     //   npcs: GMapsNPC[];
     //   party: {
     //     [T in string]: IPosition & {

@@ -123,17 +123,20 @@ function generateSkillNames(G: any) {
       }
     }
   }
-
+  let allSkills = "\n export type AllSkillNames = \n";
   let stringOutput = "";
   for (const [type, skills] of Object.entries(output)) {
     const typePostfix = `${type === "skill" ? "Name" : "SkillName"}`;
     const typeName = type.charAt(0).toUpperCase() + type.slice(1) + typePostfix;
 
     stringOutput += `\nexport type ${typeName} = \n`;
+    allSkills += `| ${typeName}\n`;
     for (const [skillName, skill] of skills) {
       stringOutput += `| '${skillName}' // ${skill.name}\n`;
     }
   }
+
+  stringOutput += allSkills;
 
   writeFileSync(join(__dirname, "src/generated/skill-names.ts"), stringOutput, {
     flag: "w",

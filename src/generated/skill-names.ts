@@ -126,3 +126,18 @@ export type MonsterSkillName =
 export type UndefinedSkillName = 
 | 'toggle_run_code' // Engage/Disengage Code
 | 'toggle_code' // Toggle Code
+
+ export type AllSkillNames = 
+| AbilitySkillName
+| PriestSkillName
+| MerchantSkillName
+| MageSkillName
+| RangerSkillName
+| WarriorSkillName
+| SkillName
+| PaladinSkillName
+| RogueSkillName
+| GmSkillName
+| UtilitySkillName
+| MonsterSkillName
+| UndefinedSkillName
