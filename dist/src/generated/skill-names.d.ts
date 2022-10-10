@@ -1,0 +1,14 @@
+export declare type AbilitySkillName = 'use_town' | 'regen_hp' | 'stop' | 'use_mp' | 'use_hp' | 'attack' | 'travel' | 'regen_mp';
+export declare type PriestSkillName = 'heal' | 'darkblessing' | 'phaseout' | 'partyheal' | 'curse' | 'revive' | 'absorb';
+export declare type MerchantSkillName = 'fishing' | 'massproduction' | 'mfrenzy' | 'mcourage' | 'throw' | 'mluck' | 'mining' | 'massproductionpp';
+export declare type MageSkillName = 'alchemy' | 'blink' | 'cburst' | 'burst' | 'entangle' | 'reflection' | 'energize' | 'light' | 'magiport';
+export declare type RangerSkillName = '3shot' | 'poisonarrow' | '5shot' | '4fingers' | 'huntersmark' | 'piercingshot' | 'supershot' | 'track';
+export declare type WarriorSkillName = 'taunt' | 'stomp' | 'agitate' | 'cleave' | 'charge' | 'warcry' | 'hardshell' | 'dash';
+export declare type SkillName = 'snowball' | 'power' | 'charm' | 'scare' | 'tangle' | 'warp' | 'xpower' | 'zapperzap';
+export declare type PaladinSkillName = 'smash' | 'selfheal' | 'mshield' | 'purify';
+export declare type RogueSkillName = 'shadowstrike' | 'mentalburst' | 'invis' | 'quickpunch' | 'rspeed' | 'pickpocket' | 'quickstab' | 'pcoat' | 'stack';
+export declare type GmSkillName = 'gm';
+export declare type UtilitySkillName = 'move_up' | 'snippet' | 'pure_eval' | 'move_down' | 'esc' | 'emotion' | 'move_right' | 'move_left' | 'interact' | 'toggle_inventory' | 'toggle_character' | 'toggle_stats' | 'open_snippet';
+export declare type MonsterSkillName = 'dampening_aura' | 'multi_freeze' | 'warpstomp' | 'frostball' | 'healing' | 'multi_burn' | 'self_healing' | 'deepfreeze' | 'zap' | 'mlight' | 'stone' | 'mtangle' | 'weakness_aura' | 'anger' | 'portal' | 'curse_aura' | 'fireball';
+export declare type UndefinedSkillName = 'toggle_run_code' | 'toggle_code';
+export declare type AllSkillNames = AbilitySkillName | PriestSkillName | MerchantSkillName | MageSkillName | RangerSkillName | WarriorSkillName | SkillName | PaladinSkillName | RogueSkillName | GmSkillName | UtilitySkillName | MonsterSkillName | UndefinedSkillName;

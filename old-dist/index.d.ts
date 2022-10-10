@@ -29,74 +29,9 @@ SOFTWARE.
 export {};
 
 declare global {
-  interface Window {
-    $: JQueryStatic;
-    clear_game_logs(): void;
-    close_merchant(): void;
-    distance(from: IPosition | PositionReal, to: IPosition | PositionReal): number;
-    exchange(inventoryPosition: number): void;
-    open_merchant(standInventoryPostion: number): void;
-    start_runner(): void;
-    stop_runner(): void;
 
-    sprite_image(name: string, args?: any): string;
 
-    is_disabled(entity: Entity): boolean;
 
-    character: CharacterEntity;
-    chests: {
-      [id: string]: ChestInfo;
-    };
-    entities: { [id: string]: Entity | CharacterEntity };
-    next_skill: { [T in import("./skills").SkillName]?: Date };
-    npcs: GMapsNPC[];
-    party: {
-      [T in string]: IPosition & {
-        level: number;
-        /** This number refers to the percent of gold you get when one of the party members loots a chest */
-        share: number;
-        type: CharacterType;
-      };
-    };
-    /** Contains the name of every character in your party */
-    party_list: string[];
-    /** Contains a list of the last 40 ping response times */
-    pings: number[];
-    server_identifier: ServerIdentifier;
-    server_region: ServerRegion;
-    socket: SocketIO.Socket & {
-      onAny(arg: (event: string, data: any) => void): void;
-    };
-    S: {
-      [T in EventName]?: IPosition & {
-        map: string;
-        live: boolean;
-        hp: number;
-        max_hp: number;
-        /** The character name that the monster is currently attacking */
-        target?: string;
-        x?:number;
-        y?:number
-      };
-    } & {
-      valentines?: boolean;
-    };
-  }
-
-  const server: {
-    mode: string;
-    pvp: boolean;
-    region: ServerRegion;
-    id: ServerIdentifier;
-  }
-
-  /**
-   * Contains information about what bank packs are available.
-   * [0]: The map where you can access this bank pack
-   * [1]: The cost to unlock this bank pack if you buy with gold
-   * [2]: The cost to unlock this bank pack if you buy with shells
-   */
-  const bank_packs: { [T in BankPackType]: [MapName, number, number] };
 
   const character: {
     // TODO: Get a list of events
@@ -194,23 +129,7 @@ declare global {
    * @returns A string containing the basic reason it failed, or nothing upon success
    */
   function auto_craft(name: ItemName): string | void;
-  /**
-   * Deposits the given amount of gold in the bank. You must be in the bank to actually deposit gold.
-   * @param amount The amount of gold to deposit
-   */
-  function bank_deposit(amount: number): void;
-  /**
-   * Deposits the given item in to the given bank. If no `pack` and `packPosition` is given, the game will try to deposit in to the first available slot. You must be in the bank to actually deposit items.
-   * @param inventoryPosition The position of the item in your inventory
-   * @param pack The bank pack that you want to deposit the item in to
-   * @param packPosition The position of the item in the bank pack you want to deposit the item in to
-   */
-  function bank_store(inventoryPosition: number, pack?: BankPackType, packPosition?: number): Promise<void>;
-  /**
-   * Withdraws the given amount of gold from the bank. You must be in the bank to actually withdraw gold.
-   * @param amount The amount of gold to withdraw
-   */
-  function bank_withdraw(amount: number): void;
+
   /**
    * Buy an item from an NPC. This function can buy things with gold or shells.
    * @param item The name of the item you wish to purchase (`G.items`)
@@ -267,12 +186,7 @@ declare global {
    */
   function can_use_door(map: MapName, door: DoorInfo, x: number, y: number): boolean;
 
-  /**
-   * Changes servers. This will reload the page (the URL will change to match the server given), which means your code will also reload.
-   * @param region The region to change to (e.g. ASIA)
-   * @param identifier The server identifier to change to (e.g. PVP)
-   */
-  function change_server(region: ServerRegion, identifier: ServerIdentifier): void;
+
   /**
    * Changes the target of the player. Use in association with `get_targeted_monster()`.
    * @param target A given target (from `parent.entities`)
@@ -475,41 +389,7 @@ declare global {
     offeringInventoryPosition?: number
   ): Promise<any>;
 
-  // function use_skill(name,target,extra_arg)
-  // target: object or string (character name or monster ID)
-  // for "blink": use_skill("blink",[x,y])
-  // for "3shot", "5shot" target can be an array of objects or strings (name or ID)
-  // example: use_skill("3shot",[target1,target2,target3])
-  // extra_arg is currently for
-  //    use_skill("throw",target,inventory_num)
-  //    and use_skill("energize",target,optional_mp)
-  // Returns a Promise
-  // For "3shot", "5shot", "cburst" returns an array of Promise's - one for each target
-  // skills are work in progress, promises aren't resolved yet!.
-  type ShotTarget = Entity | string;
-  function use_skill(name: "use_hp" | "use_mp"): void; // Promise<any>;
-  function use_skill(name: "3shot", targets: [ShotTarget, ShotTarget | undefined, ShotTarget | undefined]): void; // Promise<any>[];
-
-  function use_skill(
-    name: "5shot",
-    targets: [
-      ShotTarget,
-      ShotTarget | undefined,
-      ShotTarget | undefined,
-      ShotTarget | undefined,
-      ShotTarget | undefined
-    ]
-  ): void; // Promise<any>[];
-
-  /** For destination, it's an array of [x, y] */
-  function use_skill(name: "blink", destination: [number, number]): Promise<any>;
-  /** The string is the ID of the target, the number is how much mana to spend on the attack */
-  function use_skill(name: "cburst", targets: [string, number][]): Promise<any>;
-  function use_skill(name: "energize", target: Entity, mp: number): Promise<any>;
-  function use_skill(name: "magiport", target: string): Promise<any>;
-  function use_skill(name: "throw", target: Entity, inventoryPostion: number): Promise<any>;
-  function use_skill(name: "use_town"): Promise<any>;
-  function use_skill(name: import("./skills").SkillName, target?: Entity, extraArg?: any): Promise<any>;
+  
 
   function trade(inventoryPosition: number, tradeSlot: number | TradeSlotType, price: number, quantity: number): void;
 
@@ -1112,57 +992,6 @@ export type CharacterType = "mage" | "merchant" | "paladin" | "priest" | "ranger
 export type DamageType = "magical" | "physical";
 
 
-export type BankPackType =
-  | "gold"
-  | "items0"
-  | "items1"
-  | "items10"
-  | "items11"
-  | "items12"
-  | "items13"
-  | "items14"
-  | "items15"
-  | "items16"
-  | "items17"
-  | "items18"
-  | "items19"
-  | "items2"
-  | "items20"
-  | "items21"
-  | "items22"
-  | "items23"
-  | "items24"
-  | "items25"
-  | "items26"
-  | "items27"
-  | "items28"
-  | "items29"
-  | "items3"
-  | "items30"
-  | "items31"
-  | "items32"
-  | "items33"
-  | "items34"
-  | "items35"
-  | "items36"
-  | "items37"
-  | "items38"
-  | "items39"
-  | "items4"
-  | "items40"
-  | "items41"
-  | "items42"
-  | "items43"
-  | "items44"
-  | "items45"
-  | "items46"
-  | "items47"
-  | "items5"
-  | "items6"
-  | "items7"
-  | "items8"
-  | "items9"
-  | "character";
 
 export type SlotType =
   | "amulet"
@@ -1247,12 +1076,6 @@ export type ConditionName =
   | "xpower"
   | "xshotted"
   | "invis";
-
-
-// TODO: Confirm that PVP is actually the identifier for PVP servers
-export type ServerIdentifier = "I" | "II" | "III" | "PVP";
-
-export type ServerRegion = "ASIA" | "US" | "EU";
 
 export type EventName =
   | "abtesting"

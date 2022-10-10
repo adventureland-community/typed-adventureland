@@ -18,7 +18,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "build:declaration": "tsc && echo Emitted declaration files"
+    "build": "tsc && echo Emitted declaration files"
   },
   "devDependencies": {
     "axios": "^1.1.2",

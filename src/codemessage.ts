@@ -4,7 +4,7 @@ export type CodeMessageEvent<T> = {
   /** The message sent */
   message: T;
   /** The date the message was sent */
-  date: Date; // is this really a date or a string?
+  date: Date; // TODO: is this really a date or a string?
   /** Whether the message was sent locally */
   local: boolean;
 };

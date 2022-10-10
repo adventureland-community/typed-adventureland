@@ -20,6 +20,7 @@ export function updateData() {
       generateMonsterNames(json);
       generateSkillNames(json);
       // TODO: not all event names exist in G.events e.g. mrgreen, mrpumpkin, slenderman
+      // TODO: NPCName, NPCType, NPCRole
       console.log("Done");
     })
     .catch(function (error) {

@@ -1,3 +1,4 @@
+export {} // this is done to make window a module
 declare global {
     interface Window {
     //   $: JQueryStatic;

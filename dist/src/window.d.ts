@@ -1,4 +1,4 @@
-import type { SkillName } from "./skills";
+export {};
 declare global {
     interface Window {
         clear_game_logs(): void;
@@ -9,7 +9,7 @@ declare global {
         stop_runner(): void;
         sprite_image(name: string, args?: any): string;
         next_skill: {
-            [T in SkillName]?: Date;
+            [T in import('./generated/').AllSkillNames]?: Date;
         };
         /** Contains the name of every character in your party */
         party_list: string[];
