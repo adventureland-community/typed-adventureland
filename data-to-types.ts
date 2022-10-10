@@ -14,7 +14,7 @@ export function updateData() {
       generateItemNames(json);
       generateMapNames(json);
       generateMonsterNames(json);
-      // TODO: Generate skill names
+      generateSkillNames(json);
       // TODO: not all event names exist in G.events e.g. mrgreen, mrpumpkin,slenderman
     })
     .catch(function (error) {
@@ -77,6 +77,29 @@ function generateMonsterNames(G: any) {
   }
 
   writeFileSync(join(__dirname, "src/generated/monster.ts"), output, {
+    flag: "w",
+  });
+}
+
+function generateSkillNames(G: any) {
+  // TODO: generate class specific types? some skills are class specific
+  // TODO: there are also utility skills like move_up, snippet and so forth
+  const skillsByType = groupBy(G.skills, "type");
+
+  let output = "";
+
+  const skills: Array<[string, any]> = Object.entries(skillsByType);
+  for (const [type, value] of skills) {
+    const typePostfix = `${type === "skill" ? "Name" : "SkillName"}`;
+    const typeName = type.charAt(0).toUpperCase() + type.slice(1) + typePostfix;
+    output += `\nexport type ${typeName} = \n`;
+    const skillsByType: Array<[string, any]> = Object.entries(value);
+    for (const [skillName, skill] of skillsByType) {
+      output += `| '${skillName}' // ${skill.name}\n`;
+    }
+  }
+
+  writeFileSync(join(__dirname, "src/generated/skill.ts"), output, {
     flag: "w",
   });
 }
