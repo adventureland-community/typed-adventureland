@@ -21,8 +21,9 @@
     "build": "tsc && echo Emitted declaration files"
   },
   "devDependencies": {
-    "axios": "^1.1.2",
     "@types/node": "^18.8.3",
+    "@types/pixi.js": "^4.8.2",
+    "axios": "^1.1.2",
     "eslint": "^6.8.0",
     "prettier": "^2.0.2",
     "ts-node": "^8.10.2",

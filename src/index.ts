@@ -11,3 +11,4 @@ export * from "./entity";
 export * from "./character";
 export * from "./position";
 export * from "./event";
+export * from "./draw";
