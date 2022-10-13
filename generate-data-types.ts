@@ -1,5 +1,5 @@
 import axios from "axios";
-import { writeFileSync } from "fs";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
 import prettier from "prettier";
 
 type DeepObject<Depth extends number, Key extends number | string = string> = DeepObject_<
@@ -24,10 +24,16 @@ function capitalize(str: string) {
   return str[0].toUpperCase() + str.slice(1);
 }
 
+let cachedData: RawData | null = null;
+
 /**
  * Retrieves the G json object from the game servers.
  */
 async function getData() {
+  if (cachedData) {
+    return cachedData;
+  }
+
   console.log("Downloading data.js");
 
   const response = await axios.get<string>("https://adventure.land/data.js");
@@ -38,6 +44,9 @@ async function getData() {
   json.timestamp = Date.now();
 
   console.log(`data.js v${json.version} fetched`);
+
+  cachedData = json;
+  writeFileSync(`./tmp/__data.json`, JSON.stringify(json, null, 1));
 
   return json as RawData;
 }
@@ -168,10 +177,10 @@ const nameOverride = {
 
 interface FullAnalysis {
   category: string;
-  type: string;
+  group: string;
   ids: Array<string>;
   fields: FieldsAnalysis;
-  nameMapping: Record<string, string>;
+  nameMapping: Record<string, string | null>;
 }
 
 function analyseAll<T extends DeepObject<3>>(data: T) {
@@ -185,10 +194,12 @@ function analyseAll<T extends DeepObject<3>>(data: T) {
 
       analysis.push({
         category: nameOverride[category] ?? capitalize(category),
-        type: category,
+        group: category,
         ids: ids,
         fields,
-        nameMapping: Object.fromEntries(ids.map((id) => [id, values[id].name as string])),
+        nameMapping: Object.fromEntries(
+          ids.map((id) => [id, (values[id].name ?? null) as null | string])
+        ),
       });
     } catch (err) {
       console.error("=================================================");
@@ -205,10 +216,18 @@ function analyseAll<T extends DeepObject<3>>(data: T) {
   return analysis;
 }
 
-function generateTypes(analysis: FullAnalysis) {
+function generateTypes(analysis: FullAnalysis, groupKey: string | null) {
   const keys = [
     `type ${analysis.category}Key =`,
-    ...analysis.ids.map((id) => `| "${id}" // ${analysis.nameMapping[id]}`),
+    ...analysis.ids.map((id) => {
+      let line = `| "${id}"`;
+
+      if (analysis.nameMapping[id]) {
+        line += ` // ${analysis.nameMapping[id]}`;
+      }
+
+      return line;
+    }),
   ].join("\n");
 
   const fieldsEntries = Object.entries(analysis.fields);
@@ -217,7 +236,8 @@ function generateTypes(analysis: FullAnalysis) {
     `interface G${analysis.category} {`,
     ...fieldsEntries.map(([prop, { optional, types }]) => {
       const left = prop + (optional ? "?" : "");
-      const right = prop === "type" ? JSON.stringify(analysis.type) : types.join(" | ");
+      const right =
+        groupKey && prop === groupKey ? JSON.stringify(analysis.group) : types.join(" | ");
 
       return `${left}: ${right};`;
     }),
@@ -227,20 +247,29 @@ function generateTypes(analysis: FullAnalysis) {
   return keys + "\n\n" + terface;
 }
 
-async function main() {
+async function process(gProp: string, groupKey: string | null) {
   const data = await getData();
-  const groupedItems = groupBy(data.items, "type");
-  const analysis = analyseAll(groupedItems);
+  const grouped = groupKey ? groupBy(data[gProp], groupKey) : { [gProp]: data[gProp] };
+  const analysis = analyseAll(grouped);
 
-  writeFileSync("./tmp_grouped_items.json", JSON.stringify(groupedItems, null, 2));
+  writeFileSync(`./tmp/${gProp}_grouped.json`, JSON.stringify(grouped, null, 2));
 
   for (const val of analysis) {
-    writeFileSync(`./tmp_analysis_${val.category}.json`, JSON.stringify(val, null, 2));
+    writeFileSync(`./tmp/${gProp}_${val.category}_analysis.json`, JSON.stringify(val, null, 2));
     writeFileSync(
-      `./tmp_type_${val.category}.ts`,
-      prettier.format(generateTypes(val), { parser: "babel" })
+      `./tmp/${gProp}_${val.category}_type.ts`,
+      prettier.format(generateTypes(val, groupKey), { parser: "babel" })
     );
   }
+}
+
+async function main() {
+  if (!existsSync("./tmp")) {
+    mkdirSync("./tmp");
+  }
+
+  await process("items", "type");
+  await process("events", null);
 }
 
 main();
