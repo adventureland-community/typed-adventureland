@@ -17,11 +17,25 @@ type DeepObject_<
 
 type RawData = DeepObject<3>;
 
+function ensureDirectory(dirpath: string) {
+  if (!existsSync(dirpath)) {
+    mkdirSync(dirpath);
+  }
+}
+
 /**
  * Ensures the first character of a tring is in upper case.
  */
 function capitalize(str: string) {
   return str[0].toUpperCase() + str.slice(1);
+}
+
+function isObject(val: unknown): val is DeepObject<1> {
+  return val !== null && !Array.isArray(val) && typeof val === "object";
+}
+
+function isArray(val: unknown): val is Array<unknown> {
+  return Array.isArray(val);
 }
 
 let cachedData: RawData | null = null;
@@ -115,11 +129,25 @@ function groupBy<
   );
 }
 
+type AnalysisType =
+  | {
+      type: "string" | "number" | "boolean" | "null";
+    }
+  | {
+      type: "object";
+      fields: FieldsAnalysis;
+    }
+  | {
+      type: "array";
+      lengths: Array<number>;
+      elements: FieldsAnalysis;
+    };
+
 type FieldsAnalysis = Record<
   string,
   {
     optional: boolean;
-    types: string[];
+    types: AnalysisType[];
   }
 >;
 
@@ -134,10 +162,10 @@ type FieldsAnalysis = Record<
  * @returns A mapping where keys are the fields names and values
  *  are the type behavior.
  */
-function analyseFields<T extends DeepObject<1>>(arr: Array<T>): FieldsAnalysis {
+function analyseFields<T extends DeepObject<1> | Array<unknown>>(arr: Array<T>): FieldsAnalysis {
   const seenFields = new Set(arr.flatMap((o) => Object.keys(o)));
   const fields: FieldsAnalysis = Object.fromEntries(
-    [...seenFields.values()].map((n) => [n, { optional: false, types: [] as Array<string> }])
+    [...seenFields.values()].map((n) => [n, { optional: false, types: [] }])
   );
 
   for (const obj of arr) {
@@ -148,14 +176,45 @@ function analyseFields<T extends DeepObject<1>>(arr: Array<T>): FieldsAnalysis {
       }
 
       const value = obj[seenField];
-      const type = typeof value;
+      let type = value === null ? "null" : typeof value;
 
-      if (Array.isArray(value) || type === "object") {
-        throw new Error("Case not handled yet.");
+      if (isArray(value)) {
+        type = "array";
       }
 
-      if (!fields[seenField].types.includes(type)) {
-        fields[seenField].types.push(type);
+      if (!fields[seenField].types.find((t) => t.type === type)) {
+        if (type === "array") {
+          const allArrays = arr
+            .filter((o) => o[seenField] && isArray(o[seenField]))
+            .map((o) => o[seenField] as Array<unknown>);
+          const lengths = [...new Set(allArrays.map((a) => a.length))];
+
+          fields[seenField].types.push({
+            type: "array",
+            lengths,
+            elements: analyseFields(allArrays),
+          });
+        } else if (type === "object") {
+          fields[seenField].types.push({
+            type: "object",
+            fields: analyseFields(
+              arr
+                .filter((o) => o[seenField] && isObject(o[seenField]))
+                .map((o) => o[seenField] as DeepObject<1>)
+            ),
+          });
+        } else if (
+          type === "string" ||
+          type === "boolean" ||
+          type === "number" ||
+          type === "null"
+        ) {
+          fields[seenField].types.push({
+            type,
+          });
+        } else {
+          throw new Error(`Case not handled yet: ${type}.`);
+        }
       }
     }
   }
@@ -202,18 +261,49 @@ function analyseAll<T extends DeepObject<3>>(data: T) {
         ),
       });
     } catch (err) {
-      console.error("=================================================");
-      console.error("");
       console.error("For", category);
-      console.error(err);
-      console.error("");
-      console.error("=================================================");
     }
   }
 
   analysis.sort((a, b) => a.category.localeCompare(b.category));
 
   return analysis;
+}
+
+function typeToTs(type: AnalysisType) {
+  switch (type.type) {
+    case "object": {
+      return makeInterface(type.fields);
+    }
+    case "array": {
+      return "Array<unknown>";
+    }
+    default:
+      return type.type;
+  }
+}
+
+function makeInterface(fields: FieldsAnalysis) {
+  const entries = Object.entries(fields);
+  const lines = ["{"];
+
+  for (const [name, entry] of entries) {
+    let line = name;
+
+    if (entry.optional) {
+      line += "?";
+    }
+
+    line += ": ";
+    line += entry.types.map((type) => typeToTs(type)).join(" | ");
+    line += ";";
+
+    lines.push(line);
+  }
+
+  lines.push("}");
+
+  return lines.join("\n");
 }
 
 function generateTypes(analysis: FullAnalysis, groupKey: string | null) {
@@ -230,19 +320,7 @@ function generateTypes(analysis: FullAnalysis, groupKey: string | null) {
     }),
   ].join("\n");
 
-  const fieldsEntries = Object.entries(analysis.fields);
-
-  const terface = [
-    `interface G${analysis.category} {`,
-    ...fieldsEntries.map(([prop, { optional, types }]) => {
-      const left = prop + (optional ? "?" : "");
-      const right =
-        groupKey && prop === groupKey ? JSON.stringify(analysis.group) : types.join(" | ");
-
-      return `${left}: ${right};`;
-    }),
-    "};",
-  ].join("\n");
+  const terface = `interface G${analysis.category} ${makeInterface(analysis.fields)};`;
 
   return keys + "\n\n" + terface;
 }
@@ -252,24 +330,24 @@ async function process(gProp: string, groupKey: string | null) {
   const grouped = groupKey ? groupBy(data[gProp], groupKey) : { [gProp]: data[gProp] };
   const analysis = analyseAll(grouped);
 
-  writeFileSync(`./tmp/${gProp}_grouped.json`, JSON.stringify(grouped, null, 2));
+  ensureDirectory(`./tmp/${gProp}`);
+
+  writeFileSync(`./tmp/${gProp}/grouped.json`, JSON.stringify(grouped, null, 2));
 
   for (const val of analysis) {
-    writeFileSync(`./tmp/${gProp}_${val.category}_analysis.json`, JSON.stringify(val, null, 2));
+    writeFileSync(`./tmp/${gProp}/${val.category}_analysis.json`, JSON.stringify(val, null, 2));
     writeFileSync(
-      `./tmp/${gProp}_${val.category}_type.ts`,
+      `./tmp/${gProp}/${val.category}_type.ts`,
       prettier.format(generateTypes(val, groupKey), { parser: "babel" })
     );
   }
 }
 
 async function main() {
-  if (!existsSync("./tmp")) {
-    mkdirSync("./tmp");
-  }
+  ensureDirectory("./tmp");
 
   await process("items", "type");
-  await process("events", null);
+  //await process("events", null);
 }
 
 main();
