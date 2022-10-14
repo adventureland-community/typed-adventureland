@@ -19,7 +19,7 @@ type RawData = DeepObject<3>;
 
 function ensureDirectory(dirpath: string) {
   if (!existsSync(dirpath)) {
-    mkdirSync(dirpath);
+    mkdirSync(dirpath, { recursive: true });
   }
 }
 
@@ -308,7 +308,7 @@ function makeInterface(fields: FieldsAnalysis) {
 
 function generateTypes(analysis: FullAnalysis, groupKey: string | null) {
   const keys = [
-    `type ${analysis.category}Key =`,
+    `export type ${analysis.category}Key =`,
     ...analysis.ids.map((id) => {
       let line = `| "${id}"`;
 
@@ -320,7 +320,7 @@ function generateTypes(analysis: FullAnalysis, groupKey: string | null) {
     }),
   ].join("\n");
 
-  const terface = `interface G${analysis.category} ${makeInterface(analysis.fields)};`;
+  const terface = `export interface G${analysis.category} ${makeInterface(analysis.fields)};`;
 
   return keys + "\n\n" + terface;
 }
@@ -330,6 +330,7 @@ async function process(gProp: string, groupKey: string | null) {
   const grouped = groupKey ? groupBy(data[gProp], groupKey) : { [gProp]: data[gProp] };
   const analysis = analyseAll(grouped);
 
+  ensureDirectory(`./types/GTypes/${gProp}`);
   ensureDirectory(`./tmp/${gProp}`);
 
   writeFileSync(`./tmp/${gProp}/grouped.json`, JSON.stringify(grouped, null, 2));
@@ -337,7 +338,7 @@ async function process(gProp: string, groupKey: string | null) {
   for (const val of analysis) {
     writeFileSync(`./tmp/${gProp}/${val.category}_analysis.json`, JSON.stringify(val, null, 2));
     writeFileSync(
-      `./tmp/${gProp}/${val.category}_type.ts`,
+      `./types/GTypes/${gProp}/${val.category}.ts`,
       prettier.format(generateTypes(val, groupKey), { parser: "babel" })
     );
   }
@@ -345,9 +346,10 @@ async function process(gProp: string, groupKey: string | null) {
 
 async function main() {
   ensureDirectory("./tmp");
+  ensureDirectory("./types/GTypes");
 
   await process("items", "type");
-  //await process("events", null);
+  await process("events", null);
 }
 
 main();
