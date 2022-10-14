@@ -30,20 +30,6 @@ export {};
 
 declare global {
 
-  const game: {
-    // TODO: Get a list of events
-    /**
-     * Sets up an event listener for the game. See http://adventure.land/docs/code/game/events for more info.
-     * @param event The event name to listen to
-     * @param callback The function that gets called when the event triggers
-     */
-    on(event: string, callback?: (data: any) => void): void;
-    all(callback?: (name: any, data: any) => void): void;
-    /** indicator if the game is using graphics and we can use PIXI.Graphics for example */
-    graphics: boolean;
-  };
-  
-
   function open_stand(inventoryIndex?: number): Promise<any>;
   function close_stand(): Promise<any>;
 
