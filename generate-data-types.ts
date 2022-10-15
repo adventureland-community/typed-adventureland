@@ -24,7 +24,7 @@ function ensureDirectory(dirpath: string) {
 }
 
 /**
- * Ensures the first character of a tring is in upper case.
+ * Ensures the first character of a string is in upper case.
  */
 function capitalize(str: string) {
   return str[0].toUpperCase() + str.slice(1);
@@ -354,10 +354,15 @@ async function process(gProp: string, groupKey: string | null) {
   }
 
   // Generate index.ts exporting everything inside the category
-  const index = analysis.map((val) => `export * from './${val.category}'`);
+  const index = analysis.map((val) => `export * from './${val.category}';`);
+  // Generate union type for all categories
+  index.push(`\nexport type ${capitalize(gProp)}Key =`);
+  index.push(...analysis.map((val) => `| import('./${val.category}').${val.category}Key`));
+
   writeFileSync(
     `./types/GTypes/${gProp}/index.ts`,
-    prettier.format(index.join("\n"), { parser: "babel" })
+    // prettier.format(index.join("\n") + ";", { parser: "babel" }) // prettier is having trouble with inline imports.
+    index.join("\n") + ";"
   );
 }
 
