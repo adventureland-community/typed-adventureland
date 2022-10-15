@@ -18,16 +18,22 @@ export type PantsKey =
 export interface GPants {
   a?: boolean | number;
   stat: number;
+  /** The set this item is part of `G.sets.wanderers`. */
   set?: string;
   resistance: number;
+  /** The tier of the item. */
   tier: number;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: Array<unknown>;
   frequency?: number;
+  /** The skin of the item. */
   skin: string;
   crit?: number;
   speed?: number;
+  /** An array of classes that can use this item. */
   class?: Array<unknown>;
   dex?: number;
+  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {
     crit?: number,
     armor: number,
@@ -35,16 +41,21 @@ export interface GPants {
     resistance: number,
     rpiercing?: number,
   };
+  /** The full display name of an item. */
   name: string;
+  /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   armor: number;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;
   scroll: boolean;
   vit?: number;
   extra_stat?: number;
   explanation?: string;
   legacy?: {
+    /** The set this item is part of `G.sets.wanderers`. */
     set: null,
+    /** An array of classes that can use this item. */
     class: null,
   };
   rpiercing?: number;

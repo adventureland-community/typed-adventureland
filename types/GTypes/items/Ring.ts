@@ -22,11 +22,16 @@ export type RingKey =
 
 export interface GRing {
   a?: boolean;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: Array<unknown>;
+  /** The full display name of an item. */
   name: string;
+  /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
+  /** The skin of the item. */
   skin: string;
   armor?: number;
+  /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound: {
     armor?: number,
     dreturn?: number,
@@ -45,6 +50,7 @@ export interface GRing {
     lifesteal?: number,
     stun?: number,
   };
+  /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;
   int?: number;
   vit?: number;
@@ -60,6 +66,7 @@ export interface GRing {
   action?: string;
   gold?: number;
   resistance?: number;
+  /** The set this item is part of `G.sets.wanderers`. */
   set?: string;
   ability?: string;
   attr0?: number;

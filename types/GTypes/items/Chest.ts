@@ -34,19 +34,25 @@ export interface GChest {
   dreturn?: number;
   int?: number;
   resistance?: number;
+  /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: Array<unknown>;
   a?: number | boolean;
   vit?: number;
+  /** The skin of the item. */
   skin: string;
   dex?: number;
+  /** The full display name of an item. */
   name: string;
   rpiercing?: number;
   armor?: number;
   apiercing?: number;
   str?: number;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;
   stat?: number;
+  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade?: {
     armor?: number,
     stat?: number,
@@ -67,8 +73,10 @@ export interface GChest {
     vit?: number,
     evasion?: number,
   };
+  /** The tier of the item. */
   tier?: number;
   scroll?: boolean;
+  /** The set this item is part of `G.sets.wanderers`. */
   set?: string;
   extra_stat?: number;
   hp?: number;
@@ -77,6 +85,7 @@ export interface GChest {
   xp?: number;
   luck?: number;
   lifesteal?: number;
+  /** An array of classes that can use this item. */
   class?: Array<unknown>;
   frequency?: number;
   speed?: number;

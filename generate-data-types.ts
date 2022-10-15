@@ -1,5 +1,5 @@
 import axios from "axios";
-import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { existsSync, mkdirSync, writeFileSync, readFileSync } from "fs";
 import prettier from "prettier";
 
 type DeepObject<Depth extends number, Key extends number | string = string> = DeepObject_<
@@ -270,10 +270,10 @@ function analyseAll<T extends DeepObject<3>>(data: T) {
   return analysis;
 }
 
-function typeToTs(type: AnalysisType) {
+function typeToTs(type: AnalysisType, config: Config) {
   switch (type.type) {
     case "object": {
-      return makeInterface(type.fields);
+      return makeInterface(type.fields, config);
     }
     case "array": {
       return "Array<unknown>";
@@ -283,19 +283,23 @@ function typeToTs(type: AnalysisType) {
   }
 }
 
-function makeInterface(fields: FieldsAnalysis) {
+function makeInterface(fields: FieldsAnalysis, config: Config) {
   const entries = Object.entries(fields);
   const lines = ["{"];
 
   for (const [name, entry] of entries) {
-    let line = name;
+    const description = config.description ? config.description[name] : null;
+
+    const descriptionComment = description ? `/** ${description} */\n` : "";
+
+    let line = descriptionComment + name;
 
     if (entry.optional) {
       line += "?";
     }
 
     line += ": ";
-    line += entry.types.map((type) => typeToTs(type)).join(" | ");
+    line += entry.types.map((type) => typeToTs(type, config)).join(" | ");
     line += ";";
 
     lines.push(line);
@@ -306,7 +310,7 @@ function makeInterface(fields: FieldsAnalysis) {
   return lines.join("\n");
 }
 
-function generateTypes(analysis: FullAnalysis, groupKey: string | null) {
+function generateTypes(analysis: FullAnalysis, groupKey: string | null, config: Config) {
   const keys = [
     `export type ${analysis.category}Key =`,
     ...analysis.ids.map((id) => {
@@ -320,7 +324,10 @@ function generateTypes(analysis: FullAnalysis, groupKey: string | null) {
     }),
   ].join("\n");
 
-  const terface = `export interface G${analysis.category} ${makeInterface(analysis.fields)};`;
+  const terface = `export interface G${analysis.category} ${makeInterface(
+    analysis.fields,
+    config
+  )};`;
 
   return keys + "\n\n" + terface;
 }
@@ -333,13 +340,16 @@ async function process(gProp: string, groupKey: string | null) {
   ensureDirectory(`./types/GTypes/${gProp}`);
   ensureDirectory(`./tmp/${gProp}`);
 
+  const config = getConfig(gProp);
+  // TODO: get category specific property descriptions in analysis loop
+
   writeFileSync(`./tmp/${gProp}/grouped.json`, JSON.stringify(grouped, null, 2));
 
   for (const val of analysis) {
     writeFileSync(`./tmp/${gProp}/${val.category}_analysis.json`, JSON.stringify(val, null, 2));
     writeFileSync(
       `./types/GTypes/${gProp}/${val.category}.ts`,
-      prettier.format(generateTypes(val, groupKey), { parser: "babel" })
+      prettier.format(generateTypes(val, groupKey, config), { parser: "babel" })
     );
   }
 }
@@ -348,6 +358,7 @@ async function main() {
   ensureDirectory("./tmp");
   ensureDirectory("./types/GTypes");
 
+  await process("sets", null);
   await process("items", "type");
   await process("events", null);
 }
@@ -355,3 +366,19 @@ async function main() {
 main();
 
 // npm run generate
+
+type PropertyDescription = { [key: string]: string };
+type Config = {
+  description?: PropertyDescription;
+};
+
+function getConfig(gProp: string) {
+  const configDirectory = `./types/GTypes/${gProp}/config`;
+  ensureDirectory(configDirectory);
+  const configPath = `${configDirectory}/config.json`;
+  let config: Config = {};
+  if (existsSync(configPath)) {
+    config = JSON.parse(readFileSync(configPath, "utf8"));
+  }
+  return config;
+}

@@ -17,11 +17,16 @@ export type OrbKey =
 
 export interface GOrb {
   attr0?: number;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades?: Array<unknown>;
+  /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
+  /** The full display name of an item. */
   name: string;
   vit?: number;
+  /** The skin of the item. */
   skin: string;
+  /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound?: {
     attr0?: number,
     vit?: number,
@@ -36,6 +41,7 @@ export interface GOrb {
     xp?: number,
     courage?: number,
   };
+  /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;
   event?: boolean;
   ability?: string;
@@ -51,6 +57,7 @@ export interface GOrb {
   };
   rpiercing?: number;
   edge?: number;
+  /** The set this item is part of `G.sets.wanderers`. */
   set?: string;
   mp?: number;
   luck?: number;
