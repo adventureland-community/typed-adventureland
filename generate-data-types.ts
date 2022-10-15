@@ -23,6 +23,10 @@ function ensureDirectory(dirpath: string) {
   }
 }
 
+function unique<T>(arr: Array<T>) {
+  return [...new Set(arr).values()];
+}
+
 /**
  * Ensures the first character of a string is in upper case.
  */
@@ -140,16 +144,15 @@ type AnalysisType =
   | {
       type: "array";
       lengths: Array<number>;
-      elements: FieldsAnalysis;
+      elements: Array<FieldAnalysis>;
     };
 
-type FieldsAnalysis = Record<
-  string,
-  {
-    optional: boolean;
-    types: AnalysisType[];
-  }
->;
+type FieldAnalysis = {
+  optional: boolean;
+  types: AnalysisType[];
+};
+
+type FieldsAnalysis = Record<string, FieldAnalysis>;
 
 /**
  * Tries to understand the fields of all objects passed in `arr`.
@@ -189,10 +192,15 @@ function analyseFields<T extends DeepObject<1> | Array<unknown>>(arr: Array<T>):
             .map((o) => o[seenField] as Array<unknown>);
           const lengths = [...new Set(allArrays.map((a) => a.length))];
 
+          const elementsAnalysisAsObject = analyseFields(allArrays);
+          const elements = Object.entries(elementsAnalysisAsObject)
+            .sort(([a], [b]) => a.localeCompare(b))
+            .map(([, field]) => field);
+
           fields[seenField].types.push({
             type: "array",
             lengths,
-            elements: analyseFields(allArrays),
+            elements,
           });
         } else if (type === "object") {
           fields[seenField].types.push({
@@ -276,7 +284,15 @@ function typeToTs(type: AnalysisType, config: Config) {
       return makeInterface(type.fields, config);
     }
     case "array": {
-      return "Array<unknown>";
+      const elems = type.elements.map((e) => {
+        const types = e.types.map((type) => typeToTs(type, config));
+
+        return types;
+      });
+
+      return type.lengths.length === 1
+        ? `[${elems.join(", ")}]`
+        : `Array<${unique(elems.flat()).join(" | ")}>`;
     }
     default:
       return type.type;

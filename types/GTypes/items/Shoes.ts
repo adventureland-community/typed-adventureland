@@ -24,7 +24,7 @@ export interface GShoes {
   /** The tier of the item. */
   tier: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: Array<unknown>;
+  grades: [number, number, number, number];
   /** The skin of the item. */
   skin: string;
   cuteness?: number;
@@ -59,7 +59,7 @@ export interface GShoes {
   };
   explanation?: string;
   /** An array of classes that can use this item. */
-  class?: Array<unknown>;
+  class?: [string];
   for?: number;
   fzresistance?: number;
   dex?: number;

@@ -31,7 +31,7 @@ export interface GHelmet {
   /** The tier of the item. */
   tier?: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades?: Array<unknown>;
+  grades?: [number, number, number, number];
   protection?: boolean;
   vit?: number;
   /** The skin of the item. */
@@ -80,7 +80,7 @@ export interface GHelmet {
   };
   crit?: number;
   /** An array of classes that can use this item. */
-  class?: Array<unknown>;
+  class?: Array<string>;
   apiercing?: number;
   explanation?: string;
   hat?: string;
@@ -107,5 +107,5 @@ export interface GHelmet {
   speed?: number;
   hp?: number;
   xscroll?: boolean;
-  xcx?: Array<unknown>;
+  xcx?: [string];
 }

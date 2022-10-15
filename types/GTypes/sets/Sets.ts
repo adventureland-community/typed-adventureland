@@ -78,6 +78,6 @@ export interface GSets {
   };
   7?: {};
   name: string;
-  items: Array<unknown>;
+  items: Array<string>;
   explanation?: string;
 }

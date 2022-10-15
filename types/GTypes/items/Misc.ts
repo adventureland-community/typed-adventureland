@@ -29,7 +29,7 @@ export interface GMisc {
   ignore?: boolean;
   event?: boolean;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades?: Array<unknown>;
+  grades?: [number, number, number, number];
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade?: {};
 }

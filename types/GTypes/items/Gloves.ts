@@ -26,7 +26,7 @@ export interface GGloves {
   set?: string;
   resistance: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: Array<unknown>;
+  grades: [number, number, number, number];
   frequency?: number;
   /** The skin of the item. */
   skin: string;
@@ -61,7 +61,7 @@ export interface GGloves {
   explanation?: string;
   speed?: number;
   /** An array of classes that can use this item. */
-  class?: Array<unknown>;
+  class?: [string];
   output?: number;
   attr0?: number;
   crit?: number;

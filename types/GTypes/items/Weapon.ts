@@ -77,7 +77,7 @@ export type WeaponKey =
 
 export interface GWeapon {
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: Array<unknown>;
+  grades: [number, number, number, number];
   cx?: {
     large?: boolean,
     accent?: string,
@@ -153,7 +153,7 @@ export interface GWeapon {
   rpiercing?: number;
   trex?: string;
   /** An array of classes that can use this item. */
-  class?: Array<unknown>;
+  class?: [string];
   firesistance?: number;
   luck?: number;
   nopo?: string;

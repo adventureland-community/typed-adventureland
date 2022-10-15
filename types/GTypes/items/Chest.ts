@@ -37,7 +37,7 @@ export interface GChest {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: Array<unknown>;
+  grades: [number, number, number, number];
   a?: number | boolean;
   vit?: number;
   /** The skin of the item. */
@@ -86,7 +86,7 @@ export interface GChest {
   luck?: number;
   lifesteal?: number;
   /** An array of classes that can use this item. */
-  class?: Array<unknown>;
+  class?: [string];
   frequency?: number;
   speed?: number;
   mp?: number;

@@ -15,7 +15,7 @@ export interface GCape {
   skin: string;
   resistance?: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: Array<unknown>;
+  grades: [number, number, number, number];
   evasion?: number;
   speed?: number;
   a?: boolean;

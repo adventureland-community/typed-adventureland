@@ -6,7 +6,7 @@ export type SourceKey =
 export interface GSource {
   int?: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: Array<unknown>;
+  grades: [number, number, number, number];
   cx: {
     scale: number,
     extension: boolean,

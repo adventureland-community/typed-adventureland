@@ -23,7 +23,7 @@ export type RingKey =
 export interface GRing {
   a?: boolean;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: Array<unknown>;
+  grades: [number, number, number, number];
   /** The full display name of an item. */
   name: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */

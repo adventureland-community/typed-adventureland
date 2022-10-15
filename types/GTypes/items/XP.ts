@@ -13,5 +13,5 @@ export interface GXP {
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;
   /** If the item gives a buff, or effect, like a health potion. */
-  gives: Array<unknown>;
+  gives: [[string, number]];
 }

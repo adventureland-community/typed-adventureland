@@ -23,7 +23,7 @@ export interface GQuiver {
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: Array<unknown>;
+  grades: [number, number, number, number];
   a?: boolean;
   evasion?: number;
 }

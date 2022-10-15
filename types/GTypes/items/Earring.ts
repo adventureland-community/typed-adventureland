@@ -13,7 +13,7 @@ export interface GEarring {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: Array<unknown>;
+  grades: [number, number, number, number];
   edge?: number;
   /** The full display name of an item. */
   name: string;

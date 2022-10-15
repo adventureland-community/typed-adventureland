@@ -24,14 +24,14 @@ export interface GPants {
   /** The tier of the item. */
   tier: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: Array<unknown>;
+  grades: [number, number, number, number];
   frequency?: number;
   /** The skin of the item. */
   skin: string;
   crit?: number;
   speed?: number;
   /** An array of classes that can use this item. */
-  class?: Array<unknown>;
+  class?: Array<string>;
   dex?: number;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {

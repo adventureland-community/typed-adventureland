@@ -18,7 +18,7 @@ export type OrbKey =
 export interface GOrb {
   attr0?: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades?: Array<unknown>;
+  grades?: [number, number, number, number];
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The full display name of an item. */
