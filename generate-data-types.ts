@@ -352,6 +352,13 @@ async function process(gProp: string, groupKey: string | null) {
       prettier.format(generateTypes(val, groupKey, config), { parser: "babel" })
     );
   }
+
+  // Generate index.ts exporting everything inside the category
+  const index = analysis.map((val) => `export * from './${val.category}'`);
+  writeFileSync(
+    `./types/GTypes/${gProp}/index.ts`,
+    prettier.format(index.join("\n"), { parser: "babel" })
+  );
 }
 
 async function main() {
