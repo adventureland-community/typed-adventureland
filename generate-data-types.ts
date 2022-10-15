@@ -249,7 +249,7 @@ function analyseAll<T extends DeepObject<3>>(data: T) {
   for (const [category, values] of entries) {
     try {
       const fields = analyseFields(Object.values(values));
-      const ids = Object.keys(values);
+      const ids = Object.keys(values).sort();
 
       analysis.push({
         category: nameOverride[category] ?? capitalize(category),

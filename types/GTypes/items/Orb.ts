@@ -10,8 +10,8 @@ export type OrbKey =
   | "orbofvit" // Orb of Vitality
   | "rabbitsfoot" // Rabbit's Foot
   | "talkingskull" // Yorick the Talking Skull
-  | "test_orb" // Orb of Testing
   | "test2" // Test
+  | "test_orb" // Orb of Testing
   | "tigerstone" // Tiger Stone
   | "vorb"; // Vampiric Canine Teeth
 

@@ -1,14 +1,14 @@
 export type EventsKey =
-  | "egghunt" // Egg Hunt
   | "abtesting" // A/B Testing
-  | "valentines" // Valentines
   | "crabxx" // Giga Crab
-  | "goobrawl" // Goo Brawl
-  | "icegolem" // Ice Golem
+  | "egghunt" // Egg Hunt
   | "franky" // Franky
+  | "goobrawl" // Goo Brawl
   | "halloween" // Halloween
+  | "holidayseason" // Holiday Season
+  | "icegolem" // Ice Golem
   | "lunarnewyear" // Lunar New Year
-  | "holidayseason"; // Holiday Season
+  | "valentines"; // Valentines
 
 export interface GEvents {
   duration: number;
