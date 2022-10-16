@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "noEmit": false,
+    "strict": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+
+    "noImplicitThis": true,
+    "outDir": "./built",
+    "baseUrl": "./src"
+  },
+  "include": ["./src/**/*"],
+  "typeRoots": [
+    "./src/types",
+    "./types",
+    "./node_modules/@types",
+    "./node_modules/typed-adventureland",
+    "./node_modules/custom-types"
+  ]
+}

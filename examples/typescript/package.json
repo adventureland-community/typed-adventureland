@@ -1,0 +1,13 @@
+{
+  "name": "al-typescript",
+  "version": "1.0.0",
+  "description": "Do the following in the typed-adventureland project\r - `npm run build`\r - `npm run pack`\r - a typed-adventureland*.tgz is produced",
+  "main": "src/default_code.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "typed-adventureland": "file:../../typed-adventureland-0.0.1.tgz"
+  }
+}
