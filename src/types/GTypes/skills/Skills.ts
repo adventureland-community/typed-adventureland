@@ -149,7 +149,7 @@ export interface GSkills {
   list?: boolean;
   warning?: string;
   requirements?: {
-    int: number,
+    int: number;
   };
   range_multiplier?: number;
   range_bonus?: number;

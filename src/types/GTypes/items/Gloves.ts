@@ -36,14 +36,14 @@ export interface GGloves {
   tier: number;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {
-    armor: number,
-    stat?: number,
-    frequency?: number,
-    resistance: number,
-    rpiercing?: number,
-    apiercing?: number,
-    gold?: number,
-    attr0?: number,
+    armor: number;
+    stat?: number;
+    frequency?: number;
+    resistance: number;
+    rpiercing?: number;
+    apiercing?: number;
+    gold?: number;
+    attr0?: number;
   };
   /** The full display name of an item. */
   name: string;

@@ -23,14 +23,14 @@ export interface GCape {
   a?: boolean;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {
-    stat: number,
-    speed?: number,
-    resistance?: number,
-    evasion?: number,
-    armor?: number,
-    cuteness?: number,
-    firesistance?: number,
-    pnresistance?: number,
+    stat: number;
+    speed?: number;
+    resistance?: number;
+    evasion?: number;
+    armor?: number;
+    cuteness?: number;
+    firesistance?: number;
+    pnresistance?: number;
   };
   /** The full display name of an item. */
   name: string;

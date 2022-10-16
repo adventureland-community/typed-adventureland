@@ -13,7 +13,7 @@ export interface GShield {
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
   cx?: {
-    accent: string,
+    accent: string;
   };
   /** The skin of the item. */
   skin: string;
@@ -21,12 +21,12 @@ export interface GShield {
   tier: number;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {
-    armor?: number,
-    stat?: number,
-    luck?: number,
-    resistance?: number,
-    dreturn?: number,
-    str?: number,
+    armor?: number;
+    stat?: number;
+    luck?: number;
+    resistance?: number;
+    dreturn?: number;
+    str?: number;
   };
   /** The full display name of an item. */
   name: string;

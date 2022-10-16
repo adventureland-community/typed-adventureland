@@ -2,6 +2,7 @@
 
 Initial types based on https://github.com/BegLand/types-adventureland
 
+TODO: utilize pluralize so it becomes GMonster instead of GMonsters
 
 # installation
 `npm install --save-dev adventureland@github:adventureland-community/typed-adventureland`

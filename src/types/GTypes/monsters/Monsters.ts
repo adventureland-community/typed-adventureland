@@ -127,11 +127,11 @@ export interface GMonsters {
   rage: number;
   s?: {
     fullguardx?: {
-      ms: number,
-    },
+      ms: number;
+    };
     fullguard?: {
-      ms: number,
-    },
+      ms: number;
+    };
   };
   hp: number;
   respawn: number;
@@ -158,104 +158,104 @@ export interface GMonsters {
   charge?: number;
   abilities?: {
     burn?: {
-      unlimited: boolean,
-      attr0: number,
-    },
+      unlimited: boolean;
+      attr0: number;
+    };
     multi_freeze?: {
-      cooldown: number,
-      damage: number,
-    },
+      cooldown: number;
+      damage: number;
+    };
     weakness_aura?: {
-      cooldown: number,
-      radius: number,
-      aura: boolean,
-      condition: string,
-    },
+      cooldown: number;
+      radius: number;
+      aura: boolean;
+      condition: string;
+    };
     self_healing?: {
-      heal: number,
-      cooldown: number,
-    },
+      heal: number;
+      cooldown: number;
+    };
     portal?: {
-      cooldown: number,
-    },
+      cooldown: number;
+    };
     multi_burn?: {
-      cooldown: number,
-      damage: number,
-    },
+      cooldown: number;
+      damage: number;
+    };
     warp_on_hit?: {
-      unlimited: boolean,
-      attr0: number,
-    },
+      unlimited: boolean;
+      attr0: number;
+    };
     degen?: {
-      amount: number,
-      cooldown: number,
-    },
+      amount: number;
+      cooldown: number;
+    };
     dampening_aura?: {
-      cooldown: number,
-      radius: number,
-      aura: boolean,
-      condition: string,
-    },
+      cooldown: number;
+      radius: number;
+      aura: boolean;
+      condition: string;
+    };
     heal?: {
-      heal: number,
-      cooldown: number,
-    },
+      heal: number;
+      cooldown: number;
+    };
     mtangle?: {
-      cooldown: number,
-    },
+      cooldown: number;
+    };
     stone?: {
-      cooldown: number,
-    },
+      cooldown: number;
+    };
     anger?: {
-      cooldown: number,
-      radius: number,
-    },
+      cooldown: number;
+      radius: number;
+    };
     warpstomp?: {
-      stun: number,
-      cooldown: number,
-      radius: number,
-    },
+      stun: number;
+      cooldown: number;
+      radius: number;
+    };
     zap?: {
-      amount: number,
-      cooldown: number,
-      radius: number,
-      pure: boolean,
-    },
+      amount: number;
+      cooldown: number;
+      radius: number;
+      pure: boolean;
+    };
     mlight?: {
-      cooldown: number,
-    },
+      cooldown: number;
+    };
     deepfreeze?: {
-      cooldown: number,
-      radius: number,
-    },
+      cooldown: number;
+      radius: number;
+    };
     tangle?: {
-      cooldown: number,
-    },
+      cooldown: number;
+    };
     healing?: {
-      heal: number,
-      cooldown: number,
-    },
+      heal: number;
+      cooldown: number;
+    };
     curse_aura?: {
-      cooldown: number,
-      radius: number,
-      aura: boolean,
-      condition: string,
-    },
+      cooldown: number;
+      radius: number;
+      aura: boolean;
+      condition: string;
+    };
     putrid?: {
-      curse: boolean,
-      poison: boolean,
-    },
+      curse: boolean;
+      poison: boolean;
+    };
   };
   hit?: string;
   slots?: {
     mainhand: {
-      name: string,
-      level: number,
-    },
+      name: string;
+      level: number;
+    };
     offhand?: {
-      name: string,
-      level: number,
-    },
+      name: string;
+      level: number;
+    };
   };
   evasion?: number;
   difficulty?: number;
@@ -273,23 +273,23 @@ export interface GMonsters {
   reflection?: number;
   hide?: boolean;
   pet?: {
-    courage: [number, number],
-    passion: [number, number],
-    exponential: boolean,
+    courage: [number, number];
+    passion: [number, number];
+    exponential: boolean;
     level: {
-      evasion: number,
-      armor: number,
-      hp: number,
-      attack: number,
-      resistance: number,
-      charge: number,
-      speed: number,
-    },
-    xp: number,
-    brightness: number,
-    chatter: [number, number],
-    obedience: [number, number],
-    aggression: [number, number],
+      evasion: number;
+      armor: number;
+      hp: number;
+      attack: number;
+      resistance: number;
+      charge: number;
+      speed: number;
+    };
+    xp: number;
+    brightness: number;
+    chatter: [number, number];
+    obedience: [number, number];
+    aggression: [number, number];
   };
   size?: number;
   spawns?: [[number, string]];

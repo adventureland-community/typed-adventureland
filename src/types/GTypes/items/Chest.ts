@@ -56,24 +56,24 @@ export interface GChest {
   stat?: number;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade?: {
-    armor?: number,
-    stat?: number,
-    resistance?: number,
-    hp?: number,
-    xp?: number,
-    luck?: number,
-    lifesteal?: number,
-    int?: number,
-    dex?: number,
-    str?: number,
-    speed?: number,
-    rpiercing?: number,
-    apiercing?: number,
-    mp_cost?: number,
-    manasteal?: number,
-    for?: number,
-    vit?: number,
-    evasion?: number,
+    armor?: number;
+    stat?: number;
+    resistance?: number;
+    hp?: number;
+    xp?: number;
+    luck?: number;
+    lifesteal?: number;
+    int?: number;
+    dex?: number;
+    str?: number;
+    speed?: number;
+    rpiercing?: number;
+    apiercing?: number;
+    mp_cost?: number;
+    manasteal?: number;
+    for?: number;
+    vit?: number;
+    evasion?: number;
   };
   /** The tier of the item. */
   tier?: number;

@@ -130,10 +130,10 @@ export interface GNpcs {
   name?: string;
   color?: string;
   cx?: {
-    head?: string,
-    hat?: string,
-    hair?: string,
-    face?: string,
+    head?: string;
+    hat?: string;
+    hair?: string;
+    face?: string;
   };
   role: string;
   skin: string;
@@ -153,22 +153,22 @@ export interface GNpcs {
   attack?: number;
   slots?: {
     mainhand: {
-      name: string,
-      level: number,
-    },
+      name: string;
+      level: number;
+    };
   };
   transport?: boolean;
   side_interaction?: {
-    auto: boolean,
-    message: string,
-    skin: string,
+    auto: boolean;
+    message: string;
+    skin: string;
   };
   items?: Array<string | null>;
   old_role?: string;
   old_side_interaction?: {
-    auto: boolean,
-    message: string,
-    skin: string,
+    auto: boolean;
+    message: string;
+    skin: string;
   };
   old_items?: [
     string,
@@ -194,8 +194,8 @@ export interface GNpcs {
   token?: string;
   stand?: string;
   aura?: {
-    luck?: number,
-    gold?: number,
+    luck?: number;
+    gold?: number;
   };
   steps?: number;
   modal?: string;
@@ -203,11 +203,11 @@ export interface GNpcs {
   interval?: number;
   stopframe?: number;
   places?: {
-    winterland: number,
-    desertland: number,
-    test: number,
-    cyberland: number,
-    main: number,
-    d_e: number,
+    winterland: number;
+    desertland: number;
+    test: number;
+    cyberland: number;
+    main: number;
+    d_e: number;
   };
 }

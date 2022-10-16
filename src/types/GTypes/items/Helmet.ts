@@ -45,19 +45,19 @@ export interface GHelmet {
   extra_stat?: number;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade?: {
-    cuteness?: number,
-    armor: number,
-    stat: number,
-    resistance: number,
-    evasion?: number,
-    crit?: number,
-    apiercing?: number,
-    reflection?: number,
-    rpiercing?: number,
-    dex?: number,
-    str?: number,
-    int?: number,
-    vit?: number,
+    cuteness?: number;
+    armor: number;
+    stat: number;
+    resistance: number;
+    evasion?: number;
+    crit?: number;
+    apiercing?: number;
+    reflection?: number;
+    rpiercing?: number;
+    dex?: number;
+    str?: number;
+    int?: number;
+    vit?: number;
   };
   evasion?: number;
   /** Cost of the item in gold, if an NPC were to sell this item. */
@@ -76,9 +76,9 @@ export interface GHelmet {
   set?: string;
   legacy?: {
     /** The set this item is part of `G.sets.wanderers`. */
-    set: null,
+    set: null;
     /** An array of classes that can use this item. */
-    class: null,
+    class: null;
   };
   crit?: number;
   /** An array of classes that can use this item. */
@@ -96,15 +96,15 @@ export interface GHelmet {
   range?: number;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound?: {
-    cuteness: number,
-    range: number,
+    cuteness: number;
+    range: number;
   };
   rogue?: {
-    crit: number,
+    crit: number;
     /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
     upgrade: {
-      crit: number,
-    },
+      crit: number;
+    };
   };
   speed?: number;
   hp?: number;

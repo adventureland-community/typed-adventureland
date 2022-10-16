@@ -37,11 +37,11 @@ export interface GPants {
   dex?: number;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {
-    crit?: number,
-    armor: number,
-    stat: number,
-    resistance: number,
-    rpiercing?: number,
+    crit?: number;
+    armor: number;
+    stat: number;
+    resistance: number;
+    rpiercing?: number;
   };
   /** The full display name of an item. */
   name: string;
@@ -56,9 +56,9 @@ export interface GPants {
   explanation?: string;
   legacy?: {
     /** The set this item is part of `G.sets.wanderers`. */
-    set: null,
+    set: null;
     /** An array of classes that can use this item. */
-    class: null,
+    class: null;
   };
   rpiercing?: number;
 }

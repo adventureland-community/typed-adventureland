@@ -8,6 +8,8 @@ import prettier from "prettier";
 import { generateTypes } from "./generateTs";
 import { capitalize } from "./helpers/capitalize";
 
+const prettierOptions = { parser: "typescript" };
+
 export interface GeneratorConfig {
   /** true if the config is disabled */
   disabled?: boolean;
@@ -91,6 +93,9 @@ export class Generator {
     // generate disabled config files for each missing G key
     this.generateDefaultConfigs(data);
 
+    const gTypesIndex: string[] = [];
+    const gDataType: string[] = ["\nexport type GData = {"];
+
     for (const config of this.configMap.values()) {
       const { groupKey, GKey, disabled } = config;
 
@@ -111,9 +116,10 @@ export class Generator {
           path.join(tmpDir, `${GKey}/${val.category}_analysis.json`),
           JSON.stringify(val, null, 2)
         );
+
         writeFileSync(
           path.join(outDir, `${val.category}.ts`),
-          prettier.format(generateTypes(val, groupKey, config), { parser: "babel" })
+          prettier.format(generateTypes(val, groupKey, config), prettierOptions)
         );
       }
 
@@ -126,18 +132,57 @@ export class Generator {
 
         // Import all keys to generate union
         index.push(
-          ...analysis.map((val) => `import type { ${val.category}Key } from './${val.category}';`)
+          ...analysis.map(
+            (val) =>
+              `import type { ${val.category}Key, G${val.category} } from './${val.category}';`
+          )
+        );
+
+        // import GTypes for GTypes/index.ts
+        gTypesIndex.push(
+          `import type { `,
+          `${capitalize(GKey)}Key,`,
+          analysis.map((val) => `G${val.category}`).join(","),
+          `} from './${GKey}';`
         );
 
         // Generate union type for all categories
         index.push(`\nexport type ${capitalize(GKey)}Key =`);
         index.push(...analysis.map((val) => `| ${val.category}Key`));
+        index.push(`;`);
+
+        // Generate GData interface
+        gDataType.push(`${GKey}: {[T in ${capitalize(GKey)}Key]: `);
+        // TODO: we need a union type we can use instead.
+        gDataType.push(...analysis.map((val) => `| G${capitalize(val.category)}`));
+        gDataType.push(`};`);
+      } else {
+        // Import GDefinition
+        const gKeyType = `G${capitalize(GKey)}`;
+        gTypesIndex.push(
+          `import type { ${capitalize(GKey)}Key, ${gKeyType} } from './${GKey}';`
+        );
+
+        gDataType.push(`${GKey}: {[T in ${capitalize(GKey)}Key]: ${gKeyType}};`);
       }
 
       writeFileSync(
         path.join(outDir, "index.ts"),
-        prettier.format(index.join("\n") + ";", { parser: "babel" })
+        prettier.format(index.join("\n") + ";", prettierOptions)
       );
     }
+
+    // Generate index.ts for GTypes
+    const gTypesDir = path.join(this.targetDir, "GTypes");
+
+    // End the gDataType definition
+    gDataType.push("}");
+
+    gTypesIndex.push(gDataType.join("\n"));
+
+    writeFileSync(
+      path.join(gTypesDir, "index.ts"),
+      prettier.format(`${gTypesIndex.join("\n")}`, prettierOptions)
+    );
   }
 }

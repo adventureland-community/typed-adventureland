@@ -19,64 +19,64 @@ export type SetsKey =
   | "wt4"; // Darkforge Armor
 
 export interface GSets {
-  1: {
-    for?: number,
+  "1": {
+    for?: number;
   };
-  2: {
-    hp?: number,
-    for?: number,
-    vit?: number,
-    str?: number,
-    dex?: number,
-    int?: number,
-    courage?: number,
-    pcourage?: number,
-    mcourage?: number,
-    luck?: number,
-    mp?: number,
+  "2": {
+    hp?: number;
+    for?: number;
+    vit?: number;
+    str?: number;
+    dex?: number;
+    int?: number;
+    courage?: number;
+    pcourage?: number;
+    mcourage?: number;
+    luck?: number;
+    mp?: number;
   };
-  3?: {
-    mp?: number,
-    for?: number,
-    lifesteal?: number,
-    dex?: number,
-    speed?: number,
-    int?: number,
-    vit?: number,
-    str?: number,
-    armor?: number,
-    range?: number,
-    resistance?: number,
-    rpiercing?: number,
+  "3"?: {
+    mp?: number;
+    for?: number;
+    lifesteal?: number;
+    dex?: number;
+    speed?: number;
+    int?: number;
+    vit?: number;
+    str?: number;
+    armor?: number;
+    range?: number;
+    resistance?: number;
+    rpiercing?: number;
   };
-  4?: {
-    gold?: number,
-    for?: number,
-    apiercing?: number,
-    rpiercing?: number,
-    luck?: number,
-    speed?: number,
-    evasion?: number,
+  "4"?: {
+    gold?: number;
+    for?: number;
+    apiercing?: number;
+    rpiercing?: number;
+    luck?: number;
+    speed?: number;
+    evasion?: number;
   };
-  5?: {
-    luck?: number,
-    for?: number,
-    phresistance?: number,
-    resistance?: number,
-    stresistance?: number,
-    crit?: number,
-    courage?: number,
-    pcourage?: number,
-    mcourage?: number,
-    mp?: number,
-    speed?: number,
-    cuteness?: number,
-    vit?: number,
+  "5"?: {
+    luck?: number;
+    for?: number;
+    phresistance?: number;
+    resistance?: number;
+    stresistance?: number;
+    crit?: number;
+    courage?: number;
+    pcourage?: number;
+    mcourage?: number;
+    mp?: number;
+    speed?: number;
+    cuteness?: number;
+    vit?: number;
   };
-  6?: {
-    vit?: number,
+  "6"?: {
+    vit?: number;
   };
-  7?: {};
+  "7"?: {};
   name: string;
   items: Array<string>;
   explanation?: string;

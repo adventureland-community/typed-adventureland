@@ -9,15 +9,15 @@ export interface GMiscOffhand {
   explanation: string;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound: {
-    int?: number,
-    str?: number,
-    resistance?: number,
-    evasion?: number,
+    int?: number;
+    str?: number;
+    resistance?: number;
+    evasion?: number;
   };
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
   cx: {
-    scale?: number,
+    scale?: number;
   };
   /** The skin of the item. */
   skin: string;

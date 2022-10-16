@@ -33,13 +33,13 @@ export interface GShoes {
   speed: number;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {
-    cuteness?: number,
-    armor: number,
-    stat: number,
-    speed: number,
-    resistance?: number,
-    fzresistance?: number,
-    frequency?: number,
+    cuteness?: number;
+    armor: number;
+    stat: number;
+    speed: number;
+    resistance?: number;
+    fzresistance?: number;
+    frequency?: number;
   };
   /** The full display name of an item. */
   name: string;
@@ -55,9 +55,9 @@ export interface GShoes {
   winterland?: {
     /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
     upgrade: {
-      speed: number,
-    },
-    speed: number,
+      speed: number;
+    };
+    speed: number;
   };
   explanation?: string;
   /** An array of classes that can use this item. */

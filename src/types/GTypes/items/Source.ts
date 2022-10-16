@@ -10,8 +10,8 @@ export interface GSource {
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
   cx: {
-    scale: number,
-    extension: boolean,
+    scale: number;
+    extension: boolean;
   };
   /** The full display name of an item. */
   name: string;
@@ -23,11 +23,11 @@ export interface GSource {
   tier: number;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound: {
-    int?: number,
-    reflection?: number,
-    vit?: number,
-    dex?: number,
-    resistance?: number,
+    int?: number;
+    reflection?: number;
+    vit?: number;
+    dex?: number;
+    resistance?: number;
   };
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;

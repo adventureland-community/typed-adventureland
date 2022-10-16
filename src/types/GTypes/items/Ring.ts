@@ -35,22 +35,22 @@ export interface GRing {
   armor?: number;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound: {
-    armor?: number,
-    dreturn?: number,
-    dex?: number,
-    vit?: number,
-    rpiercing?: number,
-    int?: number,
-    apiercing?: number,
-    str?: number,
-    gold?: number,
-    resistance?: number,
-    reflection?: number,
-    luck?: number,
-    bling?: number,
-    crit?: number,
-    lifesteal?: number,
-    stun?: number,
+    armor?: number;
+    dreturn?: number;
+    dex?: number;
+    vit?: number;
+    rpiercing?: number;
+    int?: number;
+    apiercing?: number;
+    str?: number;
+    gold?: number;
+    resistance?: number;
+    reflection?: number;
+    luck?: number;
+    bling?: number;
+    crit?: number;
+    lifesteal?: number;
+    stun?: number;
   };
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;

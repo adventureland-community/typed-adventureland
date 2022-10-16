@@ -27,24 +27,24 @@ export interface GAmulet {
   hp?: number;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound?: {
-    dex?: number,
-    dreturn?: number,
-    int?: number,
-    str?: number,
-    evasion?: number,
-    crit?: number,
-    hp?: number,
-    armor?: number,
-    critdamage?: number,
-    lifesteal?: number,
-    apiercing?: number,
-    mp_cost?: number,
-    mp_reduction?: number,
-    xp?: number,
-    attr0?: number,
-    for?: number,
-    vit?: number,
-    resistance?: number,
+    dex?: number;
+    dreturn?: number;
+    int?: number;
+    str?: number;
+    evasion?: number;
+    crit?: number;
+    hp?: number;
+    armor?: number;
+    critdamage?: number;
+    lifesteal?: number;
+    apiercing?: number;
+    mp_cost?: number;
+    mp_reduction?: number;
+    xp?: number;
+    attr0?: number;
+    for?: number;
+    vit?: number;
+    resistance?: number;
   };
   /** The full display name of an item. */
   name: string;
@@ -80,8 +80,8 @@ export interface GAmulet {
   explanation?: string;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade?: {
-    apiercing: number,
-    rpiercing: number,
+    apiercing: number;
+    rpiercing: number;
   };
   rpiercing?: number;
 }

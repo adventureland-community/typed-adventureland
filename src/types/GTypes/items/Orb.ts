@@ -30,18 +30,18 @@ export interface GOrb {
   skin: string;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound?: {
-    attr0?: number,
-    vit?: number,
-    armor?: number,
-    speed?: number,
-    rpiercing?: number,
-    int?: number,
-    dex?: number,
-    str?: number,
-    mp?: number,
-    luck?: number,
-    xp?: number,
-    courage?: number,
+    attr0?: number;
+    vit?: number;
+    armor?: number;
+    speed?: number;
+    rpiercing?: number;
+    int?: number;
+    dex?: number;
+    str?: number;
+    mp?: number;
+    luck?: number;
+    xp?: number;
+    courage?: number;
   };
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;
@@ -55,7 +55,7 @@ export interface GOrb {
   armor?: number;
   str?: number;
   cx?: {
-    scale: number,
+    scale: number;
   };
   rpiercing?: number;
   edge?: number;

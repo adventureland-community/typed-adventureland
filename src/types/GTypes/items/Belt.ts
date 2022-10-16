@@ -23,15 +23,15 @@ export interface GBelt {
   grades: [number, number, number, number];
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound: {
-    dex?: number,
-    hp?: number,
-    int?: number,
-    armor?: number,
-    speed?: number,
-    mp_cost?: number,
-    mp_reduction?: number,
-    resistance?: number,
-    str?: number,
+    dex?: number;
+    hp?: number;
+    int?: number;
+    armor?: number;
+    speed?: number;
+    mp_cost?: number;
+    mp_reduction?: number;
+    resistance?: number;
+    str?: number;
   };
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;

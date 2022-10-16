@@ -11,7 +11,7 @@ export interface GTool {
   grades: [number, number, number, number];
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {
-    breaks: number,
+    breaks: number;
   };
   /** The full display name of an item. */
   name: string;

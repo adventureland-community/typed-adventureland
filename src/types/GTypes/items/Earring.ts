@@ -25,12 +25,12 @@ export interface GEarring {
   int?: number;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound: {
-    int?: number,
-    str?: number,
-    dex?: number,
-    luck?: number,
-    apiercing?: number,
-    vit?: number,
+    int?: number;
+    str?: number;
+    dex?: number;
+    luck?: number;
+    apiercing?: number;
+    vit?: number;
   };
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;

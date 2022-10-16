@@ -102,12 +102,12 @@ export interface GWeapon {
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
   cx?: {
-    large?: boolean,
-    accent?: string,
-    lightborder?: boolean,
-    scale?: number,
-    extension?: boolean,
-    border?: number,
+    large?: boolean;
+    accent?: string;
+    lightborder?: boolean;
+    scale?: number;
+    extension?: boolean;
+    border?: number;
   };
   damage_type: string;
   /** The skin of the item. */
@@ -118,26 +118,26 @@ export interface GWeapon {
   a?: boolean | number;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {
-    range: number,
-    attack: number,
-    armor?: number,
-    speed?: number,
-    stun?: number,
-    crit?: number,
-    evasion?: number,
-    apiercing?: number,
-    vit?: number,
-    attr0?: number,
-    int?: number,
-    explosion?: number,
-    blast?: number,
-    rpiercing?: number,
-    dex?: number,
-    str?: number,
-    reflection?: number,
-    awesomeness?: number,
-    resistance?: number,
-    attr1?: number,
+    range: number;
+    attack: number;
+    armor?: number;
+    speed?: number;
+    stun?: number;
+    crit?: number;
+    evasion?: number;
+    apiercing?: number;
+    vit?: number;
+    attr0?: number;
+    int?: number;
+    explosion?: number;
+    blast?: number;
+    rpiercing?: number;
+    dex?: number;
+    str?: number;
+    reflection?: number;
+    awesomeness?: number;
+    resistance?: number;
+    attr1?: number;
   };
   /** The full display name of an item. */
   name: string;
