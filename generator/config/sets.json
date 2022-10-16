@@ -1,0 +1,10 @@
+{
+  "GKey": "sets",
+  "groupKey": null,
+  "nameOverride": {},
+  "overrides": {
+    "items": "Array<ItemsKey>"
+  },
+  "extractedTypes": {},
+  "description": {}
+}

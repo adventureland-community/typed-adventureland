@@ -1,8 +1,23 @@
 {
-  "mapping": {
-    "set": {"G": "sets", "type": "SetsKey"},
-    "type": {"G": "items", "type": "ItemTypes"},
-    "wtype": {"G": "items", "type": "ItemWeaponTypes"}
+  "GKey": "items",
+  "groupKey": "type",
+  "nameOverride": {
+    "cscroll": "CompoundScroll",
+    "uscroll": "UpgradeScroll",
+    "pscroll": "StatScroll",
+    "skill_item": "SkillItem",
+    "dungeon_key": "DungeonKey",
+    "bank_key": "BankKey",
+    "petlicence": "PetLicence",
+    "misc_offhand": "MiscOffhand",
+    "xp": "XP"
+  },
+  "overrides": {
+    "wtype": "WeaponType"
+  },
+  "extractedTypes": {
+    "type": "ItemType",
+    "wtype": "WeaponType"
   },
   "description": {
     "class": "An array of classes that can use this item.",
