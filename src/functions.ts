@@ -1,35 +1,17 @@
-/**
- *
- * Main contributor:
- * MIT License
+import { CharacterEntity } from "./character";
+import { Entity, EntityBase, SlotType, TradeSlotType } from "./entity";
+import { EventName } from "./event";
+import { ItemInfo } from "./items";
+import { IPosition, PositionReal, PositionMovable, PositionSmart } from "./position";
+import { ItemsKey } from "./types/GTypes/items";
+import { MapsKey } from "./types/GTypes/maps";
+import { MonstersKey } from "./types/GTypes/monsters";
+import { NpcsKey } from "./types/GTypes/npcs";
+import { SkillsKey } from "./types/GTypes/skills";
 
-Copyright (c) 2019 Kent Rasmussen
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
- *
- *
-*/
 export {};
-
+// TODO: ALL of theese types need to be validated and verified. and potentially extracted out into meaningfull files
 declare global {
-
   function open_stand(inventoryIndex?: number): Promise<any>;
   function close_stand(): Promise<any>;
 
@@ -69,7 +51,7 @@ declare global {
    * @param name The name of the item to craft (`G.craft`)
    * @returns A string containing the basic reason it failed, or nothing upon success
    */
-  function auto_craft(name: ItemName): string | void;
+  function auto_craft(name: ItemsKey): string | void;
 
   /**
    * Buy an item from an NPC. This function can buy things with gold or shells.
@@ -77,21 +59,21 @@ declare global {
    * @param quantity How many items to buy. The default is to buy one item
    */
   // TODO: Change the "any" to the promise that this function returns
-  function buy(item: ItemName, quantity?: number): Promise<any>;
+  function buy(item: ItemsKey, quantity?: number): Promise<any>;
   /**
    * Buy an item from an NPC using only gold. If you want to buy things with shells, use `buy_with_shells`.
    * @param item The name of the item you wish to purchase (`G.items`)
    * @param quantity How many items to buy. The default is to buy one item
    */
   // TODO: Change the "any" to the promise that this function returns
-  function buy_with_gold(item: ItemName, quantity?: number): Promise<any>;
+  function buy_with_gold(item: ItemsKey, quantity?: number): Promise<any>;
   /**
    * Buy an item from an NPC using only shells. If you want to buy things with gold, use `buy_with_gold`
    * @param item The name of the item you wish to purchase (`G.items`)
    * @param quantity How many items to buy. The default is to buy one item
    */
   // TODO: Change the "any" to the promise that this function returns
-  function buy_with_shells(item: ItemName, quantity?: number): Promise<any>;
+  function buy_with_shells(item: ItemsKey, quantity?: number): Promise<any>;
   /**
    * Check if you can attack the given target. This function also checks status conditions by calling `parent.is_disabled(character)` which checks statuses such as `rip` and `stunned`.
    * NOTE: If you just want to check the cooldown, consider using `is_on_cooldown("attack")`
@@ -116,7 +98,7 @@ declare global {
    * @param skill The skill to check
    * @param returns TRUE if not on cooldown, FALSE otherwise.
    */
-  function can_use(skill: import("./skills").SkillName): boolean;
+  function can_use(skill: SkillsKey): boolean;
   /**
    * Checks if you can use the given door from the given position
    * @param map A given map (from `G.maps`)
@@ -125,8 +107,7 @@ declare global {
    * @param y The y position on the map
    * @returns TRUE if the door can be used from the given position, FALSE otherwise
    */
-  function can_use_door(map: MapName, door: DoorInfo, x: number, y: number): boolean;
-
+  function can_use_door(map: MapsKey, door: DoorInfo, x: number, y: number): boolean;
 
   /**
    * Changes the target of the player. Use in association with `get_targeted_monster()`.
@@ -259,12 +240,11 @@ declare global {
   function use_hp_or_mp(): void;
   /** Checks whether or not we can attack other players */
   function is_pvp(): boolean;
-  function is_in_range(entity: Entity, skill?: import("./skills").SkillName): boolean;
+  function is_in_range(entity: Entity, skill?: SkillsKey): boolean;
   function is_transporting(entity: Entity): boolean;
   function is_moving(entity: Entity): boolean;
   function is_on_cooldown(skill: string): boolean;
-  
-  
+
   /**
    * If no ID is given, it will loot some chests.
    * @param id The ID of a chest (from `parent.chests`)
@@ -272,13 +252,17 @@ declare global {
   function loot(id?: string): Promise<any>;
 
   function mssince(date: Date): number;
-  function reduce_cooldown(skill: import("./skills").SkillName, ms: number): void;
+  function reduce_cooldown(skill: SkillsKey, ms: number): void;
   function respawn(): any;
   /** Quantity defaults to 1 if not set */
   function sell(inventoryPostion: number, quantity?: number): any;
   function send_cm(to: string | string[], data: any): any;
   function send_gold(to: string | { name: string }, amount: number): any;
-  function send_item(to: string | { name: string }, inventoryPostion: number, quantity?: number): any;
+  function send_item(
+    to: string | { name: string },
+    inventoryPostion: number,
+    quantity?: number
+  ): any;
   function send_local_cm(to: string, data: any): any;
   /**
    *
@@ -287,7 +271,9 @@ declare global {
    */
   function send_party_invite(name: any, isRequest?: boolean): any;
   function send_party_request(name: string): any;
-  function get_active_characters(): { [characterName: string]: "self" | "starting" | "loading" | "active" | "code" };
+  function get_active_characters(): {
+    [characterName: string]: "self" | "starting" | "loading" | "active" | "code";
+  };
   /**
    * renders the object as json inside the game
    * @param e
@@ -305,7 +291,7 @@ declare global {
   function swap(index1: number, index2: number): any;
   /** For buying things off players' merchants */
   function trade_buy(target: Entity, trade_slot: number): any;
-  function transport(map: MapName, spawn?: number): any;
+  function transport(map: MapsKey, spawn?: number): any;
   function unequip(slot: SlotType | TradeSlotType): any;
 
   // TODO: do better typing for this.
@@ -317,7 +303,7 @@ declare global {
   //   calculate?: true
   // ): Promise<{
   //   chance: number;
-  //   item: { name: ItemName; gift: number; level: number };
+  //   item: { name: ItemsKey; gift: number; level: number };
   //   grace: number;
   //   scroll: string;
   //   calculate: boolean;
@@ -328,9 +314,12 @@ declare global {
     offeringInventoryPosition?: number
   ): Promise<any>;
 
-  
-
-  function trade(inventoryPosition: number, tradeSlot: number | TradeSlotType, price: number, quantity: number): void;
+  function trade(
+    inventoryPosition: number,
+    tradeSlot: number | TradeSlotType,
+    price: number,
+    quantity: number
+  ): void;
 
   function join(eventName: EventName): Promise<any>;
   /**
@@ -341,7 +330,7 @@ declare global {
    * returns the position of the npc with the specified id, the first map it encounters with the npc is returned, it does not priortize your current map.
    * @param id The key of the npc from G.npcs
    */
-  function find_npc(id: import("./npc").NPCType): IPosition;
+  function find_npc(id: NpcsKey): IPosition;
 
   /** This function uses move() if it can, otherwise it uses smart_move() */
   export function xmove(entity: PositionReal): Promise<boolean>;
@@ -378,12 +367,18 @@ declare global {
    */
   export function move(x: number, y: number): Promise<MoveResponse>;
   export type MoveResponse = void | MoveFailureResponse;
-  export type SmartMoveMapPosition = "town" | "upgrade" | "exchange" | "potions" | "scrolls" | "compound";
+  export type SmartMoveMapPosition =
+    | "town"
+    | "upgrade"
+    | "exchange"
+    | "potions"
+    | "scrolls"
+    | "compound";
   export type SmartMoveToDestination =
-    | import("./npc").NPCType
+    | NpcsKey
     | IPosition
-    | MapName
-    | MonsterName
+    | MapsKey
+    | MonstersKey
     | SmartMoveMapPosition;
 
   export type SmartMoveSuccess = { success: true };
@@ -424,13 +419,7 @@ declare global {
     /** A settable flag. If true, smart_move will use town teleports to move around */
     use_town: boolean;
   };
-
 }
-
-export type ChestInfo = PositionReal & {
-  alpha: number;
-  skin: "chest3" | string;
-};
 
 /**
  * Contains elements that describe a door
@@ -444,140 +433,14 @@ export type ChestInfo = PositionReal & {
  * [7]: ??? Maybe "locked" or "ulocked"?
  * [8]: ??? There's reference to "complicated" in smart_move?
  */
-export type DoorInfo = [number, number, number, number, MapName, number?, number?, string?, string?];
-
-export type StatusInfoBase = {
-  /** How many ms left before this condition expires */
-  ms: number;
-};
-export type MonsterHuntStatusInfo = StatusInfoBase & {
-  /** The server ID where the monster hunt is valid */
-  sn: string;
-  /** Number of monsters remaining to kill */
-  c: number;
-  /** What monster we have to kill */
-  id: MonsterName;
-};
-
-export type StatusInfo = {
-  [T in ConditionName]?: StatusInfoBase;
-} & {
-  burned?: {
-    // (Unconfirmed) the damage that the burn will do per second.
-    intensity: number;
-    // The character ID that caused the burn
-    f: string;
-  };
-  coop?: {
-    id: string;
-    p: number;
-  };
-  mluck?: {
-    /** The ID of the merchant who cast mluck */
-    f: string;
-    /** A flag to show if the mluck was cast by the user's merchant. If false, it can be mlucked by any merchant. */
-    strong: boolean;
-  };
-  monsterhunt?: MonsterHuntStatusInfo;
-  citizen0aura?: {
-    luck: number;
-  };
-  citizen4aura?: {
-    gold: number;
-  };
-};
-
-
-
-
-
-// TODO: Get all types (from G?)
-export type CharacterType = "mage" | "merchant" | "paladin" | "priest" | "ranger" | "rogue" | "warrior";
-
-// TODO: Get all types (from G?)
-export type DamageType = "magical" | "physical";
-
-export type SlotType =
-  | "amulet"
-  | "belt"
-  | "cape"
-  | "chest"
-  | "earring1"
-  | "earring2"
-  | "elixir"
-  | "gloves"
-  | "helmet"
-  | "mainhand"
-  | "offhand"
-  | "orb"
-  | "pants"
-  | "ring1"
-  | "ring2"
-  | "shoes";
-
-export type TradeSlotType =
-  | "trade1"
-  | "trade2"
-  | "trade3"
-  | "trade4"
-  | "trade5"
-  | "trade6"
-  | "trade7"
-  | "trade8"
-  | "trade9"
-  | "trade10"
-  | "trade11"
-  | "trade12"
-  | "trade13"
-  | "trade14"
-  | "trade15"
-  | "trade16";
-
-export type ConditionName =
-  | "authfail"
-  | "blink"
-  | "burned"
-  | "charging"
-  | "charmed"
-  | "dampened"
-  | "darkblessing"
-  | "easterluck"
-  | "eburn"
-  | "eheal"
-  | "energized"
-  | "fingered"
-  | "frozen"
-  | "fullguard"
-  | "hardshell"
-  | "healed"
-  | "holidayspirit"
-  | "invincible"
-  | "licenced"
-  | "marked"
-  | "mcourage"
-  | "mlifesteal"
-  | "mluck"
-  | "monsterhunt"
-  | "massproduction"
-  | "massproductionpp"
-  | "notverified"
-  | "phasedout"
-  | "poisoned"
-  | "poisonous"
-  | "power"
-  | "reflection"
-  | "rspeed"
-  | "shocked"
-  | "slowness"
-  | "stack"
-  | "stoned"
-  | "stunned"
-  | "sugarrush"
-  | "tangled"
-  | "warcry"
-  | "weakness"
-  | "withdrawal"
-  | "xpower"
-  | "xshotted"
-  | "invis";
-
+export type DoorInfo = [
+  number,
+  number,
+  number,
+  number,
+  MapsKey,
+  number?,
+  number?,
+  string?,
+  string?
+];

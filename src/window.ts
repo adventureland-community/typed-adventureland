@@ -1,3 +1,4 @@
+import { PositionReal } from "./position";
 import { SkillsKey } from "./types/GTypes/skills";
 
 export {}; // this is done to make window a module
@@ -17,9 +18,9 @@ declare global {
     //   is_disabled(entity: Entity): boolean;
 
     //   character: CharacterEntity;
-    //   chests: {
-    //     [id: string]: ChestInfo;
-    //   };
+    chests: {
+      [id: string]: ChestInfo;
+    };
     //   entities: { [id: string]: Entity | CharacterEntity };
     next_skill: { [T in SkillsKey]?: Date };
     //   npcs: GMapsNPC[];
@@ -56,3 +57,8 @@ declare global {
     //   };
   }
 }
+
+export type ChestInfo = PositionReal & {
+  alpha: number;
+  skin: "chest3" | string;
+};

@@ -1,0 +1,13 @@
+{
+  "name": "al-javascript",
+  "version": "1.0.0",
+  "description": "An example of utilizing the typed-adventureland types",
+  "main": "default_code.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "typed-adventureland": "file:../../typed-adventureland-0.0.1.tgz"
+  }
+}
