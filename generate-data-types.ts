@@ -353,7 +353,7 @@ async function process(gProp: string, groupKey: string | null) {
   const grouped = groupKey ? groupBy(data[gProp], groupKey) : { [gProp]: data[gProp] };
   const analysis = analyseAll(grouped);
 
-  ensureDirectory(`./types/GTypes/${gProp}`);
+  ensureDirectory(`./src/types/GTypes/${gProp}`);
   ensureDirectory(`./tmp/${gProp}`);
 
   const config = getConfig(gProp);
@@ -364,7 +364,7 @@ async function process(gProp: string, groupKey: string | null) {
   for (const val of analysis) {
     writeFileSync(`./tmp/${gProp}/${val.category}_analysis.json`, JSON.stringify(val, null, 2));
     writeFileSync(
-      `./types/GTypes/${gProp}/${val.category}.ts`,
+      `./src/types/GTypes/${gProp}/${val.category}.ts`,
       prettier.format(generateTypes(val, groupKey, config), { parser: "babel" })
     );
   }
@@ -387,7 +387,7 @@ async function process(gProp: string, groupKey: string | null) {
   }
 
   writeFileSync(
-    `./types/GTypes/${gProp}/index.ts`,
+    `./src/types/GTypes/${gProp}/index.ts`,
     prettier.format(index.join("\n") + ";", { parser: "babel" })
   );
 }
@@ -399,6 +399,7 @@ async function main() {
   await process("sets", null);
   await process("items", "type");
   await process("events", null);
+  await process("maps", null);
 }
 
 main();
@@ -411,7 +412,7 @@ type Config = {
 };
 
 function getConfig(gProp: string) {
-  const configDirectory = `./types/GTypes/${gProp}/config`;
+  const configDirectory = `./src/types/GTypes/${gProp}/config`;
   ensureDirectory(configDirectory);
   const configPath = `${configDirectory}/config.json`;
   let config: Config = {};

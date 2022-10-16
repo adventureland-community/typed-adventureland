@@ -6,7 +6,7 @@ declare global {
    * [2]: The cost to unlock this bank pack if you buy with shells
    */
   const bank_packs: {
-    [T in BankPackType]: [import("./generated").MapName, number, number];
+    [T in BankPackType]: [MapsKey, number, number];
   };
 
   /**
