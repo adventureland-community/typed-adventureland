@@ -14,17 +14,9 @@
     "strict": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-
     "noImplicitThis": true,
-    "outDir": "./built",
+    "outDir": "./build",
     "baseUrl": "./src"
   },
-  "include": ["./src/**/*"],
-  "typeRoots": [
-    "./src/types",
-    "./types",
-    "./node_modules/@types",
-    "./node_modules/typed-adventureland",
-    "./node_modules/custom-types"
-  ]
+  "include": ["./src/**/*", "./node_modules/typed-adventureland"]
 }
