@@ -1,5 +1,8 @@
+import { ItemInfo } from "./items";
 import { PositionMovable } from "./position";
+import { ClassesKey } from "./types/GTypes/classes";
 import { MonstersKey } from "./types/GTypes/monsters";
+import { NpcsKey } from "./types/GTypes/npcs";
 
 export type EntityBase = {
   h: number;
@@ -25,8 +28,8 @@ export type Entity = PositionMovable & {
   attack: number;
   base: EntityBase;
   cooperative: boolean;
-  // ctype: CharacterType | import("./generated").NPCKey; // TODO:
-  // damage_type?: DamageType; // TODO:
+  ctype: ClassesKey | NpcsKey; // TODO:
+  damage_type?: DamageType;
   /** A percent chance to avoid physical attacks */
   evasion: number;
   /** Related to attack speed, I think it's equal to attacks per second */
@@ -64,19 +67,19 @@ export type Entity = PositionMovable & {
   rpiercing: number;
   //   s: StatusInfo; // TODO: status info
   // TODO: slots
-  //   /** Set if the entity is a player */
-  //   slots: {
-  //     [T in SlotType]: ItemInfo;
-  //   } & {
-  //     [T in TradeSlotType]?: ItemInfo & {
-  //       /** Number of minutes remaining for giveaway items */
-  //       giveaway?: number;
-  //       /** List of character IDs that are in the giveaway */
-  //       list: string[];
-  //       price: number;
-  //       rid: string;
-  //     };
-  //   };
+  /** Set if the entity is a player */
+  slots: {
+    [T in SlotType]: ItemInfo;
+  } & {
+    [T in TradeSlotType]?: ItemInfo & {
+      /** Number of minutes remaining for giveaway items */
+      giveaway?: number;
+      /** List of character IDs that are in the giveaway */
+      list: string[];
+      price: number;
+      rid: string;
+    };
+  };
   speed: number;
   // TODO: Add the parameters to this object
   /** If set, the merchant has a stand open */

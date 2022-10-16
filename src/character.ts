@@ -1,3 +1,5 @@
+import { BankPackType } from "./bank";
+import { ItemInfo } from "./items";
 import { MapsKey } from "./types/GTypes/maps";
 import { SkillsKey } from "./types/GTypes/skills";
 
@@ -13,11 +15,11 @@ export type CharacterEntity = import("./entity").Entity & {
   awidth: number;
   /** visual height */
   aheight: number;
-  // bank: {
-  //   [T in BankPackType]: ItemInfo[];
-  // } & {
-  //   gold: number;
-  // };
+  bank: {
+    [T in BankPackType]: ItemInfo[];
+  } & {
+    gold: number;
+  };
   /** Channeling actions */
   c: {
     [T in SkillsKey]?: { ms: number }; // TODO: could probably type it specifically for only channeling actions

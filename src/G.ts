@@ -1,6 +1,7 @@
+import { ClassesKey, GClasses } from "./types/GTypes/classes";
 import { ItemsKey } from "./types/GTypes/items";
 import { MapsKey } from "./types/GTypes/maps";
-import { MonstersKey } from "./types/GTypes/monsters";
+import { GMonsters, MonstersKey } from "./types/GTypes/monsters";
 import { NpcsKey } from "./types/GTypes/npcs";
 import { SkillsKey } from "./types/GTypes/skills";
 
@@ -16,32 +17,9 @@ declare global {
         [T in MapsKey]?: number;
       };
     };
-    // TODO: classes
-    // classes: {
-    //   [T in CharacterType]: {
-    //     /** A list of items that the character can equip using both hands */
-    //     doublehand: {
-    //       [T in WeaponType]?: {
-    //         /** Modifier on the given stat for equipping this type of item */
-    //         [T in StatType]?: number;
-    //       };
-    //     };
-    //     /** A list of items that the character can equip in its mainhand */
-    //     mainhand: {
-    //       [T in WeaponType]?: {
-    //         /** Modifier on the given stat for equipping this type of item */
-    //         [T in StatType]?: number;
-    //       };
-    //     };
-    //     /** A list of items that the character can equip in its offhand */
-    //     offhand: {
-    //       [T in WeaponType]?: {
-    //         /** Modifier on the given stat for equipping this type of item */
-    //         [T in StatType]?: number;
-    //       };
-    //     };
-    //   };
-    // };
+    classes: {
+      [T in ClassesKey]: GClasses;
+    };
     // TODO: conditions
     // conditions: {
     //   [T in ConditionName]: {
@@ -73,13 +51,9 @@ declare global {
     // drops also has a bunch of keys for other items, unsure how to type
     drops: {
       monsters: {
-        [T in MonstersKey]: Array<
-          [number, ItemsKey]
-        >;
+        [T in MonstersKey]: Array<[number, ItemsKey]>;
       };
-      f1: Array<
-        [number, ItemsKey] | [number, "open", "glitch"]
-      >;
+      f1: Array<[number, ItemsKey] | [number, "open", "glitch"]>;
     };
     geometry: {
       [T in MapsKey]: {
@@ -113,13 +87,7 @@ declare global {
            * the first two numbers defines top left, the next two numbers defines bottom right
            * a boundary is actually a "spawner" for a monster, the phoenix has a spawner in main, tthere can only be one, but it can also spawn in cave and halloween
            */
-          boundaries?: [
-            MapsKey,
-            number,
-            number,
-            number,
-            number
-          ][];
+          boundaries?: [MapsKey, number, number, number, number][];
           type: MonstersKey;
           stype?: "randomspawn"; // phoenix has this there might be other types
           /** Indicates if the monster can roam, presumeably out of the boundaries */
@@ -147,7 +115,7 @@ declare global {
         data: GMapData;
       };
     };
-    monsters: { [T in MonstersKey]: GMonster };
+    monsters: { [T in MonstersKey]: GMonsters };
     npcs: {
       [T in NpcsKey]: {
         id: NpcsKey;
@@ -222,30 +190,6 @@ export type GMapsNPC = {
   loop: boolean;
   /** unsure what this is */
   manual: boolean;
-};
-
-export type GMonster = {
-  name: string;
-  type: "monster";
-  mtype: MonstersKey;
-  skin: string;
-  hp: number;
-  max_hp: number;
-  attack: number;
-  // TODO: damgetype
-  //   damage_type: DamageType;
-  frequency: number;
-
-  /** attack range in pixels */
-  range: number;
-  /** Respawn time in seconds.
-   * Can be -1 (e.g. goldenbat), which means it's special.
-   * For >200 second respawn monsters, the variance is from 0.6 to 2.2 of their base time (https://discordapp.com/channels/238332476743745536/238332476743745536/729997473484898327) */
-  respawn: number;
-  /** run speed, pixels/second */
-  speed: number;
-  xp: number;
-  armor: number;
 };
 
 export interface GMapData {
