@@ -7,6 +7,8 @@
 # dependencies
 node_modules 
 
+/examples/**/package-lock.json
+
 # testing
 /coverage
 
