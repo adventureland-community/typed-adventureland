@@ -1,3 +1,5 @@
+import { MonstersKey } from "./types/GTypes/monsters";
+
 type EntityBase = {
   h: number;
   v: number;
@@ -46,7 +48,7 @@ export type Entity = import("./position").PositionMovable & {
   /** how much manacost is reduced */
   mp_reduction: number;
   /** If the entity is a monster, it is set */
-  mtype?: import("./generated").MonsterName;
+  mtype?: MonstersKey;
   /** Contains the full name of the monster */
   name: string;
   /** Is set if the entity is an NPC, undefined otherwise */

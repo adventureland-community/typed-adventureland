@@ -28,15 +28,20 @@ export type HelmetKey =
 export interface GHelmet {
   stat?: number;
   resistance?: number;
+  /** The tier of the item. */
   tier?: number;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades?: [number, number, number, number];
   protection?: boolean;
   vit?: number;
+  /** The skin of the item. */
   skin: string;
   cuteness?: number;
+  /** The full display name of an item. */
   name: string;
   a?: number | boolean;
   extra_stat?: number;
+  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade?: {
     cuteness?: number,
     armor: number,
@@ -53,8 +58,10 @@ export interface GHelmet {
     vit?: number,
   };
   evasion?: number;
+  /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   armor?: number;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;
   scroll?: boolean;
   pnresistance?: number;
@@ -63,12 +70,16 @@ export interface GHelmet {
   dex?: number;
   pcourage?: number;
   str?: number;
+  /** The set this item is part of `G.sets.wanderers`. */
   set?: string;
   legacy?: {
+    /** The set this item is part of `G.sets.wanderers`. */
     set: null,
+    /** An array of classes that can use this item. */
     class: null,
   };
   crit?: number;
+  /** An array of classes that can use this item. */
   class?: Array<string>;
   apiercing?: number;
   explanation?: string;
@@ -81,12 +92,14 @@ export interface GHelmet {
   firesistance?: number;
   output?: number;
   range?: number;
+  /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound?: {
     cuteness: number,
     range: number,
   };
   rogue?: {
     crit: number,
+    /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
     upgrade: {
       crit: number,
     },

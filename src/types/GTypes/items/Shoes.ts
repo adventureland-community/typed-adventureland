@@ -19,12 +19,17 @@ export type ShoesKey =
 
 export interface GShoes {
   stat: number;
+  /** The set this item is part of `G.sets.wanderers`. */
   set?: string;
+  /** The tier of the item. */
   tier: number;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
+  /** The skin of the item. */
   skin: string;
   cuteness?: number;
   speed: number;
+  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {
     cuteness?: number,
     armor: number,
@@ -34,21 +39,26 @@ export interface GShoes {
     fzresistance?: number,
     frequency?: number,
   };
+  /** The full display name of an item. */
   name: string;
+  /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   armor: number;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;
   scroll: boolean;
   resistance?: number;
   a?: number | boolean;
   extra_stat?: number;
   winterland?: {
+    /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
     upgrade: {
       speed: number,
     },
     speed: number,
   };
   explanation?: string;
+  /** An array of classes that can use this item. */
   class?: [string];
   for?: number;
   fzresistance?: number;

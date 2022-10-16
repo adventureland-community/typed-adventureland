@@ -1,3 +1,5 @@
+import { MapsKey } from "./types/GTypes/maps";
+
 declare global {
   /**
    * Contains information about what bank packs are available.

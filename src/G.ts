@@ -1,3 +1,9 @@
+import { ItemsKey } from "./types/GTypes/items";
+import { MapsKey } from "./types/GTypes/maps";
+import { MonstersKey } from "./types/GTypes/monsters";
+import { NpcsKey } from "./types/GTypes/npcs";
+import { SkillsKey } from "./types/GTypes/skills";
+
 export {}; // Augmentations for the global scope can only be directly nested in external modules or ambient module declarations.
 
 declare global {
@@ -5,9 +11,9 @@ declare global {
     /** a look with needed xp per level, key is level */
     levels: { [level: number]: number };
     base_gold: {
-      [T in import("./generated").MonsterName]?: {
+      [T in MonstersKey]?: {
         /** The base amount of gold this monster drops if you kill it in the given map */
-        [T in import("./generated").MapName]?: number;
+        [T in MapsKey]?: number;
       };
     };
     // TODO: classes
@@ -49,34 +55,34 @@ declare global {
     //   };
     // };
     dismantle: {
-      [T in import("./generated").ItemName]?: {
+      [T in ItemsKey]?: {
         /** The cost of dismantling the item */
         cost: number;
         /** A list of items you will get if you dismantle. If the number is < 1, it indicates the probability of getting that item. */
-        items: [number, import("./generated").ItemName][];
+        items: [number, ItemsKey][];
       };
     };
-    items: { [T in import("./generated").ItemName]: import("./items").GItem };
+    items: { [T in ItemsKey]: import("./items").GItem };
     craft: {
-      [T in import("./generated").ItemName]: {
+      [T in ItemsKey]: {
         cost: number;
-        items: Array<[number, import("./generated").ItemName, number]>;
-        quest?: import("./generated").NPCKey;
+        items: Array<[number, ItemsKey, number]>;
+        quest?: NpcsKey;
       };
     };
     // drops also has a bunch of keys for other items, unsure how to type
     drops: {
       monsters: {
-        [T in import("./generated").MonsterName]: Array<
-          [number, import("./generated").ItemName]
+        [T in MonstersKey]: Array<
+          [number, ItemsKey]
         >;
       };
       f1: Array<
-        [number, import("./generated").ItemName] | [number, "open", "glitch"]
+        [number, ItemsKey] | [number, "open", "glitch"]
       >;
     };
     geometry: {
-      [T in import("./generated").MapName]: {
+      [T in MapsKey]: {
         max_x: number;
         max_y: number;
         min_x: number;
@@ -88,7 +94,7 @@ declare global {
       };
     };
     maps: {
-      [T in import("./generated").MapName]: {
+      [T in MapsKey]: {
         // TODO: DoorInfo
         // doors: DoorInfo[];
         /** The name of the map, if this changes, the map layout probably changed. */
@@ -108,13 +114,13 @@ declare global {
            * a boundary is actually a "spawner" for a monster, the phoenix has a spawner in main, tthere can only be one, but it can also spawn in cave and halloween
            */
           boundaries?: [
-            import("./generated").MapName,
+            MapsKey,
             number,
             number,
             number,
             number
           ][];
-          type: import("./generated").MonsterName;
+          type: MonstersKey;
           stype?: "randomspawn"; // phoenix has this there might be other types
           /** Indicates if the monster can roam, presumeably out of the boundaries */
           roam?: boolean;
@@ -127,8 +133,8 @@ declare global {
         // TODO: IPosition / ref
         // ref: {
         //   [id: string]: IPosition & {
-        //     map: import("./generated").MapName;
-        //     in: import("./generated").MapName;
+        //     map: MapsKey;
+        //     in: MapsKey;
         //     id: string;
         //   };
         // };
@@ -141,17 +147,17 @@ declare global {
         data: GMapData;
       };
     };
-    monsters: { [T in import("./generated").MonsterName]: GMonster };
+    monsters: { [T in MonstersKey]: GMonster };
     npcs: {
-      [T in import("./generated").NPCKey]: {
-        id: import("./generated").NPCKey;
+      [T in NpcsKey]: {
+        id: NpcsKey;
         /** Full name of NPC */
         name: string;
         /** A list of places you can transport to with this NPC. The number is the spawn */
         places?: {
-          [T in import("./generated").MapName]?: number;
+          [T in MapsKey]?: number;
         };
-        role: import("./generated").NPCRole;
+        // role: NPCRole; // TODO: generate npc role
         color?: string;
       };
     };
@@ -159,11 +165,11 @@ declare global {
     // TODO: quests
     // quests: {
     //   [T in string]: PositionReal & {
-    //     id: import("./generated").NPCKey;
+    //     id: NpcsKey;
     //   };
     // };
     skills: {
-      [T in import("./generated").AllSkillNames]: {
+      [T in SkillsKey]: {
         apiercing?: number;
         // TODO: charactertype "class"
         // class?: CharacterType[];
@@ -186,10 +192,10 @@ declare global {
         /** For MP use skills on the mage, 1 mp will equal this much damage */
         ratio?: number;
         /** The cooldown this skill shares with another skill */
-        share?: import("./generated").AllSkillNames;
+        share?: SkillsKey;
         // TODO: slot
         // /** The item(s) required to use this skill */
-        // slot?: [SlotType, ItemName][];
+        // slot?: [SlotType, ItemsKey][];
         /** Does this skill require a single target? (Don't use an array) */
         target?: boolean;
         /** Does this skill require multiple targets? (Use an array) */
@@ -210,7 +216,7 @@ declare global {
 // TODO: Get a better name for this.
 // TODO: Get a better naming convention for G data
 export type GMapsNPC = {
-  id: import("./generated").NPCKey;
+  id: NpcsKey;
   name?: string;
   position: [number, number];
   loop: boolean;
@@ -221,7 +227,7 @@ export type GMapsNPC = {
 export type GMonster = {
   name: string;
   type: "monster";
-  mtype: import("./generated").MonsterName;
+  mtype: MonstersKey;
   skin: string;
   hp: number;
   max_hp: number;

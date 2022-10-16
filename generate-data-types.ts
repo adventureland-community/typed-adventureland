@@ -400,6 +400,9 @@ async function main() {
   await process("items", "type");
   await process("events", null);
   await process("maps", null);
+  await process("skills", null);
+  await process("monsters", null);
+  await process("npcs", null);
 }
 
 main();

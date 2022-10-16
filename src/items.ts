@@ -1,11 +1,11 @@
-import { ItemName } from "./generated";
+import { ItemsKey } from "./types/GTypes/items";
 
 declare global {
     /** 0 = normal, 1 = high, 2 = rare */
-  function item_grade(item: ItemInfo | { name: ItemName }): -1 | 0 | 1 | 2;
+  function item_grade(item: ItemInfo | { name: ItemsKey }): -1 | 0 | 1 | 2;
   
   /** Returns the inventory position of the item, or -1 if it's not found */
-  function locate_item(item: ItemName): number; // should this live in "inventory"?
+  function locate_item(item: ItemsKey): number; // should this live in "inventory"?
 }
 
 export type HealthPotion = "hpot0" | "hpot1" | "hpotx";
@@ -24,16 +24,16 @@ export type ItemInfo = {
     b?: boolean;
     /** Set if the item is compoundable or upgradable */
     level?: number;
-    name: ItemName;
+    name: ItemsKey;
     /** How many of this item we have. Set if the item is stackable. */
     q?: number;
     /** If set, name == placeholder, and we are upgrading or compounding something */
     p?:
       | {
           chance: number;
-          name: ItemName;
+          name: ItemsKey;
           level: number;
-          scroll: ItemName;
+          scroll: ItemsKey;
           nums: number[];
         }
       | "shiny"
@@ -60,7 +60,7 @@ export type ItemInfo = {
     grades?: [number, number];
     /** The full name of the item */
     name: string;
-    id: ItemName;
+    id: ItemsKey;
     // TODO: Add a type for quests
     /** Indicates the "quest" that this item is needed to complete */
     quest: string;

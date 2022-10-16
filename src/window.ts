@@ -1,25 +1,27 @@
-export {} // this is done to make window a module
+import { SkillsKey } from "./types/GTypes/skills";
+
+export {}; // this is done to make window a module
 declare global {
-    interface Window {
+  interface Window {
     //   $: JQueryStatic;
-      clear_game_logs(): void;
-      close_merchant(): void;
+    clear_game_logs(): void;
+    close_merchant(): void;
     //   distance(from: IPosition | PositionReal, to: IPosition | PositionReal): number;
-      exchange(inventoryPosition: number): void;
-      open_merchant(standInventoryPostion: number): void;
-      start_runner(): void;
-      stop_runner(): void;
-  
-      sprite_image(name: string, args?: any): string;
-  
+    exchange(inventoryPosition: number): void;
+    open_merchant(standInventoryPostion: number): void;
+    start_runner(): void;
+    stop_runner(): void;
+
+    sprite_image(name: string, args?: any): string;
+
     //   is_disabled(entity: Entity): boolean;
-  
+
     //   character: CharacterEntity;
     //   chests: {
     //     [id: string]: ChestInfo;
     //   };
     //   entities: { [id: string]: Entity | CharacterEntity };
-       next_skill: { [T in import('./generated/').AllSkillNames]?: Date };
+    next_skill: { [T in SkillsKey]?: Date };
     //   npcs: GMapsNPC[];
     //   party: {
     //     [T in string]: IPosition & {
@@ -29,10 +31,10 @@ declare global {
     //       type: CharacterType;
     //     };
     //   };
-      /** Contains the name of every character in your party */
-      party_list: string[];
-      /** Contains a list of the last 40 ping response times */
-      pings: number[];
+    /** Contains the name of every character in your party */
+    party_list: string[];
+    /** Contains a list of the last 40 ping response times */
+    pings: number[];
     //   server_identifier: ServerIdentifier;
     //   server_region: ServerRegion;
     //   socket: SocketIO.Socket & {
@@ -52,5 +54,5 @@ declare global {
     //   } & {
     //     valentines?: boolean;
     //   };
-    }
+  }
 }

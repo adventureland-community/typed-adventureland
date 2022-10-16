@@ -76,6 +76,7 @@ export type WeaponKey =
   | "xmace"; // Merry Mace
 
 export interface GWeapon {
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
   cx?: {
     large?: boolean,
@@ -86,10 +87,13 @@ export interface GWeapon {
     border?: number,
   };
   damage_type: string;
+  /** The skin of the item. */
   skin: string;
+  /** The tier of the item. */
   tier: number;
   reflection?: number;
   a?: boolean | number;
+  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {
     range: number,
     attack: number,
@@ -112,12 +116,16 @@ export interface GWeapon {
     resistance?: number,
     attr1?: number,
   };
+  /** The full display name of an item. */
   name: string;
+  /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
+  /** The type of `weapon` `wand` `axe` `mace`... */
   wtype: string;
   attack: number;
   ignore?: boolean;
   range: number;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;
   armor?: number;
   stun?: number;
@@ -129,6 +137,7 @@ export interface GWeapon {
   str?: number;
   explanation?: string;
   evasion?: number;
+  /** The set this item is part of `G.sets.wanderers`. */
   set?: string;
   ability?: string;
   dex?: number;
@@ -143,6 +152,7 @@ export interface GWeapon {
   blast?: number;
   rpiercing?: number;
   trex?: string;
+  /** An array of classes that can use this item. */
   class?: [string];
   firesistance?: number;
   luck?: number;

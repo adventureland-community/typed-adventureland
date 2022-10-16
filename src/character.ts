@@ -1,3 +1,6 @@
+import { MapsKey } from "./types/GTypes/maps";
+import { SkillsKey } from "./types/GTypes/skills";
+
 declare global {
   const character: Character & CharacterEntity;
 }
@@ -17,7 +20,7 @@ export type CharacterEntity = import("./entity").Entity & {
   // };
   /** Channeling actions */
   c: {
-    [T in import("./generated").SkillName]?: { ms: number }; // TODO: could probably type it specifically for only channeling actions
+    [T in SkillsKey]?: { ms: number }; // TODO: could probably type it specifically for only channeling actions
   } & {
     revival?: {
       /** name of the priest trying to revive you. */
@@ -70,5 +73,5 @@ export type CharacterEntity = import("./entity").Entity & {
    * Which instance your character is in
    * If you are in a dungeon, it's a unique ID, otherwise it's the map you are in
    * */
-  in: import("./generated").MapName | string;
+  in: MapsKey | string;
 };

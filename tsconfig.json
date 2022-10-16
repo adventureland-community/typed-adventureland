@@ -23,6 +23,6 @@
     "target": "esnext",
     "rootDir": "."
   },
-  "include": ["types"],
+  "include": ["src"],
   "exclude": ["**/node_modules/*", "build", "coverage", "dist", "old-dist"]
 }

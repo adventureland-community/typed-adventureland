@@ -23,6 +23,7 @@ export interface GAmulet {
   evasion?: number;
   int?: number;
   hp?: number;
+  /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound?: {
     dex?: number,
     dreturn?: number,
@@ -43,20 +44,26 @@ export interface GAmulet {
     vit?: number,
     resistance?: number,
   };
+  /** The full display name of an item. */
   name: string;
   armor?: number;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
+  /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   a?: boolean;
   str?: number;
+  /** The skin of the item. */
   skin: string;
   crit?: number;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
   type: string;
   manasteal?: number;
   lifesteal?: number;
   critdamage?: number;
   apiercing?: number;
   mp_cost?: number;
+  /** The set this item is part of `G.sets.wanderers`. */
   set?: string;
   mp_reduction?: number;
   xp?: number;
@@ -69,6 +76,7 @@ export interface GAmulet {
   vit?: number;
   resistance?: number;
   explanation?: string;
+  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade?: {
     apiercing: number,
     rpiercing: number,

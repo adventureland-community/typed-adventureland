@@ -1,6 +1,7 @@
 import { CodeMessageEvent } from "./codemessage";
-import { ItemName, MapName } from "./generated";
 import { ItemInfo } from "./items";
+import { ItemsKey } from "./types/GTypes/items";
+import { MapsKey } from "./types/GTypes/maps";
 
 declare global {
   interface Character {
@@ -41,7 +42,7 @@ declare global {
       event: "new_map",
       callback?: (data: {
         /** The identifier used for accessing `G.maps` for exampple `G.maps.main` */
-        name: MapName;
+        name: MapsKey;
 
         /** Either the map name you are on, or the unique ID of an instance you are inside. */
         in: string;
@@ -66,7 +67,7 @@ declare global {
       callback?: (data: {
         /** Character name that sent you the item */
         name: string;
-        item: ItemName;
+        item: ItemsKey;
         q: number;
         /** The inventory #*/
         num: number;
@@ -78,7 +79,7 @@ declare global {
       callback?: (data: {
         /** Character name that sent you the item */
         name: string;
-        item: ItemName;
+        item: ItemsKey;
         q: number;
         /** The inventory #*/
         num: number;
@@ -104,12 +105,12 @@ declare global {
     on(
       event: "craft",
       callback?: (data: {
-        name: ItemName;
+        name: ItemsKey;
         /** Inventory index */
         num: number;
       }) => void
     ): void;
-    on(event: "dismantle", callback?: (data: { name: ItemName }) => void): void;
+    on(event: "dismantle", callback?: (data: { name: ItemsKey }) => void): void;
 
     on(
       event: "sale",
@@ -205,7 +206,7 @@ export interface SellEvent {
   gold: number;
 }
 export interface BuyEvent {
-  name: ItemName;
+  name: ItemsKey;
 
   /** Inventory slot */
   num: number;
@@ -247,7 +248,7 @@ export type GoldReceivedEvent =
       gold: number;
     };
 export interface LootedItem {
-  name: ItemName;
+  name: ItemsKey;
 
   /** Name of the character the item is for */
   looter: string | null;
@@ -361,7 +362,7 @@ export interface CharacterEvents {
   };
   new_map: {
     /** The identifier used for accessing `G.maps` for exampple `G.maps.main` */
-    name: MapName;
+    name: MapsKey;
 
     /** Either the map name you are on, or the unique ID of an instance you are inside. */
     in: string;
@@ -379,7 +380,7 @@ export interface CharacterEvents {
   item_received: {
     /** Character name that sent you the item */
     name: string;
-    item: ItemName;
+    item: ItemsKey;
     q: number;
     /** The inventory #*/
     num: number;
@@ -387,7 +388,7 @@ export interface CharacterEvents {
   item_sent: {
     /** Character name that sent you the item */
     name: string;
-    item: ItemName;
+    item: ItemsKey;
     q: number;
     /** The inventory #*/
     num: number;
@@ -401,12 +402,12 @@ export interface CharacterEvents {
     reason: string;
   };
   craft: {
-    name: ItemName;
+    name: ItemsKey;
     /** Inventory index */
     num: number;
   };
   dismantle: {
-    name: ItemName;
+    name: ItemsKey;
   };
   sale: {
     /** character name */

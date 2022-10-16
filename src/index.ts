@@ -4,8 +4,6 @@ export * from "./dungeon";
 export * from "./items";
 export * from "./npc";
 export * from "./skills";
-export * from "./generated";
-export * from "./server";
 export * from "./G";
 export * from "./entity";
 export * from "./character";
