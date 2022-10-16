@@ -11,6 +11,7 @@
   ],
   "keywords": [
     "AdventureLand",
+    "Adventure Land",
     "API",
     "Typescript",
     "Autocomplete"
@@ -19,7 +20,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc && echo Emitted declaration files",
-    "generate": "ts-node generate-data-types.ts"
+    "generate": "ts-node generate-data-types.ts",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@types/node": "^18.8.3",
