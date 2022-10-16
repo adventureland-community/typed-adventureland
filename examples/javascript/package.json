@@ -1,8 +1,8 @@
 {
   "name": "al-javascript",
   "version": "1.0.0",
-  "description": "An example of utilizing the typed-adventureland types",
-  "main": "default_code.js",
+  "description": "An example of utilizing the typed-adventureland types in Javascript.",
+  "main": "src/default_code.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
