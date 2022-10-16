@@ -3,6 +3,7 @@
   "GKey": "timestamp",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }

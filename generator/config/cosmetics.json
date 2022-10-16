@@ -3,6 +3,7 @@
   "GKey": "cosmetics",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }

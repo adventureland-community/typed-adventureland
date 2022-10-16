@@ -3,6 +3,7 @@
   "GKey": "dismantle",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }

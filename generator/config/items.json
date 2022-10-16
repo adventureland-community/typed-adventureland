@@ -1,8 +1,42 @@
 {
-  "disabled": true,
   "GKey": "items",
-  "groupKey": null,
-  "nameOverride": {},
-  "extractedTypes": {},
-  "description": {}
+  "groupKey": "type",
+  "nameOverride": {
+    "cscroll": "CompoundScroll",
+    "uscroll": "UpgradeScroll",
+    "pscroll": "StatScroll",
+    "skill_item": "SkillItem",
+    "dungeon_key": "DungeonKey",
+    "bank_key": "BankKey",
+    "petlicence": "PetLicence",
+    "misc_offhand": "MiscOffhand",
+    "xp": "XP"
+  },
+  "overrides": {
+    "wtype": "WeaponType"
+  },
+  "extractedTypes": {
+    "type": "ItemType",
+    "wtype": "WeaponType"
+  },
+  "description": {
+    "class": "An array of classes that can use this item.",
+    "compound": "Contains information about what stats the item will gain with each compound level. Set if the item is compoundable.",
+    "upgrade": "Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable.",
+    "damage": "The type of damage.",
+    "e": "Refers to how many items are needed to exchange (see .quest as well!)",
+    "g": "Cost of the item in gold, if an NPC were to sell this item.",
+    "grades": "The first number refers to what level the item begins being `high` grade, the second for `rare`.",
+    "name": "The full display name of an item.",
+    "id": "The id of an item, used to look up in `G.items`.",
+    "quest": "Indicates the `quest` that this item is needed to complete.",
+    "s": "Indicates how many of this items you can stack. Set if the item is stackable.",
+    "type": "The type of item, `shield`, `weapon`, `gloves`...",
+    "wtype": "The type of `weapon` `wand` `axe` `mace`...",
+    "gives": "If the item gives a buff, or effect, like a health potion.",
+    "skin": "The skin of the item.",
+    "size": "The size of the item icon.",
+    "tier": "The tier of the item.",
+    "set": "The set this item is part of `G.sets.wanderers`."
+  }
 }

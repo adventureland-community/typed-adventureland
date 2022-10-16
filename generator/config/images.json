@@ -3,6 +3,7 @@
   "GKey": "images",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }

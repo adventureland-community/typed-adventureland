@@ -3,6 +3,7 @@
   "GKey": "games",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }

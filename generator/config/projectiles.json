@@ -3,6 +3,7 @@
   "GKey": "projectiles",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }

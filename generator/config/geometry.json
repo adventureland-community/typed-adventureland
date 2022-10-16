@@ -3,6 +3,7 @@
   "GKey": "geometry",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }

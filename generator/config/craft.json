@@ -3,6 +3,7 @@
   "GKey": "craft",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }

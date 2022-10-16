@@ -3,6 +3,7 @@
   "GKey": "titles",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }

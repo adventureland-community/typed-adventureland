@@ -60,24 +60,26 @@ export class Generator {
 
       for (const config of this.configMap.values()) {
         if (config.GKey === GKey) {
+          console.log();
           continue generateDefaultConfig;
         }
+      }
 
-        const defaultConfig = {
+      if (this.configDir) {
+        const defaultConfig: GeneratorConfig = {
           disabled: true,
           GKey: GKey,
           groupKey: null,
           nameOverride: {},
+          overrides: {},
           extractedTypes: {},
           description: {},
         };
 
-        if (this.configDir) {
-          writeFileSync(
-            path.join(this.configDir, `${GKey}.json`),
-            JSON.stringify(defaultConfig, null, 2)
-          );
-        }
+        writeFileSync(
+          path.join(this.configDir, `${GKey}.json`),
+          JSON.stringify(defaultConfig, null, 2)
+        );
       }
     }
   }

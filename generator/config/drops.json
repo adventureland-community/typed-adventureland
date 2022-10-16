@@ -3,6 +3,7 @@
   "GKey": "drops",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }

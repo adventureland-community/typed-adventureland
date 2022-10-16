@@ -3,6 +3,7 @@
   "GKey": "docs",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }

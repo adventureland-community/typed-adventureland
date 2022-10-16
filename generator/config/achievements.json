@@ -3,6 +3,7 @@
   "GKey": "achievements",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }

@@ -3,6 +3,7 @@
   "GKey": "emotions",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }

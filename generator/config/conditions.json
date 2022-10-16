@@ -3,6 +3,7 @@
   "GKey": "conditions",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {},
   "extractedTypes": {},
   "description": {}
 }
