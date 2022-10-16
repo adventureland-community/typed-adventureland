@@ -1,6 +1,6 @@
 import { readdirSync, readFileSync, writeFileSync } from "fs";
 import path from "path";
-import { getGData } from "./getGData";
+import { getGData, RawData } from "./getGData";
 import { groupBy } from "./helpers/groupBy";
 import { ensureDirectory } from "./helpers/ensureDirectory";
 import { analyseAll } from "./analysis";
@@ -9,6 +9,9 @@ import { generateTypes } from "./generateTs";
 import { capitalize } from "./helpers/capitalize";
 
 export interface GeneratorConfig {
+  /** true if the config is disabled */
+  disabled?: boolean;
+
   /** Overrides the generated type for specific fields. */
   overrides: Record<string, string>;
 
@@ -31,6 +34,7 @@ export interface GeneratorConfig {
 export class Generator {
   configMap = new Map<string, GeneratorConfig>();
   targetDir: string;
+  private configDir?: string;
 
   constructor(targetDir: string) {
     ensureDirectory(targetDir);
@@ -38,6 +42,7 @@ export class Generator {
   }
 
   loadConfig(configDir: string) {
+    this.configDir = configDir;
     const configFiles = readdirSync(configDir).filter((file) => path.extname(file) === ".json");
 
     for (const configFile of configFiles) {
@@ -49,12 +54,46 @@ export class Generator {
     }
   }
 
+  generateDefaultConfigs(data: RawData) {
+    generateDefaultConfig: for (const GKey of Object.keys(data)) {
+      if (GKey === "version") continue;
+
+      for (const config of this.configMap.values()) {
+        if (config.GKey === GKey) {
+          continue generateDefaultConfig;
+        }
+
+        const defaultConfig = {
+          disabled: true,
+          GKey: GKey,
+          groupKey: null,
+          nameOverride: {},
+          extractedTypes: {},
+          description: {},
+        };
+
+        if (this.configDir) {
+          writeFileSync(
+            path.join(this.configDir, `${GKey}.json`),
+            JSON.stringify(defaultConfig, null, 2)
+          );
+        }
+      }
+    }
+  }
+
   async generate() {
     const data = await getGData();
     const tmpDir = path.resolve(__dirname, "..", "tmp");
 
+    // generate disabled config files for each missing G key
+    this.generateDefaultConfigs(data);
+
     for (const config of this.configMap.values()) {
-      const { groupKey, GKey } = config;
+      const { groupKey, GKey, disabled } = config;
+
+      if (disabled) continue;
+
       const outDir = path.join(this.targetDir, "GTypes", GKey);
 
       const grouped = groupKey ? groupBy(data[GKey], groupKey) : { [GKey]: data[GKey] };

@@ -1,6 +1,6 @@
 {
   "disabled": true,
-  "GKey": "events",
+  "GKey": "timestamp",
   "groupKey": null,
   "nameOverride": {},
   "extractedTypes": {},

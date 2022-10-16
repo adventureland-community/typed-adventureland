@@ -1,6 +1,6 @@
 {
   "disabled": true,
-  "GKey": "events",
+  "GKey": "conditions",
   "groupKey": null,
   "nameOverride": {},
   "extractedTypes": {},

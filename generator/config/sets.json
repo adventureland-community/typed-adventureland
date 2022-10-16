@@ -1,10 +1,8 @@
 {
+  "disabled": true,
   "GKey": "sets",
   "groupKey": null,
   "nameOverride": {},
-  "overrides": {
-    "items": "ItemsKey[]"
-  },
   "extractedTypes": {},
   "description": {}
 }

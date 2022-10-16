@@ -1,7 +1,7 @@
 import axios from "axios";
 import { DeepObject } from "./helpers/DeepObject";
 
-type RawData = DeepObject<3>;
+export type RawData = DeepObject<3>;
 
 let cachedData: RawData | null = null;
 
