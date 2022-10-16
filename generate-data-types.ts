@@ -308,7 +308,7 @@ function makeInterface(fields: FieldsAnalysis, config: Config) {
 
     const descriptionComment = description ? `/** ${description} */\n` : "";
 
-    let line = descriptionComment + name;
+    let line = `${descriptionComment}"${name}"`;
 
     if (entry.optional) {
       line += "?";
