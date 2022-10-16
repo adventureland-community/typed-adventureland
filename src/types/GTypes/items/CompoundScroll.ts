@@ -4,6 +4,8 @@ export type CompoundScrollKey =
   | "cscroll2" // Rare Compound Scroll
   | "cscroll3"; // Legendary Compound Scroll
 
+export type ItemType = "cscroll";
+
 export interface GCompoundScroll {
   /** The full display name of an item. */
   name: string;

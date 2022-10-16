@@ -68,10 +68,21 @@ export function generateTypes(
     }),
   ].join("\n");
 
+  const extractedTypes: string[] = [];
+  if (config.extractedTypes) {
+    Object.entries(config.extractedTypes).forEach(([field, typeName]) => {
+      const values = analysis.fields[field]?.values;
+      if (values) {
+        extractedTypes.push(`\nexport type ${typeName} = `);
+        extractedTypes.push(...values.sort().map((val) => `| "${val}"`));
+      }
+    });
+  }
+
   const terface = `export interface G${analysis.category} ${makeInterface(
     analysis.fields,
     config
   )};`;
 
-  return keys + "\n\n" + terface;
+  return [keys, extractedTypes.join("\n"), terface].join("\n\n");
 }

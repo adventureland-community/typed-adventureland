@@ -1,5 +1,7 @@
 export type TestKey = "test"; // Test
 
+export type ItemType = "test";
+
 export interface GTest {
   /** The full display name of an item. */
   name: string;

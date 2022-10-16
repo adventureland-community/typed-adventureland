@@ -1,5 +1,7 @@
 export type FluteKey = "flute"; // Flute
 
+export type ItemType = "flute";
+
 export interface GFlute {
   explanation: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */

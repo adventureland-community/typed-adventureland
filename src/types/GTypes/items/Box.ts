@@ -5,6 +5,8 @@ export type BoxKey =
   | "jewellerybox" // Jewellery Box
   | "weaponbox"; // Weapon Box
 
+export type ItemType = "box";
+
 export interface GBox {
   ignore?: boolean;
   a: number | boolean;

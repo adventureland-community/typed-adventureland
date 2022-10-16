@@ -4,6 +4,8 @@ export type DungeonKeyKey =
   | "stonekey" // The Stone Key
   | "tombkey"; // The Tomb Key
 
+export type ItemType = "dungeon_key";
+
 export interface GDungeonKey {
   /** The full display name of an item. */
   name: string;

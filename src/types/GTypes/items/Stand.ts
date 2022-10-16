@@ -2,6 +2,8 @@ export type StandKey =
   | "stand0" // Merchant Stand
   | "stand1"; // Merchant Stand [Sell+Buy]
 
+export type ItemType = "stand";
+
 export interface GStand {
   /** The full display name of an item. */
   name: string;

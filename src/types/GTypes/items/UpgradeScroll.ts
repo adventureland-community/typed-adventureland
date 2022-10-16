@@ -5,6 +5,8 @@ export type UpgradeScrollKey =
   | "scroll3" // Legendary Upgrade Scroll
   | "scroll4"; // Ultimate Upgrade Scroll
 
+export type ItemType = "uscroll";
+
 export interface GUpgradeScroll {
   /** The full display name of an item. */
   name: string;

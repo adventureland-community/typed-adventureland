@@ -9,6 +9,8 @@ export type CapeKey =
   | "tigercape" // Cape of the Tiger
   | "vcape"; // Vampiric Cape
 
+export type ItemType = "cape";
+
 export interface GCape {
   stat: number;
   /** The skin of the item. */

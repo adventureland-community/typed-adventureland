@@ -1,5 +1,7 @@
 export type TomeKey = "xptome"; // Tome of Protection
 
+export type ItemType = "tome";
+
 export interface GTome {
   /** The full display name of an item. */
   name: string;

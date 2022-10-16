@@ -20,6 +20,8 @@ export type GlovesKey =
   | "wgloves" // Wanderer's Gloves
   | "xgloves"; // Darkforge Gloves
 
+export type ItemType = "gloves";
+
 export interface GGloves {
   stat?: number;
   /** The set this item is part of `G.sets.wanderers`. */

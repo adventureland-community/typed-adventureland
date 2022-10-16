@@ -15,6 +15,8 @@ export type PantsKey =
   | "xmaspants" // Xmas Pants
   | "xpants"; // Darkforge Underarmor
 
+export type ItemType = "pants";
+
 export interface GPants {
   a?: boolean | number;
   stat: number;

@@ -1,5 +1,7 @@
 export type LicenceKey = "licence"; // Licence to Kill
 
+export type ItemType = "licence";
+
 export interface GLicence {
   /** The full display name of an item. */
   name: string;

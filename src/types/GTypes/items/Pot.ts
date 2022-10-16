@@ -7,6 +7,8 @@ export type PotKey =
   | "mpotx" // Super MP Potion
   | "snakeoil"; // Snake Oil
 
+export type ItemType = "pot";
+
 export interface GPot {
   /** The full display name of an item. */
   name: string;

@@ -33,6 +33,8 @@ export type ElixirKey =
   | "wine" // Red Wine
   | "xshot"; // X-Shot
 
+export type ItemType = "elixir";
+
 export interface GElixir {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;

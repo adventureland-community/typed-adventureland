@@ -4,6 +4,8 @@ export type ThrowKey =
   | "smoke" // Pouch of Poof
   | "snowball"; // Snowball
 
+export type ItemType = "throw";
+
 export interface GThrow {
   onclick?: string;
   /** Indicates how many of this items you can stack. Set if the item is stackable. */

@@ -15,6 +15,8 @@ export type OrbKey =
   | "tigerstone" // Tiger Stone
   | "vorb"; // Vampiric Canine Teeth
 
+export type ItemType = "orb";
+
 export interface GOrb {
   attr0?: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */

@@ -3,6 +3,8 @@ export type SourceKey =
   | "wbook1" // Book of Secrets
   | "wbookhs"; // Book of Cheer
 
+export type ItemType = "source";
+
 export interface GSource {
   int?: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */

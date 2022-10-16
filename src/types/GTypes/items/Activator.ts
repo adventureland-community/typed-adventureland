@@ -1,5 +1,7 @@
 export type ActivatorKey = "frozenstone"; // Frozen Stone
 
+export type ItemType = "activator";
+
 export interface GActivator {
   onclick: string;
   /** Indicates how many of this items you can stack. Set if the item is stackable. */

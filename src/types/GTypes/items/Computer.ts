@@ -2,6 +2,8 @@ export type ComputerKey =
   | "computer" // Ancient Computer
   | "supercomputer"; // Super Computer
 
+export type ItemType = "computer";
+
 export interface GComputer {
   /** The full display name of an item. */
   name: string;

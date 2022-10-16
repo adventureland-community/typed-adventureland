@@ -1,5 +1,7 @@
 export type ContainerKey = "monsterbox"; // Monster Box
 
+export type ItemType = "container";
+
 export interface GContainer {
   /** The full display name of an item. */
   name: string;

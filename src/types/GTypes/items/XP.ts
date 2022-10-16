@@ -1,5 +1,7 @@
 export type XPKey = "bottleofxp"; // Bottle of XP
 
+export type ItemType = "xp";
+
 export interface GXP {
   /** The full display name of an item. */
   name: string;

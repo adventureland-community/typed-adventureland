@@ -1,5 +1,7 @@
 export type PetLicenceKey = "puppyer"; // Licence to Adopt a Puppy
 
+export type ItemType = "petlicence";
+
 export interface GPetLicence {
   /** The full display name of an item. */
   name: string;

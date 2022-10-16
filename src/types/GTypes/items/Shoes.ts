@@ -17,6 +17,8 @@ export type ShoesKey =
   | "xboots" // Darkforge Boots
   | "xmasshoes"; // Xmas Shoes
 
+export type ItemType = "shoes";
+
 export interface GShoes {
   stat: number;
   /** The set this item is part of `G.sets.wanderers`. */

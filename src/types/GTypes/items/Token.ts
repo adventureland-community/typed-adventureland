@@ -4,6 +4,8 @@ export type TokenKey =
   | "monstertoken" // Monster Token
   | "pvptoken"; // PVP Token
 
+export type ItemType = "token";
+
 export interface GToken {
   /** The full display name of an item. */
   name: string;

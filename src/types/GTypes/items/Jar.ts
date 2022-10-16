@@ -3,6 +3,8 @@ export type JarKey =
   | "emotionjar" // Emotion Jar
   | "emptyjar"; // Empty Jar
 
+export type ItemType = "jar";
+
 export interface GJar {
   exclusive?: boolean;
   /** The full display name of an item. */

@@ -20,6 +20,7 @@ export type AnalysisType =
 export type FieldAnalysis = {
   optional: boolean;
   types: AnalysisType[];
+  values?: AnalysisType[];
 };
 
 export type FieldsAnalysis = Record<string, FieldAnalysis>;
@@ -55,6 +56,21 @@ export function analyseFields<T extends DeepObject<1> | Array<unknown>>(
 
       if (isArray(value)) {
         type = "array";
+      }
+
+      // Store the actual values for extractedTypes
+      switch (type) {
+        case "string":
+          let values = fields[seenField].values;
+          if (!values) {
+            fields[seenField].values = values = [];
+          }
+
+          if (!values.find((v) => v === value)) {
+            values.push(value);
+          }
+
+          break;
       }
 
       if (!fields[seenField].types.find((t) => t.type === type)) {

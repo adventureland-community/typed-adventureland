@@ -25,6 +25,8 @@ export type HelmetKey =
   | "xhelmet" // Darkforge Helmet
   | "xmashat"; // Xmas Hat
 
+export type ItemType = "helmet";
+
 export interface GHelmet {
   stat?: number;
   resistance?: number;

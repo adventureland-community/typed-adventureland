@@ -5,6 +5,8 @@ export type CosmeticsKey =
   | "cosmo3" // New Hat
   | "cosmo4"; // New Accessory
 
+export type ItemType = "cosmetics";
+
 export interface GCosmetics {
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: number;

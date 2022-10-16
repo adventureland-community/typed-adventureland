@@ -1,5 +1,7 @@
 export type QubicsKey = "qubics"; // Qubics
 
+export type ItemType = "qubics";
+
 export interface GQubics {
   a: boolean;
   /** The full display name of an item. */

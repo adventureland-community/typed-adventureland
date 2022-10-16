@@ -3,6 +3,8 @@ export type StoneKey =
   | "stoneofluck" // Stone of Luck
   | "stoneofxp"; // Stone of Wisdom
 
+export type ItemType = "stone";
+
 export interface GStone {
   ignore: boolean;
   skin_a: string;

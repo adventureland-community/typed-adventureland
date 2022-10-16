@@ -1,5 +1,7 @@
 export type TrackerKey = "tracker"; // Tracktrix
 
+export type ItemType = "tracker";
+
 export interface GTracker {
   acolor: string;
   onclick: string;

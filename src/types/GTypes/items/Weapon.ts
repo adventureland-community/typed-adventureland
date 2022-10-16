@@ -75,6 +75,29 @@ export type WeaponKey =
   | "woodensword" // Wooden Sword
   | "xmace"; // Merry Mace
 
+export type ItemType = "weapon";
+
+export type WeaponType =
+  | "axe"
+  | "basher"
+  | "bow"
+  | "crossbow"
+  | "dagger"
+  | "dartgun"
+  | "fist"
+  | "great_staff"
+  | "mace"
+  | "pmace"
+  | "rapier"
+  | "scythe"
+  | "short_sword"
+  | "spear"
+  | "staff"
+  | "stars"
+  | "sword"
+  | "wand"
+  | "wblade";
+
 export interface GWeapon {
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];

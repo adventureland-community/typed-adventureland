@@ -6,6 +6,8 @@ export type ShieldKey =
   | "wshield" // Wooden Shield
   | "xshield"; // Shield X
 
+export type ItemType = "shield";
+
 export interface GShield {
   stat?: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */

@@ -3,6 +3,8 @@ export type BoosterKey =
   | "luckbooster" // Luck Booster
   | "xpbooster"; // XP Booster
 
+export type ItemType = "booster";
+
 export interface GBooster {
   gold?: number;
   explanation: string;

@@ -3,6 +3,8 @@ export type OfferingKey =
   | "offeringp" // Primling
   | "offeringx"; // Primordial X
 
+export type ItemType = "offering";
+
 export interface GOffering {
   a: boolean;
   /** Indicates how many of this items you can stack. Set if the item is stackable. */

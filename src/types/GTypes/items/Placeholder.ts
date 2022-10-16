@@ -2,6 +2,8 @@ export type PlaceholderKey =
   | "placeholder" // Placeholder
   | "placeholder_m"; // Placeholder
 
+export type ItemType = "placeholder";
+
 export interface GPlaceholder {
   ignore: boolean;
   /** The type of item, `shield`, `weapon`, `gloves`... */

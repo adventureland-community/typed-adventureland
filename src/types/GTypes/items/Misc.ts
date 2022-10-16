@@ -8,6 +8,8 @@ export type MiscKey =
   | "storagebox" // Storage Box
   | "troll"; // T-Shirt Roll
 
+export type ItemType = "misc";
+
 export interface GMisc {
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s?: number;
