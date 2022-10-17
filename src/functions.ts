@@ -3,11 +3,11 @@ import { Entity, EntityBase, SlotType, TradeSlotType } from "./entity";
 import { EventName } from "./event";
 import { ItemInfo } from "./items";
 import { IPosition, PositionReal, PositionMovable, PositionSmart } from "./position";
-import { ItemsKey } from "./types/GTypes/items";
-import { MapsKey } from "./types/GTypes/maps";
-import { MonstersKey } from "./types/GTypes/monsters";
-import { NpcsKey } from "./types/GTypes/npcs";
-import { SkillsKey } from "./types/GTypes/skills";
+import { ItemKey } from "./types/GTypes/items";
+import { MapKey } from "./types/GTypes/maps";
+import { MonsterKey } from "./types/GTypes/monsters";
+import { NpcKey } from "./types/GTypes/npcs";
+import { SkillKey } from "./types/GTypes/skills";
 
 export {};
 // TODO: ALL of theese types need to be validated and verified. and potentially extracted out into meaningfull files
@@ -51,7 +51,7 @@ declare global {
    * @param name The name of the item to craft (`G.craft`)
    * @returns A string containing the basic reason it failed, or nothing upon success
    */
-  function auto_craft(name: ItemsKey): string | void;
+  function auto_craft(name: ItemKey): string | void;
 
   /**
    * Buy an item from an NPC. This function can buy things with gold or shells.
@@ -59,21 +59,21 @@ declare global {
    * @param quantity How many items to buy. The default is to buy one item
    */
   // TODO: Change the "any" to the promise that this function returns
-  function buy(item: ItemsKey, quantity?: number): Promise<any>;
+  function buy(item: ItemKey, quantity?: number): Promise<any>;
   /**
    * Buy an item from an NPC using only gold. If you want to buy things with shells, use `buy_with_shells`.
    * @param item The name of the item you wish to purchase (`G.items`)
    * @param quantity How many items to buy. The default is to buy one item
    */
   // TODO: Change the "any" to the promise that this function returns
-  function buy_with_gold(item: ItemsKey, quantity?: number): Promise<any>;
+  function buy_with_gold(item: ItemKey, quantity?: number): Promise<any>;
   /**
    * Buy an item from an NPC using only shells. If you want to buy things with gold, use `buy_with_gold`
    * @param item The name of the item you wish to purchase (`G.items`)
    * @param quantity How many items to buy. The default is to buy one item
    */
   // TODO: Change the "any" to the promise that this function returns
-  function buy_with_shells(item: ItemsKey, quantity?: number): Promise<any>;
+  function buy_with_shells(item: ItemKey, quantity?: number): Promise<any>;
   /**
    * Check if you can attack the given target. This function also checks status conditions by calling `parent.is_disabled(character)` which checks statuses such as `rip` and `stunned`.
    * NOTE: If you just want to check the cooldown, consider using `is_on_cooldown("attack")`
@@ -98,7 +98,7 @@ declare global {
    * @param skill The skill to check
    * @param returns TRUE if not on cooldown, FALSE otherwise.
    */
-  function can_use(skill: SkillsKey): boolean;
+  function can_use(skill: SkillKey): boolean;
   /**
    * Checks if you can use the given door from the given position
    * @param map A given map (from `G.maps`)
@@ -107,7 +107,7 @@ declare global {
    * @param y The y position on the map
    * @returns TRUE if the door can be used from the given position, FALSE otherwise
    */
-  function can_use_door(map: MapsKey, door: DoorInfo, x: number, y: number): boolean;
+  function can_use_door(map: MapKey, door: DoorInfo, x: number, y: number): boolean;
 
   /**
    * Changes the target of the player. Use in association with `get_targeted_monster()`.
@@ -240,7 +240,7 @@ declare global {
   function use_hp_or_mp(): void;
   /** Checks whether or not we can attack other players */
   function is_pvp(): boolean;
-  function is_in_range(entity: Entity, skill?: SkillsKey): boolean;
+  function is_in_range(entity: Entity, skill?: SkillKey): boolean;
   function is_transporting(entity: Entity): boolean;
   function is_moving(entity: Entity): boolean;
   function is_on_cooldown(skill: string): boolean;
@@ -252,7 +252,7 @@ declare global {
   function loot(id?: string): Promise<any>;
 
   function mssince(date: Date): number;
-  function reduce_cooldown(skill: SkillsKey, ms: number): void;
+  function reduce_cooldown(skill: SkillKey, ms: number): void;
   function respawn(): any;
   /** Quantity defaults to 1 if not set */
   function sell(inventoryPostion: number, quantity?: number): any;
@@ -291,7 +291,7 @@ declare global {
   function swap(index1: number, index2: number): any;
   /** For buying things off players' merchants */
   function trade_buy(target: Entity, trade_slot: number): any;
-  function transport(map: MapsKey, spawn?: number): any;
+  function transport(map: MapKey, spawn?: number): any;
   function unequip(slot: SlotType | TradeSlotType): any;
 
   // TODO: do better typing for this.
@@ -303,7 +303,7 @@ declare global {
   //   calculate?: true
   // ): Promise<{
   //   chance: number;
-  //   item: { name: ItemsKey; gift: number; level: number };
+  //   item: { name: ItemKey; gift: number; level: number };
   //   grace: number;
   //   scroll: string;
   //   calculate: boolean;
@@ -330,7 +330,7 @@ declare global {
    * returns the position of the npc with the specified id, the first map it encounters with the npc is returned, it does not priortize your current map.
    * @param id The key of the npc from G.npcs
    */
-  function find_npc(id: NpcsKey): IPosition;
+  function find_npc(id: NpcKey): IPosition;
 
   /** This function uses move() if it can, otherwise it uses smart_move() */
   export function xmove(entity: PositionReal): Promise<boolean>;
@@ -375,10 +375,10 @@ declare global {
     | "scrolls"
     | "compound";
   export type SmartMoveToDestination =
-    | NpcsKey
+    | NpcKey
     | IPosition
-    | MapsKey
-    | MonstersKey
+    | MapKey
+    | MonsterKey
     | SmartMoveMapPosition;
 
   export type SmartMoveSuccess = { success: true };
@@ -433,14 +433,4 @@ declare global {
  * [7]: ??? Maybe "locked" or "ulocked"?
  * [8]: ??? There's reference to "complicated" in smart_move?
  */
-export type DoorInfo = [
-  number,
-  number,
-  number,
-  number,
-  MapsKey,
-  number?,
-  number?,
-  string?,
-  string?
-];
+export type DoorInfo = [number, number, number, number, MapKey, number?, number?, string?, string?];

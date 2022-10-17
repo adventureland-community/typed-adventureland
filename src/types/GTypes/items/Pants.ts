@@ -1,4 +1,4 @@
-export type PantsKey =
+export type PantKey =
   | "fallen" // Pants of the Fallen Master
   | "frankypants" // Franky Pants
   | "hpants" // Heavy Underarmor
@@ -15,9 +15,7 @@ export type PantsKey =
   | "xmaspants" // Xmas Pants
   | "xpants"; // Darkforge Underarmor
 
-export type ItemType = "pants";
-
-export interface GPants {
+export interface GPant {
   a?: boolean | number;
   stat: number;
   /** The set this item is part of `G.sets.wanderers`. */

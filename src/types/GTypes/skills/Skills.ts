@@ -1,4 +1,4 @@
-export type SkillsKey =
+export type SkillKey =
   | "3shot" // 3-Shot
   | "4fingers" // 4 Finger Technique
   | "5shot" // 5-Shot
@@ -102,7 +102,7 @@ export type SkillsKey =
   | "zap" // Zap
   | "zapperzap"; // Zap
 
-export interface GSkills {
+export interface GSkill {
   explanation?: string;
   cooldown?: number;
   type?: string;

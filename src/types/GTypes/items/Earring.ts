@@ -9,8 +9,6 @@ export type EarringKey =
   | "strearring" // Earring of Strength
   | "vitearring"; // Earring of Vitality
 
-export type ItemType = "earring";
-
 export interface GEarring {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;

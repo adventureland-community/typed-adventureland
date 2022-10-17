@@ -1,4 +1,4 @@
-export type ShoesKey =
+export type ShoeKey =
   | "eslippers" // Fluffy Slippers
   | "hboots" // Heavy Boots
   | "iceskates" // Ice Skates
@@ -17,9 +17,7 @@ export type ShoesKey =
   | "xboots" // Darkforge Boots
   | "xmasshoes"; // Xmas Shoes
 
-export type ItemType = "shoes";
-
-export interface GShoes {
+export interface GShoe {
   stat: number;
   /** The set this item is part of `G.sets.wanderers`. */
   set?: string;

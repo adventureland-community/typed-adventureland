@@ -9,8 +9,6 @@ export type BeltKey =
   | "sbelt" // Belt of Hallowed Trials
   | "strbelt"; // Belt of Strength
 
-export type ItemType = "belt";
-
 export interface GBelt {
   dex?: number;
   /** The full display name of an item. */

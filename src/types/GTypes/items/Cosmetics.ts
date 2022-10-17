@@ -1,13 +1,11 @@
-export type CosmeticsKey =
+export type CosmeticKey =
   | "cosmo0" // New Armor
   | "cosmo1" // New Make-up
   | "cosmo2" // New Hairdo
   | "cosmo3" // New Hat
   | "cosmo4"; // New Accessory
 
-export type ItemType = "cosmetics";
-
-export interface GCosmetics {
+export interface GCosmetic {
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: number;
   /** Indicates the `quest` that this item is needed to complete. */

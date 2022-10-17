@@ -1,5 +1,5 @@
 import { GData } from "./types/GTypes";
-import { NpcsKey } from "./types/GTypes/npcs";
+import { NpcKey } from "./types/GTypes/npcs";
 
 export {}; // Augmentations for the global scope can only be directly nested in external modules or ambient module declarations.
 
@@ -181,7 +181,7 @@ declare global {
 // TODO: Get a better name for this.
 // TODO: Get a better naming convention for G data
 export type GMapsNPC = {
-  id: NpcsKey;
+  id: NpcKey;
   name?: string;
   position: [number, number];
   loop: boolean;

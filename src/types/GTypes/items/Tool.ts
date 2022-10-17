@@ -2,10 +2,6 @@ export type ToolKey =
   | "pickaxe" // Pickaxe
   | "rod"; // Fishing Rod
 
-export type ItemType = "tool";
-
-export type WeaponType = "pickaxe" | "rod";
-
 export interface GTool {
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];

@@ -2,8 +2,6 @@ export type SpawnerKey =
   | "fieldgen0" // Dampening Field Generator
   | "figurine"; // Terracota Army Figurine
 
-export type ItemType = "spawner";
-
 export interface GSpawner {
   spawn: string;
   /** The full display name of an item. */

@@ -3,8 +3,6 @@ export type ChrysalisKey =
   | "kitty1" // Egg
   | "puppy1"; // Egg
 
-export type ItemType = "chrysalis";
-
 export interface GChrysalis {
   ignore: boolean;
   a: boolean;

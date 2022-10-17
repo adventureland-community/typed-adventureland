@@ -16,8 +16,6 @@ export type AmuletKey =
   | "t2stramulet" // Amulet of the Eager Warrior
   | "warmscarf"; // Warm Scarf
 
-export type ItemType = "amulet";
-
 export interface GAmulet {
   dex?: number;
   dreturn?: number;

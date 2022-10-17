@@ -2,8 +2,6 @@ export type MiscOffhandKey =
   | "exoarm" // Exoskeletal Arm
   | "lantern"; // The Lantern
 
-export type ItemType = "misc_offhand";
-
 export interface GMiscOffhand {
   int?: number;
   explanation: string;

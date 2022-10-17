@@ -1,4 +1,4 @@
-import { MapsKey } from "./types/GTypes/maps";
+import { MapKey } from "./types/GTypes/maps";
 
 declare global {
   /**
@@ -8,7 +8,7 @@ declare global {
    * [2]: The cost to unlock this bank pack if you buy with shells
    */
   const bank_packs: {
-    [T in BankPackType]: [MapsKey, number, number];
+    [T in BankPackType]: [MapKey, number, number];
   };
 
   /**

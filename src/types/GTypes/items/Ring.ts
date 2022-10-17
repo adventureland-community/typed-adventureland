@@ -20,8 +20,6 @@ export type RingKey =
   | "vring" // Vampiring
   | "zapper"; // The Zapper
 
-export type ItemType = "ring";
-
 export interface GRing {
   a?: boolean;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */

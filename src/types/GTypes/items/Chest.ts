@@ -30,8 +30,6 @@ export type ChestKey =
   | "xarmor" // Darkforge Armor
   | "xmassweater"; // Xmas Sweater
 
-export type ItemType = "chest";
-
 export interface GChest {
   dreturn?: number;
   int?: number;

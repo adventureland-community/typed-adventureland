@@ -1,4 +1,4 @@
-export type GlovesKey =
+export type GloveKey =
   | "fierygloves" // Fiery Gloves
   | "gloves" // Gloves
   | "gloves1" // Rugged Gloves
@@ -20,9 +20,7 @@ export type GlovesKey =
   | "wgloves" // Wanderer's Gloves
   | "xgloves"; // Darkforge Gloves
 
-export type ItemType = "gloves";
-
-export interface GGloves {
+export interface GGlove {
   stat?: number;
   /** The set this item is part of `G.sets.wanderers`. */
   set?: string;

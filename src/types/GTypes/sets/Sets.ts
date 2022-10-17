@@ -1,4 +1,4 @@
-export type SetsKey =
+export type SetKey =
   | "bunny" // Bunny Set
   | "fury" // Rage and Fury
   | "holidays" // Holiday Spirit
@@ -18,7 +18,7 @@ export type SetsKey =
   | "wt3" // Heavy Armor
   | "wt4"; // Darkforge Armor
 
-export interface GSets {
+export interface GSet {
   "1": {
     for?: number;
   };

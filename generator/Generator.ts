@@ -7,6 +7,7 @@ import { analyseAll } from "./analysis";
 import prettier from "prettier";
 import { generateTypes } from "./generateTs";
 import { capitalize } from "./helpers/capitalize";
+import { singular } from "./helpers/singular";
 
 const prettierOptions = { parser: "typescript" };
 
@@ -126,7 +127,9 @@ export class Generator {
       // Generate index.ts exporting everything inside the category
       const index = analysis.map((val) => `export * from './${val.category}';`);
 
-      const gKeyType = `G${capitalize(GKey)}`;
+      const capitalizedGKey = capitalize(GKey);
+      const singularGKey = singular(capitalizedGKey);
+      const gKeyType = `G${singularGKey}`;
 
       if (groupKey) {
         // Add empty line
@@ -136,26 +139,28 @@ export class Generator {
         index.push(
           ...analysis.map(
             (val) =>
-              `import type { ${val.category}Key, G${val.category} } from './${val.category}';`
+              `import type { ${singular(val.category)}Key, G${singular(val.category)} } from './${
+                val.category
+              }';`
           )
         );
 
         // Generate union type for all category keys e.g. ItemsKey
-        index.push(`\nexport type ${capitalize(GKey)}Key =`);
-        index.push(...analysis.map((val) => `| ${val.category}Key`));
+        index.push(`\nexport type ${singularGKey}Key =`);
+        index.push(...analysis.map((val) => `| ${singular(val.category)}Key`));
         index.push(`;`);
 
         // Generate union type for all category G definitions e.g. GItems
         index.push(`\nexport type ${gKeyType} =`);
-        index.push(...analysis.map((val) => `| G${val.category}`));
+        index.push(...analysis.map((val) => `| G${singular(val.category)}`));
         index.push(`;`);
       }
 
       // Import GTypes for GTypes/index.ts
-      gTypesIndex.push(`import type { ${capitalize(GKey)}Key, ${gKeyType} } from './${GKey}';`);
+      gTypesIndex.push(`import type { ${singularGKey}Key, ${gKeyType} } from './${GKey}';`);
 
       // Generate GData interface
-      gDataType.push(`${GKey}: {[T in ${capitalize(GKey)}Key]: ${gKeyType}};`);
+      gDataType.push(`${GKey}: {[T in ${singularGKey}Key]: ${gKeyType}};`);
 
       writeFileSync(
         path.join(outDir, "index.ts"),

@@ -25,8 +25,6 @@ export type QuestKey =
   | "x8" // Quantum Piece
   | "xbox"; // Xmas Box
 
-export type ItemType = "quest";
-
 export interface GQuest {
   /** Refers to how many items are needed to exchange (see .quest as well!) */
   e?: number;

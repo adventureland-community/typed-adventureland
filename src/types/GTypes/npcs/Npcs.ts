@@ -1,4 +1,4 @@
-export type NpcsKey =
+export type NpcKey =
   | "antip2w" // Mr. Dworf
   | "appearance" // Haila
   | "armors"
@@ -126,7 +126,7 @@ export type NpcsKey =
   | "wizardrepeater" // Wizard
   | "wnpc"; // Wizard
 
-export interface GNpcs {
+export interface GNpc {
   name?: string;
   color?: string;
   cx?: {

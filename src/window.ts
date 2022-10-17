@@ -1,5 +1,5 @@
 import { PositionReal } from "./position";
-import { SkillsKey } from "./types/GTypes/skills";
+import { SkillKey } from "./types/GTypes/skills";
 
 export {}; // this is done to make window a module
 declare global {
@@ -22,7 +22,7 @@ declare global {
       [id: string]: ChestInfo;
     };
     //   entities: { [id: string]: Entity | CharacterEntity };
-    next_skill: { [T in SkillsKey]?: Date };
+    next_skill: { [T in SkillKey]?: Date };
     //   npcs: GMapsNPC[];
     //   party: {
     //     [T in string]: IPosition & {

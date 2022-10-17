@@ -1,8 +1,8 @@
 import { ItemInfo } from "./items";
 import { PositionMovable } from "./position";
-import { ClassesKey } from "./types/GTypes/classes";
-import { MonstersKey } from "./types/GTypes/monsters";
-import { NpcsKey } from "./types/GTypes/npcs";
+import { ClassKey } from "./types/GTypes/classes";
+import { MonsterKey } from "./types/GTypes/monsters";
+import { NpcKey } from "./types/GTypes/npcs";
 
 export type EntityBase = {
   h: number;
@@ -28,7 +28,7 @@ export type Entity = PositionMovable & {
   attack: number;
   base: EntityBase;
   cooperative: boolean;
-  ctype: ClassesKey | NpcsKey; // TODO:
+  ctype: ClassKey | NpcKey; // TODO:
   damage_type?: DamageType;
   /** A percent chance to avoid physical attacks */
   evasion: number;
@@ -52,7 +52,7 @@ export type Entity = PositionMovable & {
   /** how much manacost is reduced */
   mp_reduction: number;
   /** If the entity is a monster, it is set */
-  mtype?: MonstersKey;
+  mtype?: MonsterKey;
   /** Contains the full name of the monster */
   name: string;
   /** Is set if the entity is an NPC, undefined otherwise */
@@ -133,7 +133,7 @@ export type MonsterHuntStatusInfo = StatusInfoBase & {
   /** Number of monsters remaining to kill */
   c: number;
   /** What monster we have to kill */
-  id: MonstersKey;
+  id: MonsterKey;
 };
 
 // TODO: Get all types (from G?)

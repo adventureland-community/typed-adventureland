@@ -3,8 +3,6 @@ export type BankKeyKey =
   | "dkey" // Diamond Key
   | "ukey"; // The Bank Key
 
-export type ItemType = "bank_key";
-
 export interface GBankKey {
   action: string;
   /** Indicates how many of this items you can stack. Set if the item is stackable. */

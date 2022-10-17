@@ -1,4 +1,4 @@
-export type MapsKey =
+export type MapKey =
   | "abtesting" // A/B Testing
   | "arena" // Arena
   | "bank" // The Bank
@@ -53,7 +53,7 @@ export type MapsKey =
   | "winterland" // Winterland
   | "woffice"; // Wizard's Crib
 
-export interface GMaps {
+export interface GMap {
   npcs: Array<
     | {
         position: Array<number>;

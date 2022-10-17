@@ -1,15 +1,15 @@
-import { MapsKey } from "./types/GTypes/maps";
+import { MapKey } from "./types/GTypes/maps";
 
 export type IPosition = {
   /**
    * Contains the name of the map
    */
-  map?: MapsKey;
+  map?: MapKey;
   x: number;
   y: number;
 };
 export type PositionReal = IPosition & {
-  map: MapsKey;
+  map: MapKey;
   real_x: number;
   real_y: number;
 };
@@ -22,7 +22,7 @@ export type PositionMovable = PositionReal & {
 };
 
 export type PositionSmart = IPosition & {
-  map: MapsKey;
+  map: MapKey;
   transport?: boolean;
   i?: number;
   s?: number;

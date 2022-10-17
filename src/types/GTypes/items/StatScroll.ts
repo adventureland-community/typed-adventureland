@@ -22,8 +22,6 @@ export type StatScrollKey =
   | "vitscroll" // Vitality Scroll
   | "xpscroll"; // XP Scroll
 
-export type ItemType = "pscroll";
-
 export interface GStatScroll {
   stat: string;
   /** The full display name of an item. */

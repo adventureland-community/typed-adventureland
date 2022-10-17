@@ -1,4 +1,4 @@
-export type MonstersKey =
+export type MonsterKey =
   | "a1" // Spike
   | "a2" // Bill
   | "a3" // Lestat
@@ -120,7 +120,7 @@ export type MonstersKey =
   | "xscorpion" // Scorpion
   | "zapper0"; // Zapper
 
-export interface GMonsters {
+export interface GMonster {
   achievements?: Array<[number, string, string, number]>;
   "1hp"?: boolean;
   name: string;

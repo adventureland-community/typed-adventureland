@@ -63,13 +63,13 @@ import type { ChrysalisKey, GChrysalis } from "./Chrysalis";
 import type { CompoundScrollKey, GCompoundScroll } from "./CompoundScroll";
 import type { ComputerKey, GComputer } from "./Computer";
 import type { ContainerKey, GContainer } from "./Container";
-import type { CosmeticsKey, GCosmetics } from "./Cosmetics";
+import type { CosmeticKey, GCosmetic } from "./Cosmetics";
 import type { DungeonKeyKey, GDungeonKey } from "./DungeonKey";
 import type { EarringKey, GEarring } from "./Earring";
 import type { ElixirKey, GElixir } from "./Elixir";
 import type { FluteKey, GFlute } from "./Flute";
 import type { GemKey, GGem } from "./Gem";
-import type { GlovesKey, GGloves } from "./Gloves";
+import type { GloveKey, GGlove } from "./Gloves";
 import type { HelmetKey, GHelmet } from "./Helmet";
 import type { JarKey, GJar } from "./Jar";
 import type { LicenceKey, GLicence } from "./Licence";
@@ -78,7 +78,7 @@ import type { MiscKey, GMisc } from "./Misc";
 import type { MiscOffhandKey, GMiscOffhand } from "./MiscOffhand";
 import type { OfferingKey, GOffering } from "./Offering";
 import type { OrbKey, GOrb } from "./Orb";
-import type { PantsKey, GPants } from "./Pants";
+import type { PantKey, GPant } from "./Pants";
 import type { PetLicenceKey, GPetLicence } from "./PetLicence";
 import type { PlaceholderKey, GPlaceholder } from "./Placeholder";
 import type { PotKey, GPot } from "./Pot";
@@ -87,7 +87,7 @@ import type { QuestKey, GQuest } from "./Quest";
 import type { QuiverKey, GQuiver } from "./Quiver";
 import type { RingKey, GRing } from "./Ring";
 import type { ShieldKey, GShield } from "./Shield";
-import type { ShoesKey, GShoes } from "./Shoes";
+import type { ShoeKey, GShoe } from "./Shoes";
 import type { SkillItemKey, GSkillItem } from "./SkillItem";
 import type { SourceKey, GSource } from "./Source";
 import type { SpawnerKey, GSpawner } from "./Spawner";
@@ -104,7 +104,7 @@ import type { UpgradeScrollKey, GUpgradeScroll } from "./UpgradeScroll";
 import type { WeaponKey, GWeapon } from "./Weapon";
 import type { XPKey, GXP } from "./XP";
 
-export type ItemsKey =
+export type ItemKey =
   | ActivatorKey
   | AmuletKey
   | BankKeyKey
@@ -117,13 +117,13 @@ export type ItemsKey =
   | CompoundScrollKey
   | ComputerKey
   | ContainerKey
-  | CosmeticsKey
+  | CosmeticKey
   | DungeonKeyKey
   | EarringKey
   | ElixirKey
   | FluteKey
   | GemKey
-  | GlovesKey
+  | GloveKey
   | HelmetKey
   | JarKey
   | LicenceKey
@@ -132,7 +132,7 @@ export type ItemsKey =
   | MiscOffhandKey
   | OfferingKey
   | OrbKey
-  | PantsKey
+  | PantKey
   | PetLicenceKey
   | PlaceholderKey
   | PotKey
@@ -141,7 +141,7 @@ export type ItemsKey =
   | QuiverKey
   | RingKey
   | ShieldKey
-  | ShoesKey
+  | ShoeKey
   | SkillItemKey
   | SourceKey
   | SpawnerKey
@@ -158,7 +158,7 @@ export type ItemsKey =
   | WeaponKey
   | XPKey;
 
-export type GItems =
+export type GItem =
   | GActivator
   | GAmulet
   | GBankKey
@@ -171,13 +171,13 @@ export type GItems =
   | GCompoundScroll
   | GComputer
   | GContainer
-  | GCosmetics
+  | GCosmetic
   | GDungeonKey
   | GEarring
   | GElixir
   | GFlute
   | GGem
-  | GGloves
+  | GGlove
   | GHelmet
   | GJar
   | GLicence
@@ -186,7 +186,7 @@ export type GItems =
   | GMiscOffhand
   | GOffering
   | GOrb
-  | GPants
+  | GPant
   | GPetLicence
   | GPlaceholder
   | GPot
@@ -195,7 +195,7 @@ export type GItems =
   | GQuiver
   | GRing
   | GShield
-  | GShoes
+  | GShoe
   | GSkillItem
   | GSource
   | GSpawner

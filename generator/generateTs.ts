@@ -1,5 +1,6 @@
 import { AnalysisType, FieldsAnalysis, FullAnalysis } from "./analysis";
 import type { GeneratorConfig } from "./Generator";
+import { singular } from "./helpers/singular";
 import { unique } from "./helpers/unique";
 
 export function typeToTs(type: AnalysisType, config: GeneratorConfig) {
@@ -55,8 +56,10 @@ export function generateTypes(
   groupKey: string | null,
   config: GeneratorConfig
 ) {
+  const singularCategory = singular(analysis.category);
+
   const keys = [
-    `export type ${analysis.category}Key =`,
+    `export type ${singularCategory}Key =`,
     ...analysis.ids.map((id) => {
       let line = `| "${id}"`;
 
@@ -68,21 +71,25 @@ export function generateTypes(
     }),
   ].join("\n");
 
-  const extractedTypes: string[] = [];
-  if (config.extractedTypes) {
-    Object.entries(config.extractedTypes).forEach(([field, typeName]) => {
-      const values = analysis.fields[field]?.values;
-      if (values) {
-        extractedTypes.push(`\nexport type ${typeName} = `);
-        extractedTypes.push(...values.sort().map((val) => `| "${val}"`));
-      }
-    });
-  }
+  // declaration merging does not seem to work
+  // https://lightrun.com/answers/microsoft-typescript-can-not-declaration-merging-for-default-exported-class
+  // seems to indicate the issue being default export not working and us having to use named exports
+  // const extractedTypes: string[] = [];
+  // if (config.extractedTypes) {
+  //   Object.entries(config.extractedTypes).forEach(([field, typeName]) => {
+  //     const values = analysis.fields[field]?.values;
+  //     if (values) {
+  //       extractedTypes.push(`\nexport type ${typeName} = `);
+  //       extractedTypes.push(...values.sort().map((val) => `| "${val}"`));
+  //     }
+  //   });
+  // }
 
-  const terface = `export interface G${analysis.category} ${makeInterface(
+  const terface = `export interface G${singularCategory} ${makeInterface(
     analysis.fields,
     config
   )};`;
 
-  return [keys, extractedTypes.join("\n"), terface].join("\n\n");
+  // return [keys, extractedTypes.join("\n"), terface].join("\n\n");
+  return [keys, terface].join("\n\n");
 }

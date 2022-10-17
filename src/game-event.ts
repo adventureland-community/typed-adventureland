@@ -1,7 +1,7 @@
 import { ItemInfo } from "./items";
-import { ItemsKey } from "./types/GTypes/items";
-import { MapsKey } from "./types/GTypes/maps";
-import { NpcsKey } from "./types/GTypes/npcs";
+import { ItemKey } from "./types/GTypes/items";
+import { MapKey } from "./types/GTypes/maps";
+import { NpcKey } from "./types/GTypes/npcs";
 
 /*
 game.all(function(name,data){
@@ -26,7 +26,7 @@ declare global {
       callback?: (data: {
         /** snowman, pinkgoo, wabbit, franky, grinch */
         name: string; // TODO: strongly typed names?
-        map?: MapsKey;
+        map?: MapKey;
         x?: number;
         y?: number;
         // TODO: are there other data types for event?
@@ -252,7 +252,7 @@ export interface ActionEvent {
  */
 export interface GameBuyEvent {
   type: "+$";
-  id: NpcsKey;
+  id: NpcKey;
   /** character name */
   name: string;
   item: ItemInfo; //{ name: "mpot1"; q: 1 };
@@ -260,7 +260,7 @@ export interface GameBuyEvent {
 }
 export interface GameSellEvent {
   type: "-$";
-  id: NpcsKey;
+  id: NpcKey;
   /** character name */
   name: string;
   item: ItemInfo; //{ name: "strbelt"; level: 0 };
@@ -275,7 +275,7 @@ export interface GamePontyBuy {
   /** Character who triggered the event */
   name: string;
   item: {
-    name: ItemsKey;
+    name: ItemKey;
     level: number;
     rid: string;
     q: number;
@@ -288,7 +288,7 @@ export interface GameLostAndFoundBuy {
   /** Character who triggered the event */
   name: string;
   item: {
-    name: ItemsKey;
+    name: ItemKey;
     level: number;
     rid: string;
     q: number;

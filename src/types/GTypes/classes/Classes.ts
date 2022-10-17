@@ -1,4 +1,4 @@
-export type ClassesKey =
+export type ClassKey =
   | "mage"
   | "merchant"
   | "paladin"
@@ -7,7 +7,7 @@ export type ClassesKey =
   | "rogue"
   | "warrior";
 
-export interface GClasses {
+export interface GClass {
   resistance: number;
   frequency: number;
   damage_type: string;
@@ -15,162 +15,162 @@ export interface GClasses {
   speed: number;
   doublehand: {
     pickaxe?: {
-      speed: number,
-    },
+      speed: number;
+    };
     rod?: {
-      speed: number,
-    },
+      speed: number;
+    };
     basher?: {
-      speed: number,
-      mp_cost?: number,
-      frequency?: number,
-    },
+      speed: number;
+      mp_cost?: number;
+      frequency?: number;
+    };
     axe?: {
-      speed: number,
-      mp_cost?: number,
-      frequency?: number,
-    },
+      speed: number;
+      mp_cost?: number;
+      frequency?: number;
+    };
     rapier?: {
-      mp_cost?: number,
-      frequency: number,
-      miss?: number,
-    },
+      mp_cost?: number;
+      frequency: number;
+      miss?: number;
+    };
     great_sword?: {
-      mp_cost: number,
-      frequency: number,
-      speed: number,
-    },
+      mp_cost: number;
+      frequency: number;
+      speed: number;
+    };
     bow?: {
-      speed: number,
-      frequency: number,
-      miss: number,
-    },
+      speed: number;
+      frequency: number;
+      miss: number;
+    };
     scythe?: {
-      mp_cost: number,
-      frequency: number,
-      speed: number,
-    },
+      mp_cost: number;
+      frequency: number;
+      speed: number;
+    };
     wand?: {
-      frequency: number,
-    },
-    dagger?: {},
-    fist?: {},
-    short_sword?: {},
+      frequency: number;
+    };
+    dagger?: {};
+    fist?: {};
+    short_sword?: {};
     spear?: {
-      frequency: number,
-      speed: number,
-    },
+      frequency: number;
+      speed: number;
+    };
     great_staff?: {
-      mp_cost: number,
-      frequency: number,
-      speed: number,
-    },
+      mp_cost: number;
+      frequency: number;
+      speed: number;
+    };
   };
   stats: {
-    dex: number,
-    int: number,
-    vit: number,
-    str: number,
-    for: number,
+    dex: number;
+    int: number;
+    vit: number;
+    str: number;
+    for: number;
   };
   armor: number;
   range: number;
   attack: number;
   lstats: {
-    dex: number,
-    int: number,
-    vit: number,
-    str: number,
-    for: number,
+    dex: number;
+    int: number;
+    vit: number;
+    str: number;
+    for: number;
   };
   description: string;
   offhand: {
-    source?: {},
+    source?: {};
     quiver?: {
-      speed?: number,
-    },
+      speed?: number;
+    };
     shield?: {
-      speed: number,
-    },
+      speed: number;
+    };
     misc_offhand?: {
-      speed?: number,
-      frequency?: number,
-    },
+      speed?: number;
+      frequency?: number;
+    };
     sword?: {
-      speed: number,
-    },
+      speed: number;
+    };
     short_sword?: {
-      speed: number,
-    },
+      speed: number;
+    };
     mace?: {
-      frequency: number,
-      speed: number,
-    },
+      frequency: number;
+      speed: number;
+    };
     fist?: {
-      frequency?: number,
-    },
-    dagger?: {},
-    stars?: {},
+      frequency?: number;
+    };
+    dagger?: {};
+    stars?: {};
   };
   hp: number;
   courage: number;
   pcourage: number;
   mainhand: {
     mace?: {
-      speed?: number,
-      frequency?: number,
-    },
+      speed?: number;
+      frequency?: number;
+    };
     dagger?: {
-      speed?: number,
-    },
+      speed?: number;
+    };
     fist?: {
-      speed?: number,
-      frequency?: number,
-    },
+      speed?: number;
+      frequency?: number;
+    };
     spear?: {
-      speed: number,
-    },
+      speed: number;
+    };
     short_sword?: {
-      speed?: number,
-      output?: number,
-    },
+      speed?: number;
+      output?: number;
+    };
     bow?: {
-      speed: number,
-    },
-    dartgun?: {},
+      speed: number;
+    };
+    dartgun?: {};
     staff?: {
-      speed: number,
-    },
+      speed: number;
+    };
     sword?: {
-      speed: number,
-      output?: number,
-      frequency?: number,
-    },
+      speed: number;
+      output?: number;
+      frequency?: number;
+    };
     pmace?: {
-      speed: number,
-    },
+      speed: number;
+    };
     crossbow?: {
-      frequency: number,
-      apiercing: number,
-    },
+      frequency: number;
+      apiercing: number;
+    };
     stars?: {
-      frequency: number,
-    },
+      frequency: number;
+    };
     wblade?: {
-      speed: number,
-    },
+      speed: number;
+    };
     wand?: {
-      mp_cost: number,
-      frequency: number,
-    },
+      mp_cost: number;
+      frequency: number;
+    };
   };
   mp_cost: number;
   base_slots: {
     mainhand: {
-      name: string,
-      gift: number,
-      level: number,
-    },
+      name: string;
+      gift: number;
+      level: number;
+    };
   };
   mp: number;
   projectile: string;
@@ -180,35 +180,35 @@ export interface GClasses {
     [
       string,
       {
-        hair?: string,
-        head: string,
-        hat?: string,
-        chin?: string,
+        hair?: string;
+        head: string;
+        hat?: string;
+        chin?: string;
       }
     ],
     [
       string,
       {
-        hair?: string,
-        head: string,
-        makeup?: string,
+        hair?: string;
+        head: string;
+        makeup?: string;
       }
     ],
     [
       string,
       {
-        hair?: string,
-        head: string,
-        hat?: string,
-        chin?: string,
+        hair?: string;
+        head: string;
+        hat?: string;
+        chin?: string;
       }
     ],
     [
       string,
       {
-        hair?: string,
-        head: string,
-        makeup?: string,
+        hair?: string;
+        head: string;
+        makeup?: string;
       }
     ]
   ];

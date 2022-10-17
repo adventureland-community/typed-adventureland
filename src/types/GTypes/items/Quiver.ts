@@ -2,8 +2,6 @@ export type QuiverKey =
   | "quiver" // Quiver
   | "t2quiver"; // Agile Quiver
 
-export type ItemType = "quiver";
-
 export interface GQuiver {
   dex: number;
   armor: number;

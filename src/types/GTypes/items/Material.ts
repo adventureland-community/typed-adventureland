@@ -57,8 +57,6 @@ export type MaterialKey =
   | "watercore" // Water Core
   | "whiteegg"; // White Egg
 
-export type ItemType = "material";
-
 export interface GMaterial {
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: number;

@@ -1,4 +1,4 @@
-export type EventsKey =
+export type EventKey =
   | "abtesting" // A/B Testing
   | "crabxx" // Giga Crab
   | "egghunt" // Egg Hunt
@@ -10,7 +10,7 @@ export type EventsKey =
   | "lunarnewyear" // Lunar New Year
   | "valentines"; // Valentines
 
-export interface GEvents {
+export interface GEvent {
   duration: number;
   type: string;
   name: string;

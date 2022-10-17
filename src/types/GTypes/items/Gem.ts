@@ -19,8 +19,6 @@ export type GemKey =
   | "redenvelopev3" // Red Envelope
   | "redenvelopev4"; // Red Envelope
 
-export type ItemType = "gem";
-
 export interface GGem {
   a?: number | boolean;
   /** Indicates how many of this items you can stack. Set if the item is stackable. */

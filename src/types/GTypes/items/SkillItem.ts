@@ -2,8 +2,6 @@ export type SkillItemKey =
   | "poison" // Poison Sack
   | "shadowstone"; // Shadow Stone
 
-export type ItemType = "skill_item";
-
 export interface GSkillItem {
   /** The full display name of an item. */
   name: string;
