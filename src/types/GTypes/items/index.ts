@@ -157,3 +157,57 @@ export type ItemsKey =
   | UpgradeScrollKey
   | WeaponKey
   | XPKey;
+
+export type GItems =
+  | GActivator
+  | GAmulet
+  | GBankKey
+  | GBelt
+  | GBooster
+  | GBox
+  | GCape
+  | GChest
+  | GChrysalis
+  | GCompoundScroll
+  | GComputer
+  | GContainer
+  | GCosmetics
+  | GDungeonKey
+  | GEarring
+  | GElixir
+  | GFlute
+  | GGem
+  | GGloves
+  | GHelmet
+  | GJar
+  | GLicence
+  | GMaterial
+  | GMisc
+  | GMiscOffhand
+  | GOffering
+  | GOrb
+  | GPants
+  | GPetLicence
+  | GPlaceholder
+  | GPot
+  | GQubics
+  | GQuest
+  | GQuiver
+  | GRing
+  | GShield
+  | GShoes
+  | GSkillItem
+  | GSource
+  | GSpawner
+  | GStand
+  | GStatScroll
+  | GStone
+  | GTest
+  | GThrow
+  | GToken
+  | GTome
+  | GTool
+  | GTracker
+  | GUpgradeScroll
+  | GWeapon
+  | GXP;
