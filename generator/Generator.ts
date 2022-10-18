@@ -53,19 +53,18 @@ export class Generator {
         readFileSync(path.join(configDir, configFile), "utf-8")
       ) as GeneratorConfig;
 
-      this.configMap.set(path.basename(configFile, ".json"), config);
+      this.configMap.set(config.GKey, config);
     }
   }
 
   generateDefaultConfigs(data: RawData) {
-    generateDefaultConfig: for (const GKey of Object.keys(data)) {
-      if (GKey === "version") continue;
+    for (const GKey of Object.keys(data)) {
+      if (GKey === "version") {
+        continue;
+      }
 
-      for (const config of this.configMap.values()) {
-        if (config.GKey === GKey) {
-          console.log();
-          continue generateDefaultConfig;
-        }
+      if (this.configMap.has(GKey)) {
+        continue;
       }
 
       if (this.configDir) {
