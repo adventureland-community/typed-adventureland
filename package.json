@@ -21,7 +21,8 @@
   "scripts": {
     "build": "tsc && echo Emitted declaration files",
     "generate": "ts-node ./generator/main.ts",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "analyze-entities": "ts-node ./analyze-entities.ts"
   },
   "devDependencies": {
     "@types/node": "^18.8.3",
