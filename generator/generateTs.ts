@@ -125,5 +125,11 @@ export function generateTypes(
     analysis
   )};`;
 
-  return [unique(imports).join("\n"), ...unions, terface].join("\n\n");
+  return [
+    unique(imports)
+      .sort((a, b) => a.localeCompare(b))
+      .join("\n"),
+    ...unions,
+    terface,
+  ].join("\n\n");
 }

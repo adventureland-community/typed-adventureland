@@ -1,5 +1,5 @@
-import type { WeaponKey } from "../items/Weapon";
 import type { SkillKey } from "../skills/Skills";
+import type { WeaponKey } from "../items/Weapon";
 
 export type MonsterKey =
   | "a1" // Spike

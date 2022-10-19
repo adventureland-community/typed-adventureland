@@ -5,27 +5,37 @@ import { unique } from "./helpers/unique";
 import type { GeneratorConfig } from "./Generator";
 import { Union } from "./UnionRegistry";
 
+export type ArrayAnalysisType = {
+  type: "array";
+  lengths: Array<number>;
+  elements: Array<FieldAnalysis>;
+};
+
+export type ObjectAnalysisType = {
+  type: "object";
+  fields: FieldsAnalysis;
+};
+
+export type StringAnalysisType = {
+  type: "string";
+  values: Array<string>;
+};
+
+export type UnionAnalysisType = {
+  type: "union";
+  union: Union;
+};
+
+export type SimpleAnalysisType = {
+  type: "number" | "boolean" | "null";
+};
+
 export type AnalysisType =
-  | {
-      type: "number" | "boolean" | "null";
-    }
-  | {
-      type: "string";
-      values: Array<string>;
-    }
-  | {
-      type: "union";
-      union: Union;
-    }
-  | {
-      type: "object";
-      fields: FieldsAnalysis;
-    }
-  | {
-      type: "array";
-      lengths: Array<number>;
-      elements: Array<FieldAnalysis>;
-    };
+  | SimpleAnalysisType
+  | StringAnalysisType
+  | UnionAnalysisType
+  | ObjectAnalysisType
+  | ArrayAnalysisType;
 
 export type FieldAnalysis = {
   optional: boolean;
@@ -79,42 +89,6 @@ export function analyseFields<T extends DeepObject<1> | Array<unknown>>(
             .sort(([a], [b]) => a.localeCompare(b))
             .map(([, field]) => field);
 
-          // If we have multiple lengths, we won't generate a tuple
-          // so we collapse all types to unify them (all strings become a single string)
-          if (lengths.length > 1) {
-            const collapsed = elements
-              .flatMap((elem) => elem.types)
-              .reduce<Array<AnalysisType>>((all, elem) => {
-                if (elem.type === "string") {
-                  const found = all.findIndex((v) => v.type === "string");
-
-                  if (found >= 0) {
-                    // @ts-ignore I know values will be available
-                    all[found].values.push(...elem.values);
-                  } else {
-                    all.push(elem);
-                  }
-                } else {
-                  all.push(elem);
-                }
-
-                return all;
-              }, []);
-
-            elements = [
-              {
-                optional: false,
-                types: collapsed.map((val) => {
-                  if (val.type === "string") {
-                    val.values = unique(val.values);
-                  }
-
-                  return val;
-                }),
-              },
-            ];
-          }
-
           fields[seenField].types.push({
             type: "array",
             lengths,
@@ -153,46 +127,9 @@ export function analyseFields<T extends DeepObject<1> | Array<unknown>>(
   return fields;
 }
 
-export interface FullAnalysis {
-  category: string;
-  group: string;
-  ids: Array<string>;
-  fields: FieldsAnalysis;
-  nameMapping: Record<string, string | null>;
-}
+type Replacer = (type: AnalysisType) => AnalysisType | null;
 
-export function analyseAll<T extends DeepObject<3>>(data: T, config: GeneratorConfig) {
-  const entries = Object.entries(data);
-  const analysis: Array<FullAnalysis> = [];
-
-  for (const [category, values] of entries) {
-    try {
-      const fields = analyseFields(Object.values(values));
-      const ids = Object.keys(values).sort();
-
-      analysis.push({
-        category: config.nameOverride[category] ?? capitalize(category),
-        group: category,
-        ids: ids,
-        fields,
-        nameMapping: Object.fromEntries(
-          ids.map((id) => [id, (values[id].name ?? null) as null | string])
-        ),
-      });
-    } catch (err) {
-      console.error("For", category);
-    }
-  }
-
-  analysis.sort((a, b) => a.category.localeCompare(b.category));
-
-  return analysis;
-}
-
-export function replaceType(
-  field: FieldAnalysis,
-  replacer: (type: AnalysisType) => AnalysisType | null
-) {
+export function replaceType(field: FieldAnalysis, replacer: Replacer) {
   for (let i = 0; i < field.types.length; i++) {
     const type = field.types[i];
 
@@ -237,4 +174,180 @@ export function replaceType(
       }
     }
   }
+}
+
+export function reduceTypes(field: FieldAnalysis) {
+  field.types = field.types.reduce<Array<AnalysisType>>((all, elem) => {
+    if (
+      elem.type === "string" ||
+      elem.type === "number" ||
+      elem.type === "boolean" ||
+      elem.type === "null"
+    ) {
+      const found = all.findIndex((v) => v.type === elem.type);
+
+      if (found >= 0) {
+        // If string, we need to add the values
+        if (elem.type === "string") {
+          // @ts-ignore I know values will be available
+          all[found].values.push(...elem.values);
+        }
+        return all;
+      }
+    } else if (elem.type === "array") {
+      for (let j = 0; j < elem.elements.length; j++) {
+        const element = elem.elements[j];
+
+        reduceTypes(element);
+      }
+    } else if (elem.type === "object") {
+      for (let key in elem.fields) {
+        const element = elem.fields[key];
+
+        reduceTypes(element);
+      }
+    }
+
+    all.push(elem);
+
+    return all;
+  }, []);
+}
+
+export interface FullAnalysis {
+  category: string;
+  group: string;
+  ids: Array<string>;
+  fields: FieldsAnalysis;
+  nameMapping: Record<string, string | null>;
+}
+
+function isSameArray(model: ArrayAnalysisType, type: AnalysisType): type is ArrayAnalysisType {
+  return (
+    type.type === model.type &&
+    type.lengths.length === model.lengths.length &&
+    type.elements.length === model.elements.length &&
+    type.elements.every(
+      (elem1, index1) =>
+        elem1.types.length === model.elements[index1].types.length &&
+        elem1.types.every(
+          (elem2, index2) =>
+            elem2.type === model.elements[index1].types[index2].type &&
+            (["string", "number", "boolean", "null"].includes(elem2.type) ||
+              (elem2.type === "array" && isSameArray(elem2, model.elements[index1].types[index2])))
+        )
+    )
+  );
+}
+
+function arrayCleaner(type: ArrayAnalysisType): ArrayAnalysisType | null {
+  const { lengths, elements } = type;
+
+  // If we have multiple lengths, we won't generate a tuple
+  // so we collapse all types to unify them (all strings become a single string)
+  if (lengths.length > 1) {
+    const collapsed = elements
+      .flatMap((elem) => elem.types)
+      .reduce<Array<AnalysisType>>((all, elem) => {
+        if (elem.type === "string") {
+          const found = all.findIndex((v) => v.type === "string");
+
+          if (found >= 0) {
+            // @ts-ignore I know values will be available
+            all[found].values.push(...elem.values);
+            return all;
+          }
+        } else if (elem.type === "array") {
+          const found = all.findIndex((v) => isSameArray(elem, v));
+
+          if (found >= 0) {
+            for (let index = 0; index < elem.elements.length; index++) {
+              const element = elem.elements[index];
+
+              if (element.optional) {
+                // @ts-ignore I know elements will be available
+                all[found].elements[index].optional = true;
+              }
+
+              // @ts-ignore I know elements will be available
+              all[found].elements[index].types.push(...element.types);
+            }
+            return all;
+          }
+        }
+
+        all.push(elem);
+
+        return all;
+      }, []);
+
+    return {
+      type: "array",
+      lengths,
+      elements: [
+        {
+          optional: false,
+          types: collapsed.map((val) => {
+            if (val.type === "string") {
+              val.values = unique(val.values);
+            }
+
+            return val;
+          }),
+        },
+      ],
+    };
+  }
+
+  return null;
+}
+
+function cleanAnalysis(analysis: Array<FullAnalysis>) {
+  const makeReplacer =
+    (wantedType: AnalysisType["type"], replacer: Replacer) => (type: AnalysisType) => {
+      if (type.type === wantedType) {
+        return replacer(type);
+      }
+
+      return null;
+    };
+
+  for (const analys of analysis) {
+    for (const field of Object.values(analys.fields)) {
+      for (let i = 0; i < 10; i++) {
+        replaceType(field, makeReplacer("array", arrayCleaner as Replacer));
+        reduceTypes(field);
+      }
+    }
+  }
+}
+
+export function analyseAll<T extends DeepObject<3>>(data: T, config: GeneratorConfig) {
+  const entries = Object.entries(data);
+  const analysis: Array<FullAnalysis> = [];
+
+  for (const [category, values] of entries) {
+    try {
+      const fields = analyseFields(Object.values(values));
+      const ids = Object.keys(values).sort();
+
+      analysis.push({
+        category: config.nameOverride[category] ?? capitalize(category),
+        group: category,
+        ids: ids,
+        fields,
+        nameMapping: Object.fromEntries(
+          ids.map((id) => [id, (values[id].name ?? null) as null | string])
+        ),
+      });
+    } catch (err) {
+      console.error("For", category);
+    }
+  }
+
+  analysis.sort((a, b) => a.category.localeCompare(b.category));
+
+  cleanAnalysis(analysis);
+
+  return analysis;
 }

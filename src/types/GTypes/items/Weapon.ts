@@ -1,6 +1,6 @@
-import type { WeaponType } from "./index";
-import type { SetKey } from "../sets/Sets";
 import type { ClassKey } from "../classes/Classes";
+import type { SetKey } from "../sets/Sets";
+import type { WeaponType } from "./index";
 
 export type WeaponKey =
   | "axe3" // T3 Axe

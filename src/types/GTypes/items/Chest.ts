@@ -1,5 +1,5 @@
-import type { SetKey } from "../sets/Sets";
 import type { ClassKey } from "../classes/Classes";
+import type { SetKey } from "../sets/Sets";
 import type { SkillKey } from "../skills/Skills";
 
 export type ChestKey =

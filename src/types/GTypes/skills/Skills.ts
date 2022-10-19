@@ -1,8 +1,8 @@
 import type { ClassKey } from "../classes/Classes";
-import type { WeaponType } from "../items/index";
+import type { DismantleKey } from "../dismantle/Dismantle";
 import type { ItemKey } from "../items/index";
 import type { ThrowKey } from "../items/Throw";
-import type { DismantleKey } from "../dismantle/Dismantle";
+import type { WeaponType } from "../items/index";
 
 export type SkillKey =
   | "3shot" // 3-Shot

@@ -1,5 +1,5 @@
-import type { QuestKey } from "./Quest";
 import type { MonsterKey } from "../monsters/Monsters";
+import type { QuestKey } from "./Quest";
 
 export type ChrysalisKey =
   | "chrysalis0" // Dragold's Chrysalis

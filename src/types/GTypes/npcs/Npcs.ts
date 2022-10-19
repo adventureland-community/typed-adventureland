@@ -1,11 +1,11 @@
-import type { ClassKey } from "../classes/Classes";
-import type { WeaponType } from "../items/index";
-import type { ItemKey } from "../items/index";
 import type { BoosterKey } from "../items/Booster";
-import type { QubicsKey } from "../items/Qubics";
-import type { TomeKey } from "../items/Tome";
+import type { ClassKey } from "../classes/Classes";
+import type { ItemKey } from "../items/index";
 import type { OfferingKey } from "../items/Offering";
+import type { QubicsKey } from "../items/Qubics";
 import type { TokenKey } from "../items/Token";
+import type { TomeKey } from "../items/Tome";
+import type { WeaponType } from "../items/index";
 
 export type NpcKey =
   | "antip2w" // Mr. Dworf

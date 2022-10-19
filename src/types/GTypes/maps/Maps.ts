@@ -1,7 +1,7 @@
-import type { NpcKey } from "../npcs/Npcs";
+import type { ChrysalisKey } from "../items/Chrysalis";
 import type { EventKey } from "../events/Events";
 import type { MonsterKey } from "../monsters/Monsters";
-import type { ChrysalisKey } from "../items/Chrysalis";
+import type { NpcKey } from "../npcs/Npcs";
 import type { SkillKey } from "../skills/Skills";
 
 export type MapKey =
@@ -119,7 +119,6 @@ export interface GMap {
   doors: Array<
     | Array<number | string>
     | [number, number, number, number, MapKey, number, number]
-    | [number, number, number, number, EventKey, number, number]
   >;
   spawns: Array<Array<number> | [number, number] | [number, number, number]>;
   monsters?: Array<
