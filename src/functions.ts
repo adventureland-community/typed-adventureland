@@ -1,8 +1,8 @@
 import { CharacterEntity } from "./character";
 import { Entity, EntityBase, SlotType, TradeSlotType } from "./entity";
-import { EventName } from "./event";
 import { ItemInfo } from "./items";
 import { IPosition, PositionReal, PositionMovable, PositionSmart } from "./position";
+import { EventKey } from "./types/GTypes/events";
 import { ItemKey } from "./types/GTypes/items";
 import { MapKey } from "./types/GTypes/maps";
 import { MonsterKey } from "./types/GTypes/monsters";
@@ -321,7 +321,7 @@ declare global {
     quantity: number
   ): void;
 
-  function join(eventName: EventName): Promise<any>;
+  function join(eventName: EventKey): Promise<any>;
   /**
    * MOVEMENT METHODS
    */
