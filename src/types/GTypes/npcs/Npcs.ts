@@ -1,3 +1,12 @@
+import type { ClassKey } from "../classes/Classes";
+import type { WeaponType } from "../items/index";
+import type { ItemKey } from "../items/index";
+import type { BoosterKey } from "../items/Booster";
+import type { QubicsKey } from "../items/Qubics";
+import type { TomeKey } from "../items/Tome";
+import type { OfferingKey } from "../items/Offering";
+import type { TokenKey } from "../items/Token";
+
 export type NpcKey =
   | "antip2w" // Mr. Dworf
   | "appearance" // Haila
@@ -138,8 +147,8 @@ export interface GNpc {
   role: string;
   skin: string;
   type?: string;
-  id: string;
-  pack?: string;
+  id: NpcKey;
+  pack?: NpcKey;
   says?: Array<string> | string;
   hp?: number;
   speed?: number;
@@ -147,13 +156,13 @@ export interface GNpc {
   level?: number;
   delay?: number;
   seek?: string;
-  class?: string;
+  class?: ClassKey;
   heal?: number;
   range?: number;
   attack?: number;
   slots?: {
     mainhand: {
-      name: string;
+      name: WeaponType;
       level: number;
     };
   };
@@ -163,7 +172,7 @@ export interface GNpc {
     message: string;
     skin: string;
   };
-  items?: Array<string | null>;
+  items?: Array<ItemKey | null>;
   old_role?: string;
   old_side_interaction?: {
     auto: boolean;
@@ -171,17 +180,17 @@ export interface GNpc {
     skin: string;
   };
   old_items?: [
-    string,
-    string,
-    string,
+    BoosterKey,
+    BoosterKey,
+    QubicsKey,
     null,
     null,
     null,
-    string,
+    BoosterKey,
     null,
     null,
-    string,
-    string,
+    TomeKey,
+    OfferingKey,
     null,
     null,
     null
@@ -191,7 +200,7 @@ export interface GNpc {
   moving?: boolean;
   allow?: boolean;
   quest?: string;
-  token?: string;
+  token?: TokenKey;
   stand?: string;
   aura?: {
     luck?: number;

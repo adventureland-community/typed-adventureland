@@ -1,3 +1,9 @@
+import type { NpcKey } from "../npcs/Npcs";
+import type { EventKey } from "../events/Events";
+import type { MonsterKey } from "../monsters/Monsters";
+import type { ChrysalisKey } from "../items/Chrysalis";
+import type { SkillKey } from "../skills/Skills";
+
 export type MapKey =
   | "abtesting" // A/B Testing
   | "arena" // Arena
@@ -9,12 +15,12 @@ export type MapKey =
   | "cgallery" // Cosmetics Gallery
   | "crypt" // The Crypt [Cave]
   | "cyberland" // Cyberland
-  | "d2" // Dark World
   | "d_a1" // Dungeon
   | "d_a2" // Dungeon
   | "d_b1" // Dungeon
   | "d_e" // Dungeon [Entrance]
   | "d_g" // Dungeon [Gateway]
+  | "d2" // Dark World
   | "desertland" // Desertland
   | "duelland" // Duelland
   | "dungeon0" // Dungeon
@@ -57,46 +63,46 @@ export interface GMap {
   npcs: Array<
     | {
         position: Array<number>;
-        id: string;
+        id: NpcKey;
         name?: string;
         boundary?: [number, number, number, number];
       }
     | {
         position: [number, number];
         name?: string;
-        id: string;
+        id: NpcKey;
       }
     | {
         positions?: [[number, number], [number, number, number]];
-        id: string;
+        id: NpcKey;
         position?: [number, number];
       }
     | {
         position: [number, number];
-        id: string;
+        id: NpcKey;
       }
     | {
         position: [number, number];
-        id: string;
+        id: NpcKey;
         name?: string;
       }
     | {
         position: [number, number];
         boundary: [number, number, number, number];
-        id: string;
+        id: NpcKey;
       }
     | {
         position: [number, number, number];
-        id: string;
+        id: NpcKey;
       }
     | {
         position: Array<number>;
-        id: string;
+        id: NpcKey;
         name?: string;
       }
     | {
         position?: Array<number>;
-        id: string;
+        id: NpcKey;
         positions?: [[number, number], [number, number, number]];
       }
   >;
@@ -112,14 +118,15 @@ export interface GMap {
   >;
   doors: Array<
     | Array<number | string>
-    | [number, number, number, number, string, number, number]
+    | [number, number, number, number, MapKey, number, number]
+    | [number, number, number, number, EventKey, number, number]
   >;
   spawns: Array<Array<number> | [number, number] | [number, number, number]>;
   monsters?: Array<
     | {
         count: number;
         boundary?: [number, number, number, number];
-        type: string;
+        type: MonsterKey;
         gatekeeper?: boolean;
         rage?: [number, number, number, number];
         random?: boolean;
@@ -133,7 +140,7 @@ export interface GMap {
     | {
         count: number;
         boundary?: [number, number, number, number];
-        type: string;
+        type: MonsterKey;
         roam?: boolean;
         grow?: boolean;
         position?: [number, number];
@@ -144,18 +151,18 @@ export interface GMap {
     | {
         count: number;
         boundary: [number, number, number, number];
-        type: string;
+        type: MonsterKey;
       }
     | {
         count: number;
         boundary: [number, number, number, number];
-        type: string;
+        type: MonsterKey;
         grow: boolean;
       }
     | {
         count: number;
         boundary?: [number, number, number, number];
-        type: string;
+        type: MonsterKey;
         grow?: boolean;
         position?: [number, number];
         radius?: number;
@@ -163,28 +170,33 @@ export interface GMap {
       }
     | {
         boundaries: [
-          [string, number, number, number, number],
-          [string, number, number, number, number],
-          [string, number, number, number, number],
-          [string, number, number, number, number],
-          [string, number, number, number, number]
+          [MapKey, number, number, number, number],
+          [MapKey, number, number, number, number],
+          [MapKey, number, number, number, number],
+          [EventKey, number, number, number, number],
+          [MapKey, number, number, number, number]
         ];
         count: number;
-        type: string;
+        type: MonsterKey;
         stype: string;
       }
     | {
         count: number;
         boundary?: [number, number, number, number];
-        type: string;
+        type: MonsterKey;
         position?: [number, number];
         radius?: number;
         roam?: boolean;
       }
     | {
         count: number;
+        boundary: [number, number, number, number];
+        type: ChrysalisKey;
+      }
+    | {
+        count: number;
         boundary?: [number, number, number, number];
-        type: string;
+        type: MonsterKey;
         grow?: boolean;
         position?: [number, number];
         radius?: number;
@@ -194,27 +206,27 @@ export interface GMap {
     | {
         count: number;
         boundary?: [number, number, number, number];
-        type: string;
+        type: MonsterKey;
         special?: boolean;
         position?: [number, number];
         radius?: number;
         roam?: boolean;
         boundaries?: [
-          [string, number, number, number, number],
-          [string, number, number, number, number]
+          [MapKey, number, number, number, number],
+          [MapKey, number, number, number, number]
         ];
         stype?: string;
       }
     | {
         count: number;
         boundary: [number, number, number, number];
-        type: string;
+        type: MonsterKey;
         roam?: boolean;
       }
     | {
         count: number;
         boundary: [number, number, number, number];
-        type: string;
+        type: MonsterKey;
         grow?: boolean;
         roam?: boolean;
       }
@@ -290,9 +302,9 @@ export interface GMap {
   ];
   ignore?: boolean;
   instance?: boolean;
-  on_exit?: [string, number];
+  on_exit?: [MapKey, number];
   irregular?: boolean;
-  on_death?: [string, number];
+  on_death?: [MapKey, number];
   animatables?: {
     the_door?: {
       y: number;
@@ -308,7 +320,7 @@ export interface GMap {
   zones?: [
     {
       drop: string;
-      type: string;
+      type: SkillKey;
       polygon: Array<[number, number]>;
     }
   ];
@@ -318,9 +330,9 @@ export interface GMap {
     c_mid?: [number, number];
     poof?: {
       y: number;
-      map: string;
+      map: MapKey;
       x: number;
-      in: string;
+      in: MapKey;
     };
   };
   pvp?: boolean;
@@ -388,62 +400,62 @@ export interface GMap {
     {
       count: number;
       boundary: [number, number, number, number];
-      type: string;
+      type: MonsterKey;
     },
     {
       count: number;
       boundary: [number, number, number, number];
-      type: string;
+      type: MonsterKey;
     },
     {
       count: number;
       boundary: [number, number, number, number];
-      type: string;
+      type: MonsterKey;
     },
     {
       count: number;
       boundary: [number, number, number, number];
-      type: string;
+      type: MonsterKey;
     },
     {
       count: number;
       boundary: [number, number, number, number];
-      type: string;
+      type: MonsterKey;
     },
     {
       count: number;
       boundary: [number, number, number, number];
-      type: string;
+      type: MonsterKey;
     },
     {
       count: number;
       boundary: [number, number, number, number];
-      type: string;
+      type: MonsterKey;
     },
     {
       count: number;
       boundary: [number, number, number, number];
-      type: string;
+      type: MonsterKey;
     },
     {
       count: number;
       boundary: [number, number, number, number];
-      type: string;
+      type: MonsterKey;
     },
     {
       count: number;
       boundary: [number, number, number, number];
-      type: string;
+      type: MonsterKey;
     },
     {
       count: number;
       boundary: [number, number, number, number];
-      type: string;
+      type: MonsterKey;
     },
     {
       count: number;
       boundary: [number, number, number, number];
-      type: string;
+      type: MonsterKey;
     }
   ];
   loss?: boolean;

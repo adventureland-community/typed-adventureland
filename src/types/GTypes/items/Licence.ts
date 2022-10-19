@@ -9,7 +9,7 @@ export interface GLicence {
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: number;
   /** The skin of the item. */
-  skin: string;
+  skin: LicenceKey;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "licence";
 }

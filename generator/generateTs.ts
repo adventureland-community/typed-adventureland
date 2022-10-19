@@ -1,16 +1,43 @@
 import { AnalysisType, FieldsAnalysis, FullAnalysis } from "./analysis";
 import type { GeneratorConfig } from "./Generator";
+import { relative } from "./helpers/filepath";
 import { singular } from "./helpers/singular";
 import { unique } from "./helpers/unique";
+import { Union, UnionRegistry } from "./UnionRegistry";
 
-export function typeToTs(type: AnalysisType, config: GeneratorConfig) {
+export function unionString(union: Union) {
+  return [
+    `export type ${union.name} =`,
+    ...union.values
+      .sort((a, b) => a.localeCompare(b))
+      .map((val) => {
+        let line = `| "${val}"`;
+
+        if (union.comments[val]) {
+          line += ` // ${union.comments[val]}`;
+        }
+
+        return line;
+      }),
+  ].join("\n");
+}
+
+export function typeToTs(
+  type: AnalysisType,
+  config: GeneratorConfig,
+  unionRegistry: UnionRegistry,
+  imports: Array<string>,
+  analysis: FullAnalysis
+) {
   switch (type.type) {
     case "object": {
-      return makeInterface(type.fields, config);
+      return makeInterface(type.fields, config, unionRegistry, imports, analysis);
     }
     case "array": {
       const elems = type.elements.map((e) => {
-        const types = e.types.map((type) => typeToTs(type, config));
+        const types = e.types.map((type) =>
+          typeToTs(type, config, unionRegistry, imports, analysis)
+        );
 
         return types;
       });
@@ -19,12 +46,27 @@ export function typeToTs(type: AnalysisType, config: GeneratorConfig) {
         ? `[${elems.join(", ")}]`
         : `Array<${unique(elems.flat()).join(" | ")}>`;
     }
+    case "union": {
+      const importPath = relative({ GKey: config.GKey, category: analysis.category }, type.union);
+
+      if (importPath.length) {
+        imports.push(`import type { ${type.union.name} } from ${JSON.stringify(importPath)};`);
+      }
+
+      return type.union.name;
+    }
     default:
       return type.type;
   }
 }
 
-export function makeInterface(fields: FieldsAnalysis, config: GeneratorConfig) {
+export function makeInterface(
+  fields: FieldsAnalysis,
+  config: GeneratorConfig,
+  unionRegistry: UnionRegistry,
+  imports: Array<string>,
+  analysis: FullAnalysis
+) {
   const entries = Object.entries(fields);
   const lines = ["{"];
 
@@ -40,7 +82,15 @@ export function makeInterface(fields: FieldsAnalysis, config: GeneratorConfig) {
     }
 
     line += ": ";
-    line += entry.types.map((type) => typeToTs(type, config)).join(" | ");
+
+    if (name === config.groupKey) {
+      line += JSON.stringify(analysis.group);
+    } else {
+      line += entry.types
+        .map((type) => typeToTs(type, config, unionRegistry, imports, analysis))
+        .join(" | ");
+    }
+
     line += ";";
 
     lines.push(line);
@@ -53,43 +103,27 @@ export function makeInterface(fields: FieldsAnalysis, config: GeneratorConfig) {
 
 export function generateTypes(
   analysis: FullAnalysis,
-  groupKey: string | null,
+  unionRegistry: UnionRegistry,
   config: GeneratorConfig
 ) {
+  const { GKey } = config;
   const singularCategory = singular(analysis.category);
+  const imports: Array<string> = [];
+  const unions: Array<string> = [];
 
-  const keys = [
-    `export type ${singularCategory}Key =`,
-    ...analysis.ids.map((id) => {
-      let line = `| "${id}"`;
-
-      if (analysis.nameMapping[id]) {
-        line += ` // ${analysis.nameMapping[id]}`;
-      }
-
-      return line;
-    }),
-  ].join("\n");
-
-  // declaration merging does not seem to work
-  // https://lightrun.com/answers/microsoft-typescript-can-not-declaration-merging-for-default-exported-class
-  // seems to indicate the issue being default export not working and us having to use named exports
-  // const extractedTypes: string[] = [];
-  // if (config.extractedTypes) {
-  //   Object.entries(config.extractedTypes).forEach(([field, typeName]) => {
-  //     const values = analysis.fields[field]?.values;
-  //     if (values) {
-  //       extractedTypes.push(`\nexport type ${typeName} = `);
-  //       extractedTypes.push(...values.sort().map((val) => `| "${val}"`));
-  //     }
-  //   });
-  // }
+  for (const union of unionRegistry.unions.values()) {
+    if (union.GKey === GKey && union.category === analysis.category && !union.doNotWrite) {
+      unions.push(unionString(union));
+    }
+  }
 
   const terface = `export interface G${singularCategory} ${makeInterface(
     analysis.fields,
-    config
+    config,
+    unionRegistry,
+    imports,
+    analysis
   )};`;
 
-  // return [keys, extractedTypes.join("\n"), terface].join("\n\n");
-  return [keys, terface].join("\n\n");
+  return [unique(imports).join("\n"), ...unions, terface].join("\n\n");
 }

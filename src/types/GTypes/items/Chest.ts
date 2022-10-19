@@ -1,3 +1,7 @@
+import type { SetKey } from "../sets/Sets";
+import type { ClassKey } from "../classes/Classes";
+import type { SkillKey } from "../skills/Skills";
+
 export type ChestKey =
   | "cdragon" // Dragon Armor
   | "coat" // Coat
@@ -50,7 +54,7 @@ export interface GChest {
   apiercing?: number;
   str?: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "chest";
   stat?: number;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade?: {
@@ -77,7 +81,7 @@ export interface GChest {
   tier?: number;
   scroll?: boolean;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   extra_stat?: number;
   hp?: number;
   explanation?: string;
@@ -86,13 +90,13 @@ export interface GChest {
   luck?: number;
   lifesteal?: number;
   /** An array of classes that can use this item. */
-  class?: [string];
+  class?: [ClassKey];
   frequency?: number;
   speed?: number;
   mp?: number;
   mp_cost?: number;
   manasteal?: number;
-  ability?: string;
+  ability?: SkillKey;
   charge?: number;
   edge?: number;
   evasion?: number;

@@ -1,3 +1,5 @@
+import type { SetKey } from "../sets/Sets";
+
 export type BeltKey =
   | "dexbelt" // Belt of Dexterity
   | "hpbelt" // Belt of HP
@@ -16,7 +18,7 @@ export interface GBelt {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The skin of the item. */
-  skin: string;
+  skin: BeltKey;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
@@ -32,7 +34,7 @@ export interface GBelt {
     str?: number;
   };
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "belt";
   hp?: number;
   int?: number;
   armor?: number;
@@ -41,7 +43,7 @@ export interface GBelt {
   a?: boolean;
   mp_cost?: number;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   mp_reduction?: number;
   evasion?: number;
   resistance?: number;

@@ -1,3 +1,5 @@
+import type { MapKey } from "../maps/Maps";
+
 export type BankKeyKey =
   | "bkey" // The Bank Key
   | "dkey" // Diamond Key
@@ -12,10 +14,10 @@ export interface GBankKey {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The skin of the item. */
-  skin: string;
-  unlocks?: string;
+  skin: BankKeyKey;
+  unlocks?: MapKey;
   explanation: string;
   onclick: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "bank_key";
 }

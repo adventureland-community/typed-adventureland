@@ -12,9 +12,9 @@ export interface GSpawner {
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: boolean | number;
   /** The skin of the item. */
-  skin: string;
+  skin: SpawnerKey;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "spawner";
   ignore?: boolean;
   note?: string;
   action?: string;

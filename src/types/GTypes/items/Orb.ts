@@ -1,3 +1,5 @@
+import type { SetKey } from "../sets/Sets";
+
 export type OrbKey =
   | "charmer" // Charmer
   | "ftrinket" // Trinket of Faith
@@ -10,8 +12,8 @@ export type OrbKey =
   | "orbofvit" // Orb of Vitality
   | "rabbitsfoot" // Rabbit's Foot
   | "talkingskull" // Yorick the Talking Skull
-  | "test2" // Test
   | "test_orb" // Orb of Testing
+  | "test2" // Test
   | "tigerstone" // Tiger Stone
   | "vorb"; // Vampiric Canine Teeth
 
@@ -42,7 +44,7 @@ export interface GOrb {
     courage?: number;
   };
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "orb";
   event?: boolean;
   ability?: string;
   a?: boolean;
@@ -58,7 +60,7 @@ export interface GOrb {
   rpiercing?: number;
   edge?: number;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   mp?: number;
   luck?: number;
   xp?: number;

@@ -1,11 +1,21 @@
 import { DeepObject } from "./helpers/DeepObject";
 import { capitalize } from "./helpers/capitalize";
 import { isArray, isObject } from "./helpers/typeCheck";
+import { unique } from "./helpers/unique";
 import type { GeneratorConfig } from "./Generator";
+import { Union } from "./UnionRegistry";
 
 export type AnalysisType =
   | {
-      type: "string" | "number" | "boolean" | "null";
+      type: "number" | "boolean" | "null";
+    }
+  | {
+      type: "string";
+      values: Array<string>;
+    }
+  | {
+      type: "union";
+      union: Union;
     }
   | {
       type: "object";
@@ -20,7 +30,6 @@ export type AnalysisType =
 export type FieldAnalysis = {
   optional: boolean;
   types: AnalysisType[];
-  values?: AnalysisType[];
 };
 
 export type FieldsAnalysis = Record<string, FieldAnalysis>;
@@ -58,21 +67,6 @@ export function analyseFields<T extends DeepObject<1> | Array<unknown>>(
         type = "array";
       }
 
-      // Store the actual values for extractedTypes
-      switch (type) {
-        case "string":
-          let values = fields[seenField].values;
-          if (!values) {
-            fields[seenField].values = values = [];
-          }
-
-          if (!values.find((v) => v === value)) {
-            values.push(value);
-          }
-
-          break;
-      }
-
       if (!fields[seenField].types.find((t) => t.type === type)) {
         if (type === "array") {
           const allArrays = arr
@@ -81,9 +75,45 @@ export function analyseFields<T extends DeepObject<1> | Array<unknown>>(
           const lengths = [...new Set(allArrays.map((a) => a.length))];
 
           const elementsAnalysisAsObject = analyseFields(allArrays);
-          const elements = Object.entries(elementsAnalysisAsObject)
+          let elements = Object.entries(elementsAnalysisAsObject)
             .sort(([a], [b]) => a.localeCompare(b))
             .map(([, field]) => field);
+
+          // If we have multiple lengths, we won't generate a tuple
+          // so we collapse all types to unify them (all strings become a single string)
+          if (lengths.length > 1) {
+            const collapsed = elements
+              .flatMap((elem) => elem.types)
+              .reduce<Array<AnalysisType>>((all, elem) => {
+                if (elem.type === "string") {
+                  const found = all.findIndex((v) => v.type === "string");
+
+                  if (found >= 0) {
+                    // @ts-ignore I know values will be available
+                    all[found].values.push(...elem.values);
+                  } else {
+                    all.push(elem);
+                  }
+                } else {
+                  all.push(elem);
+                }
+
+                return all;
+              }, []);
+
+            elements = [
+              {
+                optional: false,
+                types: collapsed.map((val) => {
+                  if (val.type === "string") {
+                    val.values = unique(val.values);
+                  }
+
+                  return val;
+                }),
+              },
+            ];
+          }
 
           fields[seenField].types.push({
             type: "array",
@@ -99,12 +129,17 @@ export function analyseFields<T extends DeepObject<1> | Array<unknown>>(
                 .map((o) => o[seenField] as DeepObject<1>)
             ),
           });
-        } else if (
-          type === "string" ||
-          type === "boolean" ||
-          type === "number" ||
-          type === "null"
-        ) {
+        } else if (type === "string") {
+          // Store the actual values for extractedTypes
+          let values = arr
+            .filter((o) => o[seenField] && typeof o[seenField] === "string")
+            .map((o) => o[seenField] as string);
+
+          fields[seenField].types.push({
+            type: "string",
+            values: unique(values),
+          });
+        } else if (type === "boolean" || type === "number" || type === "null") {
           fields[seenField].types.push({
             type,
           });
@@ -152,4 +187,54 @@ export function analyseAll<T extends DeepObject<3>>(data: T, config: GeneratorCo
   analysis.sort((a, b) => a.category.localeCompare(b.category));
 
   return analysis;
+}
+
+export function replaceType(
+  field: FieldAnalysis,
+  replacer: (type: AnalysisType) => AnalysisType | null
+) {
+  for (let i = 0; i < field.types.length; i++) {
+    const type = field.types[i];
+
+    switch (type.type) {
+      case "array": {
+        for (let j = 0; j < type.elements.length; j++) {
+          const element = type.elements[j];
+
+          replaceType(element, replacer);
+        }
+
+        const replaced = replacer(type);
+
+        if (replaced) {
+          field.types[i] = replaced;
+        }
+        break;
+      }
+      case "object": {
+        const fieldsKeys = Object.keys(type.fields);
+
+        for (const fieldsKey of fieldsKeys) {
+          const element = type.fields[fieldsKey];
+
+          replaceType(element, replacer);
+        }
+
+        const replaced = replacer(type);
+
+        if (replaced) {
+          field.types[i] = replaced;
+        }
+        break;
+      }
+      default: {
+        const replaced = replacer(type);
+
+        if (replaced) {
+          field.types[i] = replaced;
+        }
+        break;
+      }
+    }
+  }
 }

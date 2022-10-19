@@ -1,3 +1,5 @@
+import type { SetKey } from "../sets/Sets";
+
 export type AmuletKey =
   | "amuletofm" // Amulet of Mystery
   | "bfangamulet" // Ghastly Bat Fang
@@ -54,21 +56,21 @@ export interface GAmulet {
   a?: boolean;
   str?: number;
   /** The skin of the item. */
-  skin: string;
+  skin: AmuletKey;
   crit?: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "amulet";
   manasteal?: number;
   lifesteal?: number;
   critdamage?: number;
   apiercing?: number;
   mp_cost?: number;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   mp_reduction?: number;
   xp?: number;
   attr0?: number;
-  aura?: string;
+  aura?: AmuletKey;
   for?: number;
   gold?: number;
   luck?: number;

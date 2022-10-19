@@ -29,11 +29,11 @@ export interface GStatScroll {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The skin of the item. */
-  skin: string;
+  skin: StatScrollKey;
   explanation: string;
   multiplier?: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "pscroll";
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: number;
   evasion?: number;

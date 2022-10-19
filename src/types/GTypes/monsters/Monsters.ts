@@ -1,3 +1,6 @@
+import type { WeaponKey } from "../items/Weapon";
+import type { SkillKey } from "../skills/Skills";
+
 export type MonsterKey =
   | "a1" // Spike
   | "a2" // Bill
@@ -249,11 +252,11 @@ export interface GMonster {
   hit?: string;
   slots?: {
     mainhand: {
-      name: string;
+      name: WeaponKey;
       level: number;
     };
     offhand?: {
-      name: string;
+      name: WeaponKey;
       level: number;
     };
   };
@@ -292,14 +295,14 @@ export interface GMonster {
     aggression: [number, number];
   };
   size?: number;
-  spawns?: [[number, string]];
+  spawns?: [[number, MonsterKey]];
   prefix?: string;
   rbuff?: string;
   unlist?: boolean;
-  projectile?: string;
+  projectile?: SkillKey;
   trap?: boolean;
   operator?: boolean;
-  respawn_as?: string;
+  respawn_as?: MonsterKey;
   peaceful?: boolean;
   drop_on_hit?: boolean;
   roam?: boolean;

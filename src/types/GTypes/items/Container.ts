@@ -1,3 +1,5 @@
+import type { BoxKey } from "./Box";
+
 export type ContainerKey = "monsterbox"; // Monster Box
 
 export interface GContainer {
@@ -9,7 +11,7 @@ export interface GContainer {
   explanation: string;
   ignore: boolean;
   /** The skin of the item. */
-  skin: string;
+  skin: BoxKey;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "container";
 }

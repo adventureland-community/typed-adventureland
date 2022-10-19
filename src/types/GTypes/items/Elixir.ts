@@ -1,3 +1,5 @@
+import type { SetKey } from "../sets/Sets";
+
 export type ElixirKey =
   | "ale" // Ale
   | "blue" // Blue Horizon
@@ -38,15 +40,15 @@ export interface GElixir {
   g: number;
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: number;
-  skin_a: string;
+  skin_a: ElixirKey;
   str?: number;
   miss?: number;
   /** The skin of the item. */
-  skin: string;
+  skin: ElixirKey;
   duration: number;
   speed?: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "elixir";
   /** The full display name of an item. */
   name: string;
   evasion?: number;
@@ -71,7 +73,7 @@ export interface GElixir {
   armor?: number;
   rpiercing?: number;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   lifesteal?: number;
   apiercing?: number;
 }

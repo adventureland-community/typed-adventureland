@@ -16,9 +16,9 @@ export interface GPot {
   s: number;
   cooldown?: number;
   /** The skin of the item. */
-  skin: string;
+  skin: PotKey;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "pot";
   /** If the item gives a buff, or effect, like a health potion. */
   gives: [[string, number]];
   debuff?: boolean;

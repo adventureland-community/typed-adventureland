@@ -1,3 +1,6 @@
+import type { SetKey } from "../sets/Sets";
+import type { ClassKey } from "../classes/Classes";
+
 export type GloveKey =
   | "fierygloves" // Fiery Gloves
   | "gloves" // Gloves
@@ -23,7 +26,7 @@ export type GloveKey =
 export interface GGlove {
   stat?: number;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   resistance: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
@@ -49,7 +52,7 @@ export interface GGlove {
   g: number;
   armor: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "gloves";
   scroll?: boolean;
   a?: number | boolean;
   extra_stat?: number;
@@ -61,7 +64,7 @@ export interface GGlove {
   explanation?: string;
   speed?: number;
   /** An array of classes that can use this item. */
-  class?: [string];
+  class?: [ClassKey];
   output?: number;
   attr0?: number;
   crit?: number;

@@ -1,3 +1,7 @@
+import type { WeaponType } from "./index";
+import type { SetKey } from "../sets/Sets";
+import type { ClassKey } from "../classes/Classes";
+
 export type WeaponKey =
   | "axe3" // T3 Axe
   | "basher" // Basher
@@ -121,12 +125,12 @@ export interface GWeapon {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The type of `weapon` `wand` `axe` `mace`... */
-  wtype: string;
+  wtype: WeaponType;
   attack: number;
   ignore?: boolean;
   range: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "weapon";
   armor?: number;
   stun?: number;
   delia?: string;
@@ -138,7 +142,7 @@ export interface GWeapon {
   explanation?: string;
   evasion?: number;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   ability?: string;
   dex?: number;
   skin_c?: string;
@@ -153,7 +157,7 @@ export interface GWeapon {
   rpiercing?: number;
   trex?: string;
   /** An array of classes that can use this item. */
-  class?: [string];
+  class?: [ClassKey];
   firesistance?: number;
   luck?: number;
   nopo?: string;

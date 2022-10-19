@@ -1,3 +1,5 @@
+import type { WeaponKey } from "../items/Weapon";
+
 export type ClassKey =
   | "mage"
   | "merchant"
@@ -167,7 +169,7 @@ export interface GClass {
   mp_cost: number;
   base_slots: {
     mainhand: {
-      name: string;
+      name: WeaponKey;
       gift: number;
       level: number;
     };

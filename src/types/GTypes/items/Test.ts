@@ -8,7 +8,7 @@ export interface GTest {
   explanation: string;
   ignore: boolean;
   /** The skin of the item. */
-  skin: string;
+  skin: TestKey;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "test";
 }

@@ -1,3 +1,5 @@
+import type { ItemKey } from "../items/index";
+
 export type SetKey =
   | "bunny" // Bunny Set
   | "fury" // Rage and Fury
@@ -78,6 +80,6 @@ export interface GSet {
   };
   "7"?: {};
   name: string;
-  items: Array<string>;
+  items: Array<ItemKey>;
   explanation?: string;
 }

@@ -17,12 +17,12 @@ export interface GMisc {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The skin of the item. */
-  skin: string;
+  skin: MiscKey;
   /** Refers to how many items are needed to exchange (see .quest as well!) */
   e?: number;
   explanation: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "misc";
   a?: boolean;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound?: {};

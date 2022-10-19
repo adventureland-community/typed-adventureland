@@ -1,3 +1,5 @@
+import type { SetKey } from "../sets/Sets";
+
 export type ShieldKey =
   | "mshield" // Shield M
   | "shield" // Shield
@@ -14,7 +16,7 @@ export interface GShield {
     accent: string;
   };
   /** The skin of the item. */
-  skin: string;
+  skin: ShieldKey;
   /** The tier of the item. */
   tier: number;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
@@ -32,12 +34,12 @@ export interface GShield {
   g: number;
   armor?: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "shield";
   luck?: number;
   resistance?: number;
   dreturn?: number;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   speed?: number;
   dex?: number;
   evasion?: number;

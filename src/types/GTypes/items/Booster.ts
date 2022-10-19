@@ -20,14 +20,14 @@ export interface GBooster {
   };
   skin_a: string;
   /** The skin of the item. */
-  skin: string;
+  skin: BoosterKey;
   /** The full display name of an item. */
   name: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   days: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "booster";
   gain: string;
   luck?: number;
   xp?: number;

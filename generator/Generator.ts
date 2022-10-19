@@ -3,11 +3,14 @@ import path from "path";
 import { getGData, RawData } from "./getGData";
 import { groupBy } from "./helpers/groupBy";
 import { ensureDirectory } from "./helpers/ensureDirectory";
-import { analyseAll } from "./analysis";
+import { analyseAll, AnalysisType, FullAnalysis, replaceType } from "./analysis";
 import prettier from "prettier";
-import { generateTypes } from "./generateTs";
+import { generateTypes, unionString } from "./generateTs";
 import { capitalize } from "./helpers/capitalize";
 import { singular } from "./helpers/singular";
+import { UnionRegistry } from "./UnionRegistry";
+import { unique } from "./helpers/unique";
+import { filedir, filepath } from "./helpers/filepath";
 
 const prettierOptions = { parser: "typescript" };
 
@@ -38,6 +41,7 @@ export class Generator {
   configMap = new Map<string, GeneratorConfig>();
   targetDir: string;
   private configDir?: string;
+  private unionRegistry = new UnionRegistry();
 
   constructor(targetDir: string) {
     ensureDirectory(targetDir);
@@ -86,12 +90,113 @@ export class Generator {
     }
   }
 
+  collapseStringsToUnions(analysis: Array<FullAnalysis>) {
+    const replacer = (type: AnalysisType) => {
+      if (type.type === "string") {
+        const union = this.unionRegistry.lookup(type.values);
+
+        if (union) {
+          return {
+            type: "union",
+            union: union,
+          } as AnalysisType;
+        }
+      }
+
+      return null;
+    };
+
+    for (const analys of analysis) {
+      for (const field of Object.values(analys.fields)) {
+        replaceType(field, replacer);
+      }
+    }
+  }
+
+  generateStringUnions(data: RawData) {
+    for (const config of this.configMap.values()) {
+      const { groupKey, GKey, disabled, extractedTypes } = config;
+
+      if (disabled) {
+        continue;
+      }
+
+      const grouped = groupKey ? groupBy(data[GKey], groupKey) : { [GKey]: data[GKey] };
+      const allAnalysis = analyseAll(grouped, config);
+
+      // Register the basic union for all entries
+      for (const analysis of allAnalysis) {
+        const singularCategory = singular(analysis.category);
+
+        this.unionRegistry.register({
+          name: `${singularCategory}Key`,
+          GKey: GKey,
+          category: analysis.category,
+          values: analysis.ids,
+          comments: analysis.nameMapping,
+          doNotWrite: false,
+        });
+      }
+
+      // We need to register another union: the one containing all sub unions.
+      // It is a "doNotWrite" union because we don't want to write it like that.
+      if (groupKey) {
+        const capitalizedGKey = capitalize(GKey);
+        const singularGKey = singular(capitalizedGKey);
+
+        this.unionRegistry.register({
+          name: `${singularGKey}Key`,
+          GKey: GKey,
+          category: "index",
+          values: allAnalysis.flatMap(
+            (analysis) => this.unionRegistry.unions.get(`${singular(analysis.category)}Key`)!.values
+          ),
+          comments: {},
+          doNotWrite: true,
+        });
+      }
+
+      // Register the extracted unions
+      for (const [key, union] of Object.entries(extractedTypes)) {
+        const allWithStringKey = Object.values(data[GKey]).filter(
+          (val) => typeof val[key] === "string"
+        );
+
+        const allValues = allWithStringKey.map((val) => val[key] as string);
+        const groups = unique(
+          allWithStringKey.map((val) => (groupKey ? val[groupKey] : GKey) as string)
+        );
+
+        // If there is only one group with all values, we will put the union in there
+        const category =
+          groups.length === 1 ? config.nameOverride[groups[0]] ?? capitalize(groups[0]) : "index";
+
+        this.unionRegistry.register({
+          name: union,
+          GKey: GKey,
+          category: category,
+          values: unique(allValues).sort(),
+          comments: {},
+          doNotWrite: false,
+        });
+      }
+    }
+  }
+
   async generate() {
     const data = await getGData();
     const tmpDir = path.resolve(__dirname, "..", "tmp");
 
-    // generate disabled config files for each missing G key
+    // Generate disabled config files for each missing G key
     this.generateDefaultConfigs(data);
+
+    // Register all string unions
+    this.generateStringUnions(data);
+
+    writeFileSync(
+      path.join(tmpDir, "__unions.json"),
+      JSON.stringify([...this.unionRegistry.unions.values()], null, 2)
+    );
 
     const gTypesIndex: string[] = [];
     const gDataType: string[] = ["\nexport type GData = {"];
@@ -99,27 +204,31 @@ export class Generator {
     for (const config of this.configMap.values()) {
       const { groupKey, GKey, disabled } = config;
 
-      if (disabled) continue;
-
-      const outDir = path.join(this.targetDir, "GTypes", GKey);
+      if (disabled) {
+        continue;
+      }
 
       const grouped = groupKey ? groupBy(data[GKey], groupKey) : { [GKey]: data[GKey] };
       const analysis = analyseAll(grouped, config);
 
-      ensureDirectory(outDir);
+      // Deduce where unions should be used instead of strings
+      this.collapseStringsToUnions(analysis);
+
       ensureDirectory(path.join(tmpDir, GKey));
 
       writeFileSync(path.join(tmpDir, GKey, "grouped.json"), JSON.stringify(grouped, null, 2));
 
       for (const val of analysis) {
+        ensureDirectory(filedir(GKey, val.category));
+
         writeFileSync(
           path.join(tmpDir, `${GKey}/${val.category}_analysis.json`),
           JSON.stringify(val, null, 2)
         );
 
         writeFileSync(
-          path.join(outDir, `${val.category}.ts`),
-          prettier.format(generateTypes(val, groupKey, config), prettierOptions)
+          filepath(GKey, val.category),
+          prettier.format(generateTypes(val, this.unionRegistry, config), prettierOptions)
         );
       }
 
@@ -155,6 +264,13 @@ export class Generator {
         index.push(`;`);
       }
 
+      for (const union of this.unionRegistry.unions.values()) {
+        if (union.GKey === GKey && union.category === "index" && !union.doNotWrite) {
+          index.push("");
+          index.push(unionString(union));
+        }
+      }
+
       // Import GTypes for GTypes/index.ts
       gTypesIndex.push(`import type { ${singularGKey}Key, ${gKeyType} } from './${GKey}';`);
 
@@ -162,21 +278,19 @@ export class Generator {
       gDataType.push(`${GKey}: {[T in ${singularGKey}Key]: ${gKeyType}};`);
 
       writeFileSync(
-        path.join(outDir, "index.ts"),
+        filepath(GKey, "index"),
         prettier.format(index.join("\n") + ";", prettierOptions)
       );
     }
 
-    // Generate index.ts for GTypes
-    const gTypesDir = path.join(this.targetDir, "GTypes");
-
     // End the gDataType definition
     gDataType.push("}");
 
+    // Generate index.ts for GTypes
     gTypesIndex.push(gDataType.join("\n"));
 
     writeFileSync(
-      path.join(gTypesDir, "index.ts"),
+      path.join(this.targetDir, "index.ts"),
       prettier.format(`${gTypesIndex.join("\n")}`, prettierOptions)
     );
   }

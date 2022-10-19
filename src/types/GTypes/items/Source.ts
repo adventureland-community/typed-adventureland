@@ -1,3 +1,5 @@
+import type { SetKey } from "../sets/Sets";
+
 export type SourceKey =
   | "wbook0" // Book of Knowledge
   | "wbook1" // Book of Secrets
@@ -16,7 +18,7 @@ export interface GSource {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The skin of the item. */
-  skin: string;
+  skin: SourceKey;
   /** The tier of the item. */
   tier: number;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
@@ -28,11 +30,11 @@ export interface GSource {
     resistance?: number;
   };
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "source";
   vit?: number;
   reflection?: number;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   resistance?: number;
   dex?: number;
 }

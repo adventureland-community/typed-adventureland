@@ -1,3 +1,9 @@
+import type { ClassKey } from "../classes/Classes";
+import type { WeaponType } from "../items/index";
+import type { ItemKey } from "../items/index";
+import type { ThrowKey } from "../items/Throw";
+import type { DismantleKey } from "../dismantle/Dismantle";
+
 export type SkillKey =
   | "3shot" // 3-Shot
   | "4fingers" // 4 Finger Technique
@@ -108,16 +114,16 @@ export interface GSkill {
   type?: string;
   name: string;
   skin?: string;
-  class?: [string];
+  class?: [ClassKey];
   level?: number;
-  wtype?: Array<string> | string;
+  wtype?: Array<WeaponType> | WeaponType;
   persistent?: boolean;
   range?: number;
   mp?: number;
   duration_max?: number;
   duration_min?: number;
   reuse_cooldown?: number;
-  share?: string;
+  share?: SkillKey;
   cooldown_multiplier?: number;
   duration?: number;
   condition?: string;
@@ -127,7 +133,7 @@ export interface GSkill {
   passive?: boolean;
   hostile?: boolean;
   aura?: boolean;
-  consume?: string;
+  consume?: ItemKey;
   output?: number;
   levels?: Array<[number, number]>;
   party?: boolean;
@@ -144,7 +150,7 @@ export interface GSkill {
   target?: boolean | string;
   damage?: number;
   merchant_use?: boolean;
-  inventory?: [string];
+  inventory?: [ThrowKey];
   ratio?: number;
   list?: boolean;
   warning?: string;
@@ -153,10 +159,10 @@ export interface GSkill {
   };
   range_multiplier?: number;
   range_bonus?: number;
-  slot?: Array<[string, string]>;
-  nprop?: [string, string];
-  positive?: [string];
-  negative?: [string];
+  slot?: Array<[string, ItemKey]>;
+  nprop?: [SkillKey, string];
+  positive?: [DismantleKey];
+  negative?: [DismantleKey];
   monsters?: boolean;
   toggle?: boolean;
   set_speed?: number;
