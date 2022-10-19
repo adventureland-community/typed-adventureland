@@ -30,10 +30,10 @@ export interface GGem {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The skin of the item. */
-  skin: string;
+  skin: GemKey;
   explanation: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "gem";
   ignore?: boolean;
   event?: boolean;
 }

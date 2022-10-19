@@ -17,9 +17,9 @@ export interface GCosmetic {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The skin of the item. */
-  skin: string;
+  skin: CosmeticKey;
   explanation: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "cosmetics";
   cash: number;
 }

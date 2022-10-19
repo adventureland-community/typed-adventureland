@@ -6,7 +6,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "dist",
-    "lib": ["es2017"],
+    "lib": ["es2022"],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": false,

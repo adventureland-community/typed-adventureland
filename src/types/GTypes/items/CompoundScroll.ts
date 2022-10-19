@@ -14,9 +14,9 @@ export interface GCompoundScroll {
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: number;
   /** The skin of the item. */
-  skin: string;
+  skin: CompoundScrollKey;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "cscroll";
   a?: boolean;
   markup?: number;
 }

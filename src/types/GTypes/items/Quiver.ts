@@ -17,11 +17,11 @@ export interface GQuiver {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The skin of the item. */
-  skin: string;
+  skin: QuiverKey;
   /** The tier of the item. */
   tier: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "quiver";
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
   a?: boolean;

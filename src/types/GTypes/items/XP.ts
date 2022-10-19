@@ -1,3 +1,5 @@
+import type { ItemType } from "./index";
+
 export type XPKey = "bottleofxp"; // Bottle of XP
 
 export interface GXP {
@@ -9,9 +11,9 @@ export interface GXP {
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: number;
   /** The skin of the item. */
-  skin: string;
+  skin: XPKey;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "xp";
   /** If the item gives a buff, or effect, like a health potion. */
-  gives: [[string, number]];
+  gives: [[ItemType, number]];
 }

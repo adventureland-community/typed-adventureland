@@ -12,6 +12,6 @@ export interface GComputer {
   /** The skin of the item. */
   skin: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "computer";
   special: boolean;
 }

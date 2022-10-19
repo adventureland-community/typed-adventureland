@@ -8,10 +8,10 @@ export interface GStand {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   explanation: string;
-  stand: string;
+  stand: StandKey;
   /** The skin of the item. */
-  skin: string;
+  skin: StandKey;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "stand";
   ignore?: boolean;
 }

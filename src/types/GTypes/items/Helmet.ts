@@ -1,3 +1,6 @@
+import type { ClassKey } from "../classes/Classes";
+import type { SetKey } from "../sets/Sets";
+
 export type HelmetKey =
   | "bunnyears" // Legacy Bunny Ears
   | "cyber" // Cybernetic Implants
@@ -35,7 +38,7 @@ export interface GHelmet {
   protection?: boolean;
   vit?: number;
   /** The skin of the item. */
-  skin: string;
+  skin: HelmetKey;
   cuteness?: number;
   /** The full display name of an item. */
   name: string;
@@ -62,7 +65,7 @@ export interface GHelmet {
   g: number;
   armor?: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "helmet";
   scroll?: boolean;
   pnresistance?: number;
   int?: number;
@@ -71,7 +74,7 @@ export interface GHelmet {
   pcourage?: number;
   str?: number;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   legacy?: {
     /** The set this item is part of `G.sets.wanderers`. */
     set: null;
@@ -80,7 +83,7 @@ export interface GHelmet {
   };
   crit?: number;
   /** An array of classes that can use this item. */
-  class?: Array<string>;
+  class?: Array<ClassKey>;
   apiercing?: number;
   explanation?: string;
   hat?: string;

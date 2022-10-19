@@ -1,3 +1,5 @@
+import type { SetKey } from "../sets/Sets";
+
 export type EarringKey =
   | "cearring" // Earring of The Crypt
   | "dexearring" // Earring of Dexterity
@@ -19,7 +21,7 @@ export interface GEarring {
   name: string;
   str?: number;
   /** The skin of the item. */
-  skin: string;
+  skin: EarringKey;
   int?: number;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound: {
@@ -31,18 +33,18 @@ export interface GEarring {
     vit?: number;
   };
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "earring";
   dex?: number;
   speed?: number;
   luck?: number;
   explanation?: string;
   /** Indicates the `quest` that this item is needed to complete. */
-  quest?: string;
+  quest?: EarringKey;
   a?: boolean;
   /** Refers to how many items are needed to exchange (see .quest as well!) */
   e?: number;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   apiercing?: number;
   vit?: number;
 }

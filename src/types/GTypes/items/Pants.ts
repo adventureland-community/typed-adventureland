@@ -1,3 +1,6 @@
+import type { ClassKey } from "../classes/Classes";
+import type { SetKey } from "../sets/Sets";
+
 export type PantKey =
   | "fallen" // Pants of the Fallen Master
   | "frankypants" // Franky Pants
@@ -19,7 +22,7 @@ export interface GPant {
   a?: boolean | number;
   stat: number;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   resistance: number;
   /** The tier of the item. */
   tier: number;
@@ -27,11 +30,11 @@ export interface GPant {
   grades: [number, number, number, number];
   frequency?: number;
   /** The skin of the item. */
-  skin: string;
+  skin: PantKey;
   crit?: number;
   speed?: number;
   /** An array of classes that can use this item. */
-  class?: Array<string>;
+  class?: Array<ClassKey>;
   dex?: number;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {
@@ -47,7 +50,7 @@ export interface GPant {
   g: number;
   armor: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "pants";
   scroll: boolean;
   vit?: number;
   extra_stat?: number;

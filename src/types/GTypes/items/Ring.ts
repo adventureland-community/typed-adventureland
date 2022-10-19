@@ -1,3 +1,5 @@
+import type { SetKey } from "../sets/Sets";
+
 export type RingKey =
   | "armorring" // Ring of Armor
   | "cdarktristone" // Dark Tri-Stone
@@ -51,7 +53,7 @@ export interface GRing {
     stun?: number;
   };
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "ring";
   int?: number;
   vit?: number;
   dex?: number;
@@ -67,7 +69,7 @@ export interface GRing {
   gold?: number;
   resistance?: number;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   ability?: string;
   attr0?: number;
   luck?: number;

@@ -16,5 +16,5 @@ export interface GOffering {
   grade: number;
   explanation: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "offering";
 }

@@ -1,3 +1,5 @@
+import type { SetKey } from "../sets/Sets";
+
 export type CapeKey =
   | "angelwings" // Angel Wings
   | "bcape" // Well-Crafted Cape
@@ -37,10 +39,10 @@ export interface GCape {
   onclick?: string;
   action?: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "cape";
   armor?: number;
   /** The set this item is part of `G.sets.wanderers`. */
-  set?: string;
+  set?: SetKey;
   cuteness?: number;
   firesistance?: number;
   pnresistance?: number;

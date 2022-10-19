@@ -20,6 +20,6 @@ export interface GBox {
   skin: string;
   explanation: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "box";
   event?: boolean;
 }

@@ -18,7 +18,7 @@ export interface GMiscOffhand {
     scale?: number;
   };
   /** The skin of the item. */
-  skin: string;
+  skin: MiscOffhandKey;
   /** The tier of the item. */
   tier: number;
   /** The full display name of an item. */
@@ -28,7 +28,7 @@ export interface GMiscOffhand {
   armor?: number;
   str?: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "misc_offhand";
   resistance?: number;
   evasion?: number;
 }

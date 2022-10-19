@@ -9,10 +9,10 @@ export interface GStone {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The skin of the item. */
-  skin: string;
+  skin: StoneKey;
   explanation: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "stone";
   days: number;
   /** The full display name of an item. */
   name: string;

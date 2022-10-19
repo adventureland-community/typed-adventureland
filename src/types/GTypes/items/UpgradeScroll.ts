@@ -15,9 +15,9 @@ export interface GUpgradeScroll {
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: number;
   /** The skin of the item. */
-  skin: string;
+  skin: UpgradeScrollKey;
   /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: string;
+  type: "uscroll";
   a?: boolean;
   markup?: number;
   exclusive?: boolean;
