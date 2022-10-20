@@ -21,54 +21,54 @@ export type ShoeKey =
   | "xmasshoes"; // Xmas Shoes
 
 export interface GShoe {
-  stat: number;
-  /** The set this item is part of `G.sets.wanderers`. */
-  set?: SetKey;
-  /** The tier of the item. */
-  tier: number;
-  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: [number, number, number, number];
-  /** The skin of the item. */
-  skin: ShoeKey;
+  a?: number | boolean;
+  armor: number;
+  /** An array of classes that can use this item. */
+  class?: [ClassKey];
+  credit?: string;
   cuteness?: number;
-  speed: number;
-  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
-  upgrade: {
-    cuteness?: number;
-    armor: number;
-    stat: number;
-    speed: number;
-    resistance?: number;
-    fzresistance?: number;
-    frequency?: number;
-  };
-  /** The full display name of an item. */
-  name: string;
+  dex?: number;
+  explanation?: string;
+  extra_stat?: number;
+  firesistance?: number;
+  for?: number;
+  frequency?: number;
+  fzresistance?: number;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
-  armor: number;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
+  grades: [number, number, number, number];
+  /** The full display name of an item. */
+  name: string;
+  resistance?: number;
+  scroll: boolean;
+  /** The set this item is part of `G.sets.wanderers`. */
+  set?: SetKey;
+  /** The skin of the item. */
+  skin: ShoeKey;
+  speed: number;
+  stat: number;
+  str?: number;
+  /** The tier of the item. */
+  tier: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: "shoes";
-  scroll: boolean;
-  resistance?: number;
-  a?: number | boolean;
-  extra_stat?: number;
+  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
+  upgrade: {
+    armor: number;
+    cuteness?: number;
+    frequency?: number;
+    fzresistance?: number;
+    resistance?: number;
+    speed: number;
+    stat: number;
+  };
+  vit?: number;
   winterland?: {
+    speed: number;
     /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
     upgrade: {
       speed: number;
     };
-    speed: number;
   };
-  explanation?: string;
-  /** An array of classes that can use this item. */
-  class?: [ClassKey];
-  for?: number;
-  fzresistance?: number;
-  dex?: number;
-  firesistance?: number;
-  str?: number;
-  frequency?: number;
-  credit?: string;
-  vit?: number;
 }

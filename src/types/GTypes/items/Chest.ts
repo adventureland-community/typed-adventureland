@@ -35,69 +35,69 @@ export type ChestKey =
   | "xmassweater"; // Xmas Sweater
 
 export interface GChest {
+  a?: number | boolean;
+  ability?: SkillKey;
+  apiercing?: number;
+  armor?: number;
+  charge?: number;
+  charisma?: number;
+  /** An array of classes that can use this item. */
+  class?: [ClassKey];
+  dex?: number;
   dreturn?: number;
-  int?: number;
-  resistance?: number;
+  edge?: number;
+  evasion?: number;
+  explanation?: string;
+  extra_stat?: number;
+  frequency?: number;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
-  a?: number | boolean;
-  vit?: number;
-  /** The skin of the item. */
-  skin: string;
-  dex?: number;
+  hp?: number;
+  int?: number;
+  lifesteal?: number;
+  luck?: number;
+  manasteal?: number;
+  mp?: number;
+  mp_cost?: number;
   /** The full display name of an item. */
   name: string;
+  resistance?: number;
   rpiercing?: number;
-  armor?: number;
-  apiercing?: number;
-  str?: number;
-  /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: "chest";
-  stat?: number;
-  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
-  upgrade?: {
-    armor?: number;
-    stat?: number;
-    resistance?: number;
-    hp?: number;
-    xp?: number;
-    luck?: number;
-    lifesteal?: number;
-    int?: number;
-    dex?: number;
-    str?: number;
-    speed?: number;
-    rpiercing?: number;
-    apiercing?: number;
-    mp_cost?: number;
-    manasteal?: number;
-    for?: number;
-    vit?: number;
-    evasion?: number;
-  };
-  /** The tier of the item. */
-  tier?: number;
   scroll?: boolean;
   /** The set this item is part of `G.sets.wanderers`. */
   set?: SetKey;
-  extra_stat?: number;
-  hp?: number;
-  explanation?: string;
-  charisma?: number;
-  xp?: number;
-  luck?: number;
-  lifesteal?: number;
-  /** An array of classes that can use this item. */
-  class?: [ClassKey];
-  frequency?: number;
+  /** The skin of the item. */
+  skin: string;
   speed?: number;
-  mp?: number;
-  mp_cost?: number;
-  manasteal?: number;
-  ability?: SkillKey;
-  charge?: number;
-  edge?: number;
-  evasion?: number;
+  stat?: number;
+  str?: number;
+  /** The tier of the item. */
+  tier?: number;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
+  type: "chest";
+  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
+  upgrade?: {
+    apiercing?: number;
+    armor?: number;
+    dex?: number;
+    evasion?: number;
+    for?: number;
+    hp?: number;
+    int?: number;
+    lifesteal?: number;
+    luck?: number;
+    manasteal?: number;
+    mp_cost?: number;
+    resistance?: number;
+    rpiercing?: number;
+    speed?: number;
+    stat?: number;
+    str?: number;
+    vit?: number;
+    xp?: number;
+  };
+  vit?: number;
+  xp?: number;
 }

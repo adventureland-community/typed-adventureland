@@ -29,77 +29,49 @@ export type HelmetKey =
   | "xmashat"; // Xmas Hat
 
 export interface GHelmet {
-  stat?: number;
-  resistance?: number;
-  /** The tier of the item. */
-  tier?: number;
-  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades?: [number, number, number, number];
-  protection?: boolean;
-  vit?: number;
-  /** The skin of the item. */
-  skin: HelmetKey;
-  cuteness?: number;
-  /** The full display name of an item. */
-  name: string;
   a?: number | boolean;
-  extra_stat?: number;
-  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
-  upgrade?: {
-    cuteness?: number;
-    armor: number;
-    stat: number;
-    resistance: number;
-    evasion?: number;
-    crit?: number;
-    apiercing?: number;
-    reflection?: number;
-    rpiercing?: number;
-    dex?: number;
-    str?: number;
-    int?: number;
-    vit?: number;
-  };
-  evasion?: number;
-  /** Cost of the item in gold, if an NPC were to sell this item. */
-  g: number;
+  apiercing?: number;
   armor?: number;
-  /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: "helmet";
-  scroll?: boolean;
-  pnresistance?: number;
-  int?: number;
-  mcourage?: number;
-  dex?: number;
-  pcourage?: number;
-  str?: number;
-  /** The set this item is part of `G.sets.wanderers`. */
-  set?: SetKey;
-  legacy?: {
-    /** The set this item is part of `G.sets.wanderers`. */
-    set: null;
-    /** An array of classes that can use this item. */
-    class: null;
-  };
-  crit?: number;
   /** An array of classes that can use this item. */
   class?: Array<ClassKey>;
-  apiercing?: number;
-  explanation?: string;
-  hat?: string;
-  reflection?: number;
-  lifesteal?: number;
-  rpiercing?: number;
-  luck?: number;
-  ignore?: boolean;
-  firesistance?: number;
-  output?: number;
-  range?: number;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound?: {
     cuteness: number;
     range: number;
   };
+  crit?: number;
+  cuteness?: number;
+  dex?: number;
+  evasion?: number;
+  explanation?: string;
+  extra_stat?: number;
+  firesistance?: number;
+  /** Cost of the item in gold, if an NPC were to sell this item. */
+  g: number;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
+  grades?: [number, number, number, number];
+  hat?: string;
+  hp?: number;
+  ignore?: boolean;
+  int?: number;
+  legacy?: {
+    /** An array of classes that can use this item. */
+    class: null;
+    /** The set this item is part of `G.sets.wanderers`. */
+    set: null;
+  };
+  lifesteal?: number;
+  luck?: number;
+  mcourage?: number;
+  /** The full display name of an item. */
+  name: string;
+  output?: number;
+  pcourage?: number;
+  pnresistance?: number;
+  protection?: boolean;
+  range?: number;
+  reflection?: number;
+  resistance?: number;
   rogue?: {
     crit: number;
     /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
@@ -107,8 +79,36 @@ export interface GHelmet {
       crit: number;
     };
   };
+  rpiercing?: number;
+  scroll?: boolean;
+  /** The set this item is part of `G.sets.wanderers`. */
+  set?: SetKey;
+  /** The skin of the item. */
+  skin: HelmetKey;
   speed?: number;
-  hp?: number;
-  xscroll?: boolean;
+  stat?: number;
+  str?: number;
+  /** The tier of the item. */
+  tier?: number;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
+  type: "helmet";
+  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
+  upgrade?: {
+    apiercing?: number;
+    armor: number;
+    crit?: number;
+    cuteness?: number;
+    dex?: number;
+    evasion?: number;
+    int?: number;
+    reflection?: number;
+    resistance: number;
+    rpiercing?: number;
+    stat: number;
+    str?: number;
+    vit?: number;
+  };
+  vit?: number;
   xcx?: [string];
+  xscroll?: boolean;
 }

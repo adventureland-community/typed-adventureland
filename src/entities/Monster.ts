@@ -1,299 +1,109 @@
-export interface GMonster {
-  group: {
-    enableSort: boolean;
-  };
-  x: number;
-  y: number;
-  children: [];
-  visible: boolean;
-  width: number;
-  height: number;
-  anchor: {
-    x: number;
-    y: number;
-  };
-  position: {};
-  cskin: string;
-  i: number;
-  j: number;
-  skin: string;
-  stype: string;
-  updates: number;
-  type: string;
-  mtype: string;
-  in: string;
-  map: string;
-  hp: number | null;
-  max_hp: number;
-  mp: number;
-  max_mp: number;
-  speed: number;
-  xp: number;
-  attack: number;
-  frequency: number;
-  rage: number;
-  aggro: number;
-  damage_type: string;
-  respawn: number;
-  range: number;
-  name: string;
-  armor: number;
-  resistance: number;
-  id: string;
-  cid: number;
-  s: {
-    self_healing?: {
-      ms: number;
-      ability: boolean;
-    };
-    sleeping?: {
-      ms: number;
-    };
-    healed?: {
-      ms: number;
-    };
-    stack?: {
-      ms: number;
-      s: number;
-    };
-    cursed?: {
-      ms: number;
-      duration: number;
-    };
-    marked?: {
-      ms: number;
-      duration: number;
-    };
-    burned?: {
-      ms: number;
-      intensity: number;
-      fid: string;
-      duration: number;
-      f: string;
-      last?: string;
-    };
-    young?: {
-      ms: number;
-    };
-  };
-  last_ms: string;
-  displayGroup: {
-    group: {
-      enableSort: boolean;
-    };
-    x: number;
-    y: number;
-    children: [];
-    visible: boolean;
-    width: number;
-    height: number;
-    anchor: {
-      x: number;
-      y: number;
-    };
-    position: {};
-    sortPriority: number;
-    useDoubleBuffer: boolean;
-  };
-  parentGroup: {
-    group: {
-      enableSort: boolean;
-    };
-    x: number;
-    y: number;
-    children: [];
-    visible: boolean;
-    width: number;
-    height: number;
-    anchor: {
-      x: number;
-      y: number;
-    };
-    position: {};
-    sortPriority: number;
-    useDoubleBuffer: boolean;
-  };
-  walking: null | number;
-  animations: {};
-  fx: {
-    aaa?: null | number;
-    attack?: [string, number];
-  };
-  emblems: {
-    j1?: {
-      group: {
-        enableSort: boolean;
-      };
-      x: number;
-      y: number;
-      children: [];
-      visible: boolean;
-      width: number;
-      height: number;
-      anchor: {
-        x: number;
-        y: number;
-      };
-      position: {};
-      cskin: string;
-      skin: string;
-      stype: string;
-      updates: number;
-      frame_list: [
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number
-      ];
-      frames: number;
-      parentGroup: {
-        group: {
-          enableSort: boolean;
-        };
-        x: number;
-        y: number;
-        children: [];
-        visible: boolean;
-        width: number;
-        height: number;
-        anchor: {
-          x: number;
-          y: number;
-        };
-        position: {};
-      };
-      alpha: number;
-      ms_emblemj1: string;
-    };
-    rr1?: {
-      group: {
-        enableSort: boolean;
-      };
-      x: number;
-      y: number;
-      children: [];
-      visible: boolean;
-      width: number;
-      height: number;
-      anchor: {
-        x: number;
-        y: number;
-      };
-      position: {};
-      cskin: string;
-      skin: string;
-      stype: string;
-      updates: number;
-      frame_list: [
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number
-      ];
-      frames: number;
-      parentGroup: {
-        group: {
-          enableSort: boolean;
-        };
-        x: number;
-        y: number;
-        children: [];
-        visible: boolean;
-        width: number;
-        height: number;
-        anchor: {
-          x: number;
-          y: number;
-        };
-        position: {};
-      };
-      alpha: number;
-      ms_emblemrr1: string;
-    };
-  };
-  c: {};
-  real_alpha: number;
-  real_x: number;
-  real_y: number;
-  vx: number;
-  vy: number;
-  level: number;
-  orientation?: number;
-  interactive: boolean;
-  buttonMode: boolean;
-  base: {
-    h: number;
-    v: number | null;
-    vn: number;
-  };
-  drawn: boolean;
-  resync: boolean;
-  angle: number;
-  a_direction: number;
-  direction: number;
-  moving: boolean;
-  texture?: {};
-  alpha: number;
-  immune?: boolean;
-  move_num?: number;
-  target?: null | string;
-  engaged_move?: number;
-  evasion?: number;
+import { MonsterKey, MonsterName } from "../types/GTypes/monsters";
+import { EntityBase } from "./base";
+
+export interface MonsterEntity extends EntityBase {
+  // TODO: what monster abilities are there? and there are probably different ones depending on type of monster.
   abilities?: {
     portal?: {
       cooldown: number;
     };
     self_healing?: {
-      heal: number;
       cooldown: number;
+      heal: number;
     };
   };
-  reflection?: number;
-  dreturn?: number;
-  abs?: boolean;
-  from_x?: number;
-  from_y?: number;
-  going_x?: number;
-  going_y?: number;
-  ref_speed?: number;
-  ms_walk?: string;
-  last_stop?: string;
-  last_walking?: number;
-  a_angle?: number;
+  aggro: number;
+  avoidance?: number;
+
+  buttonMode: boolean;
+
   cooperative?: boolean;
-  hit?: string;
-  lifesteal?: number;
-  y_disp?: null;
-  special?: boolean;
-  slots?: {
-    mainhand: {
-      name: string;
-      level: number;
-    };
-  };
-  pzazz?: number;
+  cskin: string;
   cx?: {};
   cxc?: {};
+  damage_type: string;
   dead?: boolean;
-  avoidance?: number;
+  direction: number;
+
+  dreturn?: number; // TODO: stats, should be on characters as wel?
+
+  evasion?: number;
+  frequency: number;
+
+  height: number;
+  hit?: string;
+  hp: number | null;
+
+  immune?: boolean;
+
+  j: number;
+
+  lifesteal?: number;
+  max_hp: number;
+  max_mp: number;
+
+  mp: number;
+  mtype: MonsterKey;
+  name: MonsterName;
+  orientation?: number;
+
+  pzazz?: number;
+  rage: number;
+  range: number;
+
+  ref_speed?: number;
+  reflection?: number;
+  resistance: number;
+  respawn: number;
+
+  // s: {
+  //   burned?: {
+  //     duration: number;
+  //     f: string;
+  //     fid: string;
+  //     intensity: number;
+  //     last?: string;
+  //     ms: number;
+  //   };
+  //   cursed?: {
+  //     duration: number;
+  //     ms: number;
+  //   };
+  //   healed?: {
+  //     ms: number;
+  //   };
+  //   marked?: {
+  //     duration: number;
+  //     ms: number;
+  //   };
+  //   self_healing?: {
+  //     ability: boolean;
+  //     ms: number;
+  //   };
+  //   sleeping?: {
+  //     ms: number;
+  //   };
+  //   stack?: {
+  //     ms: number;
+  //     s: number;
+  //   };
+  //   young?: {
+  //     ms: number;
+  //   };
+  // };
+  // TODO: ItemInstance / Info / Data
+  slots?: {
+    mainhand: {
+      level: number;
+      name: string;
+    };
+  };
+  special?: boolean;
+  speed: number;
+  stype: string;
+  target?: null | string;
+  texture?: {};
+  type: "monster";
+
+  width: number;
 }

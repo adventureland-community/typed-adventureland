@@ -2,6 +2,8 @@
   "GKey": "monsters",
   "groupKey": null,
   "nameOverride": {},
-  "extractedTypes": {},
+  "extractedTypes": {
+    "name": "MonsterName"
+  },
   "description": {}
 }

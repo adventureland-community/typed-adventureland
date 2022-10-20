@@ -3,15 +3,15 @@ export type StandKey =
   | "stand1"; // Merchant Stand [Sell+Buy]
 
 export interface GStand {
-  /** The full display name of an item. */
-  name: string;
+  explanation: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
-  explanation: string;
-  stand: StandKey;
+  ignore?: boolean;
+  /** The full display name of an item. */
+  name: string;
   /** The skin of the item. */
   skin: StandKey;
+  stand: StandKey;
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: "stand";
-  ignore?: boolean;
 }

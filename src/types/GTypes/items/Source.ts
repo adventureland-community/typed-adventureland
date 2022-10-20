@@ -6,35 +6,35 @@ export type SourceKey =
   | "wbookhs"; // Book of Cheer
 
 export interface GSource {
-  int?: number;
-  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: [number, number, number, number];
-  cx: {
-    scale: number;
-    extension: boolean;
+  /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
+  compound: {
+    dex?: number;
+    int?: number;
+    reflection?: number;
+    resistance?: number;
+    vit?: number;
   };
-  /** The full display name of an item. */
-  name: string;
+  cx: {
+    extension: boolean;
+    scale: number;
+  };
+  dex?: number;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
+  grades: [number, number, number, number];
+  int?: number;
+  /** The full display name of an item. */
+  name: string;
+  reflection?: number;
+  resistance?: number;
+  /** The set this item is part of `G.sets.wanderers`. */
+  set?: SetKey;
   /** The skin of the item. */
   skin: SourceKey;
   /** The tier of the item. */
   tier: number;
-  /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
-  compound: {
-    int?: number;
-    reflection?: number;
-    vit?: number;
-    dex?: number;
-    resistance?: number;
-  };
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: "source";
   vit?: number;
-  reflection?: number;
-  /** The set this item is part of `G.sets.wanderers`. */
-  set?: SetKey;
-  resistance?: number;
-  dex?: number;
 }

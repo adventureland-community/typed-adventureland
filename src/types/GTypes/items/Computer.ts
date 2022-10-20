@@ -3,15 +3,15 @@ export type ComputerKey =
   | "supercomputer"; // Super Computer
 
 export interface GComputer {
-  /** The full display name of an item. */
-  name: string;
+  explanation: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
-  explanation: string;
-  stand: string;
+  /** The full display name of an item. */
+  name: string;
   /** The skin of the item. */
   skin: string;
+  special: boolean;
+  stand: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: "computer";
-  special: boolean;
 }

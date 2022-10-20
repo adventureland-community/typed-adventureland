@@ -2,6 +2,7 @@ import type { ChrysalisKey } from "../items/Chrysalis";
 import type { EventKey } from "../events/Events";
 import type { MonsterKey } from "../monsters/Monsters";
 import type { NpcKey } from "../npcs/Npcs";
+import type { NpcRole } from "../npcs/Npcs";
 import type { SkillKey } from "../skills/Skills";
 
 export type MapKey =
@@ -60,112 +61,131 @@ export type MapKey =
   | "woffice"; // Wizard's Crib
 
 export interface GMap {
-  npcs: Array<
-    | {
-        position: Array<number>;
-        id: NpcKey;
-        name?: string;
-        boundary?: [number, number, number, number];
-      }
-    | {
-        position: [number, number];
-        name?: string;
-        id: NpcKey;
-      }
-    | {
-        positions?: [[number, number], [number, number, number]];
-        id: NpcKey;
-        position?: [number, number];
-      }
-    | {
-        position: [number, number];
-        id: NpcKey;
-      }
-    | {
-        position: [number, number];
-        id: NpcKey;
-        name?: string;
-      }
-    | {
-        position: [number, number];
-        boundary: [number, number, number, number];
-        id: NpcKey;
-      }
-    | {
-        position: [number, number, number];
-        id: NpcKey;
-      }
-    | {
-        position: Array<number>;
-        id: NpcKey;
-        name?: string;
-      }
-    | {
-        position?: Array<number>;
-        id: NpcKey;
-        positions?: [[number, number], [number, number, number]];
-      }
-  >;
-  key: string;
-  freeze_multiplier?: number;
-  name: string;
-  lux?: number;
+  animatables?: {
+    the_door?: {
+      position: string;
+      x: number;
+      y: number;
+    };
+    the_lever?: {
+      position: string;
+      x: number;
+      y: number;
+    };
+  };
   burn_multiplier?: number;
-  drop_norm?: number;
-  outside?: boolean;
-  quirks?: Array<
-    Array<number | string> | [number, number, number, number, string, string]
-  >;
+  code?: string;
+  day?: boolean;
   doors: Array<
     | Array<number | string>
     | [number, number, number, number, MapKey, number, number]
   >;
-  spawns: Array<Array<number> | [number, number] | [number, number, number]>;
+  drop_norm?: number;
+  event?: string;
+  freeze_multiplier?: number;
+  fx?: string;
+  ignore?: boolean;
+  instance?: boolean;
+  irregular?: boolean;
+  key: string;
+  loss?: boolean;
+  lux?: number;
+  machines?: [
+    {
+      frames: [
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number]
+      ];
+      set: string;
+      subframes: [
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number]
+      ];
+      type: string;
+      x: number;
+      y: number;
+    },
+    {
+      frames: [
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number]
+      ];
+      set: string;
+      type: string;
+      x: number;
+      y: number;
+    },
+    {
+      frames: [
+        [number, number, number, number],
+        [number, number, number, number],
+        [number, number, number, number]
+      ];
+      set: string;
+      type: string;
+      x: number;
+      y: number;
+    }
+  ];
   monsters?: Array<
     | {
-        count: number;
         boundary?: [number, number, number, number];
-        type: MonsterKey;
+        count: number;
         gatekeeper?: boolean;
-        rage?: [number, number, number, number];
-        random?: boolean;
-        roam?: boolean;
         grow?: boolean;
         polygon?: Array<[number, number]>;
         position?: [number, number];
         radius?: number;
+        rage?: [number, number, number, number];
+        random?: boolean;
+        roam?: boolean;
         special?: boolean;
+        type: MonsterKey;
       }
     | {
-        count: number;
         boundary?: [number, number, number, number];
-        type: MonsterKey;
-        roam?: boolean;
+        count: number;
         grow?: boolean;
         position?: [number, number];
         radius?: number;
         rage?: [number, number, number, number];
+        roam?: boolean;
         special?: boolean;
-      }
-    | {
-        count: number;
-        boundary: [number, number, number, number];
         type: MonsterKey;
       }
     | {
-        count: number;
         boundary: [number, number, number, number];
+        count: number;
         type: MonsterKey;
+      }
+    | {
+        boundary: [number, number, number, number];
+        count: number;
         grow: boolean;
+        type: MonsterKey;
       }
     | {
-        count: number;
         boundary?: [number, number, number, number];
-        type: MonsterKey;
+        count: number;
         grow?: boolean;
         position?: [number, number];
         radius?: number;
         roam?: boolean;
+        type: MonsterKey;
       }
     | {
         boundaries: [
@@ -176,64 +196,194 @@ export interface GMap {
           [MapKey, number, number, number, number]
         ];
         count: number;
-        type: MonsterKey;
         stype: string;
+        type: MonsterKey;
       }
     | {
-        count: number;
         boundary?: [number, number, number, number];
-        type: MonsterKey;
+        count: number;
         position?: [number, number];
         radius?: number;
         roam?: boolean;
+        type: MonsterKey;
       }
     | {
-        count: number;
         boundary: [number, number, number, number];
+        count: number;
         type: ChrysalisKey;
       }
     | {
-        count: number;
         boundary?: [number, number, number, number];
-        type: MonsterKey;
+        count: number;
         grow?: boolean;
         position?: [number, number];
         radius?: number;
         roam?: boolean;
         special?: boolean;
+        type: MonsterKey;
       }
     | {
-        count: number;
-        boundary?: [number, number, number, number];
-        type: MonsterKey;
-        special?: boolean;
-        position?: [number, number];
-        radius?: number;
-        roam?: boolean;
         boundaries?: [
           [MapKey, number, number, number, number],
           [MapKey, number, number, number, number]
         ];
-        stype?: string;
-      }
-    | {
+        boundary?: [number, number, number, number];
         count: number;
-        boundary: [number, number, number, number];
-        type: MonsterKey;
+        position?: [number, number];
+        radius?: number;
         roam?: boolean;
+        special?: boolean;
+        stype?: string;
+        type: MonsterKey;
       }
     | {
-        count: number;
         boundary: [number, number, number, number];
+        count: number;
+        roam?: boolean;
         type: MonsterKey;
+      }
+    | {
+        boundary: [number, number, number, number];
+        count: number;
         grow?: boolean;
         roam?: boolean;
+        type: MonsterKey;
       }
   >;
-  world?: string;
+  mount?: boolean;
+  name: string;
+  no_bounds?: boolean;
+  npcs: Array<
+    | {
+        boundary?: [number, number, number, number];
+        id: NpcKey;
+        name?: string;
+        position: Array<number>;
+      }
+    | {
+        id: NpcKey;
+        name?: string;
+        position: [number, number];
+      }
+    | {
+        id: NpcKey;
+        position?: [number, number];
+        positions?: [[number, number], [number, number, number]];
+      }
+    | {
+        id: NpcKey;
+        position: [number, number];
+      }
+    | {
+        id: NpcRole;
+        position: [number, number];
+      }
+    | {
+        boundary: [number, number, number, number];
+        id: NpcKey;
+        position: [number, number];
+      }
+    | {
+        id: NpcRole;
+        position: [number, number, number];
+      }
+    | {
+        id: NpcKey;
+        name?: string;
+        position: Array<number>;
+      }
+    | {
+        id: NpcKey;
+        position?: Array<number>;
+        positions?: [[number, number], [number, number, number]];
+      }
+  >;
+  old_monsters?: [
+    {
+      boundary: [number, number, number, number];
+      count: number;
+      type: MonsterKey;
+    },
+    {
+      boundary: [number, number, number, number];
+      count: number;
+      type: MonsterKey;
+    },
+    {
+      boundary: [number, number, number, number];
+      count: number;
+      type: MonsterKey;
+    },
+    {
+      boundary: [number, number, number, number];
+      count: number;
+      type: MonsterKey;
+    },
+    {
+      boundary: [number, number, number, number];
+      count: number;
+      type: MonsterKey;
+    },
+    {
+      boundary: [number, number, number, number];
+      count: number;
+      type: MonsterKey;
+    },
+    {
+      boundary: [number, number, number, number];
+      count: number;
+      type: MonsterKey;
+    },
+    {
+      boundary: [number, number, number, number];
+      count: number;
+      type: MonsterKey;
+    },
+    {
+      boundary: [number, number, number, number];
+      count: number;
+      type: MonsterKey;
+    },
+    {
+      boundary: [number, number, number, number];
+      count: number;
+      type: MonsterKey;
+    },
+    {
+      boundary: [number, number, number, number];
+      count: number;
+      type: MonsterKey;
+    },
+    {
+      boundary: [number, number, number, number];
+      count: number;
+      type: MonsterKey;
+    }
+  ];
+  on_death?: [MapKey, number];
+  on_exit?: [MapKey, number];
+  outside?: boolean;
+  pvp?: boolean;
+  quirks?: Array<
+    Array<number | string> | [number, number, number, number, string, string]
+  >;
+  ref?: {
+    c_mid?: [number, number];
+    cx?: [number, number, number, number];
+    poof?: {
+      in: MapKey;
+      map: MapKey;
+      x: number;
+      y: number;
+    };
+    u_mid?: [number, number];
+  };
+  safe?: boolean;
+  safe_pvp?: boolean;
+  small_steps?: boolean;
+  spawns: Array<Array<number> | [number, number] | [number, number, number]>;
   traps?: [
     {
-      type: string;
       polygon?: [
         [number, number],
         [number, number],
@@ -297,167 +447,17 @@ export interface GMap {
         [number, number]
       ];
       position?: [number, number];
+      type: string;
     }
   ];
-  ignore?: boolean;
-  instance?: boolean;
-  on_exit?: [MapKey, number];
-  irregular?: boolean;
-  on_death?: [MapKey, number];
-  animatables?: {
-    the_door?: {
-      y: number;
-      x: number;
-      position: string;
-    };
-    the_lever?: {
-      y: number;
-      x: number;
-      position: string;
-    };
-  };
+  unlist?: boolean;
+  weather?: string;
+  world?: string;
   zones?: [
     {
       drop: string;
-      type: SkillKey;
       polygon: Array<[number, number]>;
+      type: SkillKey;
     }
   ];
-  ref?: {
-    cx?: [number, number, number, number];
-    u_mid?: [number, number];
-    c_mid?: [number, number];
-    poof?: {
-      y: number;
-      map: MapKey;
-      x: number;
-      in: MapKey;
-    };
-  };
-  pvp?: boolean;
-  no_bounds?: boolean;
-  safe?: boolean;
-  mount?: boolean;
-  machines?: [
-    {
-      set: string;
-      y: number;
-      x: number;
-      frames: [
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number]
-      ];
-      subframes: [
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number]
-      ];
-      type: string;
-    },
-    {
-      frames: [
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number]
-      ];
-      x: number;
-      set: string;
-      type: string;
-      y: number;
-    },
-    {
-      frames: [
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number]
-      ];
-      x: number;
-      set: string;
-      type: string;
-      y: number;
-    }
-  ];
-  event?: string;
-  unlist?: boolean;
-  fx?: string;
-  weather?: string;
-  code?: string;
-  small_steps?: boolean;
-  old_monsters?: [
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    }
-  ];
-  loss?: boolean;
-  day?: boolean;
-  safe_pvp?: boolean;
 }

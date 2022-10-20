@@ -7,17 +7,17 @@ export type ChrysalisKey =
   | "puppy1"; // Egg
 
 export interface GChrysalis {
-  ignore: boolean;
   a: boolean;
-  /** The full display name of an item. */
-  name: string;
+  explanation?: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
+  grade: number;
+  ignore: boolean;
+  monster: MonsterKey;
+  /** The full display name of an item. */
+  name: string;
   /** The skin of the item. */
   skin: QuestKey;
-  grade: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: "chrysalis";
-  monster: MonsterKey;
-  explanation?: string;
 }

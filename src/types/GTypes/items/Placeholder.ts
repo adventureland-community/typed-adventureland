@@ -3,13 +3,13 @@ export type PlaceholderKey =
   | "placeholder_m"; // Placeholder
 
 export interface GPlaceholder {
-  ignore: boolean;
-  /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: "placeholder";
-  /** The full display name of an item. */
-  name: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
+  ignore: boolean;
+  /** The full display name of an item. */
+  name: string;
   /** The skin of the item. */
   skin: PlaceholderKey;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
+  type: "placeholder";
 }

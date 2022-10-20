@@ -8,19 +8,19 @@ export type PotKey =
   | "snakeoil"; // Snake Oil
 
 export interface GPot {
-  /** The full display name of an item. */
-  name: string;
+  cooldown?: number;
+  debuff?: boolean;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
+  /** If the item gives a buff, or effect, like a health potion. */
+  gives: [[string, number]];
+  /** The full display name of an item. */
+  name: string;
+  rare?: boolean;
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: number;
-  cooldown?: number;
   /** The skin of the item. */
   skin: PotKey;
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: "pot";
-  /** If the item gives a buff, or effect, like a health potion. */
-  gives: [[string, number]];
-  debuff?: boolean;
-  rare?: boolean;
 }

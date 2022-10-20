@@ -23,6 +23,6 @@ export type DismantleKey =
   | "swordofthedead";
 
 export interface GDismantle {
-  items: Array<[number, ItemKey]>;
   cost: number;
+  items: Array<[number, ItemKey]>;
 }

@@ -80,95 +80,95 @@ export type WeaponKey =
   | "xmace"; // Merry Mace
 
 export interface GWeapon {
-  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: [number, number, number, number];
-  cx?: {
-    large?: boolean;
-    accent?: string;
-    lightborder?: boolean;
-    scale?: number;
-    extension?: boolean;
-    border?: number;
-  };
-  damage_type: string;
-  /** The skin of the item. */
-  skin: string;
-  /** The tier of the item. */
-  tier: number;
-  reflection?: number;
   a?: boolean | number;
-  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
-  upgrade: {
-    range: number;
-    attack: number;
-    armor?: number;
-    speed?: number;
-    stun?: number;
-    crit?: number;
-    evasion?: number;
-    apiercing?: number;
-    vit?: number;
-    attr0?: number;
-    int?: number;
-    explosion?: number;
-    blast?: number;
-    rpiercing?: number;
-    dex?: number;
-    str?: number;
-    reflection?: number;
-    awesomeness?: number;
-    resistance?: number;
-    attr1?: number;
-  };
-  /** The full display name of an item. */
-  name: string;
-  /** Cost of the item in gold, if an NPC were to sell this item. */
-  g: number;
-  /** The type of `weapon` `wand` `axe` `mace`... */
-  wtype: WeaponType;
-  attack: number;
-  ignore?: boolean;
-  range: number;
-  /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: "weapon";
-  armor?: number;
-  stun?: number;
-  delia?: string;
-  projectile?: string;
-  vit?: number;
-  speed?: number;
-  crit?: number;
-  str?: number;
-  explanation?: string;
-  evasion?: number;
-  /** The set this item is part of `G.sets.wanderers`. */
-  set?: SetKey;
   ability?: string;
-  dex?: number;
-  skin_c?: string;
-  charisma?: number;
   apiercing?: number;
-  event?: boolean;
-  skin_r?: string;
-  int?: number;
+  armor?: number;
+  attack: number;
   attr0?: number;
-  explosion?: number;
+  attr1?: number;
+  awesomeness?: number;
   blast?: number;
-  rpiercing?: number;
-  trex?: string;
+  charisma?: number;
   /** An array of classes that can use this item. */
   class?: [ClassKey];
+  crit?: number;
+  critdamage?: number;
+  cx?: {
+    accent?: string;
+    border?: number;
+    extension?: boolean;
+    large?: boolean;
+    lightborder?: boolean;
+    scale?: number;
+  };
+  damage_type: string;
+  delia?: string;
+  dex?: number;
+  evasion?: number;
+  event?: boolean;
+  exclusive?: boolean;
+  explanation?: string;
+  explosion?: number;
   firesistance?: number;
+  for?: number;
+  /** Cost of the item in gold, if an NPC were to sell this item. */
+  g: number;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
+  grades: [number, number, number, number];
+  ignore?: boolean;
+  int?: number;
+  lifesteal?: number;
   luck?: number;
-  nopo?: string;
-  projectile_test?: string;
-  awesomeness?: number;
   mp_cost?: number;
   mp_reduction?: number;
-  for?: number;
+  /** The full display name of an item. */
+  name: string;
+  nopo?: string;
+  projectile?: string;
+  projectile_test?: string;
+  range: number;
+  reflection?: number;
   resistance?: number;
-  critdamage?: number;
-  lifesteal?: number;
-  exclusive?: boolean;
-  attr1?: number;
+  rpiercing?: number;
+  /** The set this item is part of `G.sets.wanderers`. */
+  set?: SetKey;
+  /** The skin of the item. */
+  skin: string;
+  skin_c?: string;
+  skin_r?: string;
+  speed?: number;
+  str?: number;
+  stun?: number;
+  /** The tier of the item. */
+  tier: number;
+  trex?: string;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
+  type: "weapon";
+  /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
+  upgrade: {
+    apiercing?: number;
+    armor?: number;
+    attack: number;
+    attr0?: number;
+    attr1?: number;
+    awesomeness?: number;
+    blast?: number;
+    crit?: number;
+    dex?: number;
+    evasion?: number;
+    explosion?: number;
+    int?: number;
+    range: number;
+    reflection?: number;
+    resistance?: number;
+    rpiercing?: number;
+    speed?: number;
+    str?: number;
+    stun?: number;
+    vit?: number;
+  };
+  vit?: number;
+  /** The type of `weapon` `wand` `axe` `mace`... */
+  wtype: WeaponType;
 }
