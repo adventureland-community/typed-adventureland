@@ -67,7 +67,7 @@ export function makeInterface(
   imports: Array<string>,
   analysis: FullAnalysis
 ) {
-  const entries = Object.entries(fields);
+  const entries = Object.entries(fields).sort(([name, entry],[name2, entry2]) => name.localeCompare(name2));
   const lines = ["{"];
 
   for (const [name, entry] of entries) {
