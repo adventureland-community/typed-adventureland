@@ -1,4 +1,7 @@
+import { ConditionKey } from "../types/GTypes/conditions";
 import { MapKey } from "../types/GTypes/maps";
+import { MonsterKey } from "../types/GTypes/monsters";
+import { StatusInfo } from "./status-info";
 
 export interface EntityBase {
   a_angle?: number;
@@ -225,7 +228,12 @@ export interface EntityBase {
 
   resync: boolean;
 
-  s: {}; // TODO: buffs, conditions? seems like G.conditions
+  /**
+   * Conditions or Buffs
+   * G.conditions has stat information on most conditions
+   * There are also conditions that might not be present in G.conditions `citizen0aura` being an `G.npcs.citizen0.aura`
+   */
+  s: StatusInfo;
 
   skin: string;
 
@@ -246,3 +254,33 @@ export interface EntityBase {
   speed: number;
   range: number;
 }
+
+
+
+
+// & {
+//   burned?: {
+//     // (Unconfirmed) the damage that the burn will do per second.
+//     intensity: number;
+//     // The character ID that caused the burn
+//     f: string;
+//   };
+//   coop?: {
+//     id: string;
+//     p: number;
+//   };
+//   mluck?: {
+//     /** The ID of the merchant who cast mluck */
+//     f: string;
+//     /** A flag to show if the mluck was cast by the user's merchant. If false, it can be mlucked by any merchant. */
+//     strong: boolean;
+//   };
+//   monsterhunt?: MonsterHuntStatusInfo;
+//   citizen0aura?: {
+//     luck: number;
+//   };
+//   citizen4aura?: {
+//     gold: number;
+//   };
+// }
+

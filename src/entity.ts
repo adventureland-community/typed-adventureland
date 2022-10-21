@@ -1,4 +1,6 @@
+import { StatusInfoBase } from "./entities/base-entity";
 import { SlotType, TradeSlotType } from "./entities/slots";
+import { StatusInfo } from "./entities/status-info";
 import { ItemInfo } from "./items";
 import { PositionMovable } from "./position";
 import { ClassKey } from "./types/GTypes/classes";
@@ -66,7 +68,7 @@ export type Entity = PositionMovable & {
   /** Only set if the entity is a character. If true, the player is dead. */
   rip?: boolean;
   rpiercing: number;
-  //   s: StatusInfo; // TODO: status info
+  s: StatusInfo;
   // TODO: slots
   /** Set if the entity is a player */
   slots: {
@@ -95,105 +97,5 @@ export type Entity = PositionMovable & {
   dead?: boolean | string; // monster only attribute
 };
 
-export type StatusInfoBase = {
-  /** How many ms left before this condition expires */
-  ms: number;
-};
-
-export type StatusInfo = {
-  [T in ConditionName]?: StatusInfoBase;
-} & {
-  burned?: {
-    // (Unconfirmed) the damage that the burn will do per second.
-    intensity: number;
-    // The character ID that caused the burn
-    f: string;
-  };
-  coop?: {
-    id: string;
-    p: number;
-  };
-  mluck?: {
-    /** The ID of the merchant who cast mluck */
-    f: string;
-    /** A flag to show if the mluck was cast by the user's merchant. If false, it can be mlucked by any merchant. */
-    strong: boolean;
-  };
-  monsterhunt?: MonsterHuntStatusInfo;
-  citizen0aura?: {
-    luck: number;
-  };
-  citizen4aura?: {
-    gold: number;
-  };
-};
-
-export type MonsterHuntStatusInfo = StatusInfoBase & {
-  /** The server ID where the monster hunt is valid */
-  sn: string;
-  /** Number of monsters remaining to kill */
-  c: number;
-  /** What monster we have to kill */
-  id: MonsterKey;
-};
-
-// TODO: Get all types (from G?)
-export type CharacterType =
-  | "mage"
-  | "merchant"
-  | "paladin"
-  | "priest"
-  | "ranger"
-  | "rogue"
-  | "warrior";
-
 // TODO: Get all types (from G?)
 export type DamageType = "magical" | "physical";
-
-export type ConditionName =
-  | "authfail"
-  | "blink"
-  | "burned"
-  | "charging"
-  | "charmed"
-  | "dampened"
-  | "darkblessing"
-  | "easterluck"
-  | "eburn"
-  | "eheal"
-  | "energized"
-  | "fingered"
-  | "frozen"
-  | "fullguard"
-  | "hardshell"
-  | "healed"
-  | "holidayspirit"
-  | "invincible"
-  | "licenced"
-  | "marked"
-  | "mcourage"
-  | "mlifesteal"
-  | "mluck"
-  | "monsterhunt"
-  | "massproduction"
-  | "massproductionpp"
-  | "notverified"
-  | "phasedout"
-  | "poisoned"
-  | "poisonous"
-  | "power"
-  | "reflection"
-  | "rspeed"
-  | "shocked"
-  | "slowness"
-  | "stack"
-  | "stoned"
-  | "stunned"
-  | "sugarrush"
-  | "tangled"
-  | "warcry"
-  | "weakness"
-  | "withdrawal"
-  | "xpower"
-  | "xshotted"
-  | "invis";

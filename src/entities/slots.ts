@@ -1,3 +1,4 @@
+// TODO: theese types probably belongs a more common place
 export type SlotType =
   | "amulet"
   | "belt"

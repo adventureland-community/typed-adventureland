@@ -1,5 +1,6 @@
 import { MonsterKey, MonsterName } from "../types/GTypes/monsters";
-import { EntityBase } from "./base";
+import { EntityBase } from "./base-entity";
+import { StatusInfo } from "./status-info";
 
 export interface MonsterEntity extends EntityBase {
   // TODO: what monster abilities are there? and there are probably different ones depending on type of monster.
@@ -56,42 +57,15 @@ export interface MonsterEntity extends EntityBase {
   resistance: number;
   respawn: number;
 
-  // s: {
-  //   burned?: {
-  //     duration: number;
-  //     f: string;
-  //     fid: string;
-  //     intensity: number;
-  //     last?: string;
-  //     ms: number;
-  //   };
-  //   cursed?: {
-  //     duration: number;
-  //     ms: number;
-  //   };
-  //   healed?: {
-  //     ms: number;
-  //   };
-  //   marked?: {
-  //     duration: number;
-  //     ms: number;
-  //   };
-  //   self_healing?: {
-  //     ability: boolean;
-  //     ms: number;
-  //   };
-  //   sleeping?: {
-  //     ms: number;
-  //   };
-  //   stack?: {
-  //     ms: number;
-  //     s: number;
-  //   };
-  //   young?: {
-  //     ms: number;
-  //   };
-  // };
-  // TODO: ItemInstance / Info / Data
+  s: StatusInfo & {
+    self_healing?: {
+      ability: boolean;
+      ms: number;
+    };
+    young?: {
+      ms: number;
+    };
+  };
   slots?: {
     mainhand: {
       level: number;

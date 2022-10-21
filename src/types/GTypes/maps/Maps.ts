@@ -1,9 +1,9 @@
 import type { ChrysalisKey } from "../items/Chrysalis";
+import type { ConditionKey } from "../conditions/Conditions";
 import type { EventKey } from "../events/Events";
 import type { MonsterKey } from "../monsters/Monsters";
 import type { NpcKey } from "../npcs/Npcs";
 import type { NpcRole } from "../npcs/Npcs";
-import type { SkillKey } from "../skills/Skills";
 
 export type MapKey =
   | "abtesting" // A/B Testing
@@ -457,7 +457,7 @@ export interface GMap {
     {
       drop: string;
       polygon: Array<[number, number]>;
-      type: SkillKey;
+      type: ConditionKey;
     }
   ];
 }

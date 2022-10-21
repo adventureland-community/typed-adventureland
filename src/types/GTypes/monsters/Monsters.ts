@@ -1,3 +1,4 @@
+import type { ConditionKey } from "../conditions/Conditions";
 import type { SkillKey } from "../skills/Skills";
 import type { WeaponKey } from "../items/Weapon";
 
@@ -233,13 +234,13 @@ export interface GMonster {
     };
     curse_aura?: {
       aura: boolean;
-      condition: string;
+      condition: ConditionKey;
       cooldown: number;
       radius: number;
     };
     dampening_aura?: {
       aura: boolean;
-      condition: string;
+      condition: ConditionKey;
       cooldown: number;
       radius: number;
     };
@@ -301,7 +302,7 @@ export interface GMonster {
     };
     weakness_aura?: {
       aura: boolean;
-      condition: string;
+      condition: ConditionKey;
       cooldown: number;
       radius: number;
     };
@@ -321,7 +322,11 @@ export interface GMonster {
   attack: number;
   avoidance?: number;
   balance?: string;
-  cbuff?: [[number, string], [number, string], [number, string]];
+  cbuff?: [
+    [number, ConditionKey],
+    [number, ConditionKey],
+    [number, ConditionKey]
+  ];
   charge?: number;
   charge_skin?: string;
   cooperative?: boolean;
@@ -375,7 +380,7 @@ export interface GMonster {
   projectile?: SkillKey;
   rage: number;
   range: number;
-  rbuff?: string;
+  rbuff?: ConditionKey;
   reflection?: number;
   resistance?: number;
   respawn: number;

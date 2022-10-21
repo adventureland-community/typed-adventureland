@@ -1,4 +1,5 @@
 import type { ClassKey } from "../classes/Classes";
+import type { ConditionKey } from "../conditions/Conditions";
 import type { DismantleKey } from "../dismantle/Dismantle";
 import type { ItemKey } from "../items/index";
 import type { ThrowKey } from "../items/Throw";
@@ -115,7 +116,7 @@ export interface GSkill {
   class?: [ClassKey];
   code?: boolean | string;
   complementary?: string;
-  condition?: string;
+  condition?: ConditionKey;
   consume?: ItemKey;
   cooldown?: number;
   cooldown_multiplier?: number;
@@ -130,7 +131,7 @@ export interface GSkill {
   heal?: boolean;
   hostile?: boolean;
   inventory?: [ThrowKey];
-  kill_buff?: string;
+  kill_buff?: ConditionKey;
   level?: number;
   levels?: Array<[number, number]>;
   list?: boolean;

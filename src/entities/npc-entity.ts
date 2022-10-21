@@ -1,5 +1,5 @@
 import { NpcName, NpcRole } from "../types/GTypes/npcs";
-import { EntityBase } from "./base";
+import { EntityBase } from "./base-entity";
 
 export interface NpcEntity extends EntityBase {
   aheight: number;
