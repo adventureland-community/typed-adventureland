@@ -86,7 +86,7 @@ export interface CharacterEntity extends EntityBase {
   resistance: number;
   rip: boolean | number;
   rtexture?: boolean;
-  
+
   /**
    * contains equipped gear, as well as items for trade.
    */
@@ -122,7 +122,7 @@ export interface CharacterEntity extends EntityBase {
     y: number;
     zy: number;
   };
-  stype: string;
+  stype: string; // full
   target?: string | null;
   texture?: {};
   tp?: boolean;
