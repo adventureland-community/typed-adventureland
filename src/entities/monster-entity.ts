@@ -3,6 +3,9 @@ import { EntityBase } from "./base-entity";
 import { StatusInfo } from "./status-info";
 
 export interface MonsterEntity extends EntityBase {
+  /** If set, attacks only do 1 damage */
+  "1hp": number;
+
   // TODO: what monster abilities are there? and there are probably different ones depending on type of monster.
   abilities?: {
     portal?: {
