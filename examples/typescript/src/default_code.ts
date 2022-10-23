@@ -42,8 +42,12 @@ setInterval(function() {
       // if(gItem.){
 
       // }
+      const upgradeAble = "upgrade" in gItem;
 
-      if(gItem.upgrade){
+
+
+      
+      if(upgradeAble && gItem.upgrade){
 
       }
     }
