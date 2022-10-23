@@ -34,3 +34,18 @@ setInterval(function () {
 // Write your own CODE: https://github.com/kaansoral/adventureland
 // NOTE: If the tab isn't focused, browsers slow down the game
 // NOTE: Use the performance_trick() function as a workaround
+
+setInterval(function() {
+  character.items.forEach(item => {
+    if(item){
+      const gItem = G.items[item.name]
+      // if(gItem.){
+
+      // }
+
+      if(gItem.upgrade){
+
+      }
+    }
+  })
+})
