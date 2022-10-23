@@ -187,14 +187,16 @@ export interface EntityBase {
 
   i: number;
   id: string;
-  in: string;
   interactive: boolean;
 
   last_ms: string;
   last_stop?: string;
   last_walking?: number;
   level: number;
-
+  /** The unique id of the instance you are in, else a `MapKey` */
+  in: MapKey | string;
+  
+  /** The map the character currently is on */
   map: MapKey;
 
   move_num?: number;
@@ -255,9 +257,6 @@ export interface EntityBase {
   range: number;
 }
 
-
-
-
 // & {
 //   burned?: {
 //     // (Unconfirmed) the damage that the burn will do per second.
@@ -283,4 +282,3 @@ export interface EntityBase {
 //     gold: number;
 //   };
 // }
-
