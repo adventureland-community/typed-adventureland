@@ -244,6 +244,7 @@ export class Generator {
         index.push("");
 
         // Import all keys and GItem to generate union
+        index.push(`import type { BetterUXWrapper } from '../utils'`)
         index.push(
           ...analysis.map(
             (val) =>
@@ -259,9 +260,11 @@ export class Generator {
         index.push(`;`);
 
         // Generate union type for all category G definitions e.g. GItems
-        index.push(`\nexport type ${gKeyType} =`);
+        index.push(`\nexport type ${gKeyType}Raw =`);
         index.push(...analysis.map((val) => `| G${singular(val.category)}`));
         index.push(`;`);
+
+        index.push(`\nexport type ${gKeyType} = BetterUXWrapper<${gKeyType}Raw>`);
       }
 
       for (const union of this.unionRegistry.unions.values()) {

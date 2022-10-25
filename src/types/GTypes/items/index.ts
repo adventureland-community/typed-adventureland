@@ -51,6 +51,7 @@ export * from "./UpgradeScroll";
 export * from "./Weapon";
 export * from "./XP";
 
+import type { BetterUXWrapper } from "../utils";
 import type { ActivatorKey, GActivator } from "./Activator";
 import type { AmuletKey, GAmulet } from "./Amulet";
 import type { BankKeyKey, GBankKey } from "./BankKey";
@@ -158,7 +159,7 @@ export type ItemKey =
   | WeaponKey
   | XPKey;
 
-export type GItem =
+export type GItemRaw =
   | GActivator
   | GAmulet
   | GBankKey
@@ -211,6 +212,8 @@ export type GItem =
   | GUpgradeScroll
   | GWeapon
   | GXP;
+
+export type GItem = BetterUXWrapper<GItemRaw>;
 
 export type ItemType =
   | "activator"
