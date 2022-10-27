@@ -4,20 +4,25 @@ import {
   ItemInfo,
   TradeItemInfo,
 } from "../items";
+import { ClassKey } from "../types/GTypes/classes";
+import { ItemKey, StandKey } from "../types/GTypes/items";
 import { EntityBase } from "./base-entity";
 import { SlotType, TradeSlotType } from "./slots";
 
 export interface CharacterEntity extends EntityBase {
   afk: string | boolean;
+  /** Age in days */
   age: number;
   aheight: number;
   awidth: number;
   code?: boolean;
+  /** The character name that controls the character, assuming it being run in an iframe. */
   controller?: string;
   cscale: number;
   cskin: string | null;
-  ctype: string;
+  ctype: ClassKey;
   cursor?: string;
+  /** Cosmetics */
   cx: {
     chin?: string;
     face?: string;
@@ -36,6 +41,7 @@ export interface CharacterEntity extends EntityBase {
   direction: number;
 
   external: boolean;
+  /** Secondary, manual focus/target */
   focus?: null | string;
   frequency: number;
 
@@ -52,17 +58,21 @@ export interface CharacterEntity extends EntityBase {
 
   name: string;
   on_rclick?: boolean;
+  /**  Owner ID - Available If a character isn't private, "" otherwise */
   owner: string;
 
+  /** The character name of the party leader */
   party?: string | null;
   pdps: number | null;
   player: boolean;
 
   pzazz: number;
+  /** Progressed actions */
   q: {
     compound?: {
       len: number;
       ms: number;
+      /** inventory position being compounded */
       num: number | string;
       nums: [];
       stale?: boolean;
@@ -71,7 +81,8 @@ export interface CharacterEntity extends EntityBase {
       id: string;
       len: number;
       ms: number;
-      name: string;
+      name: ItemKey; // TODO: should only be exchangeable items here.
+      /** inventory position */
       num: number;
       q: number;
       qs?: string;
@@ -80,6 +91,7 @@ export interface CharacterEntity extends EntityBase {
     upgrade?: {
       len: number;
       ms: number;
+      /** inventory position being upgraded */
       num: number | string;
       stale?: boolean;
     };
@@ -110,7 +122,7 @@ export interface CharacterEntity extends EntityBase {
   };
   speed: number;
   /** If set, the merchant has a stand open */
-  stand?: string | boolean;
+  stand?: StandKey | string | boolean;
   /** If set, the merchant has a stand open */
   standed?: {
     anchor: {
@@ -130,7 +142,10 @@ export interface CharacterEntity extends EntityBase {
     zy: number;
   };
   stype: string; // full
-  /** Set if the player is targeting something */
+  /** 
+   * ID of the monster you are targeting
+   * or the name of the character you are targeting
+   */
   target?: string | null;
   texture?: {};
   tp?: boolean;

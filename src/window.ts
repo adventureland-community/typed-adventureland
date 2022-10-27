@@ -1,3 +1,6 @@
+import { CharacterEntity } from "./entities/character-entity";
+import { MonsterEntity } from "./entities/monster-entity";
+import { NpcEntity } from "./entities/npc-entity";
 import { PositionReal } from "./position";
 import { SkillKey } from "./types/GTypes/skills";
 
@@ -21,7 +24,7 @@ declare global {
     chests: {
       [id: string]: ChestInfo;
     };
-    //   entities: { [id: string]: Entity | CharacterEntity };
+    entities: { [id: string]: CharacterEntity | MonsterEntity | NpcEntity };
     next_skill: { [T in SkillKey]?: Date };
     //   npcs: GMapsNPC[];
     //   party: {

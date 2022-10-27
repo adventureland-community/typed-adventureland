@@ -95,6 +95,8 @@ export type Entity = PositionMovable & {
   vx: number;
   vy: number;
   dead?: boolean | string; // monster only attribute
+  /**  Your vision, it's a 1400X1000 rectangle */
+  vision: [number,number]
 };
 
 // TODO: Get all types (from G?)

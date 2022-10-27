@@ -12,6 +12,7 @@ export interface NpcEntity extends EntityBase {
   };
   awidth: number;
   buttonMode: boolean;
+  /** true for moving npcs */
   citizen?: boolean;
   class?: string;
   color?: string;

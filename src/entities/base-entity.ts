@@ -104,6 +104,7 @@ export interface EntityBase {
         y: number;
       };
       position: {};
+      /** your base skin for example `mwarrior`  */
       skin: string;
       stype: string;
       updates: number;
@@ -192,6 +193,8 @@ export interface EntityBase {
   last_ms: string;
   last_stop?: string;
   last_walking?: number;
+
+  /** After level 12, only hp/max_hp/xp increases */
   level: number;
   /** The unique id of the instance you are in, else a `MapKey` */
   in: MapKey | string;
