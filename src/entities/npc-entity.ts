@@ -1,4 +1,4 @@
-import { NpcName, NpcRole } from "../types/GTypes/npcs";
+import { NpcKey, NpcName, NpcRole } from "../types/GTypes/npcs";
 import { EntityBase } from "./base-entity";
 
 export interface NpcEntity extends EntityBase {
@@ -44,7 +44,8 @@ export interface NpcEntity extends EntityBase {
   mp: number;
   ms_anim?: string;
   name: NpcName;
-  npc: string;
+
+  npc: NpcKey;
   old_items?: [
     string,
     string,
@@ -85,6 +86,7 @@ export interface NpcEntity extends EntityBase {
   range: number;
 
   ref_speed?: number;
+  /** If true, the npc is dead. */
   rip?: boolean;
   role: NpcRole;
   rtexture?: boolean;
@@ -110,6 +112,7 @@ export interface NpcEntity extends EntityBase {
   speed: number;
   stand?: string;
   stype: string;
+  /** Set if the npc is targeting something */
   target?: string;
   texture?: {};
   token?: string;

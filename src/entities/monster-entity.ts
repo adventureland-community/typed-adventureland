@@ -26,12 +26,17 @@ export interface MonsterEntity extends EntityBase {
   cx?: {};
   cxc?: {};
   damage_type: string;
-  dead?: boolean;
+  /** true when the monster is defeated
+   * "dead" can have string values too, such as "map" / "vision"
+   * Indicating the reason why the monster is as good as dead to you
+   */
+  dead?: boolean | string;
   direction: number;
 
   dreturn?: number; // TODO: stats, should be on characters as wel?
-
+  /** A percent chance to avoid physical attacks */
   evasion?: number;
+  /** attacks/second */
   frequency: number;
 
   height: number;
@@ -78,6 +83,7 @@ export interface MonsterEntity extends EntityBase {
   special?: boolean;
   speed: number;
   stype: string;
+  /** Set if the monster is targeting something */
   target?: null | string;
   texture?: {};
   type: "monster";

@@ -195,11 +195,12 @@ export interface EntityBase {
   level: number;
   /** The unique id of the instance you are in, else a `MapKey` */
   in: MapKey | string;
-  
+
   /** The map the character currently is on */
   map: MapKey;
 
   move_num?: number;
+  /** Is the character currently moving? */
   moving: boolean;
   ms_walk?: string;
 

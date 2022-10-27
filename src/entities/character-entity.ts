@@ -28,7 +28,11 @@ export interface CharacterEntity extends EntityBase {
     upper?: string;
   };
   cxc: {};
-  dead?: string;
+  /** 
+   * "dead" can have string values too, such as "map" / "vision"
+   * Indicating the reason why the monster is as good as dead to you
+   */
+  dead?: "invis"| "transport" | "disconnect" | string;
   direction: number;
 
   external: boolean;
@@ -84,6 +88,7 @@ export interface CharacterEntity extends EntityBase {
 
   ref_speed?: number;
   resistance: number;
+  /** If true, the player is dead. */
   rip: boolean | number;
   rtexture?: boolean;
 
@@ -104,7 +109,9 @@ export interface CharacterEntity extends EntityBase {
     // } | null;
   };
   speed: number;
+  /** If set, the merchant has a stand open */
   stand?: string | boolean;
+  /** If set, the merchant has a stand open */
   standed?: {
     anchor: {
       x: number;
@@ -123,6 +130,7 @@ export interface CharacterEntity extends EntityBase {
     zy: number;
   };
   stype: string; // full
+  /** Set if the player is targeting something */
   target?: string | null;
   texture?: {};
   tp?: boolean;

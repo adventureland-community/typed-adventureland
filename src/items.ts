@@ -79,6 +79,9 @@ export type InventoryUpgradeCompoundItemInfo = ItemInfo & {
 export type TradeItemInfo = ItemInfo & {
   /** If true, the entity is buying this item */
   b?: boolean;
+  /** TODO: Verify this property belongs on trade items and how they are different.
+   * Number of minutes remaining for giveaway items */
+  giveaway?: number;
   /** If set, the item is for sale, or purchase */
   rid: string;
   price: number;
