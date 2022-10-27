@@ -1,6 +1,7 @@
 import type { BoosterKey } from "../items/Booster";
 import type { ClassKey } from "../classes/Classes";
 import type { ItemKey } from "../items/index";
+import type { MapKey } from "../maps/Maps";
 import type { OfferingKey } from "../items/Offering";
 import type { QubicsKey } from "../items/Qubics";
 import type { TokenKey } from "../items/Token";
@@ -212,11 +213,6 @@ export interface GNpc {
   interval?: number;
   stopframe?: number;
   places?: {
-    winterland: number;
-    desertland: number;
-    test: number;
-    cyberland: number;
-    main: number;
-    d_e: number;
+    [K in MapKey]: number;
   };
 }

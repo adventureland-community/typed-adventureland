@@ -11,11 +11,6 @@ export type ArrayAnalysisType = {
   elements: Array<FieldAnalysis>;
 };
 
-export type ObjectAnalysisType = {
-  type: "object";
-  fields: FieldsAnalysis;
-};
-
 export type StringAnalysisType = {
   type: "string";
   values: Array<string>;
@@ -24,6 +19,18 @@ export type StringAnalysisType = {
 export type UnionAnalysisType = {
   type: "union";
   union: Union;
+};
+
+export type ObjectAnalysisType = {
+  type: "object";
+  keys: StringAnalysisType;
+  fields: FieldsAnalysis;
+};
+
+export type UnionObjectAnalysisType = {
+  type: "uobject";
+  keys: UnionAnalysisType;
+  values: FieldAnalysis;
 };
 
 export type SimpleAnalysisType = {
@@ -35,7 +42,8 @@ export type AnalysisType =
   | StringAnalysisType
   | UnionAnalysisType
   | ObjectAnalysisType
-  | ArrayAnalysisType;
+  | ArrayAnalysisType
+  | UnionObjectAnalysisType;
 
 export type FieldAnalysis = {
   optional: boolean;
@@ -95,13 +103,17 @@ export function analyseFields<T extends DeepObject<1> | Array<unknown>>(
             elements,
           });
         } else if (type === "object") {
+          const objects = arr
+            .filter((o) => o[seenField] && isObject(o[seenField]))
+            .map((o) => o[seenField] as DeepObject<1>);
+
           fields[seenField].types.push({
             type: "object",
-            fields: analyseFields(
-              arr
-                .filter((o) => o[seenField] && isObject(o[seenField]))
-                .map((o) => o[seenField] as DeepObject<1>)
-            ),
+            keys: {
+              type: "string",
+              values: unique(objects.flatMap((o) => Object.keys(o))),
+            },
+            fields: analyseFields(objects),
           });
         } else if (type === "string") {
           // Store the actual values for extractedTypes
@@ -206,6 +218,8 @@ export function reduceTypes(field: FieldAnalysis) {
 
         reduceTypes(element);
       }
+    } else if (elem.type === "uobject") {
+      reduceTypes(elem.values);
     }
 
     all.push(elem);
@@ -302,7 +316,7 @@ function arrayCleaner(type: ArrayAnalysisType): ArrayAnalysisType | null {
   return null;
 }
 
-function cleanAnalysis(analysis: Array<FullAnalysis>) {
+export function cleanAnalysis(analysis: Array<FullAnalysis>) {
   const makeReplacer =
     (wantedType: AnalysisType["type"], replacer: Replacer) => (type: AnalysisType) => {
       if (type.type === wantedType) {

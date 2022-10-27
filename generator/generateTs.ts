@@ -1,4 +1,4 @@
-import { AnalysisType, FieldsAnalysis, FullAnalysis } from "./analysis";
+import { AnalysisType, FieldsAnalysis, FullAnalysis, UnionObjectAnalysisType } from "./analysis";
 import type { GeneratorConfig } from "./Generator";
 import { relative } from "./helpers/filepath";
 import { singular } from "./helpers/singular";
@@ -33,6 +33,18 @@ export function typeToTs(
     case "object": {
       return makeInterface(type.fields, config, unionRegistry, imports, analysis);
     }
+    case "uobject": {
+      const importPath = relative(
+        { GKey: config.GKey, category: analysis.category },
+        type.keys.union
+      );
+
+      if (importPath.length) {
+        imports.push(`import type { ${type.keys.union.name} } from ${JSON.stringify(importPath)};`);
+      }
+
+      return makeUInterface(type, config, unionRegistry, imports, analysis);
+    }
     case "array": {
       const elems = type.elements.map((e) => {
         const types = e.types.map((type) =>
@@ -58,6 +70,36 @@ export function typeToTs(
     default:
       return type.type;
   }
+}
+
+export function makeUInterface(
+  type: UnionObjectAnalysisType,
+  config: GeneratorConfig,
+  unionRegistry: UnionRegistry,
+  imports: Array<string>,
+  analysis: FullAnalysis
+) {
+  const lines = ["{"];
+
+  let line = `[K in ${type.keys.union.name}]`;
+
+  if (type.values.optional) {
+    line += "?";
+  }
+
+  line += ": ";
+
+  line += type.values.types
+    .map((type) => typeToTs(type, config, unionRegistry, imports, analysis))
+    .join(" | ");
+
+  line += ";";
+
+  lines.push(line);
+
+  lines.push("}");
+
+  return lines.join("\n");
 }
 
 export function makeInterface(

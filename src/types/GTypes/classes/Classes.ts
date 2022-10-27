@@ -1,4 +1,5 @@
 import type { WeaponKey } from "../items/Weapon";
+import type { WeaponType } from "../items/index";
 
 export type ClassKey =
   | "mage"
@@ -118,53 +119,54 @@ export interface GClass {
   courage: number;
   pcourage: number;
   mainhand: {
-    mace?: {
-      speed?: number;
-      frequency?: number;
-    };
-    dagger?: {
-      speed?: number;
-    };
-    fist?: {
-      speed?: number;
-      frequency?: number;
-    };
-    spear?: {
-      speed: number;
-    };
-    short_sword?: {
-      speed?: number;
-      output?: number;
-    };
-    bow?: {
-      speed: number;
-    };
-    dartgun?: {};
-    staff?: {
-      speed: number;
-    };
-    sword?: {
-      speed: number;
-      output?: number;
-      frequency?: number;
-    };
-    pmace?: {
-      speed: number;
-    };
-    crossbow?: {
-      frequency: number;
-      apiercing: number;
-    };
-    stars?: {
-      frequency: number;
-    };
-    wblade?: {
-      speed: number;
-    };
-    wand?: {
-      mp_cost: number;
-      frequency: number;
-    };
+    [K in WeaponType]?:
+      | {
+          speed?: number;
+          frequency?: number;
+        }
+      | {
+          speed?: number;
+        }
+      | {
+          speed?: number;
+          frequency?: number;
+        }
+      | {
+          speed: number;
+        }
+      | {
+          speed?: number;
+          output?: number;
+        }
+      | {
+          speed: number;
+        }
+      | {}
+      | {
+          speed: number;
+        }
+      | {
+          speed: number;
+          output?: number;
+          frequency?: number;
+        }
+      | {
+          speed: number;
+        }
+      | {
+          frequency: number;
+          apiercing: number;
+        }
+      | {
+          frequency: number;
+        }
+      | {
+          speed: number;
+        }
+      | {
+          mp_cost: number;
+          frequency: number;
+        };
   };
   mp_cost: number;
   base_slots: {
