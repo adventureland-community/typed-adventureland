@@ -26,3 +26,17 @@ export function relative(
 
   return relativePath;
 }
+
+export function relativeTo(from: { GKey: string; category: string }, to: string) {
+  const fromPath = filepath(from.GKey, from.category);
+  const toPath = path.resolve(root, to);
+
+  const relativePath = path
+    .relative(fromPath, toPath)
+    .replaceAll("\\", "/")
+    .replace(".ts", "")
+    .replace(/^\.\.\//, "")
+    .replace(/^([^.])/, "./$1");
+
+  return relativePath;
+}

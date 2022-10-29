@@ -119,54 +119,13 @@ export interface GClass {
   courage: number;
   pcourage: number;
   mainhand: {
-    [K in WeaponType]?:
-      | {
-          speed?: number;
-          frequency?: number;
-        }
-      | {
-          speed?: number;
-        }
-      | {
-          speed?: number;
-          frequency?: number;
-        }
-      | {
-          speed: number;
-        }
-      | {
-          speed?: number;
-          output?: number;
-        }
-      | {
-          speed: number;
-        }
-      | {}
-      | {
-          speed: number;
-        }
-      | {
-          speed: number;
-          output?: number;
-          frequency?: number;
-        }
-      | {
-          speed: number;
-        }
-      | {
-          frequency: number;
-          apiercing: number;
-        }
-      | {
-          frequency: number;
-        }
-      | {
-          speed: number;
-        }
-      | {
-          mp_cost: number;
-          frequency: number;
-        };
+    [K in WeaponType]?: {
+      speed?: number;
+      frequency?: number;
+      output?: number;
+      apiercing?: number;
+      mp_cost?: number;
+    };
   };
   mp_cost: number;
   base_slots: {

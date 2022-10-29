@@ -1,6 +1,6 @@
 import { AnalysisType, FieldsAnalysis, FullAnalysis, UnionObjectAnalysisType } from "./analysis";
 import type { GeneratorConfig } from "./Generator";
-import { relative } from "./helpers/filepath";
+import { relative, relativeTo } from "./helpers/filepath";
 import { singular } from "./helpers/singular";
 import { unique } from "./helpers/unique";
 import { Union, UnionRegistry } from "./UnionRegistry";
@@ -28,7 +28,7 @@ export function typeToTs(
   unionRegistry: UnionRegistry,
   imports: Array<string>,
   analysis: FullAnalysis
-) {
+): string {
   switch (type.type) {
     case "object": {
       return makeInterface(type.fields, config, unionRegistry, imports, analysis);
@@ -46,17 +46,31 @@ export function typeToTs(
       return makeUInterface(type, config, unionRegistry, imports, analysis);
     }
     case "array": {
-      const elems = type.elements.map((e) => {
-        const types = e.types.map((type) =>
-          typeToTs(type, config, unionRegistry, imports, analysis)
+      const elems = type.elements
+        .map((e) => {
+          const types = e.types.map((type) =>
+            typeToTs(type, config, unionRegistry, imports, analysis)
+          );
+
+          return types;
+        })
+        .flat();
+
+      const isTuple = type.lengths.length === 1;
+      const isSingleTuple = isTuple && unique(elems).length === 1;
+
+      if (isSingleTuple && elems.length > 4) {
+        // Relative to GTypes/utils.ts
+        const importPath = relativeTo(
+          { GKey: config.GKey, category: analysis.category },
+          "utils.ts"
         );
+        imports.push(`import type { Tuple } from ${JSON.stringify(importPath)};`);
 
-        return types;
-      });
+        return `Tuple<${elems[0]}, ${elems.length}>`;
+      }
 
-      return type.lengths.length === 1
-        ? `[${elems.join(", ")}]`
-        : `Array<${unique(elems.flat()).join(" | ")}>`;
+      return isTuple ? `[${elems.join(", ")}]` : `Array<${unique(elems).join(" | ")}>`;
     }
     case "union": {
       const importPath = relative({ GKey: config.GKey, category: analysis.category }, type.union);
