@@ -1,6 +1,9 @@
 import type { ClassKey } from "../classes/Classes";
+import type { ConditionKey } from "../conditions/Conditions";
 import type { DismantleKey } from "../dismantle/Dismantle";
 import type { ItemKey } from "../items/index";
+import type { PositionKey } from "../positions/Positions";
+import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { ThrowKey } from "../items/Throw";
 import type { WeaponType } from "../items/index";
 
@@ -126,10 +129,10 @@ export interface GSkill {
   share?: SkillKey;
   cooldown_multiplier?: number;
   duration?: number;
-  condition?: string;
+  condition?: ConditionKey;
   ui?: boolean;
   code?: boolean | string;
-  skins?: [string, string, string];
+  skins?: [PositionKey, PositionKey, PositionKey];
   passive?: boolean;
   hostile?: boolean;
   aura?: boolean;
@@ -141,7 +144,7 @@ export interface GSkill {
   variance?: number;
   damage_type?: string;
   multi?: boolean;
-  projectile?: string;
+  projectile?: ProjectileKey;
   heal?: boolean;
   damage_multiplier?: number;
   pierces_immunity?: boolean;
@@ -168,7 +171,7 @@ export interface GSkill {
   set_speed?: number;
   apiercing?: number;
   max?: number;
-  kill_buff?: string;
+  kill_buff?: ConditionKey;
   global?: boolean;
   complementary?: string;
 }

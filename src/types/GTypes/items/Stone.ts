@@ -1,3 +1,5 @@
+import type { PositionKey } from "../positions/Positions";
+
 export type StoneKey =
   | "stoneofgold" // Stone of Riches
   | "stoneofluck" // Stone of Luck
@@ -5,7 +7,7 @@ export type StoneKey =
 
 export interface GStone {
   ignore: boolean;
-  skin_a: string;
+  skin_a: PositionKey;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The skin of the item. */

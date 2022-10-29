@@ -2,8 +2,9 @@ import type { BoosterKey } from "../items/Booster";
 import type { ClassKey } from "../classes/Classes";
 import type { ItemKey } from "../items/index";
 import type { OfferingKey } from "../items/Offering";
+import type { PositionKey } from "../positions/Positions";
 import type { QubicsKey } from "../items/Qubics";
-import type { TokenKey } from "../items/Token";
+import type { TokenKey } from "../tokens/Tokens";
 import type { TomeKey } from "../items/Tome";
 import type { WeaponType } from "../items/index";
 
@@ -201,7 +202,7 @@ export interface GNpc {
   allow?: boolean;
   quest?: string;
   token?: TokenKey;
-  stand?: string;
+  stand?: PositionKey;
   aura?: {
     luck?: number;
     gold?: number;

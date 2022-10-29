@@ -1,7 +1,15 @@
+import type { AnimationKey } from "../animations/Animations";
+import type { ConditionKey } from "../conditions/Conditions";
+import type { DimensionKey } from "../dimensions/Dimensions";
+import type { DropKey } from "../drops/Drops";
 import type { EventKey } from "../events/Events";
+import type { GameKey } from "../games/Games";
+import type { GeometryKey } from "../geometry/Geometry";
+import type { ImagesetKey } from "../imagesets/Imagesets";
 import type { MonsterKey } from "../monsters/Monsters";
 import type { NpcKey } from "../npcs/Npcs";
-import type { SkillKey } from "../skills/Skills";
+import type { PositionKey } from "../positions/Positions";
+import type { TilesetKey } from "../tilesets/Tilesets";
 import type { Tuple } from "../utils";
 
 export type MapKey =
@@ -79,7 +87,7 @@ export interface GMap {
   >;
   doors: Array<
     | Array<number | string>
-    | [number, number, number, number, MapKey, number, number]
+    | [number, number, number, number, GeometryKey, number, number]
   >;
   spawns: Array<Array<number> | [number, number] | [number, number, number]>;
   monsters?: Array<{
@@ -97,19 +105,19 @@ export interface GMap {
     special?: boolean;
     boundaries?:
       | [
-          [MapKey, number, number, number, number],
-          [MapKey, number, number, number, number],
-          [MapKey, number, number, number, number],
+          [GeometryKey, number, number, number, number],
+          [GeometryKey, number, number, number, number],
+          [GeometryKey, number, number, number, number],
           [EventKey, number, number, number, number],
-          [MapKey, number, number, number, number]
+          [GeometryKey, number, number, number, number]
         ]
       | [
-          [MapKey, number, number, number, number],
-          [MapKey, number, number, number, number]
+          [GeometryKey, number, number, number, number],
+          [GeometryKey, number, number, number, number]
         ];
     stype?: string;
   }>;
-  world?: string;
+  world?: TilesetKey;
   traps?: [
     {
       type: string;
@@ -119,25 +127,25 @@ export interface GMap {
   ];
   ignore?: boolean;
   instance?: boolean;
-  on_exit?: [MapKey, number];
+  on_exit?: [GeometryKey, number];
   irregular?: boolean;
   on_death?: [MapKey, number];
   animatables?: {
     the_door?: {
       y: number;
       x: number;
-      position: string;
+      position: PositionKey;
     };
     the_lever?: {
       y: number;
       x: number;
-      position: string;
+      position: PositionKey;
     };
   };
   zones?: [
     {
-      drop: string;
-      type: SkillKey;
+      drop: DropKey;
+      type: ConditionKey;
       polygon: Array<[number, number]>;
     }
   ];
@@ -147,9 +155,9 @@ export interface GMap {
     c_mid?: [number, number];
     poof?: {
       y: number;
-      map: MapKey;
+      map: GeometryKey;
       x: number;
-      in: MapKey;
+      in: GeometryKey;
     };
   };
   pvp?: boolean;
@@ -158,12 +166,12 @@ export interface GMap {
   mount?: boolean;
   machines?: [
     {
-      set: string;
+      set: ImagesetKey;
       y: number;
       x: number;
       frames: Tuple<[number, number, number, number], 6>;
       subframes: Tuple<[number, number, number, number], 11>;
-      type: string;
+      type: GameKey;
     },
     {
       frames: [
@@ -172,8 +180,8 @@ export interface GMap {
         [number, number, number, number]
       ];
       x: number;
-      set: string;
-      type: string;
+      set: ImagesetKey;
+      type: GameKey;
       y: number;
     },
     {
@@ -183,25 +191,79 @@ export interface GMap {
         [number, number, number, number]
       ];
       x: number;
-      set: string;
-      type: string;
+      set: ImagesetKey;
+      type: GameKey;
       y: number;
     }
   ];
   event?: string;
   unlist?: boolean;
   fx?: string;
-  weather?: string;
+  weather?: AnimationKey;
   code?: string;
   small_steps?: boolean;
-  old_monsters?: Tuple<
+  old_monsters?: [
+    {
+      count: number;
+      boundary: [number, number, number, number];
+      type: DimensionKey;
+    },
+    {
+      count: number;
+      boundary: [number, number, number, number];
+      type: DimensionKey;
+    },
     {
       count: number;
       boundary: [number, number, number, number];
       type: MonsterKey;
     },
-    12
-  >;
+    {
+      count: number;
+      boundary: [number, number, number, number];
+      type: MonsterKey;
+    },
+    {
+      count: number;
+      boundary: [number, number, number, number];
+      type: DimensionKey;
+    },
+    {
+      count: number;
+      boundary: [number, number, number, number];
+      type: DimensionKey;
+    },
+    {
+      count: number;
+      boundary: [number, number, number, number];
+      type: DimensionKey;
+    },
+    {
+      count: number;
+      boundary: [number, number, number, number];
+      type: DimensionKey;
+    },
+    {
+      count: number;
+      boundary: [number, number, number, number];
+      type: DimensionKey;
+    },
+    {
+      count: number;
+      boundary: [number, number, number, number];
+      type: DimensionKey;
+    },
+    {
+      count: number;
+      boundary: [number, number, number, number];
+      type: DimensionKey;
+    },
+    {
+      count: number;
+      boundary: [number, number, number, number];
+      type: MonsterKey;
+    }
+  ];
   loss?: boolean;
   day?: boolean;
   safe_pvp?: boolean;

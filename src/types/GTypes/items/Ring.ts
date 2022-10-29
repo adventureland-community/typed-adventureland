@@ -1,3 +1,4 @@
+import type { PositionKey } from "../positions/Positions";
 import type { SetKey } from "../sets/Sets";
 
 export type RingKey =
@@ -31,7 +32,7 @@ export interface GRing {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The skin of the item. */
-  skin: string;
+  skin: PositionKey;
   armor?: number;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound: {
@@ -64,7 +65,7 @@ export interface GRing {
   edge?: number;
   onclick?: string;
   ignore?: boolean;
-  skin_a?: string;
+  skin_a?: PositionKey;
   action?: string;
   gold?: number;
   resistance?: number;

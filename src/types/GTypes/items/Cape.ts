@@ -1,3 +1,4 @@
+import type { PositionKey } from "../positions/Positions";
 import type { SetKey } from "../sets/Sets";
 
 export type CapeKey =
@@ -14,7 +15,7 @@ export type CapeKey =
 export interface GCape {
   stat: number;
   /** The skin of the item. */
-  skin: string;
+  skin: PositionKey;
   resistance?: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];

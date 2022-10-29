@@ -1,3 +1,4 @@
+import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { WeaponKey } from "../items/Weapon";
 import type { WeaponType } from "../items/index";
 
@@ -136,7 +137,7 @@ export interface GClass {
     };
   };
   mp: number;
-  projectile: string;
+  projectile: ProjectileKey;
   output: number;
   main_stat: string;
   looks: [

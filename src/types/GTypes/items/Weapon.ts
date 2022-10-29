@@ -1,4 +1,6 @@
 import type { ClassKey } from "../classes/Classes";
+import type { PositionKey } from "../positions/Positions";
+import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { SetKey } from "../sets/Sets";
 import type { WeaponType } from "./index";
 
@@ -92,7 +94,7 @@ export interface GWeapon {
   };
   damage_type: string;
   /** The skin of the item. */
-  skin: string;
+  skin: PositionKey;
   /** The tier of the item. */
   tier: number;
   reflection?: number;
@@ -134,7 +136,7 @@ export interface GWeapon {
   armor?: number;
   stun?: number;
   delia?: string;
-  projectile?: string;
+  projectile?: ProjectileKey;
   vit?: number;
   speed?: number;
   crit?: number;
@@ -145,11 +147,11 @@ export interface GWeapon {
   set?: SetKey;
   ability?: string;
   dex?: number;
-  skin_c?: string;
+  skin_c?: PositionKey;
   charisma?: number;
   apiercing?: number;
   event?: boolean;
-  skin_r?: string;
+  skin_r?: PositionKey;
   int?: number;
   attr0?: number;
   explosion?: number;
@@ -161,7 +163,7 @@ export interface GWeapon {
   firesistance?: number;
   luck?: number;
   nopo?: string;
-  projectile_test?: string;
+  projectile_test?: ProjectileKey;
   awesomeness?: number;
   mp_cost?: number;
   mp_reduction?: number;

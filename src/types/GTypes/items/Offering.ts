@@ -1,3 +1,5 @@
+import type { PositionKey } from "../positions/Positions";
+
 export type OfferingKey =
   | "offering" // Primordial Essence
   | "offeringp" // Primling
@@ -12,7 +14,7 @@ export interface GOffering {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The skin of the item. */
-  skin: string;
+  skin: PositionKey;
   grade: number;
   explanation: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */

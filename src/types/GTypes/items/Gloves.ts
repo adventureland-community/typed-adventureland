@@ -1,4 +1,5 @@
 import type { ClassKey } from "../classes/Classes";
+import type { PositionKey } from "../positions/Positions";
 import type { SetKey } from "../sets/Sets";
 
 export type GloveKey =
@@ -32,7 +33,7 @@ export interface GGlove {
   grades: [number, number, number, number];
   frequency?: number;
   /** The skin of the item. */
-  skin: string;
+  skin: PositionKey;
   /** The tier of the item. */
   tier: number;
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
