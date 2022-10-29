@@ -3,7 +3,7 @@ import path from "path";
 import { getGData, RawData } from "./getGData";
 import { groupBy } from "./helpers/groupBy";
 import { ensureDirectory } from "./helpers/ensureDirectory";
-import { analyseAll, AnalysisType, FullAnalysis, replaceType } from "./analysis";
+import { analyseAll, AnalysisType, cleanAnalysis, FullAnalysis, replaceType } from "./analysis";
 import prettier from "prettier";
 import { generateTypes, unionString } from "./generateTs";
 import { capitalize } from "./helpers/capitalize";
@@ -91,7 +91,7 @@ export class Generator {
   }
 
   collapseStringsToUnions(analysis: Array<FullAnalysis>) {
-    const replacer = (type: AnalysisType) => {
+    const replacer = (type: AnalysisType): AnalysisType | null => {
       if (type.type === "string") {
         const union = this.unionRegistry.lookup(type.values);
 
@@ -99,7 +99,27 @@ export class Generator {
           return {
             type: "union",
             union: union,
-          } as AnalysisType;
+          };
+        }
+      }
+
+      if (type.type === "object" && type.keys.values.length) {
+        const union = this.unionRegistry.lookup(type.keys.values);
+
+        if (union) {
+          const allFields = Object.values(type.fields);
+
+          return {
+            type: "uobject",
+            keys: {
+              type: "union",
+              union: union,
+            },
+            values: {
+              optional: allFields.some((f) => f.optional),
+              types: allFields.flatMap((f) => f.types),
+            },
+          };
         }
       }
 
@@ -193,6 +213,8 @@ export class Generator {
     // Register all string unions
     this.generateStringUnions(data);
 
+    ensureDirectory(tmpDir);
+
     writeFileSync(
       path.join(tmpDir, "__unions.json"),
       JSON.stringify([...this.unionRegistry.unions.values()], null, 2)
@@ -213,6 +235,7 @@ export class Generator {
 
       // Deduce where unions should be used instead of strings
       this.collapseStringsToUnions(analysis);
+      cleanAnalysis(analysis);
 
       ensureDirectory(path.join(tmpDir, GKey));
 
@@ -244,7 +267,7 @@ export class Generator {
         index.push("");
 
         // Import all keys and GItem to generate union
-        index.push(`import type { BetterUXWrapper } from '../utils'`)
+        index.push(`import type { BetterUXWrapper } from '../utils'`);
         index.push(
           ...analysis.map(
             (val) =>

@@ -333,6 +333,7 @@ export interface GMonster {
   crit?: number;
   cute?: boolean;
   damage_type: string;
+  /** A multiplier for monsters' gold drops */
   difficulty?: number;
   dreturn?: number;
   drop_on_hit?: boolean;
@@ -361,6 +362,7 @@ export interface GMonster {
     chatter: [number, number];
     courage: [number, number];
     exponential: boolean;
+    /** After level 12, only hp/max_hp/xp increases */
     level: {
       armor: number;
       attack: number;
@@ -388,21 +390,24 @@ export interface GMonster {
   roam?: boolean;
   rpiercing?: number;
   s?: {
-    fullguard?: {
-      ms: number;
-    };
-    fullguardx?: {
-      ms: number;
-    };
+    [K in ConditionKey]?:
+      | {
+          ms: number;
+        }
+      | {
+          ms: number;
+        };
   };
   size?: number;
   skin: string;
   slots?: {
     mainhand: {
+      /** After level 12, only hp/max_hp/xp increases */
       level: number;
       name: WeaponKey;
     };
     offhand?: {
+      /** After level 12, only hp/max_hp/xp increases */
       level: number;
       name: WeaponKey;
     };
