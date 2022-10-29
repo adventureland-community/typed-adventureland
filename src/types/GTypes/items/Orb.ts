@@ -1,4 +1,3 @@
-import type { PositionKey } from "../positions/Positions";
 import type { SetKey } from "../sets/Sets";
 
 export type OrbKey =
@@ -28,7 +27,7 @@ export interface GOrb {
   name: string;
   vit?: number;
   /** The skin of the item. */
-  skin: PositionKey;
+  skin: string;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound?: {
     attr0?: number;

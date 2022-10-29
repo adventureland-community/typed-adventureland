@@ -1,5 +1,3 @@
-import type { PositionKey } from "../positions/Positions";
-
 export type ComputerKey =
   | "computer" // Ancient Computer
   | "supercomputer"; // Super Computer
@@ -12,7 +10,7 @@ export interface GComputer {
   explanation: string;
   stand: string;
   /** The skin of the item. */
-  skin: PositionKey;
+  skin: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: "computer";
   special: boolean;

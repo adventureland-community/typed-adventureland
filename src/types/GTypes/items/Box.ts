@@ -1,5 +1,3 @@
-import type { PositionKey } from "../positions/Positions";
-
 export type BoxKey =
   | "apologybox" // Apology Box
   | "armorbox" // Armor Box
@@ -19,7 +17,7 @@ export interface GBox {
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The skin of the item. */
-  skin: PositionKey;
+  skin: string;
   explanation: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: "box";

@@ -1,14 +1,12 @@
 import type { AnimationKey } from "../animations/Animations";
 import type { ConditionKey } from "../conditions/Conditions";
 import type { DimensionKey } from "../dimensions/Dimensions";
-import type { DropKey } from "../drops/Drops";
 import type { EventKey } from "../events/Events";
 import type { GameKey } from "../games/Games";
 import type { GeometryKey } from "../geometry/Geometry";
 import type { ImagesetKey } from "../imagesets/Imagesets";
 import type { MonsterKey } from "../monsters/Monsters";
 import type { NpcKey } from "../npcs/Npcs";
-import type { PositionKey } from "../positions/Positions";
 import type { TilesetKey } from "../tilesets/Tilesets";
 import type { Tuple } from "../utils";
 
@@ -134,17 +132,17 @@ export interface GMap {
     the_door?: {
       y: number;
       x: number;
-      position: PositionKey;
+      position: string;
     };
     the_lever?: {
       y: number;
       x: number;
-      position: PositionKey;
+      position: string;
     };
   };
   zones?: [
     {
-      drop: DropKey;
+      drop: string;
       type: ConditionKey;
       polygon: Array<[number, number]>;
     }

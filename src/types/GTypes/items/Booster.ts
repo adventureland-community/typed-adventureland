@@ -1,5 +1,3 @@
-import type { PositionKey } from "../positions/Positions";
-
 export type BoosterKey =
   | "goldbooster" // Gold Booster
   | "luckbooster" // Luck Booster
@@ -20,7 +18,7 @@ export interface GBooster {
     gold?: number;
     luck?: number;
   };
-  skin_a: PositionKey;
+  skin_a: string;
   /** The skin of the item. */
   skin: BoosterKey;
   /** The full display name of an item. */

@@ -2,7 +2,6 @@ import type { ClassKey } from "../classes/Classes";
 import type { ConditionKey } from "../conditions/Conditions";
 import type { DismantleKey } from "../dismantle/Dismantle";
 import type { ItemKey } from "../items/index";
-import type { PositionKey } from "../positions/Positions";
 import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { ThrowKey } from "../items/Throw";
 import type { WeaponType } from "../items/index";
@@ -132,7 +131,7 @@ export interface GSkill {
   condition?: ConditionKey;
   ui?: boolean;
   code?: boolean | string;
-  skins?: [PositionKey, PositionKey, PositionKey];
+  skins?: [string, string, string];
   passive?: boolean;
   hostile?: boolean;
   aura?: boolean;

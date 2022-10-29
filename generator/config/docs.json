@@ -1,5 +1,5 @@
 {
-  "disabled": false,
+  "disabled": true,
   "GKey": "docs",
   "groupKey": null,
   "nameOverride": {},

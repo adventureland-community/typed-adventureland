@@ -1,5 +1,4 @@
 import type { ClassKey } from "../classes/Classes";
-import type { PositionKey } from "../positions/Positions";
 import type { SetKey } from "../sets/Sets";
 import type { SkillKey } from "../skills/Skills";
 
@@ -46,7 +45,7 @@ export interface GChest {
   a?: number | boolean;
   vit?: number;
   /** The skin of the item. */
-  skin: PositionKey;
+  skin: string;
   dex?: number;
   /** The full display name of an item. */
   name: string;
