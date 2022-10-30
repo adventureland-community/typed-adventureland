@@ -3,6 +3,26 @@ import { EntityBase } from "./base-entity";
 import { StatusInfo } from "./status-info";
 
 export interface MonsterEntity extends EntityBase {
+  // Attributes
+  /** Damage Return. */
+  dreturn?: number; // TODO: stats, should be on characters as wel?
+  hp: number | null;
+  max_hp: number;
+  mp: number;
+  max_mp: number;
+  /** A percent chance to avoid physical attacks. */
+  evasion?: number;
+  pzazz?: number;
+  range: number;
+  reflection?: number;
+  resistance: number;
+  lifesteal?: number;
+  speed: number;
+  /** Attacks/second. */
+  frequency: number;
+  armor: number;
+  attack: number;
+  
   /** If set, attacks only do 1 damage */
   "1hp": number;
 
@@ -25,6 +45,7 @@ export interface MonsterEntity extends EntityBase {
 
   buttonMode: boolean;
 
+  /** Does coop rules apply */
   cooperative?: boolean;
   cskin: string;
   cx?: {};
@@ -37,44 +58,28 @@ export interface MonsterEntity extends EntityBase {
   dead?: boolean | string;
   direction: number;
 
-  dreturn?: number; // TODO: stats, should be on characters as wel?
-  /** A percent chance to avoid physical attacks. */
-  evasion?: number;
-  /** Attacks/second. */
-  frequency: number;
-
   height: number;
   hit?: string;
-  hp: number | null;
 
   immune?: boolean;
 
   j: number;
-  
+
   /** The level of the monster
    * After level 12, only hp/max_hp/xp increases. */
   level: number;
 
-  lifesteal?: number;
-  max_hp: number;
-  max_mp: number;
-
-  mp: number;
   mtype: MonsterKey;
   name: MonsterName;
   orientation?: number;
 
-  pzazz?: number;
   /**
    * Chance to target the player on attack.
    * 0.5 would be 50% chance.
    */
   rage: number;
-  range: number;
 
   ref_speed?: number;
-  reflection?: number;
-  resistance: number;
   /** Average seconds it takes for mob to respawn.
    * A value of 10 would be every 10 seconds.
    */
@@ -96,7 +101,7 @@ export interface MonsterEntity extends EntityBase {
     };
   };
   special?: boolean;
-  speed: number;
+
   stype: string;
   /** Set if the monster is targeting something */
   target?: null | string;

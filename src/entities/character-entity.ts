@@ -10,6 +10,20 @@ import { EntityBase } from "./base-entity";
 import { SlotType, TradeSlotType } from "./slots";
 
 export interface CharacterEntity extends EntityBase {
+  // Attributes
+  /** Attacks/second. */
+  frequency: number;
+  hp: number;
+  max_hp: number;
+  mp: number;
+  max_mp: number;
+  pzazz: number;
+  resistance: number;
+  speed: number;
+  armor: number;
+  attack: number;
+  range: number;
+
   afk: string | boolean;
   /** Age in days */
   age: number;
@@ -33,27 +47,22 @@ export interface CharacterEntity extends EntityBase {
     upper?: string;
   };
   cxc: {};
-  /** 
+  /**
    * "dead" can have string values too, such as "map" / "vision"
    * Indicating the reason why the monster is as good as dead to you
    */
-  dead?: "invis"| "transport" | "disconnect" | string;
+  dead?: "invis" | "transport" | "disconnect" | string;
   direction: number;
 
   external: boolean;
   /** Secondary, manual focus/target */
   focus?: null | string;
-  frequency: number;
 
   heal: number;
   height: number | null;
-  hp: number;
 
   j: number;
 
-  max_hp: number;
-  max_mp: number;
-  mp: number;
   ms_clone?: string;
 
   name: string;
@@ -66,7 +75,7 @@ export interface CharacterEntity extends EntityBase {
   pdps: number | null;
   player: boolean;
 
-  pzazz: number;
+  
   /** Progressed actions */
   q: {
     compound?: {
@@ -96,10 +105,9 @@ export interface CharacterEntity extends EntityBase {
       stale?: boolean;
     };
   };
-  range: number;
 
   ref_speed?: number;
-  resistance: number;
+  
   /** If true, the player is dead. */
   rip: boolean | number;
   rtexture?: boolean;
@@ -120,7 +128,7 @@ export interface CharacterEntity extends EntityBase {
     //   rid: string;
     // } | null;
   };
-  speed: number;
+  
   /** If set, the merchant has a stand open */
   stand?: StandKey | string | boolean;
   /** If set, the merchant has a stand open */
@@ -142,7 +150,7 @@ export interface CharacterEntity extends EntityBase {
     zy: number;
   };
   stype: string; // full
-  /** 
+  /**
    * ID of the monster you are targeting
    * or the name of the character you are targeting
    */

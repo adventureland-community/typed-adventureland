@@ -1,7 +1,17 @@
+import { ClassKey } from "../types/GTypes/classes";
 import { NpcKey, NpcName, NpcRole } from "../types/GTypes/npcs";
 import { EntityBase } from "./base-entity";
 
 export interface NpcEntity extends EntityBase {
+  // Attributes
+  armor: number;
+  attack: number;
+  speed: number;
+  range: number;
+  hp: number;
+  max_hp: number;
+  mp: number;
+
   aheight: number;
   allow?: boolean;
   aspeed?: string;
@@ -14,7 +24,7 @@ export interface NpcEntity extends EntityBase {
   buttonMode: boolean;
   /** true for moving npcs */
   citizen?: boolean;
-  class?: string;
+  class?: ClassKey;
   color?: string;
   cscale: number;
   cskin: string | null;
@@ -34,15 +44,12 @@ export interface NpcEntity extends EntityBase {
   frame?: number;
   height: number | null;
   hitArea?: {};
-  hp: number;
 
   interaction?: Array<string>;
   items?: Array<string | null>;
   j?: number;
 
-  max_hp: number;
   modal?: string;
-  mp: number;
   ms_anim?: string;
   name: NpcName;
 
@@ -84,25 +91,12 @@ export interface NpcEntity extends EntityBase {
   player: boolean;
   q: {};
   quest?: string;
-  range: number;
 
   ref_speed?: number;
   /** If true, the npc is dead. */
   rip?: boolean;
   role: NpcRole;
   rtexture?: boolean;
-  // s: {
-  //   coop?: {
-  //     id: string;
-  //     ms: number;
-  //     p: number;
-  //   };
-  //   newcomersblessing?: {
-  //     f: string;
-  //     ms: number;
-  //     undefined: number;
-  //   };
-  // };
   says?: string | Array<string>;
   seek?: string;
   side_interaction?: {
@@ -110,7 +104,6 @@ export interface NpcEntity extends EntityBase {
     message: string;
     skin: string;
   };
-  speed: number;
   stand?: string;
   stype: string;
   /** Set if the npc is targeting something */

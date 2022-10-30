@@ -253,12 +253,6 @@ export interface EntityBase {
   xp: number;
   y: number;
   y_disp?: null;
-
-  // TODO stats
-  armor: number;
-  attack: number;
-  speed: number;
-  range: number;
 }
 
 // & {
