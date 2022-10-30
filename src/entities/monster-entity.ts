@@ -1,5 +1,7 @@
+import { ItemInfo } from "../items";
 import { GMonsterAbilities, MonsterKey, MonsterName } from "../types/GTypes/monsters";
 import { EntityBase } from "./base-entity";
+import { SlotType } from "./slots";
 import { StatusInfo } from "./status-info";
 
 export interface MonsterEntity extends EntityBase {
@@ -85,11 +87,8 @@ export interface MonsterEntity extends EntityBase {
       ms: number;
     };
   };
-  slots?: {
-    mainhand: {
-      level: number;
-      name: string;
-    };
+  slots: {
+    [T in SlotType]: ItemInfo | null;
   };
   special?: boolean;
 
