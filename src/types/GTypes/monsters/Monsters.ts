@@ -223,98 +223,100 @@ export type MonsterName =
   | "Wild Boar"
   | "Zapper";
 
+export type GMonsterAbilities = {
+  anger?: {
+    cooldown: number;
+    radius: number;
+  };
+  burn?: {
+    attr0: number;
+    unlimited: boolean;
+  };
+  curse_aura?: {
+    aura: boolean;
+    condition: ConditionKey;
+    cooldown: number;
+    radius: number;
+  };
+  dampening_aura?: {
+    aura: boolean;
+    condition: ConditionKey;
+    cooldown: number;
+    radius: number;
+  };
+  deepfreeze?: {
+    cooldown: number;
+    radius: number;
+  };
+  degen?: {
+    amount: number;
+    cooldown: number;
+  };
+  heal?: {
+    cooldown: number;
+    heal: number;
+  };
+  healing?: {
+    cooldown: number;
+    heal: number;
+  };
+  mlight?: {
+    cooldown: number;
+  };
+  mtangle?: {
+    cooldown: number;
+  };
+  multi_burn?: {
+    cooldown: number;
+    damage: number;
+  };
+  multi_freeze?: {
+    cooldown: number;
+    damage: number;
+  };
+  portal?: {
+    cooldown: number;
+  };
+  putrid?: {
+    curse: boolean;
+    poison: boolean;
+  };
+  self_healing?: {
+    cooldown: number;
+    heal: number;
+  };
+  stone?: {
+    cooldown: number;
+  };
+  tangle?: {
+    cooldown: number;
+  };
+  warp_on_hit?: {
+    attr0: number;
+    unlimited: boolean;
+  };
+  warpstomp?: {
+    cooldown: number;
+    radius: number;
+    stun: number;
+  };
+  weakness_aura?: {
+    aura: boolean;
+    condition: ConditionKey;
+    cooldown: number;
+    radius: number;
+  };
+  zap?: {
+    amount: number;
+    cooldown: number;
+    pure: boolean;
+    radius: number;
+  };
+};
+
 export interface GMonster {
   "1hp"?: boolean;
-  abilities?: {
-    anger?: {
-      cooldown: number;
-      radius: number;
-    };
-    burn?: {
-      attr0: number;
-      unlimited: boolean;
-    };
-    curse_aura?: {
-      aura: boolean;
-      condition: ConditionKey;
-      cooldown: number;
-      radius: number;
-    };
-    dampening_aura?: {
-      aura: boolean;
-      condition: ConditionKey;
-      cooldown: number;
-      radius: number;
-    };
-    deepfreeze?: {
-      cooldown: number;
-      radius: number;
-    };
-    degen?: {
-      amount: number;
-      cooldown: number;
-    };
-    heal?: {
-      cooldown: number;
-      heal: number;
-    };
-    healing?: {
-      cooldown: number;
-      heal: number;
-    };
-    mlight?: {
-      cooldown: number;
-    };
-    mtangle?: {
-      cooldown: number;
-    };
-    multi_burn?: {
-      cooldown: number;
-      damage: number;
-    };
-    multi_freeze?: {
-      cooldown: number;
-      damage: number;
-    };
-    portal?: {
-      cooldown: number;
-    };
-    putrid?: {
-      curse: boolean;
-      poison: boolean;
-    };
-    self_healing?: {
-      cooldown: number;
-      heal: number;
-    };
-    stone?: {
-      cooldown: number;
-    };
-    tangle?: {
-      cooldown: number;
-    };
-    warp_on_hit?: {
-      attr0: number;
-      unlimited: boolean;
-    };
-    warpstomp?: {
-      cooldown: number;
-      radius: number;
-      stun: number;
-    };
-    weakness_aura?: {
-      aura: boolean;
-      condition: ConditionKey;
-      cooldown: number;
-      radius: number;
-    };
-    zap?: {
-      amount: number;
-      cooldown: number;
-      pure: boolean;
-      radius: number;
-    };
-  };
+  abilities?: GMonsterAbilities;
   // TODO: stat should be of type stat in the future.
   achievements?: Array<[kills: number, effectType: "stat", stat: string, amount: number]>;
   aggro: number;

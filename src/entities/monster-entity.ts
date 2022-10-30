@@ -1,4 +1,4 @@
-import { MonsterKey, MonsterName } from "../types/GTypes/monsters";
+import { GMonsterAbilities, MonsterKey, MonsterName } from "../types/GTypes/monsters";
 import { EntityBase } from "./base-entity";
 import { StatusInfo } from "./status-info";
 
@@ -22,20 +22,11 @@ export interface MonsterEntity extends EntityBase {
   frequency: number;
   armor: number;
   attack: number;
-  
+
   /** If set, attacks only do 1 damage */
   "1hp": number;
 
-  // TODO: what monster abilities are there? and there are probably different ones depending on type of monster.
-  abilities?: {
-    portal?: {
-      cooldown: number;
-    };
-    self_healing?: {
-      cooldown: number;
-      heal: number;
-    };
-  };
+  abilities?: GMonsterAbilities;
   /**
    * Chance to aggro on sight.
    * 0,5 would be 50% chance.
