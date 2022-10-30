@@ -20,66 +20,35 @@ export type SetKey =
   | "wt3" // Heavy Armor
   | "wt4"; // Darkforge Armor
 
-export interface GSet {
-  "1": {
-    for?: number;
-  };
-  "2": {
-    hp?: number;
-    for?: number;
-    vit?: number;
-    str?: number;
-    dex?: number;
-    int?: number;
-    courage?: number;
-    pcourage?: number;
-    mcourage?: number;
-    luck?: number;
-    mp?: number;
-  };
-  "3"?: {
-    mp?: number;
-    for?: number;
-    lifesteal?: number;
-    dex?: number;
-    speed?: number;
-    int?: number;
-    vit?: number;
-    str?: number;
-    armor?: number;
-    range?: number;
-    resistance?: number;
-    rpiercing?: number;
-  };
-  "4"?: {
-    gold?: number;
-    for?: number;
-    apiercing?: number;
-    rpiercing?: number;
-    luck?: number;
-    speed?: number;
-    evasion?: number;
-  };
-  "5"?: {
-    luck?: number;
-    for?: number;
-    phresistance?: number;
-    resistance?: number;
-    stresistance?: number;
-    crit?: number;
-    courage?: number;
-    pcourage?: number;
-    mcourage?: number;
-    mp?: number;
-    speed?: number;
-    cuteness?: number;
-    vit?: number;
-  };
-  "6"?: {
-    vit?: number;
-  };
-  "7"?: {};
+export type GSet = {
   name: string;
   items: Array<ItemKey>;
   explanation?: string;
-}
+} & {
+  [Key in number]?: {
+    apiercing?: number;
+    armor?: number;
+    courage?: number;
+    crit?: number;
+    cuteness?: number;
+    dex?: number;
+    evasion?: number;
+    for?: number;
+    gold?: number;
+    hp?: number;
+    int?: number;
+    lifesteal?: number;
+    luck?: number;
+    mcourage?: number;
+    mp?: number;
+    pcourage?: number;
+    phresistance?: number;
+    range?: number;
+    resistance?: number;
+    rpiercing?: number;
+    speed?: number;
+    str?: number;
+    stresistance?: number;
+    vit?: number;
+  };
+};

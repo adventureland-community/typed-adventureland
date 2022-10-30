@@ -291,3 +291,15 @@ export type WeaponType =
   | "sword"
   | "wand"
   | "wblade";
+
+export type OffhandType =
+  | "dagger"
+  | "fist"
+  | "mace"
+  | "misc_offhand"
+  | "quiver"
+  | "shield"
+  | "short_sword"
+  | "source"
+  | "stars"
+  | "sword";

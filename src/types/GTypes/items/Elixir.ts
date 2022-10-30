@@ -1,3 +1,4 @@
+import type { ConditionKey } from "../conditions/Conditions";
 import type { SetKey } from "../sets/Sets";
 
 export type ElixirKey =
@@ -68,7 +69,7 @@ export interface GElixir {
   pnresistance?: number;
   resistance?: number;
   crit?: number;
-  withdrawal?: string;
+  withdrawal?: ConditionKey;
   reflection?: number;
   armor?: number;
   rpiercing?: number;

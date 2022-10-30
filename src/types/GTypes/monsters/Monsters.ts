@@ -1,5 +1,7 @@
-import type { SkillKey } from "../skills/Skills";
+import type { ConditionKey } from "../conditions/Conditions";
+import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { WeaponKey } from "../items/Weapon";
+import type { SpriteKey } from "../sprites";
 
 export type MonsterKey =
   | "a1" // Spike
@@ -124,15 +126,13 @@ export type MonsterKey =
   | "zapper0"; // Zapper
 
 export interface GMonster {
-  achievements?: Array<[number, string, string, number]>;
+  // TODO: stat should be of type stat in the future.
+  achievements?: Array<[kills: number, effectType: "stat", stat: string, amount: number]>;
   "1hp"?: boolean;
   name: string;
   rage: number;
   s?: {
-    fullguardx?: {
-      ms: number;
-    };
-    fullguard?: {
+    [K in ConditionKey]?: {
       ms: number;
     };
   };
@@ -172,7 +172,7 @@ export interface GMonster {
       cooldown: number;
       radius: number;
       aura: boolean;
-      condition: string;
+      condition: ConditionKey;
     };
     self_healing?: {
       heal: number;
@@ -197,7 +197,7 @@ export interface GMonster {
       cooldown: number;
       radius: number;
       aura: boolean;
-      condition: string;
+      condition: ConditionKey;
     };
     heal?: {
       heal: number;
@@ -242,7 +242,7 @@ export interface GMonster {
       cooldown: number;
       radius: number;
       aura: boolean;
-      condition: string;
+      condition: ConditionKey;
     };
     putrid?: {
       curse: boolean;
@@ -264,10 +264,10 @@ export interface GMonster {
   difficulty?: number;
   rpiercing?: number;
   lifesteal?: number;
-  cbuff?: [[number, string], [number, string], [number, string]];
+  cbuff?: Array<[number, ConditionKey]>;
   crit?: number;
   poisonous?: boolean;
-  charge_skin?: string;
+  charge_skin?: SpriteKey;
   apiercing?: number;
   dreturn?: number;
   stationary?: boolean;
@@ -295,11 +295,11 @@ export interface GMonster {
     aggression: [number, number];
   };
   size?: number;
-  spawns?: [[number, MonsterKey]];
+  spawns?: Array<[number, MonsterKey]>;
   prefix?: string;
-  rbuff?: string;
+  rbuff?: ConditionKey;
   unlist?: boolean;
-  projectile?: SkillKey;
+  projectile?: ProjectileKey;
   trap?: boolean;
   operator?: boolean;
   respawn_as?: MonsterKey;

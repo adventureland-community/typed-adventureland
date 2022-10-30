@@ -1,10 +1,7 @@
-import type { NpcKey } from "../npcs/Npcs";
+import type { AchievementKey } from "../achievements/Achievements";
+import type { TokenKey } from "../tokens/Tokens";
 
-export type TokenKey =
-  | "friendtoken" // Friend Token
-  | "funtoken" // Fun Token
-  | "monstertoken" // Monster Token
-  | "pvptoken"; // PVP Token
+export type { TokenKey };
 
 export interface GToken {
   /** The full display name of an item. */
@@ -18,5 +15,5 @@ export interface GToken {
   skin: TokenKey;
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: "token";
-  npc?: NpcKey;
+  npc?: AchievementKey;
 }

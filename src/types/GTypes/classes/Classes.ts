@@ -1,123 +1,50 @@
+import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { WeaponKey } from "../items/Weapon";
-import type { WeaponType } from "../items/index";
+import type { OffhandType, WeaponType } from "../items/index";
+import { Tuple } from "../utils";
 
-export type ClassKey =
-  | "mage"
-  | "merchant"
-  | "paladin"
-  | "priest"
-  | "ranger"
-  | "rogue"
-  | "warrior";
+export type ClassKey = "mage" | "merchant" | "paladin" | "priest" | "ranger" | "rogue" | "warrior";
 
 export interface GClass {
-  resistance: number;
-  frequency: number;
-  damage_type: string;
-  mcourage: number;
-  speed: number;
-  doublehand: {
-    pickaxe?: {
-      speed: number;
-    };
-    rod?: {
-      speed: number;
-    };
-    basher?: {
-      speed: number;
-      mp_cost?: number;
-      frequency?: number;
-    };
-    axe?: {
-      speed: number;
-      mp_cost?: number;
-      frequency?: number;
-    };
-    rapier?: {
-      mp_cost?: number;
-      frequency: number;
-      miss?: number;
-    };
-    great_sword?: {
-      mp_cost: number;
-      frequency: number;
-      speed: number;
-    };
-    bow?: {
-      speed: number;
-      frequency: number;
-      miss: number;
-    };
-    scythe?: {
-      mp_cost: number;
-      frequency: number;
-      speed: number;
-    };
-    wand?: {
-      frequency: number;
-    };
-    dagger?: {};
-    fist?: {};
-    short_sword?: {};
-    spear?: {
-      frequency: number;
-      speed: number;
-    };
-    great_staff?: {
-      mp_cost: number;
-      frequency: number;
-      speed: number;
-    };
-  };
-  stats: {
-    dex: number;
-    int: number;
-    vit: number;
-    str: number;
-    for: number;
-  };
   armor: number;
-  range: number;
   attack: number;
-  lstats: {
-    dex: number;
-    int: number;
-    vit: number;
-    str: number;
-    for: number;
-  };
+  bmresistance?: number;
+  brave?: boolean;
+  damage_type: string;
   description: string;
-  offhand: {
-    source?: {};
-    quiver?: {
-      speed?: number;
-    };
-    shield?: {
-      speed: number;
-    };
-    misc_offhand?: {
-      speed?: number;
-      frequency?: number;
-    };
-    sword?: {
-      speed: number;
-    };
-    short_sword?: {
-      speed: number;
-    };
-    mace?: {
-      frequency: number;
-      speed: number;
-    };
-    fist?: {
-      frequency?: number;
-    };
-    dagger?: {};
-    stars?: {};
-  };
+  frequency: number;
+  fzresistance?: number;
   hp: number;
+  mp_cost: number;
+  mp: number;
+  output: number;
+  phresistance?: number;
+  pnresistance?: number;
+  projectile: ProjectileKey;
+  range: number;
+  resistance: number;
+  speed: number;
+  stresistance?: number;
   courage: number;
+  mcourage: number;
   pcourage: number;
+  main_stat: string;
+  side_stat?: string;
+  // TODO: How to handle "great_sword"? No weapon exists with this type yet.
+  doublehand: {
+    [Type in WeaponType | "great_sword"]?: {
+      frequency?: number;
+      miss?: number;
+      mp_cost?: number;
+      speed?: number;
+    };
+  };
+  offhand: {
+    [Type in OffhandType]?: {
+      frequency?: number;
+      speed?: number;
+    };
+  };
   mainhand: {
     [K in WeaponType]?: {
       speed?: number;
@@ -127,7 +54,23 @@ export interface GClass {
       mp_cost?: number;
     };
   };
-  mp_cost: number;
+  /** Base stats the class starts with. */
+  stats: {
+    dex: number;
+    int: number;
+    vit: number;
+    str: number;
+    for: number;
+  };
+  /** Gained stats per level. */
+  lstats: {
+    dex: number;
+    int: number;
+    vit: number;
+    str: number;
+    for: number;
+  };
+  xcx?: Array<string>;
   base_slots: {
     mainhand: {
       name: WeaponKey;
@@ -135,11 +78,7 @@ export interface GClass {
       level: number;
     };
   };
-  mp: number;
-  projectile: string;
-  output: number;
-  main_stat: string;
-  looks: [
+  looks: Tuple<
     [
       string,
       {
@@ -147,40 +86,9 @@ export interface GClass {
         head: string;
         hat?: string;
         chin?: string;
-      }
-    ],
-    [
-      string,
-      {
-        hair?: string;
-        head: string;
         makeup?: string;
       }
     ],
-    [
-      string,
-      {
-        hair?: string;
-        head: string;
-        hat?: string;
-        chin?: string;
-      }
-    ],
-    [
-      string,
-      {
-        hair?: string;
-        head: string;
-        makeup?: string;
-      }
-    ]
-  ];
-  brave?: boolean;
-  xcx?: Array<string>;
-  phresistance?: number;
-  bmresistance?: number;
-  stresistance?: number;
-  side_stat?: string;
-  pnresistance?: number;
-  fzresistance?: number;
+    4
+  >;
 }

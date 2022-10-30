@@ -1,4 +1,5 @@
 import type { ClassKey } from "../classes/Classes";
+import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { SetKey } from "../sets/Sets";
 import type { WeaponType } from "./index";
 
@@ -134,7 +135,7 @@ export interface GWeapon {
   armor?: number;
   stun?: number;
   delia?: string;
-  projectile?: string;
+  projectile?: ProjectileKey;
   vit?: number;
   speed?: number;
   crit?: number;
@@ -161,7 +162,7 @@ export interface GWeapon {
   firesistance?: number;
   luck?: number;
   nopo?: string;
-  projectile_test?: string;
+  projectile_test?: ProjectileKey;
   awesomeness?: number;
   mp_cost?: number;
   mp_reduction?: number;

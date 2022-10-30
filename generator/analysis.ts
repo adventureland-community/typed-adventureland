@@ -442,6 +442,7 @@ export function analyseAll<T extends DeepObject<3>>(data: T, config: GeneratorCo
       });
     } catch (err) {
       console.error("For", category);
+      console.error(err);
     }
   }
 

@@ -1,7 +1,10 @@
-import type { EventKey } from "../events/Events";
+import type { AnimationKey } from "../animations/Animations";
+import type { GameKey } from "../games/Games";
+import type { ImagesetKey } from "../imagesets/Imagesets";
+import type { DungeonKeyKey } from "../items";
 import type { MonsterKey } from "../monsters/Monsters";
 import type { NpcKey } from "../npcs/Npcs";
-import type { SkillKey } from "../skills/Skills";
+import type { TilesetKey } from "../tilesets/Tilesets";
 import type { Tuple } from "../utils";
 
 export type MapKey =
@@ -59,9 +62,11 @@ export type MapKey =
   | "winterland" // Winterland
   | "woffice"; // Wizard's Crib
 
+export type MapZoneKey = "fishing" | "mining";
+
 export interface GMap {
   npcs: Array<{
-    position?: Array<number> | [number, number] | [number, number, number];
+    position?: [x: number, y: number] | [number, number, number];
     id: NpcKey;
     name?: string;
     boundary?: [number, number, number, number];
@@ -75,13 +80,18 @@ export interface GMap {
   drop_norm?: number;
   outside?: boolean;
   quirks?: Array<
-    Array<number | string> | [number, number, number, number, string, string]
+    [number, number, number, number, string, string] | [number, number, number, number, string]
   >;
   doors: Array<
-    | Array<number | string>
+    | [number, number, number, number, MapKey, number]
     | [number, number, number, number, MapKey, number, number]
+    | [number, number, number, number, MapKey, number, number, "key", DungeonKeyKey]
+    | [number, number, number, number, MapKey, number, number, "ulocked", "complicated"]
+    | [number, number, number, number, MapKey, number, number, "protected" | "ulocked"]
   >;
-  spawns: Array<Array<number> | [number, number] | [number, number, number]>;
+  spawns: Array<
+    [x: number, y: number] | [number, number, number] | [number, number, number, number]
+  >;
   monsters?: Array<{
     count: number;
     boundary?: [number, number, number, number];
@@ -95,21 +105,10 @@ export interface GMap {
     position?: [number, number];
     radius?: number;
     special?: boolean;
-    boundaries?:
-      | [
-          [MapKey, number, number, number, number],
-          [MapKey, number, number, number, number],
-          [MapKey, number, number, number, number],
-          [EventKey, number, number, number, number],
-          [MapKey, number, number, number, number]
-        ]
-      | [
-          [MapKey, number, number, number, number],
-          [MapKey, number, number, number, number]
-        ];
+    boundaries?: Array<[MapKey, number, number, number, number]>;
     stype?: string;
   }>;
-  world?: string;
+  world?: TilesetKey;
   traps?: [
     {
       type: string;
@@ -137,7 +136,7 @@ export interface GMap {
   zones?: [
     {
       drop: string;
-      type: SkillKey;
+      type: MapZoneKey;
       polygon: Array<[number, number]>;
     }
   ];
@@ -156,52 +155,26 @@ export interface GMap {
   no_bounds?: boolean;
   safe?: boolean;
   mount?: boolean;
-  machines?: [
-    {
-      set: string;
-      y: number;
-      x: number;
-      frames: Tuple<[number, number, number, number], 6>;
-      subframes: Tuple<[number, number, number, number], 11>;
-      type: string;
-    },
-    {
-      frames: [
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number]
-      ];
-      x: number;
-      set: string;
-      type: string;
-      y: number;
-    },
-    {
-      frames: [
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number]
-      ];
-      x: number;
-      set: string;
-      type: string;
-      y: number;
-    }
-  ];
+  machines?: Array<{
+    set: ImagesetKey;
+    y: number;
+    x: number;
+    frames: Array<[number, number, number, number]>;
+    subframes?: Array<[number, number, number, number]>;
+    type: GameKey;
+  }>;
+  // TODO: Should be EventKey but "pirateship" is not in there.
   event?: string;
   unlist?: boolean;
   fx?: string;
-  weather?: string;
+  weather?: AnimationKey;
   code?: string;
   small_steps?: boolean;
-  old_monsters?: Tuple<
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    12
-  >;
+  old_monsters?: Array<{
+    count: number;
+    boundary: [number, number, number, number];
+    type: MonsterKey;
+  }>;
   loss?: boolean;
   day?: boolean;
   safe_pvp?: boolean;
