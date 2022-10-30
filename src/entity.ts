@@ -1,4 +1,3 @@
-import { StatusInfoBase } from "./entities/base-entity";
 import { SlotType, TradeSlotType } from "./entities/slots";
 import { StatusInfo } from "./entities/status-info";
 import { ItemInfo } from "./items";

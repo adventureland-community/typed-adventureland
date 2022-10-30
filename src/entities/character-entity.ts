@@ -119,14 +119,6 @@ export interface CharacterEntity extends EntityBase {
     [T in SlotType]: ItemInfo | InventoryExchangeItemInfo | InventoryUpgradeCompoundItemInfo | null;
   } & {
     [T in TradeSlotType]?: TradeItemInfo | null;
-    // [T in TradeSlotType]?: ItemInfo & {
-    //   /** Number of minutes remaining for giveaway items */
-    //   giveaway?: number;
-    //   /** List of character IDs that are in the giveaway */
-    //   list: string[];
-    //   price: number;
-    //   rid: string;
-    // } | null;
   };
   
   /** If set, the merchant has a stand open */

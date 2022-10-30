@@ -2,7 +2,6 @@
 import type { ConditionKey } from "../conditions/Conditions";
 import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { WeaponKey } from "../items/Weapon";
-import type { SpriteKey } from "../sprites";
 
 export type MonsterKey =
   | "a1" // Spike

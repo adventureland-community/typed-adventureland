@@ -1,6 +1,4 @@
-import { ConditionKey } from "../types/GTypes/conditions";
 import { MapKey } from "../types/GTypes/maps";
-import { MonsterKey } from "../types/GTypes/monsters";
 import { StatusInfo } from "./status-info";
 
 export interface EntityBase {

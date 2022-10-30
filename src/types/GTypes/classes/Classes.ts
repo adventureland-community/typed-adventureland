@@ -83,7 +83,7 @@ export interface GClass {
   pcourage: number;
   phresistance?: number;
   pnresistance?: number;
-  projectile: string;
+  projectile: ProjectileKey;
   range: number;
   resistance: number;
   side_stat?: string;
