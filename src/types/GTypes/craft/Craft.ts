@@ -74,7 +74,9 @@ export type CraftKey =
   | "xbox";
 
 export interface GCraft {
-  items: Array<Array<number | ItemKey> | [number, ItemKey]>;
+  items: Array<
+    [quantity: number, item: ItemKey] | [quantity: number, item: ItemKey, level: number]
+  >;
   cost: number;
   quest?: NpcKey;
 }

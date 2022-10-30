@@ -116,7 +116,7 @@ export interface GSkill {
   type?: string;
   name: string;
   skin?: string;
-  class?: [ClassKey];
+  class?: Array<ClassKey>;
   level?: number;
   wtype?: Array<WeaponType> | WeaponType;
   persistent?: boolean;

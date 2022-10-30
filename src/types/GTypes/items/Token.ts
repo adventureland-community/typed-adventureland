@@ -1,6 +1,8 @@
 import type { AchievementKey } from "../achievements/Achievements";
 import type { TokenKey } from "../tokens/Tokens";
 
+export type { TokenKey };
+
 export interface GToken {
   /** The full display name of an item. */
   name: string;

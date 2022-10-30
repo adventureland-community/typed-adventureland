@@ -1,7 +1,7 @@
 import type { ConditionKey } from "../conditions/Conditions";
-import type { DimensionKey } from "../dimensions/Dimensions";
 import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { WeaponKey } from "../items/Weapon";
+import type { SpriteKey } from "../sprites";
 
 export type MonsterKey =
   | "a1" // Spike
@@ -126,7 +126,8 @@ export type MonsterKey =
   | "zapper0"; // Zapper
 
 export interface GMonster {
-  achievements?: Array<[number, string, string, number]>;
+  // TODO: stat should be of type stat in the future.
+  achievements?: Array<[kills: number, effectType: "stat", stat: string, amount: number]>;
   "1hp"?: boolean;
   name: string;
   rage: number;
@@ -263,14 +264,10 @@ export interface GMonster {
   difficulty?: number;
   rpiercing?: number;
   lifesteal?: number;
-  cbuff?: [
-    [number, ConditionKey],
-    [number, ConditionKey],
-    [number, ConditionKey]
-  ];
+  cbuff?: Array<[number, ConditionKey]>;
   crit?: number;
   poisonous?: boolean;
-  charge_skin?: DimensionKey;
+  charge_skin?: SpriteKey;
   apiercing?: number;
   dreturn?: number;
   stationary?: boolean;
@@ -298,7 +295,7 @@ export interface GMonster {
     aggression: [number, number];
   };
   size?: number;
-  spawns?: [[number, MonsterKey]];
+  spawns?: Array<[number, MonsterKey]>;
   prefix?: string;
   rbuff?: ConditionKey;
   unlist?: boolean;

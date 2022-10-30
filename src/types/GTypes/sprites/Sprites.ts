@@ -1,5 +1,3 @@
-import type { WeaponKey } from "../items/Weapon";
-
 export type SpriteKey =
   | "adversaries"
   | "angel_wingless"
@@ -183,13 +181,7 @@ export interface GSprite {
   type?: string;
   columns: number;
   file: string;
-  matrix: Array<
-    | Array<string | null>
-    | Array<null | string>
-    | [null, string, null, string, null, WeaponKey, null]
-    | [null, string, null, string, string, null, string, null]
-    | [string, null, string, null, string, null, string, null]
-  >;
+  matrix: Array<Array<string | null>>;
   size?: string;
   skip?: number;
   rskip?: boolean;

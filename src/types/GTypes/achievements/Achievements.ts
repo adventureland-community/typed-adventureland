@@ -1,4 +1,4 @@
-import type { GemKey } from "../items/Gem";
+import type { ItemKey } from "../items";
 import type { TitleKey } from "../titles/Titles";
 
 export type AchievementKey =
@@ -27,5 +27,5 @@ export interface GAchievement {
   title?: TitleKey;
   rr?: number;
   shells?: number;
-  item?: GemKey;
+  item?: ItemKey;
 }

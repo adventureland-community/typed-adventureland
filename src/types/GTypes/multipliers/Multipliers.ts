@@ -6,4 +6,4 @@ export type MultiplierKey =
   | "secondhands_mult"
   | "shells_to_gold";
 
-export interface GMultiplier {}
+export type GMultiplier = number;
