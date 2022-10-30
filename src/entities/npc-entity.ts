@@ -1,4 +1,5 @@
 import { ClassKey } from "../types/GTypes/classes";
+import { ItemKey } from "../types/GTypes/items";
 import { NpcKey, NpcName, NpcRole } from "../types/GTypes/npcs";
 import { EntityBase } from "./base-entity";
 
@@ -46,7 +47,7 @@ export interface NpcEntity extends EntityBase {
   hitArea?: {};
 
   interaction?: Array<string>;
-  items?: Array<string | null>;
+  items?: Array<ItemKey | null>;
   j?: number;
 
   modal?: string;
