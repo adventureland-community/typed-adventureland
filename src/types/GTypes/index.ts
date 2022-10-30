@@ -2,6 +2,7 @@ import type { AchievementKey, GAchievement } from "./achievements";
 import type { AnimationKey, GAnimation } from "./animations";
 import type { ClassKey, GClass } from "./classes";
 import type { ConditionKey, GCondition } from "./conditions";
+import type { GCosmetic } from "./cosmetics";
 import type { CraftKey, GCraft } from "./craft";
 import type { DimensionKey, GDimension } from "./dimensions";
 import type { DismantleKey, GDismantle } from "./dismantle";
@@ -30,6 +31,7 @@ export type GData = {
   animations: { [T in AnimationKey]: GAnimation };
   classes: { [T in ClassKey]: GClass };
   conditions: { [T in ConditionKey]: GCondition };
+  cosmetics: GCosmetic;
   craft: { [T in CraftKey]: GCraft };
   dimensions: { [T in DimensionKey]: GDimension };
   dismantle: { [T in DismantleKey]: GDismantle };
@@ -52,4 +54,5 @@ export type GData = {
   tilesets: { [T in TilesetKey]: GTileset };
   titles: { [T in TitleKey]: GTitle };
   tokens: { [T in TokenKey]: GToken };
+  version: number;
 };
