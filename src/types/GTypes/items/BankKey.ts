@@ -1,4 +1,4 @@
-import type { GeometryKey } from "../geometry/Geometry";
+import type { MapKey } from "../maps/Maps";
 
 export type BankKeyKey =
   | "bkey" // The Bank Key
@@ -15,7 +15,7 @@ export interface GBankKey {
   g: number;
   /** The skin of the item. */
   skin: BankKeyKey;
-  unlocks?: GeometryKey;
+  unlocks?: MapKey;
   explanation: string;
   onclick: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */

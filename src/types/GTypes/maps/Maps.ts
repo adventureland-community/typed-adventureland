@@ -1,10 +1,7 @@
 import type { AnimationKey } from "../animations/Animations";
-import type { ConditionKey } from "../conditions/Conditions";
-import type { DimensionKey } from "../dimensions/Dimensions";
-import type { EventKey } from "../events/Events";
 import type { GameKey } from "../games/Games";
-import type { GeometryKey } from "../geometry/Geometry";
 import type { ImagesetKey } from "../imagesets/Imagesets";
+import type { DungeonKeyKey } from "../items";
 import type { MonsterKey } from "../monsters/Monsters";
 import type { NpcKey } from "../npcs/Npcs";
 import type { TilesetKey } from "../tilesets/Tilesets";
@@ -65,9 +62,11 @@ export type MapKey =
   | "winterland" // Winterland
   | "woffice"; // Wizard's Crib
 
+export type MapZoneKey = "fishing" | "mining";
+
 export interface GMap {
   npcs: Array<{
-    position?: Array<number> | [number, number] | [number, number, number];
+    position?: [x: number, y: number] | [number, number, number];
     id: NpcKey;
     name?: string;
     boundary?: [number, number, number, number];
@@ -81,13 +80,18 @@ export interface GMap {
   drop_norm?: number;
   outside?: boolean;
   quirks?: Array<
-    Array<number | string> | [number, number, number, number, string, string]
+    [number, number, number, number, string, string] | [number, number, number, number, string]
   >;
   doors: Array<
-    | Array<number | string>
-    | [number, number, number, number, GeometryKey, number, number]
+    | [number, number, number, number, MapKey, number]
+    | [number, number, number, number, MapKey, number, number]
+    | [number, number, number, number, MapKey, number, number, "key", DungeonKeyKey]
+    | [number, number, number, number, MapKey, number, number, "ulocked", "complicated"]
+    | [number, number, number, number, MapKey, number, number, "protected" | "ulocked"]
   >;
-  spawns: Array<Array<number> | [number, number] | [number, number, number]>;
+  spawns: Array<
+    [x: number, y: number] | [number, number, number] | [number, number, number, number]
+  >;
   monsters?: Array<{
     count: number;
     boundary?: [number, number, number, number];
@@ -101,18 +105,7 @@ export interface GMap {
     position?: [number, number];
     radius?: number;
     special?: boolean;
-    boundaries?:
-      | [
-          [GeometryKey, number, number, number, number],
-          [GeometryKey, number, number, number, number],
-          [GeometryKey, number, number, number, number],
-          [EventKey, number, number, number, number],
-          [GeometryKey, number, number, number, number]
-        ]
-      | [
-          [GeometryKey, number, number, number, number],
-          [GeometryKey, number, number, number, number]
-        ];
+    boundaries?: Array<[MapKey, number, number, number, number]>;
     stype?: string;
   }>;
   world?: TilesetKey;
@@ -125,7 +118,7 @@ export interface GMap {
   ];
   ignore?: boolean;
   instance?: boolean;
-  on_exit?: [GeometryKey, number];
+  on_exit?: [MapKey, number];
   irregular?: boolean;
   on_death?: [MapKey, number];
   animatables?: {
@@ -143,7 +136,7 @@ export interface GMap {
   zones?: [
     {
       drop: string;
-      type: ConditionKey;
+      type: MapZoneKey;
       polygon: Array<[number, number]>;
     }
   ];
@@ -153,115 +146,35 @@ export interface GMap {
     c_mid?: [number, number];
     poof?: {
       y: number;
-      map: GeometryKey;
+      map: MapKey;
       x: number;
-      in: GeometryKey;
+      in: MapKey;
     };
   };
   pvp?: boolean;
   no_bounds?: boolean;
   safe?: boolean;
   mount?: boolean;
-  machines?: [
-    {
-      set: ImagesetKey;
-      y: number;
-      x: number;
-      frames: Tuple<[number, number, number, number], 6>;
-      subframes: Tuple<[number, number, number, number], 11>;
-      type: GameKey;
-    },
-    {
-      frames: [
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number]
-      ];
-      x: number;
-      set: ImagesetKey;
-      type: GameKey;
-      y: number;
-    },
-    {
-      frames: [
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number]
-      ];
-      x: number;
-      set: ImagesetKey;
-      type: GameKey;
-      y: number;
-    }
-  ];
+  machines?: Array<{
+    set: ImagesetKey;
+    y: number;
+    x: number;
+    frames: Array<[number, number, number, number]>;
+    subframes?: Array<[number, number, number, number]>;
+    type: GameKey;
+  }>;
+  // TODO: Should be EventKey but "pirateship" is not in there.
   event?: string;
   unlist?: boolean;
   fx?: string;
   weather?: AnimationKey;
   code?: string;
   small_steps?: boolean;
-  old_monsters?: [
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: DimensionKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: DimensionKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: DimensionKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: DimensionKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: DimensionKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: DimensionKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: DimensionKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: DimensionKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: DimensionKey;
-    },
-    {
-      count: number;
-      boundary: [number, number, number, number];
-      type: MonsterKey;
-    }
-  ];
+  old_monsters?: Array<{
+    count: number;
+    boundary: [number, number, number, number];
+    type: MonsterKey;
+  }>;
   loss?: boolean;
   day?: boolean;
   safe_pvp?: boolean;
