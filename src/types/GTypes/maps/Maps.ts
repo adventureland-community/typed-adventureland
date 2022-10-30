@@ -1,10 +1,11 @@
-import type { ChrysalisKey } from "../items/Chrysalis";
-import type { ConditionKey } from "../conditions/Conditions";
-import type { EventKey } from "../events/Events";
+import type { GameKey } from "../games/Games";
+import type { ImagesetKey } from "../imagesets/Imagesets";
+import type { DungeonKeyKey } from "../items";
 import type { MonsterKey } from "../monsters/Monsters";
 import type { NpcKey } from "../npcs/Npcs";
-import type { NpcRole } from "../npcs/Npcs";
+import type { TilesetKey } from "../tilesets/Tilesets";
 import type { Tuple } from "../utils";
+import { EventKey } from "../events";
 
 export type MapKey =
   | "abtesting" // A/B Testing
@@ -61,6 +62,8 @@ export type MapKey =
   | "winterland" // Winterland
   | "woffice"; // Wizard's Crib
 
+export type MapZoneKey = "fishing" | "mining";
+
 export interface GMap {
   animatables?: {
     the_door?: {
@@ -78,11 +81,15 @@ export interface GMap {
   code?: string;
   day?: boolean;
   doors: Array<
-    | Array<number | string>
+    | [number, number, number, number, MapKey, number]
     | [number, number, number, number, MapKey, number, number]
+    | [number, number, number, number, MapKey, number, number, "key", DungeonKeyKey]
+    | [number, number, number, number, MapKey, number, number, "ulocked", "complicated"]
+    | [number, number, number, number, MapKey, number, number, "protected" | "ulocked"]
   >;
   drop_norm?: number;
-  event?: string;
+  // TODO: Should be EventKey but "pirateship" is not in there.
+  event?: EventKey | "pirateship";
   freeze_multiplier?: number;
   fx?: string;
   ignore?: boolean;
@@ -91,51 +98,16 @@ export interface GMap {
   key: string;
   loss?: boolean;
   lux?: number;
-  machines?: [
-    {
-      set: string;
-      y: number;
-      x: number;
-      frames: Tuple<[number, number, number, number], 6>;
-      subframes: Tuple<[number, number, number, number], 11>;
-      type: string;
-    },
-    {
-      frames: [
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number]
-      ];
-      x: number;
-      set: string;
-      type: string;
-      y: number;
-    },
-    {
-      frames: [
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number]
-      ];
-      x: number;
-      set: string;
-      type: string;
-      y: number;
-    }
-  ];
+  machines?: Array<{
+    set: ImagesetKey;
+    y: number;
+    x: number;
+    frames: Array<[number, number, number, number]>;
+    subframes?: Array<[number, number, number, number]>;
+    type: GameKey;
+  }>;
   monsters?: Array<{
-    boundaries?:
-      | [
-          [MapKey, number, number, number, number],
-          [MapKey, number, number, number, number],
-          [MapKey, number, number, number, number],
-          [EventKey, number, number, number, number],
-          [MapKey, number, number, number, number]
-        ]
-      | [
-          [MapKey, number, number, number, number],
-          [MapKey, number, number, number, number]
-        ];
+    boundaries?: Array<[MapKey, number, number, number, number]>;
     boundary?: [number, number, number, number];
     count: number;
     gatekeeper?: boolean;
@@ -154,7 +126,7 @@ export interface GMap {
   name: string;
   no_bounds?: boolean;
   npcs: Array<{
-    position?: Array<number> | [number, number] | [number, number, number];
+    position?: [x: number, y: number] | [number, number, number];
     id: NpcKey;
     name?: string;
     boundary?: [number, number, number, number];
@@ -173,7 +145,7 @@ export interface GMap {
   outside?: boolean;
   pvp?: boolean;
   quirks?: Array<
-    Array<number | string> | [number, number, number, number, string, string]
+    [number, number, number, number, string, string] | [number, number, number, number, string]
   >;
   ref?: {
     c_mid?: [number, number];
@@ -189,7 +161,9 @@ export interface GMap {
   safe?: boolean;
   safe_pvp?: boolean;
   small_steps?: boolean;
-  spawns: Array<Array<number> | [number, number] | [number, number, number]>;
+  spawns: Array<
+    [x: number, y: number] | [number, number, number] | [number, number, number, number]
+  >;
   traps?: [
     {
       polygon?: Tuple<[number, number], 60>;
@@ -199,12 +173,12 @@ export interface GMap {
   ];
   unlist?: boolean;
   weather?: string;
-  world?: string;
+  world?: TilesetKey;
   zones?: [
     {
       drop: string;
       polygon: Array<[number, number]>;
-      type: ConditionKey;
+      type: MapZoneKey;
     }
   ];
 }

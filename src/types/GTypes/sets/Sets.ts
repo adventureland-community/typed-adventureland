@@ -20,66 +20,35 @@ export type SetKey =
   | "wt3" // Heavy Armor
   | "wt4"; // Darkforge Armor
 
-export interface GSet {
-  "1": {
-    for?: number;
-  };
-  "2": {
-    courage?: number;
-    dex?: number;
-    for?: number;
-    hp?: number;
-    int?: number;
-    luck?: number;
-    mcourage?: number;
-    mp?: number;
-    pcourage?: number;
-    str?: number;
-    vit?: number;
-  };
-  "3"?: {
-    armor?: number;
-    dex?: number;
-    for?: number;
-    int?: number;
-    lifesteal?: number;
-    mp?: number;
-    range?: number;
-    resistance?: number;
-    rpiercing?: number;
-    speed?: number;
-    str?: number;
-    vit?: number;
-  };
-  "4"?: {
+export type GSet = {
+  explanation?: string;
+  items: Array<ItemKey>;
+  name: string;
+} & {
+  [Key in number]?: {
     apiercing?: number;
-    evasion?: number;
-    for?: number;
-    gold?: number;
-    luck?: number;
-    rpiercing?: number;
-    speed?: number;
-  };
-  "5"?: {
+    armor?: number;
     courage?: number;
     crit?: number;
     cuteness?: number;
+    dex?: number;
+    evasion?: number;
     for?: number;
+    gold?: number;
+    hp?: number;
+    int?: number;
+    lifesteal?: number;
     luck?: number;
     mcourage?: number;
     mp?: number;
     pcourage?: number;
     phresistance?: number;
+    range?: number;
     resistance?: number;
+    rpiercing?: number;
     speed?: number;
+    str?: number;
     stresistance?: number;
     vit?: number;
   };
-  "6"?: {
-    vit?: number;
-  };
-  "7"?: {};
-  explanation?: string;
-  items: Array<ItemKey>;
-  name: string;
-}
+};

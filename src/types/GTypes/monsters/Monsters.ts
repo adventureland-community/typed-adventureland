@@ -1,6 +1,8 @@
+
 import type { ConditionKey } from "../conditions/Conditions";
-import type { SkillKey } from "../skills/Skills";
+import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { WeaponKey } from "../items/Weapon";
+import type { SpriteKey } from "../sprites";
 
 export type MonsterKey =
   | "a1" // Spike
@@ -313,7 +315,8 @@ export interface GMonster {
       radius: number;
     };
   };
-  achievements?: Array<[number, string, string, number]>;
+  // TODO: stat should be of type stat in the future.
+  achievements?: Array<[kills: number, effectType: "stat", stat: string, amount: number]>;
   aggro: number;
   announce?: string | boolean;
   apiercing?: number;
@@ -322,11 +325,7 @@ export interface GMonster {
   attack: number;
   avoidance?: number;
   balance?: string;
-  cbuff?: [
-    [number, ConditionKey],
-    [number, ConditionKey],
-    [number, ConditionKey]
-  ];
+  cbuff?: Array<[number, ConditionKey]>;
   charge?: number;
   charge_skin?: string;
   cooperative?: boolean;
@@ -362,7 +361,7 @@ export interface GMonster {
     chatter: [number, number];
     courage: [number, number];
     exponential: boolean;
-    /** After level 12, only hp/max_hp/xp increases */
+  
     level: {
       armor: number;
       attack: number;
@@ -379,7 +378,7 @@ export interface GMonster {
   phresistance?: number;
   poisonous?: boolean;
   prefix?: string;
-  projectile?: SkillKey;
+  projectile?: ProjectileKey;
   rage: number;
   range: number;
   rbuff?: ConditionKey;
@@ -390,24 +389,20 @@ export interface GMonster {
   roam?: boolean;
   rpiercing?: number;
   s?: {
-    [K in ConditionKey]?:
-      | {
-          ms: number;
-        }
-      | {
-          ms: number;
-        };
+    [K in ConditionKey]?: {
+      ms: number;
+    };
   };
   size?: number;
   skin: string;
   slots?: {
     mainhand: {
-      /** After level 12, only hp/max_hp/xp increases */
+    
       level: number;
       name: WeaponKey;
     };
     offhand?: {
-      /** After level 12, only hp/max_hp/xp increases */
+    
       level: number;
       name: WeaponKey;
     };

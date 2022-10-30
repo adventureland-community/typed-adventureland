@@ -1,10 +1,6 @@
-import type { BoosterKey } from "../items/Booster";
 import type { ClassKey } from "../classes/Classes";
 import type { ItemKey } from "../items/index";
-import type { OfferingKey } from "../items/Offering";
-import type { QubicsKey } from "../items/Qubics";
-import type { TokenKey } from "../items/Token";
-import type { TomeKey } from "../items/Tome";
+import type { TokenKey } from "../tokens/Tokens";
 import type { WeaponType } from "../items/index";
 
 export type NpcKey =
@@ -323,22 +319,7 @@ export interface GNpc {
   modal?: string;
   moving?: boolean;
   name?: NpcName;
-  old_items?: [
-    BoosterKey,
-    BoosterKey,
-    QubicsKey,
-    null,
-    null,
-    null,
-    BoosterKey,
-    null,
-    null,
-    TomeKey,
-    OfferingKey,
-    null,
-    null,
-    null
-  ];
+  old_items?: Array<ItemKey | null>;
   old_role?: NpcRole;
   old_side_interaction?: {
     auto: boolean;

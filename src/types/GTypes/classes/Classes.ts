@@ -1,5 +1,7 @@
+import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { WeaponKey } from "../items/Weapon";
-import type { WeaponType } from "../items/index";
+import type { OffhandType, WeaponType } from "../items/index";
+import { Tuple } from "../utils";
 
 export type ClassKey =
   | "mage"
@@ -25,98 +27,32 @@ export interface GClass {
   courage: number;
   damage_type: string;
   description: string;
+  // TODO: How to handle "great_sword"? No weapon exists with this type yet.
   doublehand: {
-    axe?: {
+    [Type in WeaponType | "great_sword"]?: {
       frequency?: number;
-      mp_cost?: number;
-      speed: number;
-    };
-    basher?: {
-      frequency?: number;
-      mp_cost?: number;
-      speed: number;
-    };
-    bow?: {
-      frequency: number;
-      miss: number;
-      speed: number;
-    };
-    dagger?: {};
-    fist?: {};
-    great_staff?: {
-      frequency: number;
-      mp_cost: number;
-      speed: number;
-    };
-    great_sword?: {
-      frequency: number;
-      mp_cost: number;
-      speed: number;
-    };
-    pickaxe?: {
-      speed: number;
-    };
-    rapier?: {
-      frequency: number;
       miss?: number;
       mp_cost?: number;
-    };
-    rod?: {
-      speed: number;
-    };
-    scythe?: {
-      frequency: number;
-      mp_cost: number;
-      speed: number;
-    };
-    short_sword?: {};
-    spear?: {
-      frequency: number;
-      speed: number;
-    };
-    wand?: {
-      frequency: number;
+      speed?: number;
     };
   };
   frequency: number;
   fzresistance?: number;
   hp: number;
-  looks: [
+  looks: Tuple<
     [
       string,
       {
-        chin?: string;
         hair?: string;
+        head: string;
         hat?: string;
-        head: string;
-      }
-    ],
-    [
-      string,
-      {
-        hair?: string;
-        head: string;
+        chin?: string;
         makeup?: string;
       }
     ],
-    [
-      string,
-      {
-        chin?: string;
-        hair?: string;
-        hat?: string;
-        head: string;
-      }
-    ],
-    [
-      string,
-      {
-        hair?: string;
-        head: string;
-        makeup?: string;
-      }
-    ]
-  ];
+    4
+  >;
+  /** Gained stats per level. */
   lstats: {
     dex: number;
     for: number;
@@ -138,31 +74,9 @@ export interface GClass {
   mp: number;
   mp_cost: number;
   offhand: {
-    dagger?: {};
-    fist?: {
-      frequency?: number;
-    };
-    mace?: {
-      frequency: number;
-      speed: number;
-    };
-    misc_offhand?: {
+    [Type in OffhandType]?: {
       frequency?: number;
       speed?: number;
-    };
-    quiver?: {
-      speed?: number;
-    };
-    shield?: {
-      speed: number;
-    };
-    short_sword?: {
-      speed: number;
-    };
-    source?: {};
-    stars?: {};
-    sword?: {
-      speed: number;
     };
   };
   output: number;
@@ -174,6 +88,7 @@ export interface GClass {
   resistance: number;
   side_stat?: string;
   speed: number;
+  /** Base stats the class starts with. */
   stats: {
     dex: number;
     for: number;

@@ -1,10 +1,6 @@
-import type { NpcKey } from "../npcs/Npcs";
-
-export type TokenKey =
-  | "friendtoken" // Friend Token
-  | "funtoken" // Fun Token
-  | "monstertoken" // Monster Token
-  | "pvptoken"; // PVP Token
+import type { AchievementKey } from "../achievements/Achievements";
+import type { TokenKey } from "../tokens/Tokens";
+export type { TokenKey };
 
 export interface GToken {
   explanation: string;
@@ -12,7 +8,7 @@ export interface GToken {
   g: number;
   /** The full display name of an item. */
   name: string;
-  npc?: NpcKey;
+  npc?: AchievementKey;
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: number;
   /** The skin of the item. */

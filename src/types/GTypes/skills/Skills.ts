@@ -2,6 +2,7 @@ import type { ClassKey } from "../classes/Classes";
 import type { ConditionKey } from "../conditions/Conditions";
 import type { DismantleKey } from "../dismantle/Dismantle";
 import type { ItemKey } from "../items/index";
+import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { ThrowKey } from "../items/Throw";
 import type { WeaponType } from "../items/index";
 
@@ -113,7 +114,7 @@ export interface GSkill {
   action?: string;
   apiercing?: number;
   aura?: boolean;
-  class?: [ClassKey];
+  class?: ClassKey[];
   code?: boolean | string;
   complementary?: string;
   condition?: ConditionKey;
@@ -150,7 +151,7 @@ export interface GSkill {
   pierces_immunity?: boolean;
   positive?: [DismantleKey];
   procs?: boolean;
-  projectile?: string;
+  projectile?: ProjectileKey;
   range?: number;
   range_bonus?: number;
   range_multiplier?: number;

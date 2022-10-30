@@ -1,4 +1,5 @@
 import type { ClassKey } from "../classes/Classes";
+import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { SetKey } from "../sets/Sets";
 import type { WeaponType } from "./index";
 
@@ -125,8 +126,8 @@ export interface GWeapon {
   /** The full display name of an item. */
   name: string;
   nopo?: string;
-  projectile?: string;
-  projectile_test?: string;
+  projectile?: ProjectileKey;
+  projectile_test?: ProjectileKey;
   range: number;
   reflection?: number;
   resistance?: number;

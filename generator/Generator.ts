@@ -10,7 +10,7 @@ import { capitalize } from "./helpers/capitalize";
 import { singular } from "./helpers/singular";
 import { UnionRegistry } from "./UnionRegistry";
 import { unique } from "./helpers/unique";
-import { filedir, filepath } from "./helpers/filepath";
+import { filedir, filepath, root } from "./helpers/filepath";
 
 const prettierOptions = { parser: "typescript" };
 
@@ -241,6 +241,7 @@ export class Generator {
       cleanAnalysis(analysis);
 
       ensureDirectory(path.join(tmpDir, GKey));
+      ensureDirectory(path.resolve(root, GKey));
 
       writeFileSync(path.join(tmpDir, GKey, "grouped.json"), JSON.stringify(grouped, null, 2));
 
