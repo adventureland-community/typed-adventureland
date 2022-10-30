@@ -254,29 +254,3 @@ export interface EntityBase {
   y: number;
   y_disp?: null;
 }
-
-// & {
-//   burned?: {
-//     // (Unconfirmed) the damage that the burn will do per second.
-//     intensity: number;
-//     // The character ID that caused the burn
-//     f: string;
-//   };
-//   coop?: {
-//     id: string;
-//     p: number;
-//   };
-//   mluck?: {
-//     /** The ID of the merchant who cast mluck */
-//     f: string;
-//     /** A flag to show if the mluck was cast by the user's merchant. If false, it can be mlucked by any merchant. */
-//     strong: boolean;
-//   };
-//   monsterhunt?: MonsterHuntStatusInfo;
-//   citizen0aura?: {
-//     luck: number;
-//   };
-//   citizen4aura?: {
-//     gold: number;
-//   };
-// }

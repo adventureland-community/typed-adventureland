@@ -24,8 +24,10 @@ export type StatusInfo = {
   };
   burned?: {
     duration: number;
+    /** The character ID that caused the burn */
     f: string;
     fid: string;
+    /** (Unconfirmed) the damage that the burn will do per second. */
     intensity: number;
     last?: string;
     ms: number;
