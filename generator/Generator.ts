@@ -107,19 +107,22 @@ export class Generator {
         const union = this.unionRegistry.lookup(type.keys.values);
 
         if (union) {
+          const includesAll = union.values.every((v) => type.keys.values.includes(v));
           const allFields = Object.values(type.fields);
 
-          return {
-            type: "uobject",
-            keys: {
-              type: "union",
-              union: union,
-            },
-            values: {
-              optional: allFields.some((f) => f.optional),
-              types: allFields.flatMap((f) => f.types),
-            },
-          };
+          if (includesAll || allFields.some((f) => f.optional)) {
+            return {
+              type: "uobject",
+              keys: {
+                type: "union",
+                union: union,
+              },
+              values: {
+                optional: includesAll ? allFields.some((f) => f.optional) : true,
+                types: allFields.flatMap((f) => f.types),
+              },
+            };
+          }
         }
       }
 

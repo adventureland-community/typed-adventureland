@@ -1,7 +1,7 @@
 import { DeepObject } from "./helpers/DeepObject";
 import { capitalize } from "./helpers/capitalize";
 import { isArray, isObject } from "./helpers/typeCheck";
-import { unique } from "./helpers/unique";
+import { unique, uniqueBy } from "./helpers/unique";
 import type { GeneratorConfig } from "./Generator";
 import { Union } from "./UnionRegistry";
 
@@ -51,6 +51,37 @@ export type FieldAnalysis = {
 };
 
 export type FieldsAnalysis = Record<string, FieldAnalysis>;
+
+export function typeSignature(type: AnalysisType) {
+  switch (type.type) {
+    case "boolean":
+    case "number":
+    case "null": {
+      return type.type;
+    }
+    case "string": {
+      return `string(${type.values.join("|:|")})`;
+    }
+    case "union": {
+      return `union_${type.union.name}`;
+    }
+    case "array": {
+      return `array[${type.lengths.join(",")}](${type.elements
+        .flatMap((e) => e.types.map(typeSignature))
+        .join("|:|")})`;
+    }
+    case "object": {
+      return `object(${Object.entries(type.fields)
+        .map(([key, val]) => `{${key}:${val.types.map(typeSignature).join("|")}}`)
+        .join("|:|")})`;
+    }
+    case "uobject": {
+      return `uobject(${typeSignature(type.keys)}:${type.values.types
+        .map(typeSignature)
+        .join("|")})`;
+    }
+  }
+}
 
 /**
  * Tries to understand the fields of all objects passed in `arr`.
@@ -189,6 +220,8 @@ export function replaceType(field: FieldAnalysis, replacer: Replacer) {
 }
 
 export function reduceTypes(field: FieldAnalysis) {
+  field.types = uniqueBy(field.types, typeSignature);
+
   field.types = field.types.reduce<Array<AnalysisType>>((all, elem) => {
     if (
       elem.type === "string" ||
@@ -207,16 +240,69 @@ export function reduceTypes(field: FieldAnalysis) {
         return all;
       }
     } else if (elem.type === "array") {
-      for (let j = 0; j < elem.elements.length; j++) {
-        const element = elem.elements[j];
+      const signature = typeSignature(elem);
+      const found = all.find((v) => typeSignature(v) === signature) as
+        | undefined
+        | ArrayAnalysisType;
 
-        reduceTypes(element);
+      if (found) {
+        // console.log(typeSignature(found));
+        // process.exit();
+        // found.keys.values = unique([...found.keys.values, ...elem.keys.values]);
+        // for (let key in elem.fields) {
+        //   if (key in found.fields) {
+        //     found.fields[key].optional ||= elem.fields[key].optional;
+        //     found.fields[key].types.push(...elem.fields[key].types);
+        //   } else {
+        //     found.fields[key] = elem.fields[key];
+        //     found.fields[key].optional = true;
+        //   }
+        // }
+        // for (let key in found.fields) {
+        //   if (!(key in elem.fields)) {
+        //     found.fields[key].optional = true;
+        //   }
+        //   reduceTypes(found.fields[key]);
+        // }
+        // return all;
+      } else {
+        for (let j = 0; j < elem.elements.length; j++) {
+          const element = elem.elements[j];
+
+          reduceTypes(element);
+        }
       }
     } else if (elem.type === "object") {
-      for (let key in elem.fields) {
-        const element = elem.fields[key];
+      const found = all.find((v) => v.type === "object") as undefined | ObjectAnalysisType;
 
-        reduceTypes(element);
+      if (found) {
+        found.keys.values = unique([...found.keys.values, ...elem.keys.values]);
+
+        for (let key in elem.fields) {
+          if (key in found.fields) {
+            found.fields[key].optional ||= elem.fields[key].optional;
+            found.fields[key].types.push(...elem.fields[key].types);
+          } else {
+            found.fields[key] = elem.fields[key];
+            found.fields[key].optional = true;
+          }
+        }
+
+        for (let key in found.fields) {
+          if (!(key in elem.fields)) {
+            found.fields[key].optional = true;
+          }
+
+          reduceTypes(found.fields[key]);
+        }
+
+        return all;
+      } else {
+        for (let key in elem.fields) {
+          const element = elem.fields[key];
+
+          reduceTypes(element);
+        }
       }
     } else if (elem.type === "uobject") {
       reduceTypes(elem.values);

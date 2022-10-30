@@ -126,54 +126,13 @@ export interface GClass {
   };
   main_stat: string;
   mainhand: {
-    [K in WeaponType]?:
-      | {
-          frequency?: number;
-          speed?: number;
-        }
-      | {
-          speed?: number;
-        }
-      | {
-          frequency?: number;
-          speed?: number;
-        }
-      | {
-          speed: number;
-        }
-      | {
-          output?: number;
-          speed?: number;
-        }
-      | {
-          speed: number;
-        }
-      | {}
-      | {
-          speed: number;
-        }
-      | {
-          frequency?: number;
-          output?: number;
-          speed: number;
-        }
-      | {
-          speed: number;
-        }
-      | {
-          apiercing: number;
-          frequency: number;
-        }
-      | {
-          frequency: number;
-        }
-      | {
-          speed: number;
-        }
-      | {
-          frequency: number;
-          mp_cost: number;
-        };
+    [K in WeaponType]?: {
+      apiercing?: number;
+      frequency?: number;
+      mp_cost?: number;
+      output?: number;
+      speed?: number;
+    };
   };
   mcourage: number;
   mp: number;

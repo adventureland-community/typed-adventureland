@@ -4,6 +4,7 @@ import type { EventKey } from "../events/Events";
 import type { MonsterKey } from "../monsters/Monsters";
 import type { NpcKey } from "../npcs/Npcs";
 import type { NpcRole } from "../npcs/Npcs";
+import type { Tuple } from "../utils";
 
 export type MapKey =
   | "abtesting" // A/B Testing
@@ -92,30 +93,22 @@ export interface GMap {
   lux?: number;
   machines?: [
     {
+      set: string;
+      y: number;
+      x: number;
+      frames: Tuple<[number, number, number, number], 6>;
+      subframes: Tuple<[number, number, number, number], 11>;
+      type: string;
+    },
+    {
       frames: [
         [number, number, number, number],
         [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
         [number, number, number, number]
       ];
-      set: string;
-      subframes: [
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number]
-      ];
-      type: string;
       x: number;
+      set: string;
+      type: string;
       y: number;
     },
     {
@@ -124,242 +117,57 @@ export interface GMap {
         [number, number, number, number],
         [number, number, number, number]
       ];
+      x: number;
       set: string;
       type: string;
-      x: number;
-      y: number;
-    },
-    {
-      frames: [
-        [number, number, number, number],
-        [number, number, number, number],
-        [number, number, number, number]
-      ];
-      set: string;
-      type: string;
-      x: number;
       y: number;
     }
   ];
-  monsters?: Array<
-    | {
-        boundary?: [number, number, number, number];
-        count: number;
-        gatekeeper?: boolean;
-        grow?: boolean;
-        polygon?: Array<[number, number]>;
-        position?: [number, number];
-        radius?: number;
-        rage?: [number, number, number, number];
-        random?: boolean;
-        roam?: boolean;
-        special?: boolean;
-        type: MonsterKey;
-      }
-    | {
-        boundary?: [number, number, number, number];
-        count: number;
-        grow?: boolean;
-        position?: [number, number];
-        radius?: number;
-        rage?: [number, number, number, number];
-        roam?: boolean;
-        special?: boolean;
-        type: MonsterKey;
-      }
-    | {
-        boundary: [number, number, number, number];
-        count: number;
-        type: MonsterKey;
-      }
-    | {
-        boundary: [number, number, number, number];
-        count: number;
-        grow: boolean;
-        type: MonsterKey;
-      }
-    | {
-        boundary?: [number, number, number, number];
-        count: number;
-        grow?: boolean;
-        position?: [number, number];
-        radius?: number;
-        roam?: boolean;
-        type: MonsterKey;
-      }
-    | {
-        boundaries: [
+  monsters?: Array<{
+    boundaries?:
+      | [
           [MapKey, number, number, number, number],
           [MapKey, number, number, number, number],
           [MapKey, number, number, number, number],
           [EventKey, number, number, number, number],
           [MapKey, number, number, number, number]
-        ];
-        count: number;
-        stype: string;
-        type: MonsterKey;
-      }
-    | {
-        boundary?: [number, number, number, number];
-        count: number;
-        position?: [number, number];
-        radius?: number;
-        roam?: boolean;
-        type: MonsterKey;
-      }
-    | {
-        boundary: [number, number, number, number];
-        count: number;
-        type: ChrysalisKey;
-      }
-    | {
-        boundary?: [number, number, number, number];
-        count: number;
-        grow?: boolean;
-        position?: [number, number];
-        radius?: number;
-        roam?: boolean;
-        special?: boolean;
-        type: MonsterKey;
-      }
-    | {
-        boundaries?: [
+        ]
+      | [
           [MapKey, number, number, number, number],
           [MapKey, number, number, number, number]
         ];
-        boundary?: [number, number, number, number];
-        count: number;
-        position?: [number, number];
-        radius?: number;
-        roam?: boolean;
-        special?: boolean;
-        stype?: string;
-        type: MonsterKey;
-      }
-    | {
-        boundary: [number, number, number, number];
-        count: number;
-        roam?: boolean;
-        type: MonsterKey;
-      }
-    | {
-        boundary: [number, number, number, number];
-        count: number;
-        grow?: boolean;
-        roam?: boolean;
-        type: MonsterKey;
-      }
-  >;
+    boundary?: [number, number, number, number];
+    count: number;
+    gatekeeper?: boolean;
+    grow?: boolean;
+    polygon?: Array<[number, number]>;
+    position?: [number, number];
+    rage?: [number, number, number, number];
+    random?: boolean;
+    roam?: boolean;
+    radius?: number;
+    stype?: string;
+    special?: boolean;
+    type: MonsterKey;
+  }>;
   mount?: boolean;
   name: string;
   no_bounds?: boolean;
-  npcs: Array<
-    | {
-        boundary?: [number, number, number, number];
-        id: NpcKey;
-        name?: string;
-        position: Array<number>;
-      }
-    | {
-        id: NpcKey;
-        name?: string;
-        position: [number, number];
-      }
-    | {
-        id: NpcKey;
-        position?: [number, number];
-        positions?: [[number, number], [number, number, number]];
-      }
-    | {
-        id: NpcKey;
-        position: [number, number];
-      }
-    | {
-        id: NpcRole;
-        position: [number, number];
-      }
-    | {
-        boundary: [number, number, number, number];
-        id: NpcKey;
-        position: [number, number];
-      }
-    | {
-        id: NpcRole;
-        position: [number, number, number];
-      }
-    | {
-        id: NpcKey;
-        name?: string;
-        position: Array<number>;
-      }
-    | {
-        id: NpcKey;
-        position?: Array<number>;
-        positions?: [[number, number], [number, number, number]];
-      }
+  npcs: Array<{
+    position?: Array<number> | [number, number] | [number, number, number];
+    id: NpcKey;
+    name?: string;
+    boundary?: [number, number, number, number];
+    positions?: [[number, number], [number, number, number]];
+  }>;
+  old_monsters?: Tuple<
+    {
+      count: number;
+      boundary: [number, number, number, number];
+      type: MonsterKey;
+    },
+    12
   >;
-  old_monsters?: [
-    {
-      boundary: [number, number, number, number];
-      count: number;
-      type: MonsterKey;
-    },
-    {
-      boundary: [number, number, number, number];
-      count: number;
-      type: MonsterKey;
-    },
-    {
-      boundary: [number, number, number, number];
-      count: number;
-      type: MonsterKey;
-    },
-    {
-      boundary: [number, number, number, number];
-      count: number;
-      type: MonsterKey;
-    },
-    {
-      boundary: [number, number, number, number];
-      count: number;
-      type: MonsterKey;
-    },
-    {
-      boundary: [number, number, number, number];
-      count: number;
-      type: MonsterKey;
-    },
-    {
-      boundary: [number, number, number, number];
-      count: number;
-      type: MonsterKey;
-    },
-    {
-      boundary: [number, number, number, number];
-      count: number;
-      type: MonsterKey;
-    },
-    {
-      boundary: [number, number, number, number];
-      count: number;
-      type: MonsterKey;
-    },
-    {
-      boundary: [number, number, number, number];
-      count: number;
-      type: MonsterKey;
-    },
-    {
-      boundary: [number, number, number, number];
-      count: number;
-      type: MonsterKey;
-    },
-    {
-      boundary: [number, number, number, number];
-      count: number;
-      type: MonsterKey;
-    }
-  ];
   on_death?: [MapKey, number];
   on_exit?: [MapKey, number];
   outside?: boolean;
@@ -384,68 +192,7 @@ export interface GMap {
   spawns: Array<Array<number> | [number, number] | [number, number, number]>;
   traps?: [
     {
-      polygon?: [
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number],
-        [number, number]
-      ];
+      polygon?: Tuple<[number, number], 60>;
       position?: [number, number];
       type: string;
     }
