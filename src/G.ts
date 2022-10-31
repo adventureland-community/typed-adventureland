@@ -3,6 +3,8 @@ import { NpcKey } from "./types/GTypes/npcs";
 
 export {}; // Augmentations for the global scope can only be directly nested in external modules or ambient module declarations.
 
+export * from "./types/GTypes";
+
 declare global {
     const G: GData
 //   const G: {
