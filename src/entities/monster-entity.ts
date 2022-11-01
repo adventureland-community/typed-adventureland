@@ -93,7 +93,7 @@ export interface MonsterEntity extends EntityBase {
   special?: boolean;
 
   stype: string;
-  /** Set if the monster is targeting something */
+  /** Set if the monster is targeting something in `parent.entities` */
   target?: null | string;
   texture?: {};
   type: "monster";

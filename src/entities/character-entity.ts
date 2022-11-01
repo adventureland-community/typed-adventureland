@@ -145,6 +145,7 @@ export interface CharacterEntity extends EntityBase {
   /**
    * ID of the monster you are targeting
    * or the name of the character you are targeting
+   * can be used to look up in `parent.entities`
    */
   target?: string | null;
   texture?: {};
