@@ -1,5 +1,6 @@
 import { CharacterEntity } from "./character";
-import { Entity, EntityBase, SlotType, TradeSlotType } from "./entity";
+import { SlotType, TradeSlotType } from "./entities/slots";
+import { Entity, EntityBase } from "./entity";
 import { ItemInfo } from "./items";
 import { IPosition, PositionReal, PositionMovable, PositionSmart } from "./position";
 import { EventKey } from "./types/GTypes/events";

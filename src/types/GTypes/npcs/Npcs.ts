@@ -131,67 +131,202 @@ export type NpcKey =
   | "wizardrepeater" // Wizard
   | "wnpc"; // Wizard
 
+export type NpcName =
+  | "Ace"
+  | "Alia"
+  | "Angel"
+  | "Baron"
+  | "Bean"
+  | "Bobo"
+  | "Caroline"
+  | "Christie"
+  | "Christina"
+  | "Cole"
+  | "Crun"
+  | "Cue"
+  | "Cunn"
+  | "Daisy"
+  | "Divian"
+  | "Ernis"
+  | "Faith"
+  | "Fredric"
+  | "Fvona"
+  | "Gabriel"
+  | "Gabriella"
+  | "Gabrielle"
+  | "Garwyn"
+  | "Gn. Spence"
+  | "Green"
+  | "Grundur"
+  | "Guard"
+  | "Haila"
+  | "Jailord"
+  | "Jane"
+  | "Janet"
+  | "Jaqk"
+  | "Jayson"
+  | "Kane"
+  | "Kilgore"
+  | "Landon"
+  | "Ledia"
+  | "Leo"
+  | "Lidia"
+  | "Lilith"
+  | "Lucas"
+  | "Lucy"
+  | "Marven"
+  | "Mine Heathcliff"
+  | "Mr. Dworf"
+  | "Mr. Rich"
+  | "New Year Tree"
+  | "Pete"
+  | "Pink"
+  | "Ponty"
+  | "Princess"
+  | "Purple"
+  | "Reny"
+  | "Ron"
+  | "Rose"
+  | "Santa"
+  | "Scarf"
+  | "Smith"
+  | "Stewart"
+  | "Timmy"
+  | "Tricksy"
+  | "Tristian"
+  | "Twig"
+  | "Violet"
+  | "Warin"
+  | "Werdars"
+  | "Witch"
+  | "Wizard"
+  | "Wogue"
+  | "Wynifreed"
+  | "Wyr"
+  | "X10"
+  | "X11"
+  | "X12"
+  | "X13"
+  | "X14"
+  | "X15"
+  | "X16"
+  | "X17"
+  | "X18"
+  | "X19"
+  | "X20"
+  | "X21"
+  | "X22"
+  | "X23"
+  | "X24"
+  | "X25"
+  | "X26"
+  | "X27"
+  | "X28"
+  | "X29"
+  | "X30"
+  | "X31"
+  | "X32"
+  | "X33"
+  | "X34"
+  | "X35"
+  | "X36"
+  | "X37"
+  | "X38"
+  | "X39"
+  | "X40"
+  | "X41"
+  | "X42"
+  | "X43"
+  | "X44"
+  | "X45"
+  | "X46"
+  | "X47"
+  | "X8"
+  | "X9"
+  | "Xyn"
+  | "Z";
+
+export type NpcRole =
+  | "blocker"
+  | "bouncer"
+  | "citizen"
+  | "companion"
+  | "compound"
+  | "craftsman"
+  | "cx"
+  | "events"
+  | "exchange"
+  | "friendtokens"
+  | "funtokens"
+  | "gold"
+  | "guard"
+  | "items"
+  | "jailer"
+  | "locksmith"
+  | "lostandfound"
+  | "lottery"
+  | "mcollector"
+  | "merchant"
+  | "monstertokens"
+  | "newupgrade"
+  | "newyear_tree"
+  | "petkeeper"
+  | "premium"
+  | "pvp_announcer"
+  | "pvptokens"
+  | "quest"
+  | "repeater"
+  | "resort"
+  | "rewards"
+  | "santa"
+  | "secondhands"
+  | "shells"
+  | "ship"
+  | "shrine"
+  | "standmerchant"
+  | "tavern"
+  | "tease"
+  | "thesearch"
+  | "transport"
+  | "witch";
+
 export interface GNpc {
-  name?: string;
+  allow?: boolean;
+  aspeed?: string;
+  attack?: number;
+  atype?: string;
+  aura?: {
+    gold?: number;
+    luck?: number;
+  };
+  class?: ClassKey;
   color?: string;
   cx?: {
-    head?: string;
-    hat?: string;
-    hair?: string;
     face?: string;
+    hair?: string;
+    hat?: string;
+    head?: string;
   };
-  role: string;
-  skin: string;
-  type?: string;
-  id: NpcKey;
-  pack?: NpcKey;
-  says?: Array<string> | string;
-  hp?: number;
-  speed?: number;
-  interaction?: Array<string>;
-  level?: number;
   delay?: number;
-  seek?: string;
-  class?: ClassKey;
   heal?: number;
-  range?: number;
-  attack?: number;
-  slots?: {
-    mainhand: {
-      name: WeaponType;
-      level: number;
-    };
-  };
-  transport?: boolean;
-  side_interaction?: {
-    auto: boolean;
-    message: string;
-    skin: string;
-  };
+  hp?: number;
+  id: NpcKey;
+  ignore?: boolean;
+  interaction?: Array<string>;
+  interval?: number;
   items?: Array<ItemKey | null>;
-  old_role?: string;
+  level?: number;
+  modal?: string;
+  moving?: boolean;
+  name?: NpcName;
+  old_items?: Array<ItemKey | null>;
+  old_role?: NpcRole;
   old_side_interaction?: {
     auto: boolean;
     message: string;
     skin: string;
   };
-  old_items?: Array<ItemKey | null>;
-  atype?: string;
-  aspeed?: string;
-  moving?: boolean;
-  allow?: boolean;
-  quest?: string;
-  token?: TokenKey;
-  stand?: string;
-  aura?: {
-    luck?: number;
-    gold?: number;
-  };
-  steps?: number;
-  modal?: string;
-  ignore?: boolean;
-  interval?: number;
-  stopframe?: number;
+  pack?: NpcKey;
   places?: {
     winterland: number;
     desertland: number;
@@ -200,4 +335,28 @@ export interface GNpc {
     main: number;
     d_e: number;
   };
+  quest?: string;
+  range?: number;
+  role: NpcRole;
+  says?: Array<string> | string;
+  seek?: string;
+  side_interaction?: {
+    auto: boolean;
+    message: string;
+    skin: string;
+  };
+  skin: string;
+  slots?: {
+    mainhand: {
+      level: number;
+      name: WeaponType;
+    };
+  };
+  speed?: number;
+  stand?: string;
+  steps?: number;
+  stopframe?: number;
+  token?: TokenKey;
+  transport?: boolean;
+  type?: string;
 }

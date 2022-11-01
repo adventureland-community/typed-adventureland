@@ -2,6 +2,9 @@
   "GKey": "npcs",
   "groupKey": null,
   "nameOverride": {},
-  "extractedTypes": {},
+  "extractedTypes": {
+    "name": "NpcName",
+    "role": "NpcRole"
+  },
   "description": {}
 }

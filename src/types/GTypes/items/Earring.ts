@@ -12,39 +12,39 @@ export type EarringKey =
   | "vitearring"; // Earring of Vitality
 
 export interface GEarring {
+  a?: boolean;
+  apiercing?: number;
+  /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
+  compound: {
+    apiercing?: number;
+    dex?: number;
+    int?: number;
+    luck?: number;
+    str?: number;
+    vit?: number;
+  };
+  dex?: number;
+  /** Refers to how many items are needed to exchange (see .quest as well!) */
+  e?: number;
+  edge?: number;
+  explanation?: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
-  edge?: number;
+  int?: number;
+  luck?: number;
   /** The full display name of an item. */
   name: string;
-  str?: number;
-  /** The skin of the item. */
-  skin: EarringKey;
-  int?: number;
-  /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
-  compound: {
-    int?: number;
-    str?: number;
-    dex?: number;
-    luck?: number;
-    apiercing?: number;
-    vit?: number;
-  };
-  /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: "earring";
-  dex?: number;
-  speed?: number;
-  luck?: number;
-  explanation?: string;
   /** Indicates the `quest` that this item is needed to complete. */
   quest?: EarringKey;
-  a?: boolean;
-  /** Refers to how many items are needed to exchange (see .quest as well!) */
-  e?: number;
   /** The set this item is part of `G.sets.wanderers`. */
   set?: SetKey;
-  apiercing?: number;
+  /** The skin of the item. */
+  skin: EarringKey;
+  speed?: number;
+  str?: number;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
+  type: "earring";
   vit?: number;
 }

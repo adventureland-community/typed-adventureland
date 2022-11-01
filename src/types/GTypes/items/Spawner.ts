@@ -3,19 +3,19 @@ export type SpawnerKey =
   | "figurine"; // Terracota Army Figurine
 
 export interface GSpawner {
-  spawn: string;
-  /** The full display name of an item. */
-  name: string;
+  action?: string;
+  explanation?: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
-  explanation?: string;
+  ignore?: boolean;
+  /** The full display name of an item. */
+  name: string;
+  note?: string;
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: boolean | number;
   /** The skin of the item. */
   skin: SpawnerKey;
+  spawn: string;
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: "spawner";
-  ignore?: boolean;
-  note?: string;
-  action?: string;
 }

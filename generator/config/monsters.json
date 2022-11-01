@@ -2,6 +2,11 @@
   "GKey": "monsters",
   "groupKey": null,
   "nameOverride": {},
-  "extractedTypes": {},
-  "description": {}
+  "extractedTypes": {
+    "name": "MonsterName"
+  },
+  "description": {
+    "level": "After level 12, only hp/max_hp/xp increases",
+    "difficulty": "A multiplier for monsters' gold drops"
+  }
 }

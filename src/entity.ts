@@ -1,3 +1,5 @@
+import { SlotType, TradeSlotType } from "./entities/slots";
+import { StatusInfo } from "./entities/status-info";
 import { ItemInfo } from "./items";
 import { PositionMovable } from "./position";
 import { ClassKey } from "./types/GTypes/classes";
@@ -65,7 +67,7 @@ export type Entity = PositionMovable & {
   /** Only set if the entity is a character. If true, the player is dead. */
   rip?: boolean;
   rpiercing: number;
-  //   s: StatusInfo; // TODO: status info
+  s: StatusInfo;
   // TODO: slots
   /** Set if the entity is a player */
   slots: {
@@ -92,143 +94,9 @@ export type Entity = PositionMovable & {
   vx: number;
   vy: number;
   dead?: boolean | string; // monster only attribute
+  /**  Your vision, it's a 1400X1000 rectangle */
+  vision: [number,number]
 };
-
-export type StatusInfoBase = {
-  /** How many ms left before this condition expires */
-  ms: number;
-};
-
-export type StatusInfo = {
-  [T in ConditionName]?: StatusInfoBase;
-} & {
-  burned?: {
-    // (Unconfirmed) the damage that the burn will do per second.
-    intensity: number;
-    // The character ID that caused the burn
-    f: string;
-  };
-  coop?: {
-    id: string;
-    p: number;
-  };
-  mluck?: {
-    /** The ID of the merchant who cast mluck */
-    f: string;
-    /** A flag to show if the mluck was cast by the user's merchant. If false, it can be mlucked by any merchant. */
-    strong: boolean;
-  };
-  monsterhunt?: MonsterHuntStatusInfo;
-  citizen0aura?: {
-    luck: number;
-  };
-  citizen4aura?: {
-    gold: number;
-  };
-};
-
-export type MonsterHuntStatusInfo = StatusInfoBase & {
-  /** The server ID where the monster hunt is valid */
-  sn: string;
-  /** Number of monsters remaining to kill */
-  c: number;
-  /** What monster we have to kill */
-  id: MonsterKey;
-};
-
-// TODO: Get all types (from G?)
-export type CharacterType =
-  | "mage"
-  | "merchant"
-  | "paladin"
-  | "priest"
-  | "ranger"
-  | "rogue"
-  | "warrior";
 
 // TODO: Get all types (from G?)
 export type DamageType = "magical" | "physical";
-
-export type SlotType =
-  | "amulet"
-  | "belt"
-  | "cape"
-  | "chest"
-  | "earring1"
-  | "earring2"
-  | "elixir"
-  | "gloves"
-  | "helmet"
-  | "mainhand"
-  | "offhand"
-  | "orb"
-  | "pants"
-  | "ring1"
-  | "ring2"
-  | "shoes";
-
-export type TradeSlotType =
-  | "trade1"
-  | "trade2"
-  | "trade3"
-  | "trade4"
-  | "trade5"
-  | "trade6"
-  | "trade7"
-  | "trade8"
-  | "trade9"
-  | "trade10"
-  | "trade11"
-  | "trade12"
-  | "trade13"
-  | "trade14"
-  | "trade15"
-  | "trade16";
-
-export type ConditionName =
-  | "authfail"
-  | "blink"
-  | "burned"
-  | "charging"
-  | "charmed"
-  | "dampened"
-  | "darkblessing"
-  | "easterluck"
-  | "eburn"
-  | "eheal"
-  | "energized"
-  | "fingered"
-  | "frozen"
-  | "fullguard"
-  | "hardshell"
-  | "healed"
-  | "holidayspirit"
-  | "invincible"
-  | "licenced"
-  | "marked"
-  | "mcourage"
-  | "mlifesteal"
-  | "mluck"
-  | "monsterhunt"
-  | "massproduction"
-  | "massproductionpp"
-  | "notverified"
-  | "phasedout"
-  | "poisoned"
-  | "poisonous"
-  | "power"
-  | "reflection"
-  | "rspeed"
-  | "shocked"
-  | "slowness"
-  | "stack"
-  | "stoned"
-  | "stunned"
-  | "sugarrush"
-  | "tangled"
-  | "warcry"
-  | "weakness"
-  | "withdrawal"
-  | "xpower"
-  | "xshotted"
-  | "invis";

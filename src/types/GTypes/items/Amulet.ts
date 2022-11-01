@@ -19,69 +19,69 @@ export type AmuletKey =
   | "warmscarf"; // Warm Scarf
 
 export interface GAmulet {
-  dex?: number;
-  dreturn?: number;
-  reflection?: number;
-  evasion?: number;
-  int?: number;
-  hp?: number;
-  /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
-  compound?: {
-    dex?: number;
-    dreturn?: number;
-    int?: number;
-    str?: number;
-    evasion?: number;
-    crit?: number;
-    hp?: number;
-    armor?: number;
-    critdamage?: number;
-    lifesteal?: number;
-    apiercing?: number;
-    mp_cost?: number;
-    mp_reduction?: number;
-    xp?: number;
-    attr0?: number;
-    for?: number;
-    vit?: number;
-    resistance?: number;
-  };
-  /** The full display name of an item. */
-  name: string;
-  armor?: number;
-  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: [number, number, number, number];
-  /** Cost of the item in gold, if an NPC were to sell this item. */
-  g: number;
   a?: boolean;
-  str?: number;
-  /** The skin of the item. */
-  skin: AmuletKey;
-  crit?: number;
-  /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: "amulet";
-  manasteal?: number;
-  lifesteal?: number;
-  critdamage?: number;
   apiercing?: number;
-  mp_cost?: number;
-  /** The set this item is part of `G.sets.wanderers`. */
-  set?: SetKey;
-  mp_reduction?: number;
-  xp?: number;
+  armor?: number;
   attr0?: number;
   aura?: AmuletKey;
-  for?: number;
-  gold?: number;
-  luck?: number;
+  /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
+  compound?: {
+    apiercing?: number;
+    armor?: number;
+    attr0?: number;
+    crit?: number;
+    critdamage?: number;
+    dex?: number;
+    dreturn?: number;
+    evasion?: number;
+    for?: number;
+    hp?: number;
+    int?: number;
+    lifesteal?: number;
+    mp_cost?: number;
+    mp_reduction?: number;
+    resistance?: number;
+    str?: number;
+    vit?: number;
+    xp?: number;
+  };
+  crit?: number;
+  critdamage?: number;
+  dex?: number;
+  dreturn?: number;
   edge?: number;
-  vit?: number;
-  resistance?: number;
+  evasion?: number;
   explanation?: string;
+  for?: number;
+  /** Cost of the item in gold, if an NPC were to sell this item. */
+  g: number;
+  gold?: number;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
+  grades: [number, number, number, number];
+  hp?: number;
+  int?: number;
+  lifesteal?: number;
+  luck?: number;
+  manasteal?: number;
+  mp_cost?: number;
+  mp_reduction?: number;
+  /** The full display name of an item. */
+  name: string;
+  reflection?: number;
+  resistance?: number;
+  rpiercing?: number;
+  /** The set this item is part of `G.sets.wanderers`. */
+  set?: SetKey;
+  /** The skin of the item. */
+  skin: AmuletKey;
+  str?: number;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
+  type: "amulet";
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade?: {
     apiercing: number;
     rpiercing: number;
   };
-  rpiercing?: number;
+  vit?: number;
+  xp?: number;
 }

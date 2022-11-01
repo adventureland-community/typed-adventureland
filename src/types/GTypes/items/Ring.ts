@@ -24,62 +24,62 @@ export type RingKey =
 
 export interface GRing {
   a?: boolean;
-  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades: [number, number, number, number];
-  /** The full display name of an item. */
-  name: string;
-  /** Cost of the item in gold, if an NPC were to sell this item. */
-  g: number;
-  /** The skin of the item. */
-  skin: string;
+  ability?: string;
+  action?: string;
+  apiercing?: number;
   armor?: number;
+  attr0?: number;
+  bling?: number;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound: {
-    armor?: number;
-    dreturn?: number;
-    dex?: number;
-    vit?: number;
-    rpiercing?: number;
-    int?: number;
     apiercing?: number;
-    str?: number;
-    gold?: number;
-    resistance?: number;
-    reflection?: number;
-    luck?: number;
+    armor?: number;
     bling?: number;
     crit?: number;
+    dex?: number;
+    dreturn?: number;
+    gold?: number;
+    int?: number;
     lifesteal?: number;
+    luck?: number;
+    reflection?: number;
+    resistance?: number;
+    rpiercing?: number;
+    str?: number;
     stun?: number;
+    vit?: number;
   };
-  /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: "ring";
-  int?: number;
-  vit?: number;
+  courage?: number;
+  crit?: number;
   dex?: number;
-  rpiercing?: number;
-  evasion?: number;
-  apiercing?: number;
-  str?: number;
+  dreturn?: number;
   edge?: number;
-  onclick?: string;
-  ignore?: boolean;
-  skin_a?: string;
-  action?: string;
+  evasion?: number;
+  event?: boolean;
+  explanation?: string;
+  /** Cost of the item in gold, if an NPC were to sell this item. */
+  g: number;
   gold?: number;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
+  grades: [number, number, number, number];
+  ignore?: boolean;
+  int?: number;
+  lifesteal?: number;
+  luck?: number;
+  /** The full display name of an item. */
+  name: string;
+  onclick?: string;
+  pnresistance?: number;
   resistance?: number;
+  rpiercing?: number;
   /** The set this item is part of `G.sets.wanderers`. */
   set?: SetKey;
-  ability?: string;
-  attr0?: number;
-  luck?: number;
-  bling?: number;
-  explanation?: string;
-  event?: boolean;
-  lifesteal?: number;
-  crit?: number;
+  /** The skin of the item. */
+  skin: string;
+  skin_a?: string;
+  str?: number;
   stun?: number;
-  dreturn?: number;
-  pnresistance?: number;
-  courage?: number;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
+  type: "ring";
+  vit?: number;
 }

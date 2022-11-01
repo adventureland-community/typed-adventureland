@@ -12,9 +12,9 @@ export type EventKey =
 
 export interface GEvent {
   duration: number;
-  type: string;
-  name: string;
-  modal: string;
-  sprite: string;
   join?: boolean;
+  modal: string;
+  name: string;
+  sprite: string;
+  type: string;
 }

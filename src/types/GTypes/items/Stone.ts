@@ -4,16 +4,16 @@ export type StoneKey =
   | "stoneofxp"; // Stone of Wisdom
 
 export interface GStone {
-  ignore: boolean;
-  skin_a: string;
+  days: number;
+  explanation: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
-  /** The skin of the item. */
-  skin: StoneKey;
-  explanation: string;
-  /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: "stone";
-  days: number;
+  ignore: boolean;
   /** The full display name of an item. */
   name: string;
+  /** The skin of the item. */
+  skin: StoneKey;
+  skin_a: string;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
+  type: "stone";
 }

@@ -1,4 +1,3 @@
-import type { AnimationKey } from "../animations/Animations";
 import type { GameKey } from "../games/Games";
 import type { ImagesetKey } from "../imagesets/Imagesets";
 import type { DungeonKeyKey } from "../items";
@@ -6,6 +5,7 @@ import type { MonsterKey } from "../monsters/Monsters";
 import type { NpcKey } from "../npcs/Npcs";
 import type { TilesetKey } from "../tilesets/Tilesets";
 import type { Tuple } from "../utils";
+import { EventKey } from "../events";
 
 export type MapKey =
   | "abtesting" // A/B Testing
@@ -65,23 +65,21 @@ export type MapKey =
 export type MapZoneKey = "fishing" | "mining";
 
 export interface GMap {
-  npcs: Array<{
-    position?: [x: number, y: number] | [number, number, number];
-    id: NpcKey;
-    name?: string;
-    boundary?: [number, number, number, number];
-    positions?: [[number, number], [number, number, number]];
-  }>;
-  key: string;
-  freeze_multiplier?: number;
-  name: string;
-  lux?: number;
+  animatables?: {
+    the_door?: {
+      position: string;
+      x: number;
+      y: number;
+    };
+    the_lever?: {
+      position: string;
+      x: number;
+      y: number;
+    };
+  };
   burn_multiplier?: number;
-  drop_norm?: number;
-  outside?: boolean;
-  quirks?: Array<
-    [number, number, number, number, string, string] | [number, number, number, number, string]
-  >;
+  code?: string;
+  day?: boolean;
   doors: Array<
     | [number, number, number, number, MapKey, number]
     | [number, number, number, number, MapKey, number, number]
@@ -89,72 +87,17 @@ export interface GMap {
     | [number, number, number, number, MapKey, number, number, "ulocked", "complicated"]
     | [number, number, number, number, MapKey, number, number, "protected" | "ulocked"]
   >;
-  spawns: Array<
-    [x: number, y: number] | [number, number, number] | [number, number, number, number]
-  >;
-  monsters?: Array<{
-    count: number;
-    boundary?: [number, number, number, number];
-    type: MonsterKey;
-    gatekeeper?: boolean;
-    rage?: [number, number, number, number];
-    random?: boolean;
-    roam?: boolean;
-    grow?: boolean;
-    polygon?: Array<[number, number]>;
-    position?: [number, number];
-    radius?: number;
-    special?: boolean;
-    boundaries?: Array<[MapKey, number, number, number, number]>;
-    stype?: string;
-  }>;
-  world?: TilesetKey;
-  traps?: [
-    {
-      type: string;
-      polygon?: Tuple<[number, number], 60>;
-      position?: [number, number];
-    }
-  ];
+  drop_norm?: number;
+  // TODO: Should be EventKey but "pirateship" is not in there.
+  event?: EventKey | "pirateship";
+  freeze_multiplier?: number;
+  fx?: string;
   ignore?: boolean;
   instance?: boolean;
-  on_exit?: [MapKey, number];
   irregular?: boolean;
-  on_death?: [MapKey, number];
-  animatables?: {
-    the_door?: {
-      y: number;
-      x: number;
-      position: string;
-    };
-    the_lever?: {
-      y: number;
-      x: number;
-      position: string;
-    };
-  };
-  zones?: [
-    {
-      drop: string;
-      type: MapZoneKey;
-      polygon: Array<[number, number]>;
-    }
-  ];
-  ref?: {
-    cx?: [number, number, number, number];
-    u_mid?: [number, number];
-    c_mid?: [number, number];
-    poof?: {
-      y: number;
-      map: MapKey;
-      x: number;
-      in: MapKey;
-    };
-  };
-  pvp?: boolean;
-  no_bounds?: boolean;
-  safe?: boolean;
-  mount?: boolean;
+  key: string;
+  loss?: boolean;
+  lux?: number;
   machines?: Array<{
     set: ImagesetKey;
     y: number;
@@ -163,19 +106,79 @@ export interface GMap {
     subframes?: Array<[number, number, number, number]>;
     type: GameKey;
   }>;
-  // TODO: Should be EventKey but "pirateship" is not in there.
-  event?: string;
-  unlist?: boolean;
-  fx?: string;
-  weather?: AnimationKey;
-  code?: string;
-  small_steps?: boolean;
-  old_monsters?: Array<{
+  monsters?: Array<{
+    boundaries?: Array<[MapKey, number, number, number, number]>;
+    boundary?: [number, number, number, number];
     count: number;
-    boundary: [number, number, number, number];
+    gatekeeper?: boolean;
+    grow?: boolean;
+    polygon?: Array<[number, number]>;
+    position?: [number, number];
+    rage?: [number, number, number, number];
+    random?: boolean;
+    roam?: boolean;
+    radius?: number;
+    stype?: string;
+    special?: boolean;
     type: MonsterKey;
   }>;
-  loss?: boolean;
-  day?: boolean;
+  mount?: boolean;
+  name: string;
+  no_bounds?: boolean;
+  npcs: Array<{
+    position?: [x: number, y: number] | [number, number, number];
+    id: NpcKey;
+    name?: string;
+    boundary?: [number, number, number, number];
+    positions?: [[number, number], [number, number, number]];
+  }>;
+  old_monsters?: Tuple<
+    {
+      count: number;
+      boundary: [number, number, number, number];
+      type: MonsterKey;
+    },
+    12
+  >;
+  on_death?: [MapKey, number];
+  on_exit?: [MapKey, number];
+  outside?: boolean;
+  pvp?: boolean;
+  quirks?: Array<
+    [number, number, number, number, string, string] | [number, number, number, number, string]
+  >;
+  ref?: {
+    c_mid?: [number, number];
+    cx?: [number, number, number, number];
+    poof?: {
+      in: MapKey;
+      map: MapKey;
+      x: number;
+      y: number;
+    };
+    u_mid?: [number, number];
+  };
+  safe?: boolean;
   safe_pvp?: boolean;
+  small_steps?: boolean;
+  spawns: Array<
+    [x: number, y: number] | [number, number, number] | [number, number, number, number]
+  >;
+  traps?: [
+    {
+      polygon?: Tuple<[number, number], 60>;
+      position?: [number, number];
+      type: string;
+    }
+  ];
+  unlist?: boolean;
+  weather?: string;
+  world?: TilesetKey;
+  zones?: [
+    {
+      drop: string;
+      polygon: Array<[number, number]>;
+      type: MapZoneKey;
+    }
+  ];
 }

@@ -18,58 +18,58 @@ export type OrbKey =
   | "vorb"; // Vampiric Canine Teeth
 
 export interface GOrb {
+  a?: boolean;
+  ability?: string;
+  armor?: number;
   attr0?: number;
-  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
-  grades?: [number, number, number, number];
-  /** Cost of the item in gold, if an NPC were to sell this item. */
-  g: number;
-  /** The full display name of an item. */
-  name: string;
-  vit?: number;
-  /** The skin of the item. */
-  skin: string;
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound?: {
-    attr0?: number;
-    vit?: number;
     armor?: number;
-    speed?: number;
-    rpiercing?: number;
-    int?: number;
-    dex?: number;
-    str?: number;
-    mp?: number;
-    luck?: number;
-    xp?: number;
+    attr0?: number;
     courage?: number;
+    dex?: number;
+    int?: number;
+    luck?: number;
+    mp?: number;
+    rpiercing?: number;
+    speed?: number;
+    str?: number;
+    vit?: number;
+    xp?: number;
   };
-  /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: "orb";
-  event?: boolean;
-  ability?: string;
-  a?: boolean;
-  int?: number;
-  explanation?: string;
-  speed?: number;
-  dex?: number;
-  armor?: number;
-  str?: number;
+  courage?: number;
+  critdamage?: number;
   cx?: {
     scale: number;
   };
-  rpiercing?: number;
+  dex?: number;
   edge?: number;
+  event?: boolean;
+  explanation?: string;
+  firesistance?: number;
+  for?: number;
+  fzresistance?: number;
+  /** Cost of the item in gold, if an NPC were to sell this item. */
+  g: number;
+  /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
+  grades?: [number, number, number, number];
+  ignore?: boolean;
+  int?: number;
+  luck?: number;
+  manasteal?: number;
+  mp?: number;
+  /** The full display name of an item. */
+  name: string;
+  pcourage?: number;
+  rpiercing?: number;
   /** The set this item is part of `G.sets.wanderers`. */
   set?: SetKey;
-  mp?: number;
-  luck?: number;
+  /** The skin of the item. */
+  skin: string;
+  speed?: number;
+  str?: number;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
+  type: "orb";
+  vit?: number;
   xp?: number;
-  fzresistance?: number;
-  firesistance?: number;
-  ignore?: boolean;
-  for?: number;
-  critdamage?: number;
-  manasteal?: number;
-  courage?: number;
-  pcourage?: number;
 }

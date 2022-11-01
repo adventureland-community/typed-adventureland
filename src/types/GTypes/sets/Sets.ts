@@ -21,9 +21,9 @@ export type SetKey =
   | "wt4"; // Darkforge Armor
 
 export type GSet = {
-  name: string;
-  items: Array<ItemKey>;
   explanation?: string;
+  items: Array<ItemKey>;
+  name: string;
 } & {
   [Key in number]?: {
     apiercing?: number;

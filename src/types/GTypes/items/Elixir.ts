@@ -37,44 +37,44 @@ export type ElixirKey =
   | "xshot"; // X-Shot
 
 export interface GElixir {
-  /** Cost of the item in gold, if an NPC were to sell this item. */
-  g: number;
-  /** Indicates how many of this items you can stack. Set if the item is stackable. */
-  s: number;
-  skin_a: ElixirKey;
-  str?: number;
-  miss?: number;
-  /** The skin of the item. */
-  skin: ElixirKey;
-  duration: number;
-  speed?: number;
-  /** The type of item, `shield`, `weapon`, `gloves`... */
-  type: "elixir";
-  /** The full display name of an item. */
-  name: string;
-  evasion?: number;
-  hp?: number;
-  vit?: number;
+  a?: boolean;
+  apiercing?: number;
+  armor?: number;
+  crit?: number;
   dex?: number;
-  mp?: number;
-  explanation?: string;
-  eat?: boolean;
-  int?: number;
+  duration: number;
   /** Refers to how many items are needed to exchange (see .quest as well!) */
   e?: number;
-  luck?: number;
-  a?: boolean;
+  eat?: boolean;
+  evasion?: number;
+  explanation?: string;
   firesistance?: number;
   fzresistance?: number;
+  /** Cost of the item in gold, if an NPC were to sell this item. */
+  g: number;
+  hp?: number;
+  int?: number;
+  lifesteal?: number;
+  luck?: number;
+  miss?: number;
+  mp?: number;
+  /** The full display name of an item. */
+  name: string;
   pnresistance?: number;
-  resistance?: number;
-  crit?: number;
-  withdrawal?: ConditionKey;
   reflection?: number;
-  armor?: number;
+  resistance?: number;
   rpiercing?: number;
+  /** Indicates how many of this items you can stack. Set if the item is stackable. */
+  s: number;
   /** The set this item is part of `G.sets.wanderers`. */
   set?: SetKey;
-  lifesteal?: number;
-  apiercing?: number;
+  /** The skin of the item. */
+  skin: ElixirKey;
+  skin_a: ElixirKey;
+  speed?: number;
+  str?: number;
+  /** The type of item, `shield`, `weapon`, `gloves`... */
+  type: "elixir";
+  vit?: number;
+  withdrawal?: ConditionKey;
 }

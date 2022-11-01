@@ -1,7 +1,7 @@
+
 import type { ConditionKey } from "../conditions/Conditions";
 import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { WeaponKey } from "../items/Weapon";
-import type { SpriteKey } from "../sprites";
 
 export type MonsterKey =
   | "a1" // Spike
@@ -125,193 +125,296 @@ export type MonsterKey =
   | "xscorpion" // Scorpion
   | "zapper0"; // Zapper
 
+export type MonsterName =
+  | "Angel"
+  | "Angry Chest"
+  | "Arctic Bee"
+  | "Armadillo"
+  | "Bat"
+  | "Bee"
+  | "Bill"
+  | "Black Scorpion"
+  | "Boo Boo"
+  | "Brawl Goo"
+  | "Chicken"
+  | "Croc"
+  | "Cute Bee"
+  | "Dark Hound"
+  | "Dark Knight"
+  | "Dark Mage"
+  | "Dark Wizard"
+  | "Dracul"
+  | "Dragold"
+  | "Earth Elemental"
+  | "Elena"
+  | "Ent"
+  | "Fairy"
+  | "Field Generator"
+  | "Fire Elemental"
+  | "Fire Spirit"
+  | "Franky"
+  | "Froggie"
+  | "Ghost"
+  | "Giga Crab"
+  | "Golden Bat"
+  | "Goo"
+  | "Green Jr."
+  | "Grinch"
+  | "Harpy"
+  | "Hawk"
+  | "Huge Crab"
+  | "Ice Golem"
+  | "Irradiated Goo"
+  | "Jr."
+  | "Kitty"
+  | "Lestat"
+  | "Liger X"
+  | "Love Goo"
+  | "Lucinda"
+  | "Mage"
+  | "Marceline"
+  | "Mech-a Gnome"
+  | "Mole"
+  | "Mr. Green"
+  | "Mr. Pumpkin"
+  | "Ms. Dracul"
+  | "Mummy"
+  | "Nature Elemental"
+  | "One Eye"
+  | "Orlok"
+  | "Phoenix"
+  | "Pink Goblin"
+  | "Poisio"
+  | "Pom Pom"
+  | "Porcupine"
+  | "Protector of Darkness"
+  | "Protector of Fire"
+  | "Protector of Frost"
+  | "Protector of Nature"
+  | "Puppy"
+  | "Rainbow Goo"
+  | "Rat"
+  | "Rebel Harpy"
+  | "Reindeer"
+  | "Scorpion"
+  | "Skeletor"
+  | "Slenderman"
+  | "Snake"
+  | "Sneaky Goblin"
+  | "Snowman"
+  | "Spider"
+  | "Spike"
+  | "Sprawling"
+  | "Squig"
+  | "Squigtoad"
+  | "Stompy"
+  | "Stone Worm"
+  | "Target Automatron"
+  | "Tiger"
+  | "Tiny Crab"
+  | "Tortoise"
+  | "Vampire Rat"
+  | "Vampireling"
+  | "Wabbit"
+  | "Water Elemental"
+  | "Water Spirit"
+  | "White Wolf"
+  | "Wild Boar"
+  | "Zapper";
+
+export type GMonsterAbilities = {
+  anger?: {
+    cooldown: number;
+    radius: number;
+  };
+  burn?: {
+    attr0: number;
+    unlimited: boolean;
+  };
+  curse_aura?: {
+    aura: boolean;
+    condition: ConditionKey;
+    cooldown: number;
+    radius: number;
+  };
+  dampening_aura?: {
+    aura: boolean;
+    condition: ConditionKey;
+    cooldown: number;
+    radius: number;
+  };
+  deepfreeze?: {
+    cooldown: number;
+    radius: number;
+  };
+  degen?: {
+    amount: number;
+    cooldown: number;
+  };
+  heal?: {
+    cooldown: number;
+    heal: number;
+  };
+  healing?: {
+    cooldown: number;
+    heal: number;
+  };
+  mlight?: {
+    cooldown: number;
+  };
+  mtangle?: {
+    cooldown: number;
+  };
+  multi_burn?: {
+    cooldown: number;
+    damage: number;
+  };
+  multi_freeze?: {
+    cooldown: number;
+    damage: number;
+  };
+  portal?: {
+    cooldown: number;
+  };
+  putrid?: {
+    curse: boolean;
+    poison: boolean;
+  };
+  self_healing?: {
+    cooldown: number;
+    heal: number;
+  };
+  stone?: {
+    cooldown: number;
+  };
+  tangle?: {
+    cooldown: number;
+  };
+  warp_on_hit?: {
+    attr0: number;
+    unlimited: boolean;
+  };
+  warpstomp?: {
+    cooldown: number;
+    radius: number;
+    stun: number;
+  };
+  weakness_aura?: {
+    aura: boolean;
+    condition: ConditionKey;
+    cooldown: number;
+    radius: number;
+  };
+  zap?: {
+    amount: number;
+    cooldown: number;
+    pure: boolean;
+    radius: number;
+  };
+};
+
 export interface GMonster {
+  "1hp"?: boolean;
+  abilities?: GMonsterAbilities;
   // TODO: stat should be of type stat in the future.
   achievements?: Array<[kills: number, effectType: "stat", stat: string, amount: number]>;
-  "1hp"?: boolean;
-  name: string;
+  aggro: number;
+  announce?: string | boolean;
+  apiercing?: number;
+  armor?: number;
+  article?: string;
+  attack: number;
+  avoidance?: number;
+  balance?: string;
+  cbuff?: Array<[number, ConditionKey]>;
+  charge?: number;
+  charge_skin?: string;
+  cooperative?: boolean;
+  crit?: number;
+  cute?: boolean;
+  damage_type: string;
+  /** A multiplier for monsters' gold drops */
+  difficulty?: number;
+  dreturn?: number;
+  drop_on_hit?: boolean;
+  escapist?: boolean;
+  evasion?: number;
+  explanation?: string;
+  explosion?: number;
+  frequency: number;
+  global?: boolean;
+  goldsteal?: number;
+  hide?: boolean;
+  hit?: string;
+  hp: number;
+  humanoid?: boolean;
+  immune?: boolean;
+  lifesteal?: number;
+  mp: number;
+  name: MonsterName;
+  operator?: boolean;
+  orientation?: number;
+  passive?: boolean;
+  peaceful?: boolean;
+  pet?: {
+    aggression: [number, number];
+    brightness: number;
+    chatter: [number, number];
+    courage: [number, number];
+    exponential: boolean;
+  
+    level: {
+      armor: number;
+      attack: number;
+      charge: number;
+      evasion: number;
+      hp: number;
+      resistance: number;
+      speed: number;
+    };
+    obedience: [number, number];
+    passion: [number, number];
+    xp: number;
+  };
+  phresistance?: number;
+  poisonous?: boolean;
+  prefix?: string;
+  projectile?: ProjectileKey;
   rage: number;
+  range: number;
+  rbuff?: ConditionKey;
+  reflection?: number;
+  resistance?: number;
+  respawn: number;
+  respawn_as?: MonsterKey;
+  roam?: boolean;
+  rpiercing?: number;
   s?: {
     [K in ConditionKey]?: {
       ms: number;
     };
   };
-  hp: number;
-  respawn: number;
-  range: number;
-  aggro: number;
-  immune?: boolean;
-  attack: number;
-  frequency: number;
-  damage_type: string;
-  cooperative?: boolean;
+  size?: number;
   skin: string;
-  announce?: string | boolean;
-  xp: number;
-  speed: number;
-  special?: boolean;
-  mp: number;
-  aa?: number;
-  phresistance?: number;
-  cute?: boolean;
-  avoidance?: number;
-  explanation?: string;
-  armor?: number;
-  resistance?: number;
-  charge?: number;
-  abilities?: {
-    burn?: {
-      unlimited: boolean;
-      attr0: number;
-    };
-    multi_freeze?: {
-      cooldown: number;
-      damage: number;
-    };
-    weakness_aura?: {
-      cooldown: number;
-      radius: number;
-      aura: boolean;
-      condition: ConditionKey;
-    };
-    self_healing?: {
-      heal: number;
-      cooldown: number;
-    };
-    portal?: {
-      cooldown: number;
-    };
-    multi_burn?: {
-      cooldown: number;
-      damage: number;
-    };
-    warp_on_hit?: {
-      unlimited: boolean;
-      attr0: number;
-    };
-    degen?: {
-      amount: number;
-      cooldown: number;
-    };
-    dampening_aura?: {
-      cooldown: number;
-      radius: number;
-      aura: boolean;
-      condition: ConditionKey;
-    };
-    heal?: {
-      heal: number;
-      cooldown: number;
-    };
-    mtangle?: {
-      cooldown: number;
-    };
-    stone?: {
-      cooldown: number;
-    };
-    anger?: {
-      cooldown: number;
-      radius: number;
-    };
-    warpstomp?: {
-      stun: number;
-      cooldown: number;
-      radius: number;
-    };
-    zap?: {
-      amount: number;
-      cooldown: number;
-      radius: number;
-      pure: boolean;
-    };
-    mlight?: {
-      cooldown: number;
-    };
-    deepfreeze?: {
-      cooldown: number;
-      radius: number;
-    };
-    tangle?: {
-      cooldown: number;
-    };
-    healing?: {
-      heal: number;
-      cooldown: number;
-    };
-    curse_aura?: {
-      cooldown: number;
-      radius: number;
-      aura: boolean;
-      condition: ConditionKey;
-    };
-    putrid?: {
-      curse: boolean;
-      poison: boolean;
-    };
-  };
-  hit?: string;
   slots?: {
     mainhand: {
-      name: WeaponKey;
+    
       level: number;
+      name: WeaponKey;
     };
     offhand?: {
-      name: WeaponKey;
+    
       level: number;
+      name: WeaponKey;
     };
   };
-  evasion?: number;
-  difficulty?: number;
-  rpiercing?: number;
-  lifesteal?: number;
-  cbuff?: Array<[number, ConditionKey]>;
-  crit?: number;
-  poisonous?: boolean;
-  charge_skin?: SpriteKey;
-  apiercing?: number;
-  dreturn?: number;
+  spawns?: [[number, MonsterKey]];
+  special?: boolean;
+  speed: number;
   stationary?: boolean;
-  humanoid?: boolean;
-  orientation?: number;
-  reflection?: number;
-  hide?: boolean;
-  pet?: {
-    courage: [number, number];
-    passion: [number, number];
-    exponential: boolean;
-    level: {
-      evasion: number;
-      armor: number;
-      hp: number;
-      attack: number;
-      resistance: number;
-      charge: number;
-      speed: number;
-    };
-    xp: number;
-    brightness: number;
-    chatter: [number, number];
-    obedience: [number, number];
-    aggression: [number, number];
-  };
-  size?: number;
-  spawns?: Array<[number, MonsterKey]>;
-  prefix?: string;
-  rbuff?: ConditionKey;
-  unlist?: boolean;
-  projectile?: ProjectileKey;
-  trap?: boolean;
-  operator?: boolean;
-  respawn_as?: MonsterKey;
-  peaceful?: boolean;
-  drop_on_hit?: boolean;
-  roam?: boolean;
-  global?: boolean;
-  passive?: boolean;
-  goldsteal?: number;
-  escapist?: boolean;
-  balance?: string;
-  article?: string;
-  explosion?: number;
   supporter?: boolean;
+  trap?: boolean;
+  unlist?: boolean;
+  xp: number;
+  aa?: number;
 }
