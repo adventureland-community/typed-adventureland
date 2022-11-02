@@ -1,13 +1,13 @@
 import type { NpcRole } from "../npcs/Npcs";
 
-export type CosmeticKey =
+export type CosmeticItemKey =
   | "cosmo0" // New Armor
   | "cosmo1" // New Make-up
   | "cosmo2" // New Hairdo
   | "cosmo3" // New Hat
   | "cosmo4"; // New Accessory
 
-export interface GCosmetic {
+export interface GCosmeticItem {
   cash: number;
   /** Refers to how many items are needed to exchange (see .quest as well!) */
   e?: number;
@@ -21,7 +21,7 @@ export interface GCosmetic {
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: number;
   /** The skin of the item. */
-  skin: CosmeticKey;
+  skin: CosmeticItemKey;
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: "cosmetics";
 }

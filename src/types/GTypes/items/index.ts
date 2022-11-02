@@ -10,7 +10,7 @@ export * from "./Chrysalis";
 export * from "./CompoundScroll";
 export * from "./Computer";
 export * from "./Container";
-export * from "./Cosmetics";
+export * from "./CosmeticsItems";
 export * from "./DungeonKey";
 export * from "./Earring";
 export * from "./Elixir";
@@ -43,7 +43,7 @@ export * from "./StatScroll";
 export * from "./Stone";
 export * from "./Test";
 export * from "./Throw";
-export * from "./Token";
+export * from "./TokenItem";
 export * from "./Tome";
 export * from "./Tool";
 export * from "./Tracker";
@@ -64,7 +64,7 @@ import type { ChrysalisKey, GChrysalis } from "./Chrysalis";
 import type { CompoundScrollKey, GCompoundScroll } from "./CompoundScroll";
 import type { ComputerKey, GComputer } from "./Computer";
 import type { ContainerKey, GContainer } from "./Container";
-import type { CosmeticKey, GCosmetic } from "./Cosmetics";
+import type { CosmeticItemKey, GCosmeticItem } from "./CosmeticsItems";
 import type { DungeonKeyKey, GDungeonKey } from "./DungeonKey";
 import type { EarringKey, GEarring } from "./Earring";
 import type { ElixirKey, GElixir } from "./Elixir";
@@ -97,7 +97,7 @@ import type { StatScrollKey, GStatScroll } from "./StatScroll";
 import type { StoneKey, GStone } from "./Stone";
 import type { TestKey, GTest } from "./Test";
 import type { ThrowKey, GThrow } from "./Throw";
-import type { TokenKey, GToken } from "./Token";
+import type { TokenKey, GTokenItem } from "./TokenItem";
 import type { TomeKey, GTome } from "./Tome";
 import type { ToolKey, GTool } from "./Tool";
 import type { TrackerKey, GTracker } from "./Tracker";
@@ -118,7 +118,7 @@ export type ItemKey =
   | CompoundScrollKey
   | ComputerKey
   | ContainerKey
-  | CosmeticKey
+  | CosmeticItemKey
   | DungeonKeyKey
   | EarringKey
   | ElixirKey
@@ -172,7 +172,7 @@ export type GItemRaw =
   | GCompoundScroll
   | GComputer
   | GContainer
-  | GCosmetic
+  | GCosmeticItem
   | GDungeonKey
   | GEarring
   | GElixir
@@ -205,7 +205,7 @@ export type GItemRaw =
   | GStone
   | GTest
   | GThrow
-  | GToken
+  | GTokenItem
   | GTome
   | GTool
   | GTracker

@@ -2,7 +2,7 @@ import type { AchievementKey } from "../achievements/Achievements";
 import type { TokenKey } from "../tokens/Tokens";
 export type { TokenKey };
 
-export interface GToken {
+export interface GTokenItem {
   explanation: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;

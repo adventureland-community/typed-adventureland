@@ -71,8 +71,7 @@ export * from "./games";
 export * from "./geometry";
 export * from "./images";
 export * from "./imagesets";
-// TODO: Module "./cosmetics" has already exported a member named 'GCosmetic'. Consider explicitly re-exporting to resolve the ambiguity.ts(2308)
-// export * from "./items";
+export * from "./items";
 export * from "./levels";
 export * from "./maps";
 export * from "./monsters";
@@ -84,5 +83,4 @@ export * from "./skills";
 export * from "./sprites";
 export * from "./tilesets";
 export * from "./titles";
-// TODO: Module "./items" has already exported a member named 'GToken'. Consider explicitly re-exporting to resolve the ambiguity.ts(2308)
 export * from "./tokens";
