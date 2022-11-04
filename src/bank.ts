@@ -11,6 +11,8 @@ declare global {
     [T in BankPackType]: [MapKey, number, number];
   };
 
+  function bank_retrieve(pack: string, pack_slot: number, slot?: number): Promise<void>;
+  
   /**
    * Deposits the given amount of gold in the bank. You must be in the bank to actually deposit gold.
    * @param amount The amount of gold to deposit

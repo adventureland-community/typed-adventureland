@@ -17,7 +17,9 @@ declare global {
     stop_runner(): void;
 
     sprite_image(name: string, args?: any): string;
-
+    smart_eval(code: string): void;
+    open_chest(id: string | number): Promise<void>;
+    d_text(message: string, entity: CharacterEntity, args?: { color: string }): void;
     //   is_disabled(entity: Entity): boolean;
 
     //   character: CharacterEntity;

@@ -19,6 +19,7 @@ export interface EntityBase {
   };
 
   // TODO: pickpocket, town, what exactly is .c?
+  /** Channeling actions */
   c: {
     pickpocket?: {
       ms: number;
@@ -26,6 +27,16 @@ export interface EntityBase {
     };
     town?: {
       ms: number;
+    };
+    revival?: {
+      /** name of the priest trying to revive you. */
+      f: string;
+    };
+    fishing?: {
+      drop: any; //GDrops;
+    };
+    mining?: {
+      drop: any; //GDrops;
     };
   };
 

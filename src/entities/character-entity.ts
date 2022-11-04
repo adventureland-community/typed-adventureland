@@ -27,7 +27,9 @@ export interface CharacterEntity extends EntityBase {
   afk: string | boolean;
   /** Age in days */
   age: number;
+  /** visual width */
   aheight: number;
+  /** visual height */
   awidth: number;
   code?: boolean;
   /** The character name that controls the character, assuming it being run in an iframe. */
@@ -75,7 +77,6 @@ export interface CharacterEntity extends EntityBase {
   pdps: number | null;
   player: boolean;
 
-  
   /** Progressed actions */
   q: {
     compound?: {
@@ -107,7 +108,7 @@ export interface CharacterEntity extends EntityBase {
   };
 
   ref_speed?: number;
-  
+
   /** If true, the player is dead. */
   rip: boolean | number;
   rtexture?: boolean;
@@ -120,8 +121,8 @@ export interface CharacterEntity extends EntityBase {
   } & {
     [T in TradeSlotType]?: TradeItemInfo | null;
   };
-  
-  /** If set, the merchant has a stand open */
+
+  /** The name of the current open stand or false */
   stand?: StandKey | string | boolean;
   /** If set, the merchant has a stand open */
   standed?: {
@@ -153,4 +154,7 @@ export interface CharacterEntity extends EntityBase {
   type: "character";
 
   width: number | null;
+
+  /** The team you are on in the abtesting event. */
+  team: "A" | "B";
 }

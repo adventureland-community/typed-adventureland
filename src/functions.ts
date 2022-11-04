@@ -1,6 +1,8 @@
-import { CharacterEntity } from "./character";
+import { CharacterEntity } from "./entities/character-entity";
+import { MonsterEntity } from "./entities/monster-entity";
+import { NpcEntity } from "./entities/npc-entity";
 import { SlotType, TradeSlotType } from "./entities/slots";
-import { Entity, EntityBase } from "./entity";
+import { Entity } from "./entity";
 import { ItemInfo } from "./items";
 import { IPosition, PositionReal, PositionMovable, PositionSmart } from "./position";
 import { EventKey } from "./types/GTypes/events";
@@ -13,8 +15,31 @@ import { SkillKey } from "./types/GTypes/skills";
 export {};
 // TODO: ALL of theese types need to be validated and verified. and potentially extracted out into meaningfull files
 declare global {
+  function get_characters(): OnlineCharacter[];
+
+  function is_monster(entity: MonsterEntity): entity is MonsterEntity;
+  function is_character(entity: CharacterEntity): entity is CharacterEntity;
+
+  function resolving_promise<T>(data: T): Promise<T>;
+
+  function sleep(ms: number): Promise<void>;
+  function log(msg: string, color?: string): void;
+  function add_top_button(id: string, text: string, fn: () => unknown): void;
+  function add_bottom_button(id: string, text: string, fn: () => unknown): void;
+  function calculate_item_value(item: ItemInfo, m?: number): number;
+
   function open_stand(inventoryIndex?: number): Promise<any>;
   function close_stand(): Promise<any>;
+
+  function get_party(): Record<string, PartyCharacter>;
+
+  function is_object(arg: unknown): boolean;
+
+  /** Shuffles the elements of the array. */
+  function shuffle<T>(arr: Array<T>): Array<T>;
+
+  /** Called just before the CODE is destroyed */
+  function on_destroy(): void;
 
   // function draw_circle(x: number, y: number, radius: number, size: number, color: number): any;
   function unmap_key(key: string): void;
@@ -343,7 +368,8 @@ declare global {
    * @param entity The moveable entity you want to check is movable
    * @returns TRUE if you can move there, FALSE otherwise
    */
-  export function can_move(position: PositionMovable & { base: EntityBase }): boolean;
+   export function can_move(position: PositionMovable ): boolean;
+  // export function can_move(position: PositionMovable & { base: EntityBase }): boolean;
   /**
    * Checks if you can move your character to the given destination on your current map
    * @param destination A position object containing the destination coordinates
@@ -435,3 +461,42 @@ declare global {
  * [8]: ??? There's reference to "complicated" in smart_move?
  */
 export type DoorInfo = [number, number, number, number, MapKey, number?, number?, string?, string?];
+
+interface OnlineCharacter {
+  x: number;
+  y: number;
+  map: MapKey;
+  in: string;
+  name: string;
+  level: number;
+  skin: string;
+  server: string;
+  secret: string;
+  cx?: {
+    head?: string;
+    hair?: string;
+  };
+  online: number;
+  type: string;
+  id: string;
+}
+
+export interface PartyCharacter {
+  x: number;
+  y: number;
+  map: MapKey;
+  in: string;
+  skin: string;
+  level: number;
+  type: string;
+  share: number;
+  pdps: number;
+  l: number;
+  xp: number;
+  luck: number;
+  gold: number;
+  cx?: {
+    head?: string;
+    hair?: string;
+  };
+}
