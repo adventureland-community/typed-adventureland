@@ -18,8 +18,16 @@ export interface EntityBase {
     vn: number;
   };
 
-  // TODO: pickpocket, town, what exactly is .c?
-  /** Channeling actions */
+  // TODO: pickpocket, town, what exactly is .c? some conditions have channeling property
+  // Object.entries(G.conditions).filter(([key,condition]) => condition.channel)
+  // mining, pickpocket, fishing, town
+  // but other things can be channeling as well
+  /** Channeling actions 
+   * some conditions have channeling property
+   * `Object.entries(G.conditions).filter(([key,condition]) => condition.channel)`
+   * mining, pickpocket, fishing, town
+   * but other skills can be channeling as well
+  */
   c: {
     pickpocket?: {
       ms: number;
@@ -212,7 +220,7 @@ export interface EntityBase {
   map: MapKey;
 
   move_num?: number;
-  /** Is the character currently moving? */
+  /** Is the entity currently moving? */
   moving: boolean;
   ms_walk?: string;
 
