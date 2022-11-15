@@ -16,7 +16,7 @@
     "Typescript",
     "Autocomplete"
   ],
-  "author": "",
+  "author": "adventureland-community",
   "license": "MIT",
   "scripts": {
     "build": "tsc && echo Emitted declaration files",

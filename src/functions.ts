@@ -1,6 +1,5 @@
 import { CharacterEntity } from "./entities/character-entity";
 import { MonsterEntity } from "./entities/monster-entity";
-import { NpcEntity } from "./entities/npc-entity";
 import { SlotType, TradeSlotType } from "./entities/slots";
 import { Entity } from "./entity";
 import { ItemInfo } from "./items";
@@ -368,7 +367,7 @@ declare global {
    * @param entity The moveable entity you want to check is movable
    * @returns TRUE if you can move there, FALSE otherwise
    */
-   export function can_move(position: PositionMovable ): boolean;
+  export function can_move(position: PositionMovable): boolean;
   // export function can_move(position: PositionMovable & { base: EntityBase }): boolean;
   /**
    * Checks if you can move your character to the given destination on your current map
