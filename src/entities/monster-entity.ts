@@ -7,8 +7,10 @@ import { StatusInfo } from "./status-info";
 export interface MonsterEntity extends EntityBase {
   // Attributes
   /** Damage Return. */
-  dreturn?: number; // TODO: stats, should be on characters as wel?
-  hp: number | null;
+  dreturn?: number; // TODO: stats, should be on characters as well?
+
+  /** HP can be null for mtype === "target_ar900" */
+  hp: number;
   max_hp: number;
   mp: number;
   max_mp: number;

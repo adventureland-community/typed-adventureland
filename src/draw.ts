@@ -16,8 +16,9 @@ declare global {
     x2: number,
     y2: number,
     thickness?: number,
-    color?: string | number // TODO: should really be a hex number
+    color?: number // TODO: should really be a hex number
   ): PIXI.Graphics;
+
   /**
    *
    * @param x
@@ -31,6 +32,6 @@ declare global {
     y: number,
     radius: number,
     thickness?: number,
-    color?: string
+    color?: number
   ): PIXI.Graphics;
 }

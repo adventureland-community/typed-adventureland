@@ -1,174 +1,18 @@
 import { CodeMessageEvent } from "./codemessage";
 import { ItemInfo } from "./items";
+import { TypedEventEmitter } from "./TypedEventEmitter";
 import { ItemKey } from "./types/GTypes/items";
 import { MapKey } from "./types/GTypes/maps";
 
-declare global {
-  interface Character {
-    on(
-      event: "death",
-      callback: (data: {
-        /** True when your code executes with a dead character */
-        past: boolean;
-      }) => void
-    ): void;
+export type CharacterWithEventsFunctions = Pick<
+  TypedEventEmitter<CharacterEvents>,
+  "on" | "once"
+> & {
+  on<T>(event: "cm", callback?: (data: CodeMessageEvent<T>) => void): void;
+  once<T>(event: "cm", callback?: (data: CodeMessageEvent<T>) => void): void;
 
-    on(event: "respawn", callback?: (data: any) => void): void;
-
-    on<T>(event: "cm", callback?: (data: CodeMessageEvent<T>) => void): void;
-
-    on(event: "gold_sent", callback?: (data: GoldSentEvent) => void): void;
-
-    on(
-      event: "gold_received",
-      callback?: (data: GoldReceivedEvent) => void
-    ): void;
-
-    on(event: "buy", callback?: (data: BuyEvent) => void): void;
-    on(event: "sell", callback?: (data: SellEvent) => void): void;
-    on(event: "loot", callback?: (data: LootEvent) => void): void;
-    on(event: "target_hit", callback?: (data: HitData) => void): void;
-    on(event: "hit", callback?: (data: HitData) => void): void;
-
-    on(
-      event: "level_up",
-      callback?: (data: {
-        /** New level */
-        level: number;
-      }) => void
-    ): void;
-
-    on(
-      event: "new_map",
-      callback?: (data: {
-        /** The identifier used for accessing `G.maps` for exampple `G.maps.main` */
-        name: MapKey;
-
-        /** Either the map name you are on, or the unique ID of an instance you are inside. */
-        in: string;
-      }) => void
-    ): void;
-
-    on(
-      event: "mluck",
-      callback?: (data: {
-        /** Character Name  */
-        name: string;
-
-        item: ItemInfo;
-
-        /** Inventory slot */
-        num: number;
-      }) => void
-    ): void;
-
-    on(
-      event: "item_received",
-      callback?: (data: {
-        /** Character name that sent you the item */
-        name: string;
-        item: ItemKey;
-        q: number;
-        /** The inventory #*/
-        num: number;
-      }) => void
-    ): void;
-
-    on(
-      event: "item_sent",
-      callback?: (data: {
-        /** Character name that sent you the item */
-        name: string;
-        item: ItemKey;
-        q: number;
-        /** The inventory #*/
-        num: number;
-      }) => void
-    ): void;
-
-    on(
-      event: "mail_sent",
-      callback?: (data: {
-        to: string;
-        // There's also a "mail_failed" with a reason
-      }) => void
-    ): void;
-
-    on(
-      event: "mail_failed",
-      callback?: (data: {
-        // TODO: but what mail failed?
-        reason: string;
-      }) => void
-    ): void;
-
-    on(
-      event: "craft",
-      callback?: (data: {
-        name: ItemKey;
-        /** Inventory index */
-        num: number;
-      }) => void
-    ): void;
-    on(event: "dismantle", callback?: (data: { name: ItemKey }) => void): void;
-
-    on(
-      event: "sale",
-      callback?: (data: {
-        /** character name */
-        buyer: string;
-        item: ItemInfo; //{ name: "staff"; level: 9 }; // ItemInfo?
-        slot: string; // TODO: trade slot type, e.g. trade8
-      }) => void
-    ): void;
-    on(
-      event: "exchange_buy",
-      callback?: (data: {
-        // Token Exchange
-        /** Inventory index */
-        num: number;
-      }) => void
-    ): void;
-    /**
-     * If you target 4+ monsters, they start dealing increased damage
-     * This behaviour is called "mobbing"
-     * @param event
-     * @param callback
-     */
-    on(
-      event: "mobbing",
-      callback?: (data: {
-        /** The intensity increases with each hit */
-        intensity: number;
-      }) => void
-    ): void;
-
-    /**
-     * If you place your characters on top of each other
-     * Monsters deal stacked/increasing damage to all the stacked characters
-     * When this event is triggered, scatter your characters
-     * @param event
-     * @param callback
-     */
-    on(
-      event: "stacked",
-      callback?: (data: {
-        /**
-         * A list of characternames that are stacked.
-         */
-        ids: string[]; //["CharacterName1","CharacterName2","..."],
-      }) => void
-    ): void;
-
-    /**
-     * Sets up an event listener for the character. See http://adventure.land/docs/code/character/events for more info.
-     * @param event The event name to listen to
-     * @param callback The function that gets called when the event triggers
-     */
-    on(event: string, callback?: (data: any) => void): void;
-    all(callback?: (name: any, data: any) => void): void;
-  }
-}
+  all(callback?: (name: any, data: any) => void): void;
+};
 
 export interface LootEvent {
   id: string;
@@ -195,6 +39,7 @@ export interface LootEvent {
   /** Items found in chest */
   items: Array<LootedItem>;
 }
+
 export interface SellEvent {
   success: boolean;
   response: string;
@@ -205,6 +50,7 @@ export interface SellEvent {
   /** Gold earned */
   gold: number;
 }
+
 export interface BuyEvent {
   name: ItemKey;
 
@@ -233,6 +79,7 @@ export type GoldSentEvent =
       name: string;
       gold: number;
     };
+
 export type GoldReceivedEvent =
   | {
       /** Sender Name */
@@ -247,6 +94,7 @@ export type GoldReceivedEvent =
 
       gold: number;
     };
+
 export interface LootedItem {
   name: ItemKey;
 
@@ -377,14 +225,36 @@ export interface CharacterEvents {
     num: number;
   };
   // TODO: could perhaps share an interface for item send/receive
-  item_received: {
-    /** Character name that sent you the item */
-    name: string;
-    item: ItemKey;
-    q: number;
-    /** The inventory #*/
-    num: number;
-  };
+  item_received:
+    | {
+        /** This is the one you should rely on. */
+        response: "item_received";
+
+        /** Item name */
+        item: ItemKey;
+
+        /** Character Name  */
+        name: string;
+
+        /** Quantity */
+        q?: number;
+
+        /** Inventory slot */
+        num: number;
+      }
+    | {
+        /** Item name */
+        name: ItemKey;
+
+        /** Character Name  */
+        from: string;
+
+        /** Quantity */
+        q?: number;
+
+        /** Inventory slot */
+        num: number;
+      };
   item_sent: {
     /** Character name that sent you the item */
     name: string;
@@ -440,33 +310,3 @@ export interface CharacterEvents {
     ids: string[]; //["CharacterName1","CharacterName2","..."],
   };
 }
-
-// export interface TypedEventEmitter<
-//     Events,
-//     VoidKeys extends KeysOfType<Events, void> = KeysOfType<Events, void>,
-//     NotVoidKeys extends Exclude<keyof Events, VoidKeys> = Exclude<keyof Events, VoidKeys>,
-// > {
-//     on<K extends NotVoidKeys>(eventName: K, callback: (payload: Events[K]) => void): void;
-//     on<K extends VoidKeys>(eventName: K, callback: () => void): void;
-
-//     once<K extends NotVoidKeys>(eventName: K, callback: (payload: Events[K]) => void): void;
-//     once<K extends VoidKeys>(eventName: K, callback: () => void): void;
-
-//     emit<K extends NotVoidKeys>(eventName: K, payload: Events[K]): void;
-//     emit<K extends VoidKeys>(eventName: K): void;
-// }
-
-// export type StrictEventEmitter<Events, EventEmitter> = TypedEventEmitter<Events> &
-//     PickMembers<EventEmitter, Exclude<keyof EventEmitter, keyof TypedEventEmitter<Events>>>;
-
-// export type StrictEventEmitterPicked<
-//     Events,
-//     EventEmitter,
-//     Picked extends keyof TypedEventEmitter<Events>,
-//     TEE extends TypedEventEmitter<Events> = TypedEventEmitter<Events>,
-// > = PickMembers<TEE, Extract<keyof TEE, Picked>> &
-//     PickMembers<EventEmitter, Exclude<keyof EventEmitter, keyof Pick<TEE, Picked>>>;
-// // used like this
-// const character: ICharacter & Pick<TypedEventEmitter<CharacterEvents>, "on">;
-
-// https://www.npmjs.com/package/@telokys/ts-meta-types
