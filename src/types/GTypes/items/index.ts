@@ -159,59 +159,65 @@ export type ItemKey =
   | WeaponKey
   | XPKey;
 
-export type GItemRaw =
-  | GActivator
-  | GAmulet
-  | GBankKey
-  | GBelt
-  | GBooster
-  | GBox
-  | GCape
-  | GChest
-  | GChrysalis
-  | GCompoundScroll
-  | GComputer
-  | GContainer
-  | GCosmeticItem
-  | GDungeonKey
-  | GEarring
-  | GElixir
-  | GFlute
-  | GGem
-  | GGlove
-  | GHelmet
-  | GJar
-  | GLicence
-  | GMaterial
-  | GMisc
-  | GMiscOffhand
-  | GOffering
-  | GOrb
-  | GPant
-  | GPetLicence
-  | GPlaceholder
-  | GPot
-  | GQubics
-  | GQuest
-  | GQuiver
-  | GRing
-  | GShield
-  | GShoe
-  | GSkillItem
-  | GSource
-  | GSpawner
-  | GStand
-  | GStatScroll
-  | GStone
-  | GTest
-  | GThrow
-  | GTokenItem
-  | GTome
-  | GTool
-  | GTracker
-  | GUpgradeScroll
-  | GWeapon
-  | GXP;
+type GItemDynamic = {
+  buy: boolean | undefined;
+};
+
+export type GItemRaw = GItemDynamic &
+  (
+    | GActivator
+    | GAmulet
+    | GBankKey
+    | GBelt
+    | GBooster
+    | GBox
+    | GCape
+    | GChest
+    | GChrysalis
+    | GCompoundScroll
+    | GComputer
+    | GContainer
+    | GCosmeticItem
+    | GDungeonKey
+    | GEarring
+    | GElixir
+    | GFlute
+    | GGem
+    | GGlove
+    | GHelmet
+    | GJar
+    | GLicence
+    | GMaterial
+    | GMisc
+    | GMiscOffhand
+    | GOffering
+    | GOrb
+    | GPant
+    | GPetLicence
+    | GPlaceholder
+    | GPot
+    | GQubics
+    | GQuest
+    | GQuiver
+    | GRing
+    | GShield
+    | GShoe
+    | GSkillItem
+    | GSource
+    | GSpawner
+    | GStand
+    | GStatScroll
+    | GStone
+    | GTest
+    | GThrow
+    | GTokenItem
+    | GTome
+    | GTool
+    | GTracker
+    | GUpgradeScroll
+    | GWeapon
+    | GXP
+  );
 
 export type GItem = BetterUXWrapper<GItemRaw>;
 

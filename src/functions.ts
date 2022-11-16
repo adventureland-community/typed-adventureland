@@ -10,14 +10,15 @@ import { MapKey } from "./types/GTypes/maps";
 import { MonsterKey } from "./types/GTypes/monsters";
 import { NpcKey } from "./types/GTypes/npcs";
 import { SkillKey } from "./types/GTypes/skills";
+import { BetterUXWrapper } from "./types/GTypes/utils";
 
 export {};
 // TODO: ALL of theese types need to be validated and verified. and potentially extracted out into meaningfull files
 declare global {
   function get_characters(): OnlineCharacter[];
 
-  function is_monster(entity: MonsterEntity): entity is MonsterEntity;
-  function is_character(entity: CharacterEntity): entity is CharacterEntity;
+  function is_monster(entity: Entity): entity is MonsterEntity;
+  function is_character(entity: Entity): entity is CharacterEntity;
 
   function resolving_promise<T>(data: T): Promise<T>;
 
@@ -25,6 +26,9 @@ declare global {
   function log(msg: string, color?: string): void;
   function add_top_button(id: string, text: string, fn: () => unknown): void;
   function add_bottom_button(id: string, text: string, fn: () => unknown): void;
+
+  function set_button_value(id: string, text: string): void;
+
   function calculate_item_value(item: ItemInfo, m?: number): number;
 
   function open_stand(inventoryIndex?: number): Promise<any>;
@@ -34,13 +38,28 @@ declare global {
 
   function is_object(arg: unknown): boolean;
 
+  /**
+   * Moves the item at slot `slot` to slot `destSlot`.
+   * Combines into slot `destSlot` if possible.
+   * @param destSlot If combination is possible, items will end up here.
+   * @param slot Second slot to swap/combine.
+   */
+  function swap(destSlot: number, slot: number): Promise<unknown>;
+
+  /**
+   * Created a new item instance (ALWAYS) with exactly `count` items
+   * taken from the slot `slot`.
+   * @param slot Slot to split.
+   * @param count How many items should be in the new slot.
+   */
+  function split(slot: number, count: number): Promise<unknown>;
+
   /** Shuffles the elements of the array. */
   function shuffle<T>(arr: Array<T>): Array<T>;
 
   /** Called just before the CODE is destroyed */
   function on_destroy(): void;
 
-  // function draw_circle(x: number, y: number, radius: number, size: number, color: number): any;
   function unmap_key(key: string): void;
   function map_key(key: string, thing: string, arg?: string): void;
   function load_code(nameOrSlot: string | number, onerror?: any): void;
@@ -148,34 +167,34 @@ declare global {
   /**
    * Runs the given code snippet for the given character.
    * @param character The name of the character
-   * @param code The code snippet to run
+   * @param code The code snippet to run (using eval)
    */
-  // TODO: I think the code snippet is the actual code, not the name of a saved piece of code, but I need to confirm.
   function command_character(character: string, code: string): void;
+
   /**
    * Compounds the three items for a chance at obtaining 1 higher level item of the same kind.
-   * @param item1 The inventory position of the first item
-   * @param item2 The inventory position of the second item
-   * @param item3 The inventory position of the third item
-   * @param scroll The inventory position of the scroll to use to combine the three items
-   * @param offering The inventory position of the offering (e.g. Primordial Essence) to use
+   * @param itemSlot1 The inventory position of the first item
+   * @param itemSlot2 The inventory position of the second item
+   * @param itemSlot3 The inventory position of the third item
+   * @param scrollSlot The inventory position of the scroll to use to combine the three items
+   * @param offeringSlot The inventory position of the offering (e.g. Primordial Essence) to use
+   * @param onlyCalculate If set to true, no action if performed and the success chance is returned.
    */
-  // TODO: Change the "any" to the promise that this function returns
   function compound(
-    item1: number,
-    item2: number,
-    item3: number,
-    scroll: number,
-    offering?: number
-  ): Promise<CompoundSuccessResponse | CompoundFailureResponse>;
-
+    itemSlot1: number,
+    itemSlot2: number,
+    itemSlot3: number,
+    scrollSlot: number,
+    offeringSlot?: number | null,
+    onlyCalculate?: false
+  ): Promise<BetterUXWrapper<CompoundSuccessResponse | CompoundFailureResponse>>;
   function compound(
-    item1: number,
-    item2: number,
-    item3: number,
-    scroll: number,
-    offering?: number,
-    only_calculate?: boolean
+    itemSlot1: number,
+    itemSlot2: number,
+    itemSlot3: number,
+    scrollSlot: number,
+    offeringSlot: number | null,
+    onlyCalculate: true
   ): Promise<CompoundCalculateResponse>;
 
   type CompoundSuccessResponse = {
@@ -237,10 +256,9 @@ declare global {
   function distance(from: IPosition | PositionReal, to: IPosition | PositionReal): number;
 
   function equip(inventoryPostion: number, slot?: SlotType): any;
-  function exchange(inventoryPosition: number): Promise<any>;
   function game_log(message: string, color?: string): any;
   function get<T>(key: string): T;
-  function get_targeted_monster(): Entity;
+  function get_targeted_monster(): MonsterEntity | null;
   function get_target(): CharacterEntity | Entity | null;
   function get_target_of(entity: Entity): Entity | null;
   function get_player(name: string): CharacterEntity;
@@ -312,32 +330,51 @@ declare global {
   /** stops moving, or channeled actions */
   function stop(action?: string): any;
   function stop_character(name: string): any;
-  /** Swap the position of two items in the player's inventory */
-  function swap(index1: number, index2: number): any;
   /** For buying things off players' merchants */
   function trade_buy(target: Entity, trade_slot: number): any;
   function transport(map: MapKey, spawn?: number): any;
   function unequip(slot: SlotType | TradeSlotType): any;
 
-  // TODO: do better typing for this.
-  // /** Allows you to specify the calculate chance  */
-  // function upgrade(
-  //   itemInventoryPosition: number,
-  //   scrollInventoryPosition: number,
-  //   offeringInventoryPosition?: number,
-  //   calculate?: true
-  // ): Promise<{
-  //   chance: number;
-  //   item: { name: ItemKey; gift: number; level: number };
-  //   grace: number;
-  //   scroll: string;
-  //   calculate: boolean;
-  // }>;
   function upgrade(
-    itemInventoryPosition: number,
-    scrollInventoryPosition: number,
-    offeringInventoryPosition?: number
-  ): Promise<any>;
+    item_slot: number,
+    scroll_slot: number,
+    offering_slot?: number | null,
+    only_calculate?: false
+  ): Promise<{
+    success: boolean;
+    level: number;
+
+    stat?: boolean;
+    stat_type?: string;
+
+    /** Slot index */
+    num: number;
+  }>;
+  function upgrade(
+    item_slot: number,
+    scroll_slot: number,
+    offering_slot: number | null,
+    only_calculate: true
+  ): Promise<{
+    success: boolean;
+    level: number;
+
+    /** Success chance */
+    chance: number;
+
+    stat?: boolean;
+    stat_type?: string;
+
+    /** Slot index */
+    num: number;
+  }>;
+
+  function exchange(item_slot: number): Promise<{
+    success: boolean;
+
+    /** Slot index */
+    num: number;
+  }>;
 
   function trade(
     inventoryPosition: number,

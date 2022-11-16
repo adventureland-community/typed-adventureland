@@ -18,6 +18,16 @@ export type ManaPotion = "mpot0" | "mpot1" | "mpotx";
 
 // gift is an item we got gifted from the start, gifts can only be sold for 1 gold, if you add items to a gift stack, they also becomes gifts.
 
+export type ItemInfoPValues =
+  | "festive"
+  | "firehazard"
+  | "glitched"
+  | "gooped"
+  | "legacy"
+  | "lucky"
+  | "shiny"
+  | "superfast";
+
 /** the item instance used different places, your inventory, merchant stand, bank and other places */
 export type ItemInfo = {
   acc?: number;
@@ -27,6 +37,12 @@ export type ItemInfo = {
   /** If item was gifted to you making your initial characters, sell value is 1 gold */
   gift?: 1;
 
+  /** Checked to determine Ponty prices. */
+  cash?: number;
+
+  /** Unique id used for trading. */
+  rid?: string;
+
   l?: string; // TODO: figure out what this is.
   ld?: string; // TODO: figure out what this is.
   /** Set if the item is compoundable or upgradable */
@@ -34,7 +50,7 @@ export type ItemInfo = {
   m?: string; // TODO: figure out what this is
   name: ItemKey;
   /** Is this item a special item? */
-  p?: "shiny" | "glitched" | "superfast" | "lucky";
+  p?: ItemInfoPValues;
   // can also have theese apparently abtesting, firehazard, festive, critmonger, glitched, lucky, legacy, fast, gooped, stomped, shiny, superfast, sniper
   ps?: [string]; // TODO: figure out what it is
   /** How many of this item we have. Set if the item is stackable. */

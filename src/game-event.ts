@@ -1,153 +1,12 @@
 import { ItemInfo } from "./items";
+import { TypedEventEmitter } from "./TypedEventEmitter";
 import { ItemKey } from "./types/GTypes/items";
 import { MapKey } from "./types/GTypes/maps";
 import { NpcKey } from "./types/GTypes/npcs";
 
-/*
-game.all(function(name,data){
-	data.event_name=name;
-	console.log(data);
-});
-*/
-
-declare global {
-  interface Game {
-    on(
-      event: "level_up",
-      callback?: (data: {
-        /** Character name */
-        name: string;
-        level: number;
-      }) => void
-    ): void;
-
-    on(
-      event: "event",
-      callback?: (data: {
-        /** snowman, pinkgoo, wabbit, franky, grinch */
-        name: string; // TODO: strongly typed names?
-        map?: MapKey;
-        x?: number;
-        y?: number;
-        // TODO: are there other data types for event?
-      }) => void
-    ): void;
-
-    on(
-      event: "trade",
-      callback?: (data: {
-        /** Character name */
-        seller: string;
-        /** Character name */
-        buyer: string;
-        item: ItemInfo;
-        slot: string; //"trade8"; // TODO: trade slots
-      }) => void
-    ): void;
-
-    on(event: "action", callback?: (data: ActionEvent) => void): void;
-
-    on(event: "hit", callback?: (data: GameHitEvent) => void): void;
-
-    on(
-      event: "death",
-      callback?: (data: {
-        /**
-         * Charactername or monster id
-         */
-        id: string;
-      }) => void
-    ): void;
-
-    on(
-      event: "shutdown",
-      callback?: (data: {
-        /**
-         * Server shutdown in 20 seconds
-         */
-        seconds: number;
-      }) => void
-    ): void;
-
-    on(event: "sell", callback?: (data: GameSellEvent) => void): void;
-
-    on(event: "buy", callback?: (data: GameBuyEvent) => void): void;
-
-    on(event: "sbuy", callback?: (data: GamePontyBuy) => void): void;
-
-    on(event: "fbuy", callback?: (data: GameLostAndFoundBuy) => void): void;
-
-    on(
-      event: "item_sent",
-      callback?: (data: {
-        // Player to player item transfer
-        sender: string;
-        receiver: string;
-        item: ItemInfo;
-      }) => void
-    ): void;
-
-    on(
-      event: "gold_sent",
-      callback?: (data: {
-        // Player to player item transfer
-        sender: string;
-        receiver: string;
-        gold: number;
-      }) => void
-    ): void;
-
-    on(
-      event: "cx_sent",
-      callback?: (data: {
-        // cosmetics transfer
-        sender: string;
-        receiver: string;
-        cx: string; // hat999 // TODO: cosmetics key?
-      }) => void
-    ): void;
-
-    on(
-      event: "mluck",
-      callback?: (data: {
-        /** Character Name  */
-        name: string;
-
-        item: ItemInfo;
-
-        /** Inventory slot */
-        num: number;
-      }) => void
-    ): void;
-
-    on(
-      event: "api_response",
-      callback?: (
-        data:
-          | any
-          | {
-              type: string; // "servers_and_characters";
-              servers: [];
-              characters: [];
-              // TODO: there is a lot of different types of api responses, depending on api call
-            }
-      ) => void
-    ): void;
-
-    /**
-     * Sets up an event listener for the game. See http://adventure.land/docs/code/game/events for more info.
-     * @param event The event name to listen to
-     * @param callback The function that gets called when the event triggers
-     */
-    on(event: string, callback?: (data: any) => void): void;
-
-    /**
-     * Regisers to all events.
-     * @param callback
-     */
-    all(callback?: (name: any, data: any) => void): void;
-  }
-}
+export type GameWithEventsFunctions = Pick<TypedEventEmitter<GameEvents>, "on" | "once"> & {
+  all(callback?: (name: any, data: any) => void): void;
+};
 
 export interface GameHitEvent {
   source: string;
@@ -292,5 +151,94 @@ export interface GameLostAndFoundBuy {
     level: number;
     rid: string;
     q: number;
+  };
+}
+
+export interface GameEvents {
+  level_up: {
+    /** Character name */
+    name: string;
+    level: number;
+  };
+  event: {
+    /** snowman, pinkgoo, wabbit, franky, grinch */
+    name: string; // TODO: strongly typed names?
+    map?: MapKey;
+    x?: number;
+    y?: number;
+    // TODO: are there other data types for event?
+  };
+  shutdown: {
+    /**
+     * Server shutdown in 20 seconds
+     */
+    seconds: number;
+  };
+  item_sent: {
+    // Player to player item transfer
+    sender: string;
+    receiver: string;
+    item: ItemInfo;
+  };
+  gold_sent: {
+    // Player to player item transfer
+    sender: string;
+    receiver: string;
+    gold: number;
+  };
+  cx_sent: {
+    // cosmetics transfer
+    sender: string;
+    receiver: string;
+    cx: string; // hat999 // TODO: cosmetics key?
+  };
+  api_response:
+    | any
+    | {
+        type: string; // "servers_and_characters";
+        servers: [];
+        characters: [];
+        // TODO: there is a lot of different types of api responses, depending on api call
+      };
+  /** Item bought from Ponty */
+  sbuy: {
+    /** Character who triggered the event */
+    name: string;
+    item: ItemInfo;
+  };
+  /** Item bought from Lost and Found */
+  fbuy: {
+    /** Character who triggered the event */
+    name: string;
+    item: {
+      name: ItemKey;
+      level: number;
+      rid: string;
+      q: number;
+    };
+  };
+  death: {
+    /** Character Name or Monster ID  */
+    id: string;
+  };
+  mluck: {
+    /** Character Name  */
+    name: string;
+
+    item: ItemInfo;
+
+    /** Inventory slot */
+    num: number;
+  };
+  trade: {
+    /** Character Name  */
+    seller: string;
+
+    /** Character Name  */
+    buyer: string;
+
+    item: ItemInfo;
+
+    slot: string;
   };
 }

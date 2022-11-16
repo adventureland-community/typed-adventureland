@@ -9,6 +9,9 @@
 import { CharacterEntity } from "./entities/character-entity";
 import { MonsterEntity } from "./entities/monster-entity";
 import { NpcEntity } from "./entities/npc-entity";
+import { BetterUXWrapper } from "./types/GTypes/utils";
+
+export type { CharacterEntity, MonsterEntity, NpcEntity };
 
 // export type EntityBase = {
 //   h: number;
@@ -19,4 +22,5 @@ import { NpcEntity } from "./entities/npc-entity";
 // TODO: Get all types (from G?)
 export type DamageType = "magical" | "physical";
 
-export type Entity = MonsterEntity | CharacterEntity | NpcEntity | Character
+export type RawEntity = MonsterEntity | CharacterEntity | NpcEntity | Character;
+export type Entity = BetterUXWrapper<RawEntity>;
