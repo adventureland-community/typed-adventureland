@@ -47,6 +47,9 @@ declare global {
     start_runner(): void;
     stop_runner(): void;
 
+    /** show a modal, TODO: investigate paramters */
+    show_modal(arg1: any, arg2: any): any;
+
     sprite_image(name: string, args?: any): string;
 
     smart_eval(code: string): void;
