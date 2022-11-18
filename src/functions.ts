@@ -24,10 +24,6 @@ declare global {
 
   function sleep(ms: number): Promise<void>;
   function log(msg: string, color?: string): void;
-  function add_top_button(id: string, text: string, fn: () => unknown): void;
-  function add_bottom_button(id: string, text: string, fn: () => unknown): void;
-
-  function set_button_value(id: string, text: string): void;
 
   function calculate_item_value(item: ItemInfo, m?: number): number;
 
@@ -163,7 +159,7 @@ declare global {
    */
   function clear_drawings(): void;
 
-  function clear_buttons(): void;
+  
   /**
    * Runs the given code snippet for the given character.
    * @param character The name of the character
