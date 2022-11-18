@@ -56,6 +56,9 @@ declare global {
   /** Called just before the CODE is destroyed */
   function on_destroy(): void;
 
+  /** Sends a message in chat. */
+  function say(message: string): void;
+
   function unmap_key(key: string): void;
   function map_key(key: string, thing: string, arg?: string): void;
   function load_code(nameOrSlot: string | number, onerror?: any): void;
