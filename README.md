@@ -1,13 +1,16 @@
 # typed-adventureland
 
-Initial types based on https://github.com/BegLand/types-adventureland
+This repository contains type definitions for the game [Adventure Land](https://adventure.land).
 
-TODO: utilize pluralize so it becomes GMonster instead of GMonsters
+**The project is currently in an alpha stage.**  
+We know a lot of things are missing and we are still in the process of figuring things out.  
+Feel free to ask for missing/convenient types or suggest changes through [Github Issues](https://github.com/adventureland-community/typed-adventureland/issues).  
+You can also get in touch with either `thmsn#6385` or `Telokis#1111` on the official game Discord. Preferably in the [dedicated thread](https://discord.com/channels/238332476743745536/1014762228530040902).
 
-# installation
-`npm install --save-dev adventureland@github:adventureland-community/typed-adventureland`
+Initially based on https://github.com/BegLand/types-adventureland
 
-https://www.typescriptlang.org/docs/handbook/declaration-files/dts-from-js.html
-If you’d like to write tests for your .d.ts files, try tsd. https://github.com/SamVerschueren/tsd
+# Installation
+`npm install --save-dev typed-adventureland`
 
-https://stackoverflow.com/questions/39722682/export-single-d-ts-from-several-typescript-files-entrypoint
+Once you have installed the package, you have to tell TypeScript to use it. It's pretty simple: add `"./node_modules/typed-adventureland"` to the `"include"` array of your `tsconfig.json`/`jsconfig.json`.  
+Please take a look at [the examples](./examples/) if you are unsure.

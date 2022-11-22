@@ -377,7 +377,8 @@ declare global {
     /** Slot index */
     num: number;
 
-    reward: string;
+    /** The item obtained from the exchange. Can be null if gold or nothing. */
+    reward: ItemKey | null;
   }>;
 
   function trade(
