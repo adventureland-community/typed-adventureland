@@ -162,7 +162,6 @@ declare global {
    */
   function clear_drawings(): void;
 
-  
   /**
    * Runs the given code snippet for the given character.
    * @param character The name of the character
@@ -313,9 +312,13 @@ declare global {
    */
   function send_party_invite(name: any, isRequest?: boolean): any;
   function send_party_request(name: string): any;
+
+  function leave_party(): Promise<void>;
+
   function get_active_characters(): {
     [characterName: string]: "self" | "starting" | "loading" | "active" | "code";
   };
+
   /**
    * renders the object as json inside the game
    * @param e
@@ -373,6 +376,8 @@ declare global {
 
     /** Slot index */
     num: number;
+
+    reward: string;
   }>;
 
   function trade(
@@ -524,6 +529,8 @@ export interface PartyCharacter {
   skin: string;
   level: number;
   type: string;
+
+  /** This number refers to the percent of gold you get when one of the party members loots a chest */
   share: number;
   pdps: number;
   l: number;

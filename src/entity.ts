@@ -1,4 +1,4 @@
-// import { SlotType, TradeSlotType } from "./entities/slots";
+export { SlotType, TradeSlotType } from "./entities/slots";
 // import { StatusInfo } from "./entities/status-info";
 // import { ItemInfo } from "./items";
 // import { PositionMovable } from "./position";

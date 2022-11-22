@@ -1,6 +1,7 @@
 import { CharacterEntity } from "./entities/character-entity";
 import { MonsterEntity } from "./entities/monster-entity";
 import { NpcEntity } from "./entities/npc-entity";
+import { PartyCharacter } from "./functions";
 import { MapKey } from "./G";
 import { PositionReal } from "./position";
 import { SocketWithEventsFunctions } from "./socket-events";
@@ -69,17 +70,14 @@ declare global {
     chests: {
       [id: string]: ChestInfo;
     };
+
     entities: { [id: string]: BetterUXWrapper<CharacterEntity | MonsterEntity | NpcEntity> };
     next_skill: { [T in SkillKey]?: Date };
     //   npcs: GMapsNPC[];
-    //   party: {
-    //     [T in string]: IPosition & {
-    //       level: number;
-    //       /** This number refers to the percent of gold you get when one of the party members loots a chest */
-    //       share: number;
-    //       type: CharacterType;
-    //     };
-    //   };
+
+    /** @deprecated Prefer `get_party()` */
+    party: Record<string, PartyCharacter>;
+
     /** Contains the name of every character in your party */
     party_list: string[];
     /** Contains a list of the last 40 ping response times */
