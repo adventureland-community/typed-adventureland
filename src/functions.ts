@@ -260,23 +260,39 @@ declare global {
   function get_target(): CharacterEntity | Entity | null;
   function get_target_of(entity: Entity): Entity | null;
   function get_player(name: string): CharacterEntity;
+
   function get_nearest_monster(args: {
     /**
-     * max attack
+     * Maximum attack the monster should have.
      */
     max_att?: number;
+
     /**
-     * min XP
+     * Mininmum XP the monster should give.
      */
     min_xp?: number;
+
     /**
      * Only return monsters that target this "name" or player object
      */
-    target?: any;
+    target?: string | { name: string };
+
+    /**
+     * Only pick monsters that don't have any target.
+     */
     no_target?: boolean;
+
+    /**
+     * Checks if the character can move to the target.
+     */
     path_check?: boolean;
+
+    /**
+     * Type of the monsters, for example "goo", can be referenced from `show_json(G.monsters)` [08/02/17]
+     */
     type?: string;
-  }): Entity;
+  }): MonsterEntity | null;
+
   function heal(target: Entity): any;
   function use_hp_or_mp(): void;
   /** Checks whether or not we can attack other players */
@@ -377,8 +393,8 @@ declare global {
     /** Slot index */
     num: number;
 
-    /** The item obtained from the exchange. Can be null if gold or nothing. */
-    reward: ItemKey | null;
+    /** The item obtained from the exchange. Can be undefined if gold or nothing. */
+    reward?: ItemKey;
   }>;
 
   function trade(
