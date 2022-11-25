@@ -268,7 +268,7 @@ declare global {
     max_att?: number;
 
     /**
-     * Mininmum XP the monster should give.
+     * Minimum XP the monster should give.
      */
     min_xp?: number;
 
@@ -288,7 +288,9 @@ declare global {
     path_check?: boolean;
 
     /**
-     * Type of the monsters, for example "goo", can be referenced from `show_json(G.monsters)` [08/02/17]
+     * Type of the monsters, for example "goo", can be referenced from `show_json(G.monsters)`.
+     *
+     * @since [08/02/17]
      */
     type?: string;
   }): MonsterEntity | null;
