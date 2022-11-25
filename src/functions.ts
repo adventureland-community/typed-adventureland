@@ -62,26 +62,31 @@ declare global {
   function unmap_key(key: string): void;
   function map_key(key: string, thing: string, arg?: string): void;
   function load_code(nameOrSlot: string | number, onerror?: any): void;
+
   /**
    * Accept a magiport request from a mage
    * @param name The name of the mage offering a magiport
    */
   function accept_magiport(name: string): void;
+
   /**
    * Accept the party invititation of another character (i.e. join their party)
    * @param name The name of the character offering a party invite
    */
   function accept_party_invite(name: string): void;
+
   /**
    * Accept the request of another character to join your party (i.e. let them join your party)
    * @param name The name of the character to allow in to your party
    */
   function accept_party_request(name: string): void;
+
   /**
    * Activate an item (likely a booster)
    * @param inventoryPosition The position of the item in your inventory
    */
   function activate(inventoryPosition: number): void;
+
   /**
    * Attack another monster or a player with your normal attack
    * @param target The target entity to attack (`parent.entities`)
@@ -89,12 +94,6 @@ declare global {
    */
   // TODO: Change the "any" to the promise that this function returns
   function attack(target: Entity): Promise<any>;
-  /**
-   * Crafts the given item if you can craft that item, you have the required items, and you have enough gold.
-   * @param name The name of the item to craft (`G.craft`)
-   * @returns A string containing the basic reason it failed, or nothing upon success
-   */
-  function auto_craft(name: ItemKey): string | void;
 
   /**
    * Buy an item from an NPC. This function can buy things with gold or shells.
@@ -103,6 +102,7 @@ declare global {
    */
   // TODO: Change the "any" to the promise that this function returns
   function buy(item: ItemKey, quantity?: number): Promise<any>;
+
   /**
    * Buy an item from an NPC using only gold. If you want to buy things with shells, use `buy_with_shells`.
    * @param item The name of the item you wish to purchase (`G.items`)
@@ -110,6 +110,7 @@ declare global {
    */
   // TODO: Change the "any" to the promise that this function returns
   function buy_with_gold(item: ItemKey, quantity?: number): Promise<any>;
+
   /**
    * Buy an item from an NPC using only shells. If you want to buy things with gold, use `buy_with_gold`
    * @param item The name of the item you wish to purchase (`G.items`)
@@ -117,6 +118,7 @@ declare global {
    */
   // TODO: Change the "any" to the promise that this function returns
   function buy_with_shells(item: ItemKey, quantity?: number): Promise<any>;
+
   /**
    * Check if you can attack the given target. This function also checks status conditions by calling `parent.is_disabled(character)` which checks statuses such as `rip` and `stunned`.
    * NOTE: If you just want to check the cooldown, consider using `is_on_cooldown("attack")`
@@ -124,6 +126,7 @@ declare global {
    * @returns TRUE if the target is attackable, FALSE otherwise.
    */
   function can_attack(target: Entity): boolean;
+
   /**
    * Check if you can heal the given target.
    * @param target The target entity to check if you can heal (`parent.entities`)
@@ -136,12 +139,14 @@ declare global {
    * @returns TRUE if you are not currently transporting, and can transport, FALSE otherwise
    */
   function can_transport(entity: Entity): boolean;
+
   /**
    * Checks if the skill is usable by the given character. Also checks if the given skill is on cooldown.
    * @param skill The skill to check
    * @param returns TRUE if not on cooldown, FALSE otherwise.
    */
   function can_use(skill: SkillKey): boolean;
+
   /**
    * Checks if you can use the given door from the given position
    * @param map A given map (from `G.maps`)
@@ -157,6 +162,7 @@ declare global {
    * @param target A given target (from `parent.entities`)
    */
   function change_target(target?: Entity): void;
+
   /**
    * Clears all drawings from the window. Use this function to clean up `draw_circle` and `draw_line`.
    */
@@ -195,7 +201,7 @@ declare global {
     onlyCalculate: true
   ): Promise<CompoundCalculateResponse>;
 
-  type CompoundSuccessResponse = {
+  export type CompoundSuccessResponse = {
     success: boolean;
     level: number;
     num: number;
@@ -212,7 +218,7 @@ declare global {
     place: string;
   };
 
-  type CompoundFailureResponse = {
+  export type CompoundFailureResponse = {
     reason: string;
   };
 
@@ -221,6 +227,28 @@ declare global {
    * @param item The inventory position of the item
    */
   function consume(item: number): void;
+
+  export type CraftSuccessResponse = {
+    num: number;
+    name: ItemKey;
+    success: true;
+    response: "craft";
+    place: "craft";
+  };
+
+  export type CraftFailureResponse = {
+    failed: true;
+    reason: string;
+  };
+
+  /**
+   * Crafts the given item if you can craft that item, you have the required items, and you have enough gold.
+   * @param name The name of the item to craft (`G.craft`)
+   */
+  function auto_craft(
+    name: ItemKey
+  ): Promise<BetterUXWrapper<CraftSuccessResponse | CraftFailureResponse>>;
+
   /**
    * Crafts the given items. Note: Some recipes might require gold to craft, too.
    * @param item0 The inventory position of the item to be put in the top left crafting slot
@@ -243,19 +271,27 @@ declare global {
     item6?: number,
     item7?: number,
     item8?: number
-  ): void;
+  ): Promise<BetterUXWrapper<CraftSuccessResponse | CraftFailureResponse>>;
+
   /**
    * Overrides the character to walk at `Math.min(parent.character.speed, cruise_speed)` speed.
    * @param speed The speed at which to walk at
    */
   function cruise(speed: number): void;
+
   /** Feed this function a value like (character.apiercing - target.armor) and it spits out a multiplier so you can adjust your expected damage */
   function damage_multiplier(difference: number): number;
   function distance(from: IPosition | PositionReal, to: IPosition | PositionReal): number;
 
   function equip(inventoryPostion: number, slot?: SlotType): any;
   function game_log(message: string, color?: string): any;
+
+  /**
+   * Retrieves a value stored in localstorage.
+   * @param key The key to retrieve.
+   */
   function get<T>(key: string): T;
+
   function get_targeted_monster(): MonsterEntity | null;
   function get_target(): CharacterEntity | Entity | null;
   function get_target_of(entity: Entity): Entity | null;
@@ -338,10 +374,10 @@ declare global {
   };
 
   /**
-   * renders the object as json inside the game
-   * @param e
+   * Renders the object as json inside the game.
+   * @param value Whatever you want to display.
    */
-  function show_json(e: any): void;
+  function show_json(value: any): void;
   function set(key: string, value: unknown): unknown;
   function set_message(text: string, color?: string): any;
   function simple_distance(from: IPosition | PositionReal, to: IPosition | PositionReal): number;
@@ -399,12 +435,44 @@ declare global {
     reward?: ItemKey;
   }>;
 
+  /**
+   * Lists an item as selling in the merchant stand.
+   * @param inventoryPosition
+   * @param tradeSlot
+   * @param price
+   * @param quantity
+   */
   function trade(
     inventoryPosition: number,
     tradeSlot: number | TradeSlotType,
     price: number,
     quantity: number
-  ): void;
+  ): unknown;
+
+  /**
+   * Lists an item as wanted in the merchant stand.
+   * @param slot
+   * @param name
+   * @param price
+   * @param q
+   * @param level
+   */
+  function wishlist(
+    slot: TradeSlotType | number,
+    name: ItemKey,
+    price: number,
+    q: number,
+    level?: number
+  ): unknown;
+
+  /**
+   * Will start a giveaway where characters can enlist in hope of getting the item.
+   * @param slot Giveaway slot to add the item into.
+   * @param inventoryPosition Inventory slot of the item to giveaway.
+   * @param q Quantity to giveaway.
+   * @param minutes How long the giveaway should last.
+   */
+  function giveaway(slot: number, inventoryPosition: number, q: number, minutes: number): unknown;
 
   function join(eventName: EventKey): Promise<any>;
   /**

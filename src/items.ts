@@ -1,15 +1,17 @@
 import { ElixirKey, ItemKey } from "./types/GTypes/items";
 
 declare global {
-  /** 0 = normal, 1 = high, 2 = rare */
-  function item_grade(item: ItemInfo | { name: ItemKey }): -1 | 0 | 1 | 2;
+  /**
+   * Returns the grade of an item.
+   * 0 = normal, 1 = high, 2 = rare, 3 = legendary, 4 = exalted
+   */
+  function item_grade(item: ItemInfo | { name: ItemKey }): -1 | 0 | 1 | 2 | 3 | 4;
 
   /** Returns the inventory position of the item, or -1 if it's not found */
   function locate_item(item: ItemKey): number; // should this live in "inventory"?
 }
 
 export type HealthPotion = "hpot0" | "hpot1" | "hpotx";
-
 export type ManaPotion = "mpot0" | "mpot1" | "mpotx";
 
 // TODO: each category should have its own type
@@ -28,7 +30,7 @@ export type ItemInfoPValues =
   | "shiny"
   | "superfast";
 
-/** the item instance used different places, your inventory, merchant stand, bank and other places */
+/** The item instance used different places, your inventory, merchant stand, bank and other places */
 export type ItemInfo = {
   acc?: number;
   ach?: string; // TODO: achievement from G.achievements?
@@ -45,26 +47,48 @@ export type ItemInfo = {
 
   l?: string; // TODO: figure out what this is.
   ld?: string; // TODO: figure out what this is.
+
   /** Set if the item is compoundable or upgradable */
   level?: number;
-  m?: string; // TODO: figure out what this is
+
+  /**
+   * This item was received through mluck.
+   * This property contains the name of the person that generated the item.
+   */
+  m?: string;
+
+  /**
+   * Key of the item in `G.items`
+   */
   name: ItemKey;
-  /** Is this item a special item? */
+
+  /**
+   * If this property is set, the item has a special modifier.
+   */
   p?: ItemInfoPValues;
-  // can also have theese apparently abtesting, firehazard, festive, critmonger, glitched, lucky, legacy, fast, gooped, stomped, shiny, superfast, sniper
+
+  /**
+   * Can also have theese apparently abtesting, firehazard, festive, critmonger, glitched, lucky, legacy, fast, gooped, stomped, shiny, superfast, sniper
+   */
   ps?: [string]; // TODO: figure out what it is
+
   /** How many of this item we have. Set if the item is stackable. */
   q?: number;
 
   /**
    * Players participating in a giveaway for this item.
-   * the value being the players name
-   * */
-  registry?: {
-    [key: string]: string;
-  };
+   * The value being the players name.
+   */
+  registry?: Record<string, string>;
+
+  /**
+   * This item has had a stat scroll applied to it.
+   */
   stat_type?: StatType;
-  /** indicates the item being a pvp time, value contains a timestamp */
+
+  /**
+   * Indicates the item being a pvp time, value contains a timestamp.
+   */
   v?: string;
 };
 
@@ -80,6 +104,7 @@ export type InventoryExchangeItemInfo = {
 
 export type InventoryUpgradeCompoundItemInfo = ItemInfo & {
   name: "placeholder";
+
   /**
    * Upgrading or compounding item
    */
@@ -103,40 +128,6 @@ export type TradeItemInfo = ItemInfo & {
   price: number;
   gf?: string; // TODO figure out.
 };
-
-//   export type GItem = {
-//     // class: CharacterType[]; // TODO: fix type
-//     buy?: boolean;
-//     /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
-//     compound?: {
-//       [T in StatType]?: number;
-//     };
-//     // damage?: DamageType; // TODO: fix type
-//     /** Refers to how many items are needed to exchange (see .quest as well!) */
-//     e?: number;
-//     /** Cost of the item in gold, if an NPC were to sell this item */
-//     g: number;
-//     /** The first number refers to what level the item begins being "high" grade, the second for "rare" */
-//     grades?: [number, number];
-//     /** The full name of the item */
-//     name: string;
-//     id: ItemKey;
-//     // TODO: Add a type for quests
-//     /** Indicates the "quest" that this item is needed to complete */
-//     quest: string;
-//     /** Indicates how many of this items you can stack. Set if the item is stackable. */
-//     s: number;
-//     /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
-//     upgrade?: {
-//       [T in StatType | "stat"]?: number;
-//     };
-//     type: ItemType;
-//     wtype: WeaponType;
-//     gives?: Array<[StatType, number]>;
-//     skin:string;
-//     size:number;
-//     tier?:number;
-//   } & { [T in StatType]?: number };
 
 // TODO: Get all stat types
 export type StatType =
