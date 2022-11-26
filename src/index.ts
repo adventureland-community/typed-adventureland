@@ -17,4 +17,4 @@ export * from "./server";
 export * from "./skills";
 export * from "./window";
 export * from "./button";
-
+export * from "./types/GTypes";
