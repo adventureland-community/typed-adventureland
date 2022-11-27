@@ -1,3 +1,4 @@
+import { StatType } from "../../../items";
 import type { ItemKey } from "../items/index";
 
 export type SetKey =
@@ -25,30 +26,7 @@ export type GSet = {
   items: Array<ItemKey>;
   name: string;
 } & {
-  [Key in number]?: {
-    apiercing?: number;
-    armor?: number;
-    courage?: number;
-    crit?: number;
-    cuteness?: number;
-    dex?: number;
-    evasion?: number;
-    for?: number;
-    gold?: number;
-    hp?: number;
-    int?: number;
-    lifesteal?: number;
-    luck?: number;
-    mcourage?: number;
-    mp?: number;
-    pcourage?: number;
-    phresistance?: number;
-    range?: number;
-    resistance?: number;
-    rpiercing?: number;
-    speed?: number;
-    str?: number;
-    stresistance?: number;
-    vit?: number;
+  [Quantity in number]?: {
+    [Stat in StatType]?: number;
   };
 };
