@@ -5,7 +5,7 @@ import { Entity } from "./entity";
 import { ItemInfo } from "./items";
 import { IPosition, PositionReal, PositionMovable, PositionSmart } from "./position";
 import { EventKey } from "./types/GTypes/events";
-import { ItemKey } from "./types/GTypes/items";
+import { BoosterKey, ItemKey } from "./types/GTypes/items";
 import { MapKey } from "./types/GTypes/maps";
 import { MonsterKey } from "./types/GTypes/monsters";
 import { NpcKey } from "./types/GTypes/npcs";
@@ -473,6 +473,13 @@ declare global {
    * @param minutes How long the giveaway should last.
    */
   function giveaway(slot: number, inventoryPosition: number, q: number, minutes: number): unknown;
+
+  /**
+   * Will change the type of the booster to the specified one.
+   * @param inventoryPosition Inventory slot of the booster to shift.
+   * @param toBooster Type the booster should be of.
+   */
+  function shift(inventoryPosition: number, toBooster: BoosterKey): Promise<unknown>;
 
   function join(eventName: EventKey): Promise<any>;
   /**
