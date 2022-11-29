@@ -474,12 +474,19 @@ declare global {
    */
   function giveaway(slot: number, inventoryPosition: number, q: number, minutes: number): unknown;
 
+  export type ShiftResult = {
+    name: BoosterKey;
+    success: boolean;
+    response: "data";
+    place: "booster";
+  };
+
   /**
    * Will change the type of the booster to the specified one.
    * @param inventoryPosition Inventory slot of the booster to shift.
    * @param toBooster Type the booster should be of.
    */
-  function shift(inventoryPosition: number, toBooster: BoosterKey): Promise<unknown>;
+  function shift(inventoryPosition: number, toBooster: BoosterKey): Promise<ShiftResult>;
 
   function join(eventName: EventKey): Promise<any>;
   /**

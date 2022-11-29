@@ -1,3 +1,4 @@
+import { HitData } from "./character-event";
 import { ItemInfo } from "./items";
 import { TypedEventEmitter } from "./TypedEventEmitter";
 import { ItemKey } from "./types/GTypes/items";
@@ -241,4 +242,5 @@ export interface GameEvents {
 
     slot: string;
   };
+  hit: HitData;
 }
