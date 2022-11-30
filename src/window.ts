@@ -36,6 +36,28 @@ export interface XServerInfos {
   region: string;
 }
 
+export type SMonsterEvent = {
+  /** Is the monster currently available? */
+  live: boolean;
+
+  /** At what date will the monster spawn? */
+  spawn: string;
+};
+
+export type SEventsInfos = {
+  schedule: {
+    time_offset: number;
+    dailies: Array<number>;
+    nightlies: Array<number>;
+    night: boolean;
+  };
+} & {
+  // Christmas
+  holidayseason?: boolean;
+  grinch?: SMonsterEvent;
+  snowman?: SMonsterEvent;
+};
+
 export {}; // this is done to make window a module
 declare global {
   interface Window {
@@ -85,6 +107,9 @@ declare global {
     //   server_identifier: ServerIdentifier;
     //   server_region: ServerRegion;
     socket: /* SocketIO.Socket &*/ SocketWithEventsFunctions;
+
+    S: SEventsInfos;
+
     //   S: {
     //     [T in EventName]?: IPosition & {
     //       map: string;
