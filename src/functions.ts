@@ -23,7 +23,6 @@ declare global {
   function resolving_promise<T>(data: T): Promise<T>;
 
   function sleep(ms: number): Promise<void>;
-  function log(msg: string, color?: string): void;
 
   function calculate_item_value(item: ItemInfo, m?: number): number;
 
@@ -284,7 +283,40 @@ declare global {
   function distance(from: IPosition | PositionReal, to: IPosition | PositionReal): number;
 
   function equip(inventoryPostion: number, slot?: SlotType): any;
-  function game_log(message: string, color?: string): any;
+
+  /**
+   * Will html_escape the message before displaying it.
+   * If the message is an object, it will be stringified.
+   * @param message The string or object with potential html that should be escaped.
+   * @param color Can be used to override the color of the message. Any CSS color is fine.
+   *
+   * @see game_log if you want to print text as-is.
+   * @see log if you don't want to escape the text but still stringify objects.
+   */
+  function safe_log(message: any, color?: string): void;
+
+  /**
+   * Displays a log message in the game log. This is not the chat and other players can't see it.
+   * @param message The message that will be printed. Should NOT contain html.
+   * @param color Can be used to override the color of the message. Any CSS color is fine.
+   *
+   * @warning This function won't escape html. See `safe_log` if you want to log unsafe data.
+   *
+   * @see safe_log if you want to escape a string or object that might contain html.
+   * @see log if you want to stringify an object.
+   */
+  function game_log(message: any, color?: string): void;
+
+  /**
+   * Displays a string in the game logs. If the message is an object, it will be stringified.
+   *
+   * @param message A string or an object that should be stringified.
+   * @param color Can be used to override the color of the message. Any CSS color is fine.
+   *
+   * @see game_log if you want to print text as-is.
+   * @see safe_log if you want to escape a string or object that might contain html.
+   */
+  function log(message: any, color?: string): void;
 
   /**
    * Retrieves a value stored in localstorage.
