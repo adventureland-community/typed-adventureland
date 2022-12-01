@@ -3,7 +3,7 @@ import { TypedEventEmitter } from "./TypedEventEmitter";
 
 export type SocketWithEventsFunctions = Pick<
   TypedEventEmitter<ReceivedSocketEvents>,
-  "on" | "once"
+  "on" | "once" | "off"
 > &
   Pick<TypedEventEmitter<EmittedSocketEvents>, "emit">;
 

@@ -21,6 +21,15 @@ export interface TypedEventEmitter<
   once<K extends NotVoidKeys>(eventName: K, callback: (payload: Events[K]) => void): void;
   once<K extends VoidKeys>(eventName: K, callback: () => void): void;
 
+  off<K extends NotVoidKeys>(eventName: K, callback: (payload: Events[K]) => void): void;
+  off<K extends VoidKeys>(eventName: K, callback: () => void): void;
+
+  /** Removes all listeners for event `eventName` */
+  off<K extends keyof Events>(eventName: K): void;
+
+  /** Removes all event listeners */
+  off(): void;
+
   emit<K extends NotVoidKeys>(eventName: K, payload: Events[K]): void;
   emit<K extends VoidKeys>(eventName: K): void;
 }

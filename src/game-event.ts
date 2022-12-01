@@ -5,7 +5,7 @@ import { ItemKey } from "./types/GTypes/items";
 import { MapKey } from "./types/GTypes/maps";
 import { NpcKey } from "./types/GTypes/npcs";
 
-export type GameWithEventsFunctions = Pick<TypedEventEmitter<GameEvents>, "on" | "once"> & {
+export type GameWithEventsFunctions = Pick<TypedEventEmitter<GameEvents>, "on" | "once" | "off"> & {
   all(callback?: (name: any, data: any) => void): void;
 };
 

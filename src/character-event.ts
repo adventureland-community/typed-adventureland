@@ -6,10 +6,11 @@ import { MapKey } from "./types/GTypes/maps";
 
 export type CharacterWithEventsFunctions = Pick<
   TypedEventEmitter<CharacterEvents>,
-  "on" | "once"
+  "on" | "once" | "off"
 > & {
   on<T>(event: "cm", callback?: (data: CodeMessageEvent<T>) => void): void;
   once<T>(event: "cm", callback?: (data: CodeMessageEvent<T>) => void): void;
+  off<T>(event: "cm", callback?: (data: CodeMessageEvent<T>) => void): void;
 
   all(callback?: (name: any, data: any) => void): void;
 };
