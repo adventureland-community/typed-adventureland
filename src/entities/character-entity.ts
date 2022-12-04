@@ -9,6 +9,51 @@ import { ItemKey, StandKey } from "../types/GTypes/items";
 import { EntityBase } from "./base-entity";
 import { SlotType, TradeSlotType } from "./slots";
 
+export interface CharacterEntityCXInfos {
+  chin?: string;
+  face?: string;
+  hair?: string;
+  hat?: string;
+  head?: string;
+  makeup?: string;
+  upper?: string;
+}
+
+export type CharacterEntitySlotsInfos = {
+  [T in SlotType]: ItemInfo | InventoryExchangeItemInfo | InventoryUpgradeCompoundItemInfo | null;
+} & {
+  [T in TradeSlotType]?: TradeItemInfo | null;
+};
+
+export type CharacterEntityQInfos = {
+  compound?: {
+    len: number;
+    ms: number;
+    /** inventory position being compounded */
+    num: number | string;
+    nums: [];
+    stale?: boolean;
+  };
+  exchange?: {
+    id: string;
+    len: number;
+    ms: number;
+    name: ItemKey; // TODO: should only be exchangeable items here.
+    /** inventory position */
+    num: number;
+    q: number;
+    qs?: string;
+    stale?: boolean;
+  };
+  upgrade?: {
+    len: number;
+    ms: number;
+    /** inventory position being upgraded */
+    num: number | string;
+    stale?: boolean;
+  };
+};
+
 export interface CharacterEntity extends EntityBase {
   // Attributes
   /** Attacks/second. */
@@ -39,15 +84,7 @@ export interface CharacterEntity extends EntityBase {
   ctype: ClassKey;
   cursor?: string;
   /** Cosmetics */
-  cx: {
-    chin?: string;
-    face?: string;
-    hair?: string;
-    hat?: string;
-    head?: string;
-    makeup?: string;
-    upper?: string;
-  };
+  cx: CharacterEntityCXInfos;
   cxc: {};
   /**
    * "dead" can have string values too, such as "map" / "vision"
@@ -78,34 +115,7 @@ export interface CharacterEntity extends EntityBase {
   player: boolean;
 
   /** Progressed actions */
-  q: {
-    compound?: {
-      len: number;
-      ms: number;
-      /** inventory position being compounded */
-      num: number | string;
-      nums: [];
-      stale?: boolean;
-    };
-    exchange?: {
-      id: string;
-      len: number;
-      ms: number;
-      name: ItemKey; // TODO: should only be exchangeable items here.
-      /** inventory position */
-      num: number;
-      q: number;
-      qs?: string;
-      stale?: boolean;
-    };
-    upgrade?: {
-      len: number;
-      ms: number;
-      /** inventory position being upgraded */
-      num: number | string;
-      stale?: boolean;
-    };
-  };
+  q: CharacterEntityQInfos;
 
   ref_speed?: number;
 
@@ -116,11 +126,7 @@ export interface CharacterEntity extends EntityBase {
   /**
    * contains equipped gear, as well as items for trade.
    */
-  slots: {
-    [T in SlotType]: ItemInfo | InventoryExchangeItemInfo | InventoryUpgradeCompoundItemInfo | null;
-  } & {
-    [T in TradeSlotType]?: TradeItemInfo | null;
-  };
+  slots: CharacterEntitySlotsInfos;
 
   /** The name of the current open stand or false */
   stand?: StandKey | string | boolean;

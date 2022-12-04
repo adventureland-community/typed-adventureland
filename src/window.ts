@@ -3,11 +3,55 @@ import { CharacterEntity } from "./entities/character-entity";
 import { MonsterEntity } from "./entities/monster-entity";
 import { NpcEntity } from "./entities/npc-entity";
 import { PartyCharacter } from "./functions";
-import { MapKey } from "./G";
+import {
+  MapKey,
+  GDropList,
+  GDropMaps,
+  GDropMonsters,
+  GDropNormalDrops,
+  ItemKey,
+  MonsterKey,
+} from "./G";
 import { PositionReal } from "./position";
 import { SocketWithEventsFunctions } from "./socket-events";
 import { SkillKey } from "./types/GTypes/skills";
 import { BetterUXWrapper } from "./types/GTypes/utils";
+
+/** Tracktrix informations */
+export interface Tracker {
+  /** How many points you have for each monster for the given character */
+  monsters: Partial<Record<MonsterKey, number>>;
+
+  /** How many points behind this character is from your character that has the most points for this monster */
+  monsters_diff: Partial<Record<MonsterKey, number>>;
+
+  /** How many exchanges this character has done for the various given items */
+  exchanges: Partial<
+    Record<
+      ItemKey | "lostearring0" | "lostearring1" | "lostearring2" | "lostearring3" | "lostearring4",
+      number
+    >
+  >;
+
+  /** Contains drop information */
+  maps: GDropMaps;
+
+  /** For the "open" items in maps, this table has a list of the drops that could occur */
+  tables: GDropNormalDrops;
+
+  /** Contains information about your characters with the max points */
+  max: {
+    monsters: Partial<Record<MonsterKey, [score: number, char: string]>>;
+  };
+
+  drops: GDropMonsters;
+
+  // TODO: What's the difference between the global here, and the one in 'maps'?
+  global: GDropList;
+
+  // TODO: What's the difference between the global_static here, and the one in 'maps'?
+  global_static: GDropList;
+}
 
 export interface XOnlineCharacter {
   x: number;
@@ -107,7 +151,9 @@ declare global {
     pings: number[];
     //   server_identifier: ServerIdentifier;
     //   server_region: ServerRegion;
-    socket: /* SocketIO.Socket &*/ SocketWithEventsFunctions;
+    socket: Omit<SocketIO.Socket, keyof SocketWithEventsFunctions> & SocketWithEventsFunctions;
+
+    tracker: Record<string, never> | Tracker;
 
     bank_packs: BankPacksInfos;
 

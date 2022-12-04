@@ -2,15 +2,9 @@ import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { WeaponKey } from "../items/Weapon";
 import type { OffhandType, WeaponType } from "../items/index";
 import { Tuple } from "../utils";
+import { CharacterEntityCXInfos } from "../../../entities/character-entity";
 
-export type ClassKey =
-  | "mage"
-  | "merchant"
-  | "paladin"
-  | "priest"
-  | "ranger"
-  | "rogue"
-  | "warrior";
+export type ClassKey = "mage" | "merchant" | "paladin" | "priest" | "ranger" | "rogue" | "warrior";
 
 export interface GClass {
   armor: number;
@@ -39,19 +33,7 @@ export interface GClass {
   frequency: number;
   fzresistance?: number;
   hp: number;
-  looks: Tuple<
-    [
-      string,
-      {
-        hair?: string;
-        head: string;
-        hat?: string;
-        chin?: string;
-        makeup?: string;
-      }
-    ],
-    4
-  >;
+  looks: Tuple<[string, CharacterEntityCXInfos], 4>;
   /** Gained stats per level. */
   lstats: {
     dex: number;
