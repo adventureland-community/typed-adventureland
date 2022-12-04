@@ -16,7 +16,7 @@ declare global {
     x2: number,
     y2: number,
     thickness?: number,
-    color?: number // TODO: should really be a hex number
+    color?: number
   ): PIXI.Graphics;
 
   /**

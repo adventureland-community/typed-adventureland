@@ -25,11 +25,13 @@
     "analyze-entities": "ts-node ./analyze-entities.ts",
     "pack": "npm pack"
   },
-  "devDependencies": {
-    "@types/node": "^18.8.3",
+  "dependencies": {
     "@types/jquery": "3.2.0",
     "@types/pixi.js": "4.8.2",
-    "@types/socket.io": "1.4",
+    "@types/socket.io": "1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.8.3",
     "axios": "^1.1.2",
     "eslint": "^6.8.0",
     "prettier": "^2.7.1",
