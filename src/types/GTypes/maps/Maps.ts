@@ -6,6 +6,7 @@ import type { NpcKey } from "../npcs/Npcs";
 import type { TilesetKey } from "../tilesets/Tilesets";
 import type { Tuple } from "../utils";
 import { EventKey } from "../events";
+import { GGeometry } from "../geometry";
 
 export type MapKey =
   | "abtesting" // A/B Testing
@@ -80,6 +81,7 @@ export interface GMap {
   burn_multiplier?: number;
   code?: string;
   day?: boolean;
+  data: GGeometry;
   doors: Array<
     | [number, number, number, number, MapKey, number]
     | [number, number, number, number, MapKey, number, number]
