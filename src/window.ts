@@ -1,3 +1,4 @@
+import { BankPackType } from "./bank";
 import { CharacterEntity } from "./entities/character-entity";
 import { MonsterEntity } from "./entities/monster-entity";
 import { NpcEntity } from "./entities/npc-entity";
@@ -58,6 +59,11 @@ export type SEventsInfos = {
   snowman?: SMonsterEvent;
 };
 
+export type BankPacksInfos = Record<
+  Exclude<BankPackType, "gold" | "character">,
+  [map: MapKey, goldPrice: number, shellPrice: number]
+>;
+
 export {}; // this is done to make window a module
 declare global {
   interface Window {
@@ -107,6 +113,8 @@ declare global {
     //   server_identifier: ServerIdentifier;
     //   server_region: ServerRegion;
     socket: /* SocketIO.Socket &*/ SocketWithEventsFunctions;
+
+    bank_packs: BankPacksInfos;
 
     S: SEventsInfos;
 
