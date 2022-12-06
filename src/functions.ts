@@ -294,7 +294,9 @@ declare global {
   function damage_multiplier(difference: number): number;
   function distance(from: IPosition | PositionReal, to: IPosition | PositionReal): number;
 
-  function equip(inventoryPostion: number, slot?: SlotType): any;
+  function equip(inventoryPostion: number, slot?: SlotType): Promise<unknown>;
+
+  function dismantle(inventoryPostion: number): Promise<unknown>;
 
   /**
    * Will html_escape the message before displaying it.
