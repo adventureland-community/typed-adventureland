@@ -1,4 +1,4 @@
-import { BankPackType } from "./bank";
+import { BankPacksInfos } from "./bank";
 import { CharacterEntity } from "./entities/character-entity";
 import { MonsterEntity } from "./entities/monster-entity";
 import { NpcEntity } from "./entities/npc-entity";
@@ -58,11 +58,6 @@ export type SEventsInfos = {
   grinch?: SMonsterEvent;
   snowman?: SMonsterEvent;
 };
-
-export type BankPacksInfos = Record<
-  Exclude<BankPackType, "gold" | "character">,
-  [map: MapKey, goldPrice: number, shellPrice: number]
->;
 
 export {}; // this is done to make window a module
 declare global {
