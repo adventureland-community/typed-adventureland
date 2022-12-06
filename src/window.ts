@@ -111,6 +111,12 @@ declare global {
 
     bank_packs: BankPacksInfos;
 
+    /** PIXI element for the game map */
+    map: PIXI.Container;
+
+    /** Contains user drawings for cleanup */
+    drawings: Array<PIXI.Graphics>;
+
     S: SEventsInfos;
 
     //   S: {
