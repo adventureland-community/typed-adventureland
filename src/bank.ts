@@ -78,6 +78,7 @@ declare global {
    * @param amount The amount of gold to deposit
    */
   function bank_deposit(amount: number): void;
+
   /**
    * Deposits the given item in to the given bank. If no `pack` and `packPosition` is given, the game will try to deposit in to the first available slot. You must be in the bank to actually deposit items.
    * @param inventoryPosition The position of the item in your inventory
@@ -89,6 +90,7 @@ declare global {
     pack?: BankPackTypeItemsOnly,
     packPosition?: number
   ): Promise<void>;
+
   /**
    * Withdraws the given amount of gold from the bank. You must be in the bank to actually withdraw gold.
    * @param amount The amount of gold to withdraw

@@ -12,6 +12,11 @@ import { NpcKey } from "./types/GTypes/npcs";
 import { SkillKey } from "./types/GTypes/skills";
 import { BetterUXWrapper } from "./types/GTypes/utils";
 
+export interface CanStackArgs {
+  /** If true, will ignore the pvp flag. For an example, see bank_store. */
+  ignore_pvp?: boolean;
+}
+
 export {};
 // TODO: ALL of theese types need to be validated and verified. and potentially extracted out into meaningfull files
 declare global {
@@ -145,6 +150,13 @@ declare global {
    * @param returns TRUE if not on cooldown, FALSE otherwise.
    */
   function can_use(skill: SkillKey): boolean;
+
+  function can_stack(
+    itemA: ItemInfo,
+    itemB: ItemInfo,
+    additionalQuantity?: number,
+    args?: CanStackArgs
+  ): boolean;
 
   /**
    * Checks if you can use the given door from the given position
