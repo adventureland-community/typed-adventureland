@@ -1,6 +1,28 @@
 import { MapKey } from "../types/GTypes/maps";
 import { StatusInfo } from "./status-info";
 
+export type EntityChannelInfos = {
+  pickpocket?: {
+    ms: number;
+    target: string;
+  };
+  town?: {
+    ms: number;
+  };
+  revival?: {
+    /** name of the priest trying to revive you. */
+    f: string;
+  };
+  fishing?: {
+    ms: number;
+    drop: string; //GDrops;
+  };
+  mining?: {
+    ms: number;
+    drop: string; //GDrops;
+  };
+};
+
 export interface EntityBase {
   a_angle?: number;
   a_direction: number;
@@ -22,31 +44,13 @@ export interface EntityBase {
   // Object.entries(G.conditions).filter(([key,condition]) => condition.channel)
   // mining, pickpocket, fishing, town
   // but other things can be channeling as well
-  /** Channeling actions 
+  /** Channeling actions
    * some conditions have channeling property
    * `Object.entries(G.conditions).filter(([key,condition]) => condition.channel)`
    * mining, pickpocket, fishing, town
    * but other skills can be channeling as well
-  */
-  c: {
-    pickpocket?: {
-      ms: number;
-      target: string;
-    };
-    town?: {
-      ms: number;
-    };
-    revival?: {
-      /** name of the priest trying to revive you. */
-      f: string;
-    };
-    fishing?: {
-      drop: any; //GDrops;
-    };
-    mining?: {
-      drop: any; //GDrops;
-    };
-  };
+   */
+  c: EntityChannelInfos;
 
   children: [];
   cid: number;

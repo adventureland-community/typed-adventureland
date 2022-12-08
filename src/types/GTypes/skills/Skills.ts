@@ -5,6 +5,7 @@ import type { ItemKey } from "../items/index";
 import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { ThrowKey } from "../items/Throw";
 import type { WeaponType } from "../items/index";
+import { StatType } from "../../../items";
 
 export type SkillKey =
   | "3shot" // 3-Shot
@@ -156,9 +157,7 @@ export interface GSkill {
   range_bonus?: number;
   range_multiplier?: number;
   ratio?: number;
-  requirements?: {
-    int: number;
-  };
+  requirements?: Partial<Record<StatType, number>>;
   reuse_cooldown?: number;
   set_speed?: number;
   share?: SkillKey;
