@@ -3,7 +3,7 @@ import { CharacterWithEventsFunctions } from "./character-event";
 import type { CharacterEntity } from "./entities/character-entity";
 import type { ItemInfo } from "./items";
 
-export type CharacterBank =
+export type CharacterBankInfos =
   | ({
       [T in BankPackTypeItemsOnly]: Array<ItemInfo | null>;
     } & {
@@ -20,7 +20,7 @@ declare global {
       explanation: "Hey Adventurer! This is your very own character that is a PIXI.Sprite Object. Adventure Land uses PIXI to draw things. You can learn more about it: https://www.pixijs.com/ and draw your own stuff via CODE! (Technical) Since your character is a special object, it doesn't get drawn like other entities, therefore your real character object has static x and y values. The character object in Code is an Object that mimics and extends your actual character Object. It's kinda complicated, but the only difference is that your real character object has different x and y values.";
       proxy_character: boolean;
 
-      bank?: CharacterBank;
+      bank?: CharacterBankInfos;
 
       items: Array<ItemInfo | null>;
       /** Amount of gold the player has in its inventory */
