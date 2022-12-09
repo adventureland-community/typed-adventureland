@@ -208,7 +208,7 @@ declare global {
     itemSlot2: number,
     itemSlot3: number,
     scrollSlot: number,
-    offeringSlot: number | null,
+    offeringSlot: number | null | undefined,
     onlyCalculate: true
   ): Promise<CompoundCalculateResponse>;
 
@@ -455,7 +455,7 @@ declare global {
   function upgrade(
     item_slot: number,
     scroll_slot: number,
-    offering_slot: number | null,
+    offering_slot: number | null | undefined,
     only_calculate: true
   ): Promise<{
     success: boolean;
