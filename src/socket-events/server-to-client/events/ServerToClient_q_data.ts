@@ -9,6 +9,7 @@ export type ServerToClient_q_data = {
     name: ItemKey;
     nums: Array<number>;
     scroll: ItemKey;
+    offering?: ItemKey;
     failure?: true;
     success?: true;
   };

@@ -17,6 +17,8 @@ import { SocketWithEventsFunctions } from "./socket-events";
 import { SkillKey } from "./types/GTypes/skills";
 import { BetterUXWrapper } from "./types/GTypes/utils";
 
+export * from "./socket-events";
+
 /** Tracktrix informations */
 export interface Tracker {
   /** How many points you have for each monster for the given character */

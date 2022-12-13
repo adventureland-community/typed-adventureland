@@ -1,4 +1,5 @@
 export * from "./bank";
+export * from "./button";
 export * from "./character-event";
 export * from "./character";
 export * from "./codemessage";
@@ -15,6 +16,6 @@ export * from "./npc";
 export * from "./position";
 export * from "./server";
 export * from "./skills";
-export * from "./window";
-export * from "./button";
+export * from "./TypedEventEmitter";
 export * from "./types/GTypes";
+export * from "./window";

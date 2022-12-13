@@ -1,6 +1,6 @@
 {
   "name": "typed-adventureland",
-  "version": "0.0.21",
+  "version": "0.0.25",
   "description": "Strong TypeScript declarations for the game AdventureLand",
   "repository": "adventureland-community/typed-adventureland",
   "main": "dist/src/index.d.ts",
@@ -20,8 +20,9 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc && echo Emitted declaration files",
+    "clean": "rm -rf ./dist && echo Cleaned dist",
     "generate": "ts-node ./generator/main.ts",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run clean && npm run build",
     "analyze-entities": "ts-node ./analyze-entities.ts",
     "pack": "npm pack"
   },

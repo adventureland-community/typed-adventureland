@@ -43,6 +43,8 @@ import {
   ServerToClient_welcome,
 } from "./events";
 
+export * from "./events";
+
 export interface ServerToClientEvents {
   achievement_progress: ServerToClient_achievement_progress;
   action: ServerToClient_action;
