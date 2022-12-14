@@ -1,6 +1,4 @@
 import {
-  InventoryExchangeItemInfo,
-  InventoryUpgradeCompoundItemInfo,
   ItemInfo,
   TradeItemInfo,
 } from "../items";
