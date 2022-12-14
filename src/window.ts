@@ -2,6 +2,7 @@ import { BankPacksInfos } from "./bank";
 import { CharacterEntity } from "./entities/character-entity";
 import { MonsterEntity } from "./entities/monster-entity";
 import { NpcEntity } from "./entities/npc-entity";
+import { Entity } from "./entity";
 import { PartyCharacter } from "./functions";
 import {
   MapKey,
@@ -11,8 +12,9 @@ import {
   GDropNormalDrops,
   ItemKey,
   MonsterKey,
+  EventKey,
 } from "./G";
-import { PositionReal } from "./position";
+import { IPosition, PositionReal } from "./position";
 import { SocketWithEventsFunctions } from "./socket-events";
 import { SkillKey } from "./types/GTypes/skills";
 import { BetterUXWrapper } from "./types/GTypes/utils";
@@ -83,12 +85,17 @@ export interface XServerInfos {
   region: string;
 }
 
-export type SMonsterEvent = {
+export type SMonsterEvent = IPosition & {
   /** Is the monster currently available? */
   live: boolean;
 
   /** At what date will the monster spawn? */
   spawn: string;
+
+  hp: number;
+  max_hp: number;
+  /** The character name that the monster is currently attacking */
+  target?: string;
 };
 
 export type SEventsInfos = {
@@ -98,12 +105,15 @@ export type SEventsInfos = {
     nightlies: Array<number>;
     night: boolean;
   };
-} & {
-  // Christmas
-  holidayseason?: boolean;
-  grinch?: SMonsterEvent;
-  snowman?: SMonsterEvent;
-};
+} & Partial<Record<EventKey, SMonsterEvent>> & {
+    // Christmas
+    holidayseason?: boolean; // unsure if this will override the above general purpose EventKey
+  } & Partial<Record<"grinch" | "snowman", SMonsterEvent>> & {
+    valentines?: boolean;
+  }& {
+    // halloween
+    halloween?: boolean; // unsure if this will override the above general purpose EventKey
+  } & Partial<Record<"mrpumpkin" | "mrgreen", SMonsterEvent>>;
 
 export {}; // this is done to make window a module
 declare global {
@@ -166,21 +176,6 @@ declare global {
     drawings: Array<PIXI.Graphics>;
 
     S: SEventsInfos;
-
-    //   S: {
-    //     [T in EventName]?: IPosition & {
-    //       map: string;
-    //       live: boolean;
-    //       hp: number;
-    //       max_hp: number;
-    //       /** The character name that the monster is currently attacking */
-    //       target?: string;
-    //       x?:number;
-    //       y?:number
-    //     };
-    //   } & {
-    //     valentines?: boolean;
-    //   };
   }
 
   /* eslint-disable no-var, vars-on-top */
@@ -190,6 +185,8 @@ declare global {
   var on_party_invite: undefined | ((from: string) => void);
   var on_party_request: undefined | ((from: string) => void);
   /* eslint-enable no-var, vars-on-top */
+
+  
 }
 
 export type ChestInfo = PositionReal & {
