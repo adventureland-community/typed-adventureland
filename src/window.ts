@@ -15,6 +15,7 @@ import {
   EventKey,
 } from "./G";
 import { IPosition, PositionReal } from "./position";
+import { ServerIdentifier, ServerRegion } from "./server";
 import { SocketWithEventsFunctions } from "./socket-events";
 import { SkillKey } from "./types/GTypes/skills";
 import { BetterUXWrapper } from "./types/GTypes/utils";
@@ -176,6 +177,9 @@ declare global {
     drawings: Array<PIXI.Graphics>;
 
     S: SEventsInfos;
+
+    server_region: ServerRegion;
+    server_identifier: ServerIdentifier;
   }
 
   /* eslint-disable no-var, vars-on-top */
