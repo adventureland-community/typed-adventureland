@@ -108,7 +108,7 @@ export type SEventsInfos = {
 export {}; // this is done to make window a module
 declare global {
   interface Window {
-    //   $: JQueryStatic;
+    $: JQueryStatic;
     clear_game_logs(): void;
     close_merchant(): void;
     //   distance(from: IPosition | PositionReal, to: IPosition | PositionReal): number;
