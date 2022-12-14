@@ -386,6 +386,12 @@ declare global {
   function is_moving(entity: Entity): boolean;
   function is_on_cooldown(skill: string): boolean;
 
+  /** returns true if you are silenced or disabled */
+  function is_silenced(entity: Entity): boolean;
+
+  /** returns true if you are dead, stunned, fingered, stoned, deepfreezed or sleeping */
+  function is_disabled(entity: Entity): boolean;
+
   /**
    * If no ID is given, it will loot some chests.
    * @param id The ID of a chest (from `parent.chests`)
