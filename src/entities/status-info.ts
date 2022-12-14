@@ -7,6 +7,17 @@ export type StatusInfoBase = {
   ms: number;
 };
 
+export type MonsterHuntStatusInfo = {
+  /** Number of monsters remaining to kill */
+  c: number;
+  dl: boolean;
+  /** The monster to be killed */
+  id: MonsterKey;
+  ms: number;
+  /** The server where the monster hunt is valid */
+  sn: string;
+}
+
 export type StatusInfo = {
   [T in ConditionKey]?: StatusInfoBase;
 } & {
@@ -84,16 +95,7 @@ export type StatusInfo = {
     ms: number;
     strong?: boolean;
   };
-  monsterhunt?: {
-    /** Number of monsters remaining to kill */
-    c: number;
-    dl: boolean;
-    /** The monster to be killed */
-    id: MonsterKey;
-    ms: number;
-    /** The server where the monster hunt is valid */
-    sn: string;
-  };
+  monsterhunt?: MonsterHuntStatusInfo;
   newcomersblessing?: {
     f: string;
     ms: number;
