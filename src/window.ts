@@ -2,7 +2,6 @@ import { BankPacksInfos } from "./bank";
 import { CharacterEntity } from "./entities/character-entity";
 import { MonsterEntity } from "./entities/monster-entity";
 import { NpcEntity } from "./entities/npc-entity";
-import { Entity } from "./entity";
 import { PartyCharacter } from "./functions";
 import {
   MapKey,
@@ -111,7 +110,7 @@ export type SEventsInfos = {
     holidayseason?: boolean; // unsure if this will override the above general purpose EventKey
   } & Partial<Record<"grinch" | "snowman", SMonsterEvent>> & {
     valentines?: boolean;
-  }& {
+  } & {
     // halloween
     halloween?: boolean; // unsure if this will override the above general purpose EventKey
   } & Partial<Record<"mrpumpkin" | "mrgreen", SMonsterEvent>>;
@@ -139,14 +138,12 @@ declare global {
 
     open_chest(id: string | number): Promise<void>;
     d_text(message: string, entity: CharacterEntity, args?: { color: string }): void;
-    //   is_disabled(entity: Entity): boolean;
 
     X: {
       characters: Array<XOnlineCharacter>;
       servers: Array<XServerInfos>;
     };
 
-    //   character: CharacterEntity;
     chests: {
       [id: string]: ChestInfo;
     };
@@ -162,8 +159,10 @@ declare global {
     party_list: string[];
     /** Contains a list of the last 40 ping response times */
     pings: number[];
-    //   server_identifier: ServerIdentifier;
-    //   server_region: ServerRegion;
+
+    server_identifier: ServerIdentifier;
+    server_region: ServerRegion;
+    
     socket: Omit<SocketIO.Socket, keyof SocketWithEventsFunctions> & SocketWithEventsFunctions;
 
     tracker: Record<string, never> | Tracker;
@@ -177,9 +176,6 @@ declare global {
     drawings: Array<PIXI.Graphics>;
 
     S: SEventsInfos;
-
-    server_region: ServerRegion;
-    server_identifier: ServerIdentifier;
   }
 
   /* eslint-disable no-var, vars-on-top */
@@ -189,8 +185,6 @@ declare global {
   var on_party_invite: undefined | ((from: string) => void);
   var on_party_request: undefined | ((from: string) => void);
   /* eslint-enable no-var, vars-on-top */
-
-  
 }
 
 export type ChestInfo = PositionReal & {
