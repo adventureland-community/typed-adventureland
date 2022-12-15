@@ -51,6 +51,7 @@ export * from "./UpgradeScroll";
 export * from "./Weapon";
 export * from "./XP";
 
+import { StatType } from "../../..";
 import type { BetterUXWrapper } from "../utils";
 import type { ActivatorKey, GActivator } from "./Activator";
 import type { AmuletKey, GAmulet } from "./Amulet";
@@ -161,6 +162,8 @@ export type ItemKey =
 
 type GItemDynamic = {
   buy: boolean | undefined;
+  upgrade: Partial<Record<StatType, number>>;
+  compound: Partial<Record<StatType, number>>;
 };
 
 export type GItemRaw = GItemDynamic &
