@@ -1,7 +1,8 @@
 import { HitData } from "./character-event";
-import { ItemInfo } from "./items";
+import { TradeSlotType } from "./entity";
+import { ItemInfo, TradeItemInfo } from "./items";
 import { TypedEventEmitter } from "./TypedEventEmitter";
-import { ItemKey } from "./types/GTypes/items";
+import { ItemKey, StandKey } from "./types/GTypes/items";
 import { MapKey } from "./types/GTypes/maps";
 import { NpcKey } from "./types/GTypes/npcs";
 
@@ -194,13 +195,31 @@ export interface GameEvents {
     cx: string; // hat999 // TODO: cosmetics key?
   };
   api_response:
-    | any
+    // https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions
+    // | { type: string }
+    // TODO: there is a lot of different types of api responses, depending on api call
     | {
-        type: string; // "servers_and_characters";
+        type: "servers_and_characters";
         servers: [];
         characters: [];
-        // TODO: there is a lot of different types of api responses, depending on api call
+      }
+    | {
+        type: "merchants";
+        chars: Array<{
+          map: MapKey;
+          cx: string; // cosmetics
+          skin: string;
+          slots: Partial<Record<TradeSlotType, TradeItemInfo>>;
+          name: string;
+          level: number;
+          afk: boolean | string;
+          server: string;
+          stand: StandKey | "cstand" /** computer stand */;
+          y: number;
+          x: number;
+        }>
       };
+
   /** Item bought from Ponty */
   sbuy: {
     /** Character who triggered the event */
