@@ -24,3 +24,5 @@ export type DamageType = "magical" | "physical";
 
 export type RawEntity = MonsterEntity | CharacterEntity | NpcEntity | Character;
 export type Entity = BetterUXWrapper<RawEntity>;
+
+export * from "./entities/status-info";
