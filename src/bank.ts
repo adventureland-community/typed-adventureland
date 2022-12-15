@@ -55,7 +55,7 @@ export type BankPackTypeItemsOnly =
   | "items8"
   | "items9";
 
-/** @deprecated This is not used anywhere anymore. */
+/** @deprecated This is not used anywhere anymore. @see BankPackTypeItemsOnly */
 export type BankPackType = "gold" | BankPackTypeItemsOnly;
 
 declare global {
