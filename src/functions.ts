@@ -57,9 +57,6 @@ declare global {
   /** Shuffles the elements of the array. */
   function shuffle<T>(arr: Array<T>): Array<T>;
 
-  /** Called just before the CODE is destroyed */
-  function on_destroy(): void;
-
   /** Sends a message in chat. */
   function say(message: string): void;
 
