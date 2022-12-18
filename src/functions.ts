@@ -156,7 +156,19 @@ declare global {
   ): boolean;
 
   /**
+   * Quick check to see if you can use the door.
+   * This can return false positives, so you should check `can_use_door` if this returns true.
+   * @param map A given map (from `G.maps`)
+   * @param door The given door (from `G.maps[map].doors`)
+   * @param x The x position on the map
+   * @param y The y position on the map
+   * @returns TRUE if the door can be used from the given position, FALSE otherwise
+   */
+  function is_door_close(map: MapKey, door: DoorInfo, x: number, y: number): boolean;
+
+  /**
    * Checks if you can use the given door from the given position
+   * This function is costly, so only check when is_door_close is true.
    * @param map A given map (from `G.maps`)
    * @param door The given door (from `G.maps[map].doors`)
    * @param x The x position on the map
