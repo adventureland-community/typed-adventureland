@@ -2,6 +2,7 @@ import { BankPacksInfos } from "./bank";
 import { CharacterEntity } from "./entities/character-entity";
 import { MonsterEntity } from "./entities/monster-entity";
 import { NpcEntity } from "./entities/npc-entity";
+import { Entity } from "./entity";
 import { PartyCharacter } from "./functions";
 import {
   MapKey,
@@ -85,18 +86,31 @@ export interface XServerInfos {
   region: string;
 }
 
-export type SMonsterEvent = IPosition & {
+export type SMonsterEventLive = {
   /** Is the monster currently available? */
-  live: boolean;
+  live: true;
 
-  /** At what date will the monster spawn? */
-  spawn: string;
+  x: number;
+  y: number;
+  map: MapKey;
 
   hp: number;
   max_hp: number;
+
   /** The character name that the monster is currently attacking */
-  target?: string;
+  target?: string | null;
+  end?: Date;
 };
+
+export type SMonsterEventNotLive = {
+  /** Is the monster currently available? */
+  live: false;
+
+  /** At what date will the monster spawn? */
+  spawn: string;
+};
+
+export type SMonsterEvent = BetterUXWrapper<SMonsterEventNotLive | SMonsterEventLive>;
 
 export type SEventsInfos = {
   schedule: {
@@ -113,7 +127,9 @@ export type SEventsInfos = {
   } & {
     // halloween
     halloween?: boolean; // unsure if this will override the above general purpose EventKey
-  } & Partial<Record<"mrpumpkin" | "mrgreen", SMonsterEvent>>;
+  } & Partial<Record<"mrpumpkin" | "mrgreen", SMonsterEvent>> & {
+    crabxx?: SMonsterEvent;
+  };
 
 export {}; // this is done to make window a module
 declare global {
@@ -162,7 +178,7 @@ declare global {
 
     server_identifier: ServerIdentifier;
     server_region: ServerRegion;
-    
+
     socket: Omit<SocketIO.Socket, keyof SocketWithEventsFunctions> & SocketWithEventsFunctions;
 
     tracker: Record<string, never> | Tracker;
@@ -182,8 +198,41 @@ declare global {
   var handle_command: undefined | ((command: string, args: string) => void);
   var on_cm: undefined | ((from: string, data: any) => void);
   // var on_map_click: undefined | ((x: number, y: number) => boolean);
+
+  /**
+   *
+   */
   var on_party_invite: undefined | ((from: string) => void);
+
+  /**
+   * called by the inviter's name
+   * request = someone requesting to join your existing party
+   */
   var on_party_request: undefined | ((from: string) => void);
+
+  var on_disappear: undefined | ((entity: Entity, data: unknown) => void);
+
+  /**
+   * called by the mage's name in PVE servers,
+   * in PVP servers magiport either succeeds or fails without consent
+   */
+  var on_magiport: undefined | ((from: string) => void);
+
+  /**
+   * if true is returned, the default move is cancelled
+   */
+  var on_map_click: undefined | ((x: number, y: number) => void);
+
+  /**
+   * called just before the CODE is destroyed
+   */
+  var on_destroy: undefined | (() => void);
+
+  /**
+   * the game calls this function at the best place in each game draw frame,
+   * so if you are playing the game at 60fps, this function gets called 60 times per second
+   */
+  var on_draw: undefined | (() => void);
   /* eslint-enable no-var, vars-on-top */
 }
 

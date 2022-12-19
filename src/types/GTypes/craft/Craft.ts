@@ -80,3 +80,6 @@ export interface GCraft {
   cost: number;
   quest?: NpcKey;
 }
+
+export type GCrafts = Record<CraftKey, GCraft> &
+  Partial<Record<Exclude<ItemKey, CraftKey>, undefined>>;

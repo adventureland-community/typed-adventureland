@@ -3,7 +3,7 @@ import type { AnimationKey, GAnimation } from "./animations";
 import type { ClassKey, GClass } from "./classes";
 import type { ConditionKey, GCondition } from "./conditions";
 import type { GCosmetic } from "./cosmetics";
-import type { CraftKey, GCraft } from "./craft";
+import type { GCrafts } from "./craft";
 import type { DimensionKey, GDimension } from "./dimensions";
 import type { DismantleKey, GDismantle } from "./dismantle";
 import type { EmotionKey, GEmotion } from "./emotions";
@@ -33,7 +33,7 @@ export type GData = {
   classes: Record<ClassKey, GClass>;
   conditions: Record<ConditionKey, GCondition>;
   cosmetics: GCosmetic;
-  craft: Record<CraftKey, GCraft>;
+  craft: GCrafts;
   dimensions: Record<DimensionKey, GDimension>;
   dismantle: Record<DismantleKey, GDismantle>;
   drops: GDrops;
