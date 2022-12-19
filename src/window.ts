@@ -84,13 +84,30 @@ export interface XServerInfos {
   region: string;
 }
 
-export type SMonsterEvent = {
+export type SMonsterEventLive = {
   /** Is the monster currently available? */
-  live: boolean;
+  live: true;
+
+  x: number;
+  y: number;
+  map: MapKey;
+
+  hp: number;
+  max_hp: number;
+
+  target?: string | null;
+  end?: Date;
+};
+
+export type SMonsterEventNotLive = {
+  /** Is the monster currently available? */
+  live: false;
 
   /** At what date will the monster spawn? */
   spawn: string;
 };
+
+export type SMonsterEvent = BetterUXWrapper<SMonsterEventNotLive | SMonsterEventLive>;
 
 export type SEventsInfos = {
   schedule: {
@@ -104,6 +121,8 @@ export type SEventsInfos = {
   holidayseason?: boolean;
   grinch?: SMonsterEvent;
   snowman?: SMonsterEvent;
+} & {
+  crabxx?: SMonsterEvent;
 };
 
 export {}; // this is done to make window a module
