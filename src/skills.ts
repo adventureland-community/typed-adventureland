@@ -49,7 +49,7 @@ export type SkillKey_TargetParameter = Extract<
   | "zapperzap"
   | "smash"
   | "charm"
-  | "heal" 
+  | "heal"
   | "purify"
 >;
 
@@ -85,9 +85,9 @@ declare global {
 
   // cburst with no target
   // var hostiles=get_nearby_hostiles({range:character.range-2,limit:12}),targets=[],mp=character.mp-200,hmp=parseInt(mp/hostiles.length);
-	// 		hostiles.forEach(function(hostile){
-	// 			targets.push([hostile.id,hmp]);
-	// 		});
+  // 		hostiles.forEach(function(hostile){
+  // 			targets.push([hostile.id,hmp]);
+  // 		});
 
   /** The string is the ID of the target, the number is how much mana to spend on the attack */
   function use_skill(
@@ -96,35 +96,33 @@ declare global {
   ): Promise<unknown>;
 
   // if(target && is_array(target))
-	// 	for(var i=0;i<target.length;i++)
-	// 	{
-	// 		if(target[i] && target[i].id) target[i]=target[i].id; // "3shot", "5shot"
-	// 		if(target[i] && target[i][0] && target[i][0].id) target[i][0]=target[i][0].id; // "cburst"
-	// 	}
+  // 	for(var i=0;i<target.length;i++)
+  // 	{
+  // 		if(target[i] && target[i].id) target[i]=target[i].id; // "3shot", "5shot"
+  // 		if(target[i] && target[i][0] && target[i][0].id) target[i][0]=target[i][0].id; // "cburst"
+  // 	}
 
   /** if no target is supplied, it will find 3 targets in character.range-2 */
-  function use_skill(name: "3shot", targets?: Tuple<SkillTarget, 1>): Promise<Tuple<unknown, 1>>;
-  /** if no target is supplied, it will find 3 targets in character.range-2 */
-  function use_skill(name: "3shot", targets?: Tuple<SkillTarget, 2>): Promise<Tuple<unknown, 2>>;
-  /** if no target is supplied, it will find 3 targets in character.range-2 */
-  function use_skill(name: "3shot", targets?: Tuple<SkillTarget, 3>): Promise<Tuple<unknown, 3>>;
+  function use_skill(name: "3shot"): Promise<Array<unknown>>;
+
+  function use_skill(name: "3shot", targets: Tuple<SkillTarget, 1>): Promise<Tuple<unknown, 1>>;
+  function use_skill(name: "3shot", targets: Tuple<SkillTarget, 2>): Promise<Tuple<unknown, 2>>;
+  function use_skill(name: "3shot", targets: Tuple<SkillTarget, 3>): Promise<Tuple<unknown, 3>>;
 
   /** if no target is supplied, it will find 5 targets in character.range-2 */
-  function use_skill(name: "5shot", targets?: Tuple<SkillTarget, 1>): Promise<Tuple<unknown, 1>>;
-  /** if no target is supplied, it will find 5 targets in character.range-2 */
-  function use_skill(name: "5shot", targets?: Tuple<SkillTarget, 2>): Promise<Tuple<unknown, 2>>;
-  /** if no target is supplied, it will find 5 targets in character.range-2 */
-  function use_skill(name: "5shot", targets?: Tuple<SkillTarget, 3>): Promise<Tuple<unknown, 3>>;
-  /** if no target is supplied, it will find 5 targets in character.range-2 */
-  function use_skill(name: "5shot", targets?: Tuple<SkillTarget, 4>): Promise<Tuple<unknown, 4>>;
-  /** if no target is supplied, it will find 5 targets in character.range-2 */
-  function use_skill(name: "5shot", targets?: Tuple<SkillTarget, 5>): Promise<Tuple<unknown, 5>>;
+  function use_skill(name: "5shot"): Promise<Array<unknown>>;
+
+  function use_skill(name: "5shot", targets: Tuple<SkillTarget, 1>): Promise<Tuple<unknown, 1>>;
+  function use_skill(name: "5shot", targets: Tuple<SkillTarget, 2>): Promise<Tuple<unknown, 2>>;
+  function use_skill(name: "5shot", targets: Tuple<SkillTarget, 3>): Promise<Tuple<unknown, 3>>;
+  function use_skill(name: "5shot", targets: Tuple<SkillTarget, 4>): Promise<Tuple<unknown, 4>>;
+  function use_skill(name: "5shot", targets: Tuple<SkillTarget, 5>): Promise<Tuple<unknown, 5>>;
 
   function use_skill(name: "throw", target: SkillTarget, inventorySlot: number): Promise<unknown>;
 
   function use_skill(name: "energize", target: SkillTarget, mp: number): Promise<unknown>;
 
-  // TODO: Skills accepting a target have `G.skills[name].target` set. 
+  // TODO: Skills accepting a target have `G.skills[name].target` set.
   // Object.entries(G.skills).filter(([x,y]) => y.target)
   // mtangle but it seems like it's a monster ability, and not a skill, type is monster
   // TODO: G.skills[name].target can be `true`, `"player"` or `"monster"`.
@@ -138,22 +136,22 @@ declare global {
 
   // TODO: warp?
   // else if(name=="warp")
-	// {
-	// 	if(target && is_string(target) && !target[2]) target[2]=character.map;
-	// 	else if(!target || !target[2] || is_string(target)) 
-	// 	{
-	// 		var trset=false;
-	// 		for(var id in G.maps)
-	// 		{
-	// 			var map=G.maps[id];
-	// 			if(map.ignore || map.instance) continue;
-	// 			map.spawns.forEach(function(s){
-	// 				if(trset) return;
-	// 				if(Math.random()<0.02) trset=true,target=[s[0],s[1],id];
-	// 			});
-	// 		}
-	// 		if(!trset) target=[Math.random()*100,Math.random()*100,"main"];
-	// 	}
-	// 	socket.emit("skill",{name:"warp",x:target[0],y:target[1],'in':target[2]});
-	// }
+  // {
+  // 	if(target && is_string(target) && !target[2]) target[2]=character.map;
+  // 	else if(!target || !target[2] || is_string(target))
+  // 	{
+  // 		var trset=false;
+  // 		for(var id in G.maps)
+  // 		{
+  // 			var map=G.maps[id];
+  // 			if(map.ignore || map.instance) continue;
+  // 			map.spawns.forEach(function(s){
+  // 				if(trset) return;
+  // 				if(Math.random()<0.02) trset=true,target=[s[0],s[1],id];
+  // 			});
+  // 		}
+  // 		if(!trset) target=[Math.random()*100,Math.random()*100,"main"];
+  // 	}
+  // 	socket.emit("skill",{name:"warp",x:target[0],y:target[1],'in':target[2]});
+  // }
 }
