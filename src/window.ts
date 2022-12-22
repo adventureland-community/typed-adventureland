@@ -14,7 +14,7 @@ import {
   MonsterKey,
   EventKey,
 } from "./G";
-import { IPosition, PositionReal } from "./position";
+import { PositionReal } from "./position";
 import { ServerIdentifier, ServerRegion } from "./server";
 import { SocketWithEventsFunctions } from "./socket-events";
 import { SkillKey } from "./types/GTypes/skills";
