@@ -90,8 +90,9 @@ export type SMonsterEventLive = {
   /** Is the monster currently available? */
   live: true;
 
-  x: number;
-  y: number;
+  /** NOTE: Some event monsters don't have x and y (e.g.: Slenderman) */
+  x?: number;
+  y?: number;
   map: MapKey;
 
   hp: number;
@@ -102,6 +103,7 @@ export type SMonsterEventLive = {
   end?: Date;
 };
 
+// TODO: don't think all events has live / spawn when not live
 export type SMonsterEventNotLive = {
   /** Is the monster currently available? */
   live: false;
@@ -112,6 +114,53 @@ export type SMonsterEventNotLive = {
 
 export type SMonsterEvent = BetterUXWrapper<SMonsterEventNotLive | SMonsterEventLive>;
 
+export type SEventBooleanKeys =
+  | "egghunt"
+  | "halloween"
+  | "holidayseason"
+  | "lunarnewyear"
+  | "valentines";
+
+export type SPartialEventBoolean = Partial<Record<Extract<SEventBooleanKeys, EventKey>, boolean>>;
+
+// TODO: should we just use MonsterKey?
+export type SPartialEventMonsterEvent = Partial<
+  Record<Exclude<EventKey, SEventBooleanKeys | "abtesting" | "goobrawl">, SMonsterEvent>
+>;
+export type SPartialHolidaySeasonMonsters = Partial<Record<"grinch" | "snowman", SMonsterEvent>>;
+export type SPartialHalloweenMonsters = Partial<
+  Record<"mrpumpkin" | "mrgreen" | "slenderman", SMonsterEvent>
+>;
+
+export type SPartialABTesting = Partial<
+  Record<
+    "abtesting",
+    {
+      /** A date string of when the event will end */
+      end?: string;
+
+      /** A date string of when sign-ups will stop for the event */
+      signup_end: string;
+      /** How many characters are on team A. TODO: Check that this is actually what it means */
+      A: number;
+      /** How many characters are on team B. TODO: Check that this is actually what it means */
+      B: number;
+      /** The event ID. TODO: Do we need this? */
+      id: string;
+    }
+  >
+>;
+
+export type SPartialGooBrawlEventInfo = Partial<
+  Record<
+    "abtesting",
+    {
+      /** A date string of when the event will end */
+      end?: string;
+    }
+  >
+>;
+
 export type SEventsInfos = {
   schedule: {
     time_offset: number;
@@ -119,17 +168,12 @@ export type SEventsInfos = {
     nightlies: Array<number>;
     night: boolean;
   };
-} & Partial<Record<EventKey, SMonsterEvent>> & {
-    // Christmas
-    holidayseason?: boolean; // unsure if this will override the above general purpose EventKey
-  } & Partial<Record<"grinch" | "snowman", SMonsterEvent>> & {
-    valentines?: boolean;
-  } & {
-    // halloween
-    halloween?: boolean; // unsure if this will override the above general purpose EventKey
-  } & Partial<Record<"mrpumpkin" | "mrgreen", SMonsterEvent>> & {
-    crabxx?: SMonsterEvent;
-  };
+} & SPartialEventBoolean &
+  SPartialEventMonsterEvent &
+  SPartialHolidaySeasonMonsters &
+  SPartialHalloweenMonsters &
+  SPartialABTesting &
+  SPartialGooBrawlEventInfo;
 
 export {}; // this is done to make window a module
 declare global {
