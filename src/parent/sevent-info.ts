@@ -98,4 +98,12 @@ export type SEventsInfos = {
     /** The event ID. TODO: Do we need this? */
     id: string;
   };
+
+  /**
+   * Giga Crab is a challenging server event boss. 
+   * As long as there are Huge Crabs around, Giga Crab only receives one damage! 
+   * The entire server needs to get together to continually clear all the Huge Crabs that spawn. 
+   * The event lasts 40 minutes but as long as Giga Crab is being engaged, the event goes on! 
+   * read more: https://adventure.land/docs/ref/event-crabxx */
+  crabxx: SMonsterEventWithCoordinates;
 };
