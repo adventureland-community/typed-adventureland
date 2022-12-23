@@ -1,11 +1,22 @@
 import { BankPacksInfos } from "../bank";
 import { CharacterEntity, MonsterEntity, NpcEntity } from "../entity";
 import { PartyCharacter } from "../functions";
-import { EventKey, GDropList, GDropMaps, GDropMonsters, GDropNormalDrops, ItemKey, MapKey, MonsterKey, SkillKey } from "../G";
+import {
+  EventKey,
+  GDropList,
+  GDropMaps,
+  GDropMonsters,
+  GDropNormalDrops,
+  ItemKey,
+  MapKey,
+  MonsterKey,
+  SkillKey,
+} from "../G";
 import { PositionReal } from "../position";
 import { ServerIdentifier, ServerRegion } from "../server";
 import { SocketWithEventsFunctions } from "../socket-events";
 import { BetterUXWrapper } from "../types/GTypes/utils";
+import { SEventsInfos } from "./sevent-info";
 
 /** Tracktrix informations */
 export interface Tracker {
@@ -70,95 +81,6 @@ export interface XServerInfos {
   port: number;
   region: string;
 }
-
-export type SMonsterEventLive = {
-  /** Is the monster currently available? */
-  live: true;
-
-  /** NOTE: Some event monsters don't have x and y (e.g.: Slenderman) */
-  x?: number;
-  y?: number;
-  map: MapKey;
-
-  hp: number;
-  max_hp: number;
-
-  /** The character name that the monster is currently attacking */
-  target?: string | null;
-  end?: Date;
-};
-
-// TODO: don't think all events has live / spawn when not live
-export type SMonsterEventNotLive = {
-  /** Is the monster currently available? */
-  live: false;
-
-  /** At what date will the monster spawn? */
-  spawn: string;
-};
-
-export type SMonsterEvent = BetterUXWrapper<SMonsterEventNotLive | SMonsterEventLive>;
-
-export type SEventBooleanKeys =
-  | "egghunt"
-  | "halloween"
-  | "holidayseason"
-  | "lunarnewyear"
-  | "valentines";
-
-export type SPartialEventBoolean = Partial<Record<Extract<SEventBooleanKeys, EventKey>, boolean>>;
-
-// TODO: should we just use MonsterKey?
-export type SPartialEventMonsterEvent = Partial<
-  Record<Exclude<EventKey, SEventBooleanKeys | "abtesting" | "goobrawl">, SMonsterEvent>
->;
-export type SPartialHolidaySeasonMonsters = Partial<Record<"grinch" | "snowman", SMonsterEvent>>;
-export type SPartialHalloweenMonsters = Partial<
-  Record<"mrpumpkin" | "mrgreen" | "slenderman", SMonsterEvent>
->;
-
-export type SPartialABTesting = Partial<
-  Record<
-    "abtesting",
-    {
-      /** A date string of when the event will end */
-      end?: string;
-
-      /** A date string of when sign-ups will stop for the event */
-      signup_end: string;
-      /** How many characters are on team A. TODO: Check that this is actually what it means */
-      A: number;
-      /** How many characters are on team B. TODO: Check that this is actually what it means */
-      B: number;
-      /** The event ID. TODO: Do we need this? */
-      id: string;
-    }
-  >
->;
-
-export type SPartialGooBrawlEventInfo = Partial<
-  Record<
-    "abtesting",
-    {
-      /** A date string of when the event will end */
-      end?: string;
-    }
-  >
->;
-
-export type SEventsInfos = {
-  schedule: {
-    time_offset: number;
-    dailies: Array<number>;
-    nightlies: Array<number>;
-    night: boolean;
-  };
-} & SPartialEventBoolean &
-  SPartialEventMonsterEvent &
-  SPartialHolidaySeasonMonsters &
-  SPartialHalloweenMonsters &
-  SPartialABTesting &
-  SPartialGooBrawlEventInfo;
 
 export {}; // this is done to make parent a module
 declare global {
@@ -229,3 +151,5 @@ export type ChestInfo = PositionReal & {
   alpha: number;
   skin: "chest3" | string;
 };
+
+export * from "./sevent-info";
