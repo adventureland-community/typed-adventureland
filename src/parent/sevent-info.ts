@@ -105,5 +105,12 @@ export type SEventsInfos = {
    * The entire server needs to get together to continually clear all the Huge Crabs that spawn. 
    * The event lasts 40 minutes but as long as Giga Crab is being engaged, the event goes on! 
    * read more: https://adventure.land/docs/ref/event-crabxx */
-  crabxx: SMonsterEventWithCoordinates;
+   crabxx: SMonsterEventWithCoordinates;
+
+   /** read more: https://adventure.land/docs/ref/event-franky */
+   franky: SMonsterEventWithCoordinates;
+   /**
+    * icegolem is located on a closed island, make sure to not get stuck when the event is over. 
+    * read more: https://adventure.land/docs/ref/event-icegolem */
+   icegolem: SMonsterEventWithCoordinates;
 };
