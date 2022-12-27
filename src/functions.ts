@@ -178,6 +178,58 @@ declare global {
   function can_use_door(map: MapKey, door: DoorInfo, x: number, y: number): boolean;
 
   /**
+   * Formats a floating number to a pretty string.
+   *
+   * @param num The number to format
+   *
+   * @returns A pretty string
+   *
+   * @example to_pretty_float(123456.789) // "123,456.78"
+   */
+  function to_pretty_float(num: number): string;
+
+  /**
+   * Formats a number to a pretty string.
+   *
+   * @param num The number to format
+   *
+   * @returns A pretty string
+   *
+   * @example to_pretty_num(123456.789) // "123,456"
+   */
+  function to_pretty_num(num: number): string;
+
+  /**
+   * Formats a number to a pretty string, with a given edge.
+   * The number will only be formatted if it's greater than or equal to the edge.
+   *
+   * @param num The number to format
+   * @param edge The edge to decide whether to format or not (default: 10000)
+   *
+   * @returns A pretty string
+   *
+   * @example to_pretty_num(123456.789, 100000) // "123,456"
+   * @example to_pretty_num(1234.789, 10000) // "1234.789"
+   */
+  function smart_num(num: number, edge?: number): string;
+
+  /**
+   * Shrinks a number to its nearest unit.
+   * The thresholds are:
+   * -  1e3 (K)
+   * -  1e6 (M)
+   * -  1e9 (B)
+   * - 1e12 (T)
+   * @param num The number to shrink
+   *
+   * @returns A string with the number and its unit
+   *
+   * @example to_shrinked_num(123456.789) // "123K"
+   * @example to_shrinked_num(1234567) // "1.2M"
+   */
+  function to_shrinked_num(num: number): string;
+
+  /**
    * Changes the target of the player. Use in association with `get_targeted_monster()`.
    * @param target A given target (from `parent.entities`)
    */
