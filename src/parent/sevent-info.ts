@@ -1,4 +1,4 @@
-import { MapKey, EventKey } from "../G";
+import { MapKey } from "../G";
 import { BetterUXWrapper } from "../types/GTypes/utils";
 
 /** NOTE: Some event monsters don't have x and y (e.g.: Slenderman) */

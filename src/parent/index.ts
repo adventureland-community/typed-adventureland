@@ -2,7 +2,6 @@ import { BankPacksInfos } from "../bank";
 import { CharacterEntity, MonsterEntity, NpcEntity } from "../entity";
 import { PartyCharacter } from "../functions";
 import {
-  EventKey,
   GDropList,
   GDropMaps,
   GDropMonsters,

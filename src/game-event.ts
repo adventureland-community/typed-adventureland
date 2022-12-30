@@ -1,9 +1,8 @@
 import { HitData } from "./character-event";
-import { TradeSlotType } from "./entity";
 import { ApiResponse } from "./game-event-api-response";
-import { ItemInfo, TradeItemInfo } from "./items";
+import { ItemInfo } from "./items";
 import { TypedEventEmitter } from "./TypedEventEmitter";
-import { ItemKey, StandKey } from "./types/GTypes/items";
+import { ItemKey } from "./types/GTypes/items";
 import { MapKey } from "./types/GTypes/maps";
 import { NpcKey } from "./types/GTypes/npcs";
 
