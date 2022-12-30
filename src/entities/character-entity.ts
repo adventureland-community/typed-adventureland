@@ -1,6 +1,4 @@
 import {
-  InventoryExchangeItemInfo,
-  InventoryUpgradeCompoundItemInfo,
   ItemInfo,
   TradeItemInfo,
 } from "../items";
@@ -20,7 +18,7 @@ export interface CharacterEntityCXInfos {
 }
 
 export type CharacterEntitySlotsInfos = {
-  [T in SlotType]: ItemInfo | InventoryExchangeItemInfo | InventoryUpgradeCompoundItemInfo | null;
+  [T in SlotType]: ItemInfo  | null;
 } & {
   [T in TradeSlotType]?: TradeItemInfo | null;
 };

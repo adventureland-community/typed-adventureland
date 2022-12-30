@@ -1,4 +1,5 @@
 import { HitData } from "./character-event";
+import { ApiResponse } from "./game-event-api-response";
 import { ItemInfo } from "./items";
 import { TypedEventEmitter } from "./TypedEventEmitter";
 import { ItemKey } from "./types/GTypes/items";
@@ -193,14 +194,8 @@ export interface GameEvents {
     receiver: string;
     cx: string; // hat999 // TODO: cosmetics key?
   };
-  api_response:
-    | any
-    | {
-        type: string; // "servers_and_characters";
-        servers: [];
-        characters: [];
-        // TODO: there is a lot of different types of api responses, depending on api call
-      };
+  api_response: ApiResponse;
+
   /** Item bought from Ponty */
   sbuy: {
     /** Character who triggered the event */
@@ -244,3 +239,5 @@ export interface GameEvents {
   };
   hit: HitData;
 }
+
+export * from "./game-event-api-response";

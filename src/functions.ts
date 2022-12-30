@@ -3,7 +3,7 @@ import { MonsterEntity } from "./entities/monster-entity";
 import { SlotType, TradeSlotType } from "./entities/slots";
 import { Entity } from "./entity";
 import { ItemInfo } from "./items";
-import { IPosition, PositionReal, PositionMovable, PositionSmart } from "./position";
+import { IPosition, PositionReal, PositionSmart, ICoordReal } from "./position";
 import { EventKey } from "./types/GTypes/events";
 import { BoosterKey, ItemKey } from "./types/GTypes/items";
 import { MapKey } from "./types/GTypes/maps";
@@ -269,7 +269,7 @@ declare global {
     itemSlot2: number,
     itemSlot3: number,
     scrollSlot: number,
-    offeringSlot: number | null,
+    offeringSlot: number | null | undefined,
     onlyCalculate: true
   ): Promise<CompoundCalculateResponse>;
 
@@ -447,6 +447,12 @@ declare global {
   function is_moving(entity: Entity): boolean;
   function is_on_cooldown(skill: string): boolean;
 
+  /** returns true if you are silenced or disabled */
+  function is_silenced(entity: Entity): boolean;
+
+  /** returns true if you are dead, stunned, fingered, stoned, deepfreezed or sleeping */
+  function is_disabled(entity: Entity): boolean;
+
   /**
    * If no ID is given, it will loot some chests.
    * @param id The ID of a chest (from `parent.chests`)
@@ -516,7 +522,7 @@ declare global {
   function upgrade(
     item_slot: number,
     scroll_slot: number,
-    offering_slot: number | null,
+    offering_slot: number | null | undefined,
     only_calculate: true
   ): Promise<{
     success: boolean;
@@ -616,14 +622,26 @@ declare global {
    * @param entity The moveable entity you want to check is movable
    * @returns TRUE if you can move there, FALSE otherwise
    */
-  export function can_move(position: PositionMovable): boolean;
+  export function can_move(
+    position: IPosition & {
+      going_x: number;
+      going_y: number;
+      base?: {
+        h: number;
+        v: number | null;
+        vn: number;
+      };
+    }
+  ): boolean;
+
   // export function can_move(position: PositionMovable & { base: EntityBase }): boolean;
+
   /**
-   * Checks if you can move your character to the given destination on your current map
+   * Checks if you can move your character to the given destination on your current map from your current position
    * @param destination A position object containing the destination coordinates
    * @returns TRUE if you can move there, FALSE otherwise
    */
-  export function can_move_to(destination: PositionReal): boolean;
+  export function can_move_to(destination: ICoordReal): boolean;
   /**
    * Checks if you can move your character to the given destination on your current map
    * @param x The x-coordinate that you want to move to

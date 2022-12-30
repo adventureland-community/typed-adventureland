@@ -1,24 +1,21 @@
-import { BankPacksInfos } from "./bank";
-import { CharacterEntity } from "./entities/character-entity";
-import { MonsterEntity } from "./entities/monster-entity";
-import { NpcEntity } from "./entities/npc-entity";
-import { Entity } from "./entity";
-import { PartyCharacter } from "./functions";
+import { BankPacksInfos } from "../bank";
+import { CharacterEntity, MonsterEntity, NpcEntity } from "../entity";
+import { PartyCharacter } from "../functions";
 import {
-  MapKey,
   GDropList,
   GDropMaps,
   GDropMonsters,
   GDropNormalDrops,
   ItemKey,
+  MapKey,
   MonsterKey,
-} from "./G";
-import { PositionReal } from "./position";
-import { SocketWithEventsFunctions } from "./socket-events";
-import { SkillKey } from "./types/GTypes/skills";
-import { BetterUXWrapper } from "./types/GTypes/utils";
-
-export * from "./socket-events";
+  SkillKey,
+} from "../G";
+import { PositionReal } from "../position";
+import { ServerIdentifier, ServerRegion } from "../server";
+import { SocketWithEventsFunctions } from "../socket-events";
+import { BetterUXWrapper } from "../types/GTypes/utils";
+import { SEventsInfos } from "./sevent-info";
 
 /** Tracktrix informations */
 export interface Tracker {
@@ -84,51 +81,11 @@ export interface XServerInfos {
   region: string;
 }
 
-export type SMonsterEventLive = {
-  /** Is the monster currently available? */
-  live: true;
-
-  x: number;
-  y: number;
-  map: MapKey;
-
-  hp: number;
-  max_hp: number;
-
-  target?: string | null;
-  end?: Date;
-};
-
-export type SMonsterEventNotLive = {
-  /** Is the monster currently available? */
-  live: false;
-
-  /** At what date will the monster spawn? */
-  spawn: string;
-};
-
-export type SMonsterEvent = BetterUXWrapper<SMonsterEventNotLive | SMonsterEventLive>;
-
-export type SEventsInfos = {
-  schedule: {
-    time_offset: number;
-    dailies: Array<number>;
-    nightlies: Array<number>;
-    night: boolean;
-  };
-} & {
-  // Christmas
-  holidayseason?: boolean;
-  grinch?: SMonsterEvent;
-  snowman?: SMonsterEvent;
-} & {
-  crabxx?: SMonsterEvent;
-};
-
-export {}; // this is done to make window a module
+export {}; // this is done to make parent a module
 declare global {
+  /** When you access parent via game code, this is what you have access to. */
   interface Window {
-    //   $: JQueryStatic;
+    $: JQueryStatic;
     clear_game_logs(): void;
     close_merchant(): void;
     //   distance(from: IPosition | PositionReal, to: IPosition | PositionReal): number;
@@ -148,14 +105,12 @@ declare global {
 
     open_chest(id: string | number): Promise<void>;
     d_text(message: string, entity: CharacterEntity, args?: { color: string }): void;
-    //   is_disabled(entity: Entity): boolean;
 
     X: {
       characters: Array<XOnlineCharacter>;
       servers: Array<XServerInfos>;
     };
 
-    //   character: CharacterEntity;
     chests: {
       [id: string]: ChestInfo;
     };
@@ -171,8 +126,10 @@ declare global {
     party_list: string[];
     /** Contains a list of the last 40 ping response times */
     pings: number[];
-    //   server_identifier: ServerIdentifier;
-    //   server_region: ServerRegion;
+
+    server_identifier: ServerIdentifier;
+    server_region: ServerRegion;
+
     socket: Omit<SocketIO.Socket, keyof SocketWithEventsFunctions> & SocketWithEventsFunctions;
 
     tracker: Record<string, never> | Tracker;
@@ -186,66 +143,12 @@ declare global {
     drawings: Array<PIXI.Graphics>;
 
     S: SEventsInfos;
-
-    //   S: {
-    //     [T in EventName]?: IPosition & {
-    //       map: string;
-    //       live: boolean;
-    //       hp: number;
-    //       max_hp: number;
-    //       /** The character name that the monster is currently attacking */
-    //       target?: string;
-    //       x?:number;
-    //       y?:number
-    //     };
-    //   } & {
-    //     valentines?: boolean;
-    //   };
   }
-
-  /* eslint-disable no-var, vars-on-top */
-  var handle_command: undefined | ((command: string, args: string) => void);
-  var on_cm: undefined | ((from: string, data: any) => void);
-  // var on_map_click: undefined | ((x: number, y: number) => boolean);
-
-  /**
-   *
-   */
-  var on_party_invite: undefined | ((from: string) => void);
-
-  /**
-   * called by the inviter's name
-   * request = someone requesting to join your existing party
-   */
-  var on_party_request: undefined | ((from: string) => void);
-
-  var on_disappear: undefined | ((entity: Entity, data: unknown) => void);
-
-  /**
-   * called by the mage's name in PVE servers,
-   * in PVP servers magiport either succeeds or fails without consent
-   */
-  var on_magiport: undefined | ((from: string) => void);
-
-  /**
-   * if true is returned, the default move is cancelled
-   */
-  var on_map_click: undefined | ((x: number, y: number) => void);
-
-  /**
-   * called just before the CODE is destroyed
-   */
-  var on_destroy: undefined | (() => void);
-
-  /**
-   * the game calls this function at the best place in each game draw frame,
-   * so if you are playing the game at 60fps, this function gets called 60 times per second
-   */
-  var on_draw: undefined | (() => void);
-  /* eslint-enable no-var, vars-on-top */
 }
 
 export type ChestInfo = PositionReal & {
   alpha: number;
   skin: "chest3" | string;
 };
+
+export * from "./sevent-info";

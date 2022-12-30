@@ -18,4 +18,6 @@ export * from "./server";
 export * from "./skills";
 export * from "./TypedEventEmitter";
 export * from "./types/GTypes";
-export * from "./window";
+export * from "./global";
+export * from "./socket-events";
+export * from "./parent";

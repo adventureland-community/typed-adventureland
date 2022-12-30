@@ -351,6 +351,7 @@ export interface GMonster {
   immune?: boolean;
   lifesteal?: number;
   mp: number;
+  max_hp: number;
   name: MonsterName;
   operator?: boolean;
   orientation?: number;
