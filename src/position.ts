@@ -1,4 +1,13 @@
 import { MapKey } from "./types/GTypes/maps";
+export interface ICoord {
+  x: number;
+  y: number;
+}
+
+export interface ICoordReal {
+  real_x: number;
+  real_y: number;
+}
 
 export type IPosition = {
   /**
