@@ -163,8 +163,14 @@ export interface GMap {
   safe?: boolean;
   safe_pvp?: boolean;
   small_steps?: boolean;
+  /**
+   * direction is the way the character spawns 0 down,1 right, 2 bottom ,3 left.
+   * size indicates an area you could spawn in with x,y as the center.
+   */
   spawns: Array<
-    [x: number, y: number] | [number, number, number] | [number, number, number, number]
+    [x: number, y: number] 
+    | [x: number, y: number, direction:number] 
+    | [x: number, y: number, direction:number, size:number]
   >;
   traps?: [
     {
