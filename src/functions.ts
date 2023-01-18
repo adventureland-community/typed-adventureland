@@ -587,6 +587,14 @@ declare global {
    */
   function giveaway(slot: number, inventoryPosition: number, q: number, minutes: number): unknown;
 
+  /**
+   * Joins a giveaway for the specified item
+   * @param characterName Name of the character you want to join the giveaway of
+   * @param slot_name Trade slot containing the item you want to join the giveaway of
+   * @param rid Unique id of the item you want to join the giveaway of
+   */
+  function join_giveaway(characterName: string, slot_name: TradeSlotType, rid: string): unknown;
+
   export type ShiftResult = {
     name: BoosterKey;
     success: boolean;

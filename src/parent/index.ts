@@ -1,5 +1,5 @@
 import { BankPacksInfos } from "../bank";
-import { CharacterEntity, MonsterEntity, NpcEntity } from "../entity";
+import { CharacterEntity, MonsterEntity, NpcEntity, TradeSlotType } from "../entity";
 import { PartyCharacter } from "../functions";
 import {
   GDropList,
@@ -93,6 +93,14 @@ declare global {
     open_merchant(standInventoryPostion: number): void;
     start_runner(): void;
     stop_runner(): void;
+
+    /**
+     * Joins a giveaway for the specified item
+     * @param slot_name Trade slot containing the item you want to join the giveaway of
+     * @param characterName Name of the character you want to join the giveaway of
+     * @param rid Unique id of the item you want to join the giveaway of
+     */
+    join_giveaway(slot_name: TradeSlotType, characterName: string, rid: string): unknown;
 
     /** show a modal, TODO: investigate paramters */
     show_modal(arg1: any, arg2: any): any;
