@@ -63,7 +63,7 @@ export type SEventsInfos = {
   /** lunarnewyear: Dragold spanws every 3 hours. Take a chance to capture one of the very rare drops. A unique crown as a cosmetics item and Dragold's chrysalis! (to have a Dragold as a pet!) */
   dragold:SMonsterEventWithCoordinates;
   /** lunarnewyear: The Legendary Tiger appears to players and drops Tiger set items each time you manage to land a hit! Make sure to not hurt this peaceful and giving animal! */
-  tiger:SMonsterEventWithCoordinates;
+  tiger:SMonsterEvent;
 
   /** read more https://adventure.land/docs/ref/event-holidayseason */
   holidayseason: boolean;
