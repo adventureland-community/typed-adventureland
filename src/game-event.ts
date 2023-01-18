@@ -216,6 +216,12 @@ export interface GameEvents {
   death: {
     /** Character Name or Monster ID  */
     id: string;
+
+    /** Luck taken into account when looting */
+    luckm: number;
+
+    /** Contribution distribution for cooperative monsters */
+    points?: Record<string, number>;
   };
   mluck: {
     /** Character Name  */

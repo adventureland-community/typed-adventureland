@@ -37,7 +37,6 @@ export type SMonsterEventWithCoordinates = BetterUXWrapper<
   SMonsterEventNotLive | SMonsterEventLiveWithCoordinates
 >;
 
-
 export type SEventsInfos = {
   schedule: {
     time_offset: number;
@@ -46,24 +45,24 @@ export type SEventsInfos = {
     night: boolean;
   };
 } & {
-  /** `wabbit` spawns hourly on a random map and inside a random monster pack. 
-   * It's super hard to kill for 5 minutes, which should give you enough time to join the fight! 
+  /** `wabbit` spawns hourly on a random map and inside a random monster pack.
+   * It's super hard to kill for 5 minutes, which should give you enough time to join the fight!
    * read more: https://adventure.land/docs/ref/event-egghunt */
   egghunt: boolean;
-  wabbit: SMonsterEvent
+  wabbit: SMonsterEvent;
 
-  /** `pinkgoo` spawns every hour in a random map and inside a random monster pack. 
-   * Love Goo is co-op but has 98% avoidance, so it's a bit tricky to land a hit! 
+  /** `pinkgoo` spawns every hour in a random map and inside a random monster pack.
+   * Love Goo is co-op but has 98% avoidance, so it's a bit tricky to land a hit!
    * read more: https://adventure.land/docs/ref/event-valentines */
   valentines: boolean;
-  pinkgoo: SMonsterEvent
-  
+  pinkgoo: SMonsterEvent;
+
   /** read more: https://adventure.land/docs/ref/event-lunarnewyear */
   lunarnewyear: boolean;
   /** lunarnewyear: Dragold spanws every 3 hours. Take a chance to capture one of the very rare drops. A unique crown as a cosmetics item and Dragold's chrysalis! (to have a Dragold as a pet!) */
-  dragold:SMonsterEventWithCoordinates;
+  dragold: SMonsterEventWithCoordinates;
   /** lunarnewyear: The Legendary Tiger appears to players and drops Tiger set items each time you manage to land a hit! Make sure to not hurt this peaceful and giving animal! */
-  tiger:SMonsterEvent;
+  tiger: SMonsterEvent;
 
   /** read more https://adventure.land/docs/ref/event-holidayseason */
   holidayseason: boolean;
@@ -75,7 +74,7 @@ export type SEventsInfos = {
   halloween: boolean;
   mrpumpkin: SMonsterEventWithCoordinates;
   mrgreen: SMonsterEventWithCoordinates;
-  slenderma: SMonsterEvent;
+  slenderman: SMonsterEvent;
 
   /** read more: https://adventure.land/docs/ref/event-goobrawl */
   goobrawl: {
@@ -100,17 +99,17 @@ export type SEventsInfos = {
   };
 
   /**
-   * Giga Crab is a challenging server event boss. 
-   * As long as there are Huge Crabs around, Giga Crab only receives one damage! 
-   * The entire server needs to get together to continually clear all the Huge Crabs that spawn. 
-   * The event lasts 40 minutes but as long as Giga Crab is being engaged, the event goes on! 
+   * Giga Crab is a challenging server event boss.
+   * As long as there are Huge Crabs around, Giga Crab only receives one damage!
+   * The entire server needs to get together to continually clear all the Huge Crabs that spawn.
+   * The event lasts 40 minutes but as long as Giga Crab is being engaged, the event goes on!
    * read more: https://adventure.land/docs/ref/event-crabxx */
-   crabxx: SMonsterEventWithCoordinates;
+  crabxx: SMonsterEventWithCoordinates;
 
-   /** read more: https://adventure.land/docs/ref/event-franky */
-   franky: SMonsterEventWithCoordinates;
-   /**
-    * icegolem is located on a closed island, make sure to not get stuck when the event is over. 
-    * read more: https://adventure.land/docs/ref/event-icegolem */
-   icegolem: SMonsterEventWithCoordinates;
+  /** read more: https://adventure.land/docs/ref/event-franky */
+  franky: SMonsterEventWithCoordinates;
+  /**
+   * icegolem is located on a closed island, make sure to not get stuck when the event is over.
+   * read more: https://adventure.land/docs/ref/event-icegolem */
+  icegolem: SMonsterEventWithCoordinates;
 };
