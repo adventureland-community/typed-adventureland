@@ -16,7 +16,7 @@ export type MonsterHuntStatusInfo = {
   ms: number;
   /** The server where the monster hunt is valid */
   sn: string;
-}
+};
 
 export type StatusInfo = {
   [T in ConditionKey]?: StatusInfoBase;
@@ -96,6 +96,10 @@ export type StatusInfo = {
     strong?: boolean;
   };
   monsterhunt?: MonsterHuntStatusInfo;
+  multi_burn?: {
+    ms: number;
+    ability: boolean;
+  };
   newcomersblessing?: {
     f: string;
     ms: number;
