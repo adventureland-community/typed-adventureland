@@ -15,7 +15,7 @@ export type Wrap<Terface, Keys extends string | number | symbol> = Terface & {
 export type BetterUXWrapper<
   Terface,
   Keys extends AllKeys<Terface> = AllKeys<Terface>
-> = Terface extends any ? Debug<Wrap<Terface, Keys>> : never;
+> = Terface extends any ? Wrap<Terface, Keys> : never;
 
 /** Builds a tuple containing N times the type T. */
 export type Tuple<T, N extends number> = N extends N

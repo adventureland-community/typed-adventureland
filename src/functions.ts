@@ -102,7 +102,18 @@ declare global {
    * @param quantity How many items to buy. The default is to buy one item
    */
   // TODO: Change the "any" to the promise that this function returns
-  function buy(item: ItemKey, quantity?: number): Promise<any>;
+  function buy(
+    item: ItemKey,
+    quantity?: number
+  ): Promise<{
+    cost: number;
+    num: number;
+    name: ItemKey;
+    q: number;
+    success: true;
+    response: "buy_success";
+    place: "buy";
+  }>;
 
   /**
    * Buy an item from an NPC using only gold. If you want to buy things with shells, use `buy_with_shells`.
@@ -470,7 +481,34 @@ declare global {
     to: string | { name: string },
     inventoryPostion: number,
     quantity?: number
-  ): any;
+  ): Promise<
+    BetterUXWrapper<
+      | {
+          response: "item_sent";
+
+          /** Character you sent the item to */
+          name: string;
+
+          /** Item you sent */
+          item: ItemKey;
+
+          /** Quantity sent */
+          q: number;
+
+          /** Slot the item you sent was in */
+          num: number;
+
+          place: "send";
+          success: true;
+        }
+      | {
+          response: string;
+          reason: string;
+          failed: true;
+          place: "send";
+        }
+    >
+  >;
   function send_local_cm(to: string, data: any): any;
   /**
    *
@@ -574,8 +612,8 @@ declare global {
     slot: TradeSlotType | number,
     name: ItemKey,
     price: number,
-    q: number,
-    level?: number
+    level?: number,
+    q?: number
   ): unknown;
 
   /**

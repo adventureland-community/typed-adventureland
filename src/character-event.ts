@@ -3,6 +3,7 @@ import { ItemInfo } from "./items";
 import { TypedEventEmitter } from "./TypedEventEmitter";
 import { ItemKey } from "./types/GTypes/items";
 import { MapKey } from "./types/GTypes/maps";
+import { BetterUXWrapper } from "./types/GTypes/utils";
 
 export type CharacterWithEventsFunctions = Pick<
   TypedEventEmitter<CharacterEvents>,
@@ -226,7 +227,7 @@ export interface CharacterEvents {
     num: number;
   };
   // TODO: could perhaps share an interface for item send/receive
-  item_received:
+  item_received: BetterUXWrapper<
     | {
         /** This is the one you should rely on. */
         response: "item_received";
@@ -255,7 +256,8 @@ export interface CharacterEvents {
 
         /** Inventory slot */
         num: number;
-      };
+      }
+  >;
   item_sent: {
     /** Character name that sent you the item */
     name: string;
