@@ -67,10 +67,17 @@ declare global {
    */
   const bank_packs: BankPacksInfos;
 
+  /**
+   * bank_retrieve("items0",0) -> retrieves the first item from bank's "items0"
+	 * bank_retrieve("items0",0,12) -> you can optionally specify where to retrieve the item in inventory
+   * @param pack The bank pack to retrieve the item from
+   * @param pack_slot The pack index where the item is located
+   * @param inventoryIndex The player inventory where the item should be added to. The server interprets -1 as first slot available
+   */
   function bank_retrieve(
     pack: BankPackTypeItemsOnly,
     pack_slot: number,
-    slot?: number
+    inventoryIndex?: number
   ): Promise<void>;
 
   /**
