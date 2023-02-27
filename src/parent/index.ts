@@ -94,6 +94,9 @@ declare global {
     start_runner(): void;
     stop_runner(): void;
 
+    /** The response is given via game.on('api_response',function(data){ where data.type is equal to for example merchants */
+    api_call(call: "pull_merchants" | "pull_friends"): void;
+
     /**
      * Joins a giveaway for the specified item
      * @param slot_name Trade slot containing the item you want to join the giveaway of
