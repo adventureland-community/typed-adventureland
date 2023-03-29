@@ -11,7 +11,7 @@ export type ServersAndCharactersApiResponse = {
 
 export type FriendsApiResponse = {
   type: "friends";
-  chars: any[];
+  chars: unknown[];
 }
 
 export type MerchantsApiResponse = {
