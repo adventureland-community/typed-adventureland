@@ -538,7 +538,9 @@ declare global {
   function stop(action?: string): any;
   function stop_character(name: string): any;
   /** For buying things off players' merchants */
-  function trade_buy(target: Entity, trade_slot: number): any;
+  function trade_buy(target: Entity, trade_slot: TradeSlotType, quantity?: number): any;
+  /** For selling things to player merchants */
+  function trade_sell(target: Entity, trade_slot: TradeSlotType, quantity?: number): any;
   function transport(map: MapKey, spawn?: number): any;
   function unequip(slot: SlotType | TradeSlotType): any;
 

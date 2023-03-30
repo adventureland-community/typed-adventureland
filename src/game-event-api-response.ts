@@ -9,6 +9,11 @@ export type ServersAndCharactersApiResponse = {
   characters: [];
 };
 
+export type FriendsApiResponse = {
+  type: "friends";
+  chars: unknown[];
+}
+
 export type MerchantsApiResponse = {
   type: "merchants";
   chars: Array<{
@@ -27,3 +32,8 @@ export type MerchantsApiResponse = {
 };
 export type RawApiResponse = ServersAndCharactersApiResponse | MerchantsApiResponse;
 export type ApiResponse = BetterUXWrapper<RawApiResponse>;
+
+export interface ApiCalls {
+  pull_merchants: MerchantsApiResponse;
+  pull_friends: FriendsApiResponse;
+}
