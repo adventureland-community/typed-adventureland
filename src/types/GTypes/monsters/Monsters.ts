@@ -1,4 +1,3 @@
-
 import type { ConditionKey } from "../conditions/Conditions";
 import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { WeaponKey } from "../items/Weapon";
@@ -72,6 +71,7 @@ export type MonsterKey =
   | "mummy" // Mummy
   | "mvampire" // Dracul
   | "nelemental" // Nature Elemental
+  | "nerfedbat" // Bat
   | "nerfedmummy" // Mummy
   | "oneeye" // One Eye
   | "osnake" // Snake
@@ -363,7 +363,7 @@ export interface GMonster {
     chatter: [number, number];
     courage: [number, number];
     exponential: boolean;
-  
+
     level: {
       armor: number;
       attack: number;
@@ -399,12 +399,10 @@ export interface GMonster {
   skin: string;
   slots?: {
     mainhand: {
-    
       level: number;
       name: WeaponKey;
     };
     offhand?: {
-    
       level: number;
       name: WeaponKey;
     };
