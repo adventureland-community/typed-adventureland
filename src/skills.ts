@@ -10,6 +10,7 @@ export type SkillKey_NoParameter = Extract<
   | "charge"
   | "cleave"
   | "darkblessing"
+  | "dash"
   | "fishing"
   | "hardshell"
   | "invis"
@@ -24,33 +25,33 @@ export type SkillKey_NoParameter = Extract<
   | "selfheal"
   | "stomp"
   | "warcry"
-  | "dash"
 >;
 
 export type SkillKey_TargetParameter = Extract<
   SkillKey,
-  | "attack"
   | "4fingers"
   | "absorb"
+  | "attack"
   | "burst"
+  | "charm"
   | "curse"
+  | "heal"
   | "huntersmark"
   | "magiport"
   | "mentalburst"
   | "mluck"
-  | "piercingshot"
   | "pickpocket"
+  | "piercingshot"
+  | "purify"
   | "quickpunch"
   | "quickstab"
   | "reflection"
   | "rspeed"
+  | "smash"
+  | "snowball"
   | "supershot"
   | "taunt"
   | "zapperzap"
-  | "smash"
-  | "charm"
-  | "heal"
-  | "purify"
 >;
 
 export type SkillKey_ItemNeeded = Extract<SkillKey, "pcoat" | "shadowstrike">;
