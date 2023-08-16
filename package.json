@@ -1,6 +1,6 @@
 {
   "name": "typed-adventureland",
-  "version": "0.0.38",
+  "version": "0.0.39",
   "description": "Strong TypeScript declarations for the game AdventureLand",
   "repository": "adventureland-community/typed-adventureland",
   "main": "dist/src/index.d.ts",
