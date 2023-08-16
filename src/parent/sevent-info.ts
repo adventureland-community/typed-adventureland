@@ -80,6 +80,7 @@ export type SEventsInfos = {
   goobrawl: {
     /** A date string of when the event will end */
     end?: string;
+    join?: boolean;
   };
 
   /** read more: https://adventure.land/docs/ref/event-abtesting */
@@ -96,6 +97,8 @@ export type SEventsInfos = {
     B: number;
     /** The event ID. TODO: Do we need this? */
     id: string;
+
+    join?: boolean;
   };
 
   /**

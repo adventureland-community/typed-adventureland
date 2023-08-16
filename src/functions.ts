@@ -544,6 +544,9 @@ declare global {
   function transport(map: MapKey, spawn?: number): any;
   function unequip(slot: SlotType | TradeSlotType): any;
 
+  /** Used to leave jail, cyberland and maybe others. */
+  function leave(): Promise<unknown>;
+
   function upgrade(
     item_slot: number,
     scroll_slot: number,
