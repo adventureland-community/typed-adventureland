@@ -779,7 +779,7 @@ declare global {
  */
 export type DoorInfo = [number, number, number, number, MapKey, number?, number?, string?, string?];
 
-interface OnlineCharacter {
+export interface OnlineCharacter {
   x: number;
   y: number;
   map: MapKey;
