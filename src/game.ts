@@ -13,4 +13,8 @@ declare global {
     cli: string;
     listeners: Array<{ id: string; event: string }>;
   };
+
+  interface AdventurelandClient {
+    game: Game;
+  }
 }

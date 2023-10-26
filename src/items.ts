@@ -9,6 +9,17 @@ declare global {
 
   /** Returns the inventory position of the item, or -1 if it's not found */
   function locate_item(item: ItemKey): number; // should this live in "inventory"?
+
+  interface AdventurelandClient {
+    /**
+     * Returns the grade of an item.
+     * 0 = normal, 1 = high, 2 = rare, 3 = legendary, 4 = exalted
+     */
+    item_grade(item: ItemInfo | { name: ItemKey }): -1 | 0 | 1 | 2 | 3 | 4;
+
+    /** Returns the inventory position of the item, or -1 if it's not found */
+    locate_item(item: ItemKey): number; // should this live in "inventory"?
+  }
 }
 
 export type HealthPotion = "hpot0" | "hpot1" | "hpotx";
