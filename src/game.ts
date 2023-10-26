@@ -3,7 +3,7 @@ import { GameWithEventsFunctions } from "./game-event";
 export {};
 
 declare global {
-  const game: Game;
+  var game: Game;
 
   type Game = GameWithEventsFunctions & {
     /** indicator if the game is using graphics and we can use PIXI.Graphics for example */

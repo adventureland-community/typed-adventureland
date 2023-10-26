@@ -17,7 +17,7 @@ export type CharacterBankInfos =
   | null;
 
 declare global {
-  const character: Character;
+  var character: Character;
 
   //  TODO: validate we have all properties that CharacterEntity does
   type Character = CharacterWithEventsFunctions &

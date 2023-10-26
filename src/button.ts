@@ -1,6 +1,6 @@
 export {};
 declare global {
-  const buttons: {
+  var buttons: {
     [id: string]: {
       value: any;
       fn: Function;

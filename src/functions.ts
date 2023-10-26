@@ -750,7 +750,7 @@ declare global {
   function can_walk(entity: Entity): boolean;
 
   /** Contains information about smart_move() */
-  let smart: IPosition & {
+  var smart: IPosition & {
     /** If searching and false, we are still searching. If  */
     found: boolean;
     /** If .moving == true, we are moving or searching */

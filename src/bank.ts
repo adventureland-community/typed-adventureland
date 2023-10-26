@@ -65,7 +65,7 @@ declare global {
    * [1]: The cost to unlock this bank pack if you buy with gold
    * [2]: The cost to unlock this bank pack if you buy with shells
    */
-  const bank_packs: BankPacksInfos;
+  var bank_packs: BankPacksInfos;
 
   /**
    * bank_retrieve("items0",0) -> retrieves the first item from bank's "items0"

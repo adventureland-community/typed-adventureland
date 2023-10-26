@@ -6,7 +6,7 @@ export {}; // Augmentations for the global scope can only be directly nested in 
 export * from "./types/GTypes";
 
 declare global {
-  const G: GData;
+  var G: GData;
 
   interface AdventurelandClient {
     G: GData;

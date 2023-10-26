@@ -1,5 +1,5 @@
 declare global {
-  const server: Server;
+  var server: Server;
 
   /**
    * Changes servers. This will reload the page (the URL will change to match the server given), which means your code will also reload.
