@@ -1,7 +1,7 @@
 declare global {
   function enter(dungeon: string, instance?: string): Promise<any>;
   interface AdventurelandClient {
-    enter(dungeon: string, instance?: string): Promise<any>;
+    enter: typeof enter;
   }
 }
 

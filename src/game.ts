@@ -15,6 +15,6 @@ declare global {
   };
 
   interface AdventurelandClient {
-    game: Game;
+    game: typeof game;
   }
 }

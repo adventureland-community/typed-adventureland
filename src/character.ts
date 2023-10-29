@@ -127,6 +127,6 @@ declare global {
       pzazz: number;
     };
   interface AdventurelandClient {
-    character: Character;
+    character: typeof character;
   }
 }

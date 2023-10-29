@@ -9,7 +9,7 @@ declare global {
   var G: GData;
 
   interface AdventurelandClient {
-    G: GData;
+    G: typeof G;
   }
   //   const G: {
   //     /** a look with needed xp per level, key is level */

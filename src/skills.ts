@@ -157,43 +157,6 @@ declare global {
   // }
 
   interface AdventurelandClient {
-    use_skill(name: "use_hp" | "use_mp"): Promise<unknown>;
-
-    use_skill(name: "magiport", target: SkillTarget): Promise<unknown>;
-
-    use_skill(name: "use_town"): Promise<unknown>;
-
-    /** For destination, it's an array of [x, y] */
-    use_skill(name: SkillKey_CoordinatesNeeded, pos: [x: number, y: number]): Promise<unknown>;
-
-    /** The string is the ID of the target, the number is how much mana to spend on the attack */
-    use_skill(name: "cburst", targets: [target: SkillTarget, mana: number][]): Promise<unknown>;
-
-    /** if no target is supplied, it will find 3 targets in character.range-2 */
-    use_skill(name: "3shot"): Promise<Array<unknown>>;
-
-    use_skill(name: "3shot", targets: Tuple<SkillTarget, 1>): Promise<Tuple<unknown, 1>>;
-    use_skill(name: "3shot", targets: Tuple<SkillTarget, 2>): Promise<Tuple<unknown, 2>>;
-    use_skill(name: "3shot", targets: Tuple<SkillTarget, 3>): Promise<Tuple<unknown, 3>>;
-
-    /** if no target is supplied, it will find 5 targets in character.range-2 */
-    use_skill(name: "5shot"): Promise<Array<unknown>>;
-
-    use_skill(name: "5shot", targets: Tuple<SkillTarget, 1>): Promise<Tuple<unknown, 1>>;
-    use_skill(name: "5shot", targets: Tuple<SkillTarget, 2>): Promise<Tuple<unknown, 2>>;
-    use_skill(name: "5shot", targets: Tuple<SkillTarget, 3>): Promise<Tuple<unknown, 3>>;
-    use_skill(name: "5shot", targets: Tuple<SkillTarget, 4>): Promise<Tuple<unknown, 4>>;
-    use_skill(name: "5shot", targets: Tuple<SkillTarget, 5>): Promise<Tuple<unknown, 5>>;
-
-    use_skill(name: "throw", target: SkillTarget, inventorySlot: number): Promise<unknown>;
-
-    use_skill(name: "energize", target: SkillTarget, mp: number): Promise<unknown>;
-
-    /**
-     * Skills expecting a target will default to the current target if none is explicitely specified.
-     */
-    use_skill(name: SkillKey_TargetParameter, target?: SkillTarget): Promise<unknown>;
-
-    use_skill(name: SkillKey_NoParameter): Promise<unknown>;
+    use_skill: typeof use_skill;
   }
 }

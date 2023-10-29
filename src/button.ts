@@ -13,16 +13,10 @@ declare global {
   function clear_buttons(): void;
 
   interface AdventurelandClient {
-    buttons: {
-      [id: string]: {
-        value: any;
-        fn: Function;
-        place: "top" | "bottom";
-      };
-    };
-    add_top_button(id: string, text: string, fn: () => unknown): void;
-    add_bottom_button(id: string, text: string, fn: () => unknown): void;
-    set_button_value(id: string, text: string): void;
-    clear_buttons(): void;
+    buttons: typeof buttons;
+    add_top_button: typeof add_top_button;
+    add_bottom_button: typeof add_bottom_button;
+    set_button_value: typeof set_button_value;
+    clear_buttons: typeof clear_buttons;
   }
 }
