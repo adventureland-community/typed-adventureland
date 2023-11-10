@@ -38,6 +38,8 @@ declare global {
 
   function is_object(arg: unknown): boolean;
 
+  function destroy(itemSlot: number): Promise<{ success: boolean; place: "destroy" }>;
+
   /**
    * Moves the item at slot `slot` to slot `destSlot`.
    * Combines into slot `destSlot` if possible.
