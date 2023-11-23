@@ -9,6 +9,11 @@ declare global {
 
   /** Returns the inventory position of the item, or -1 if it's not found */
   function locate_item(item: ItemKey): number; // should this live in "inventory"?
+
+  interface AdventurelandClient {
+    item_grade: typeof item_grade;
+    locate_item: typeof locate_item;
+  }
 }
 
 export type HealthPotion = "hpot0" | "hpot1" | "hpotx";

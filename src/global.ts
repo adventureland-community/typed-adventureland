@@ -42,4 +42,15 @@ declare global {
    */
   var on_draw: undefined | (() => void);
   /* eslint-enable no-var, vars-on-top */
+  interface AdventurelandClient {
+    handle_command: typeof handle_command;
+    on_cm: typeof on_cm;
+    on_party_invite: typeof on_party_invite;
+    on_party_request: typeof on_party_request;
+    on_disappear: typeof on_disappear;
+    on_magiport: typeof on_magiport;
+    on_map_click: typeof on_map_click;
+    on_destroy: typeof on_destroy;
+    on_draw: typeof on_draw;
+  }
 }

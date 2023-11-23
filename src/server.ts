@@ -1,15 +1,17 @@
 declare global {
-  const server: Server;
+  var server: Server;
 
   /**
    * Changes servers. This will reload the page (the URL will change to match the server given), which means your code will also reload.
    * @param region The region to change to (e.g. ASIA)
    * @param identifier The server identifier to change to (e.g. PVP)
    */
-  function change_server(
-    region: ServerRegion,
-    identifier: ServerIdentifier
-  ): void;
+  function change_server(region: ServerRegion, identifier: ServerIdentifier): void;
+
+  interface AdventurelandClient {
+    server: typeof server;
+    change_server: typeof change_server;
+  }
 }
 
 export type Server = {

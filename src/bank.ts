@@ -65,11 +65,11 @@ declare global {
    * [1]: The cost to unlock this bank pack if you buy with gold
    * [2]: The cost to unlock this bank pack if you buy with shells
    */
-  const bank_packs: BankPacksInfos;
+  var bank_packs: BankPacksInfos;
 
   /**
    * bank_retrieve("items0",0) -> retrieves the first item from bank's "items0"
-	 * bank_retrieve("items0",0,12) -> you can optionally specify where to retrieve the item in inventory
+   * bank_retrieve("items0",0,12) -> you can optionally specify where to retrieve the item in inventory
    * @param pack The bank pack to retrieve the item from
    * @param pack_slot The pack index where the item is located
    * @param inventoryIndex The player inventory where the item should be added to. The server interprets -1 as first slot available
@@ -103,4 +103,12 @@ declare global {
    * @param amount The amount of gold to withdraw
    */
   function bank_withdraw(amount: number): void;
+
+  interface AdventurelandClient {
+    bank_packs: typeof bank_packs;
+    bank_retrieve: typeof bank_retrieve;
+    bank_deposit: typeof bank_deposit;
+    bank_store: typeof bank_store;
+    bank_withdraw: typeof bank_withdraw;
+  }
 }
