@@ -38,6 +38,8 @@ declare global {
 
   function is_object(arg: unknown): boolean;
 
+  function destroy(itemSlot: number): Promise<{ success: boolean; place: "destroy" }>;
+
   /**
    * Moves the item at slot `slot` to slot `destSlot`.
    * Combines into slot `destSlot` if possible.
@@ -544,6 +546,9 @@ declare global {
   function transport(map: MapKey, spawn?: number): any;
   function unequip(slot: SlotType | TradeSlotType): any;
 
+  /** Used to leave jail, cyberland and maybe others. */
+  function leave(): Promise<unknown>;
+
   function upgrade(
     item_slot: number,
     scroll_slot: number,
@@ -776,7 +781,7 @@ declare global {
  */
 export type DoorInfo = [number, number, number, number, MapKey, number?, number?, string?, string?];
 
-interface OnlineCharacter {
+export interface OnlineCharacter {
   x: number;
   y: number;
   map: MapKey;

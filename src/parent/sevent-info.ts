@@ -49,7 +49,7 @@ export type SEventsInfos = {
    * It's super hard to kill for 5 minutes, which should give you enough time to join the fight!
    * read more: https://adventure.land/docs/ref/event-egghunt */
   egghunt: boolean;
-  wabbit: SMonsterEvent;
+  wabbit: SMonsterEventWithCoordinates;
 
   /** `pinkgoo` spawns every hour in a random map and inside a random monster pack.
    * Love Goo is co-op but has 98% avoidance, so it's a bit tricky to land a hit!
@@ -80,6 +80,7 @@ export type SEventsInfos = {
   goobrawl: {
     /** A date string of when the event will end */
     end?: string;
+    join?: boolean;
   };
 
   /** read more: https://adventure.land/docs/ref/event-abtesting */
@@ -96,6 +97,8 @@ export type SEventsInfos = {
     B: number;
     /** The event ID. TODO: Do we need this? */
     id: string;
+
+    join?: boolean;
   };
 
   /**

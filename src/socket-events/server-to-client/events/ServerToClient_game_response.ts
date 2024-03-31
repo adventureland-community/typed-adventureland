@@ -391,6 +391,9 @@ export type GameResponseDataUpgradeChance = {
   /** The scroll used for the compound calculation */
   scroll: ItemKey;
 
+  /** The offering used for the compound calculation */
+  offering: ItemKey;
+
   /** Related to compound chance */
   grace: number;
 };
