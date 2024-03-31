@@ -1,6 +1,6 @@
 import { HitData } from "./character-event";
 import { ApiResponse } from "./game-event-api-response";
-import { ItemInfo } from "./items";
+import { ItemInfo, TradeItemInfo } from "./items";
 import { TypedEventEmitter } from "./TypedEventEmitter";
 import { ItemKey } from "./types/GTypes/items";
 import { MapKey } from "./types/GTypes/maps";
@@ -239,7 +239,7 @@ export interface GameEvents {
     /** Character Name  */
     buyer: string;
 
-    item: ItemInfo;
+    item: TradeItemInfo;
 
     slot: string;
   };
