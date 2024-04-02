@@ -2,6 +2,7 @@ import { BankPacksInfos } from "../bank";
 import { CharacterEntity, MonsterEntity, NpcEntity, TradeSlotType } from "../entity";
 import { PartyCharacter } from "../functions";
 import {
+  ClassKey,
   GDropList,
   GDropMaps,
   GDropMonsters,
@@ -69,7 +70,7 @@ export interface XOnlineCharacter {
     hair?: string;
   };
   online: number;
-  type: string;
+  type: ClassKey;
   id: string;
 }
 
@@ -96,7 +97,11 @@ declare global {
     stop_runner(): void;
 
     /** The response is given via game.on('api_response',function(data){ where data.type is equal to for example merchants */
-    api_call<K extends keyof ApiCalls = keyof ApiCalls>(call: K, arg1?: {}, arg2?: {callback: (data: [ApiCalls[K]]) => void}): void;
+    api_call<K extends keyof ApiCalls = keyof ApiCalls>(
+      call: K,
+      arg1?: {},
+      arg2?: { callback: (data: [ApiCalls[K]]) => void }
+    ): void;
 
     /**
      * Joins a giveaway for the specified item
