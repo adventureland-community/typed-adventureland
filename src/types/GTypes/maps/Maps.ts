@@ -108,6 +108,18 @@ export interface GMap {
     subframes?: Array<[number, number, number, number]>;
     type: GameKey;
   }>;
+  /**
+   * Merchants on the map that sell validates against
+   */
+  merchants?: Array<{
+    /** The map the merchant currently is on */
+    map: MapKey;
+    /** The unique id of the instance you are in, else a `MapKey` */
+    in: MapKey | string;
+    x: number;
+    y: number;
+    id: NpcKey;
+  }>;
   monsters?: Array<{
     boundaries?: Array<[MapKey, number, number, number, number]>;
     boundary?: [number, number, number, number];
@@ -168,9 +180,9 @@ export interface GMap {
    * size indicates an area you could spawn in with x,y as the center.
    */
   spawns: Array<
-    [x: number, y: number] 
-    | [x: number, y: number, direction:number] 
-    | [x: number, y: number, direction:number, size:number]
+    | [x: number, y: number]
+    | [x: number, y: number, direction: number]
+    | [x: number, y: number, direction: number, size: number]
   >;
   traps?: [
     {
