@@ -192,6 +192,26 @@ export interface GMap {
     }
   ];
   unlist?: boolean;
+  /**
+   * The position of the upgrade station where you can upgrade
+   */
+  upgrade?: {
+    map: MapKey;
+    in: MapKey | string;
+    x: number;
+    y: number;
+    id: NpcKey;
+  };
+  /**
+   * The position of the compound station where you can compound
+   */
+  compound?: {
+    map: MapKey;
+    in: MapKey | string;
+    x: number;
+    y: number;
+    id: NpcKey;
+  };
   weather?: string;
   world?: TilesetKey;
   zones?: [
