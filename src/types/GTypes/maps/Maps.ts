@@ -1,6 +1,6 @@
 import type { GameKey } from "../games/Games";
 import type { ImagesetKey } from "../imagesets/Imagesets";
-import type { DungeonKeyKey } from "../items";
+import type { DungeonKeyKey, ItemKey } from "../items";
 import type { MonsterKey } from "../monsters/Monsters";
 import type { NpcKey } from "../npcs/Npcs";
 import type { TilesetKey } from "../tilesets/Tilesets";
@@ -212,6 +212,21 @@ export interface GMap {
     y: number;
     id: NpcKey;
   };
+  /**
+   * Positions where the item is sold.
+   */
+  items?: Partial<
+    Record<
+      ItemKey,
+      Array<{
+        map: MapKey;
+        in: MapKey | string;
+        x: number;
+        y: number;
+        id: NpcKey;
+      }>
+    >
+  >;
   weather?: string;
   world?: TilesetKey;
   zones?: [
