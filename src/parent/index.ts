@@ -1,4 +1,5 @@
 import { BankPacksInfos } from "../bank";
+import { CharacterEntityCXInfos } from "../entities/character-entity";
 import { CharacterEntity, MonsterEntity, NpcEntity, TradeSlotType } from "../entity";
 import { PartyCharacter } from "../functions";
 import {
@@ -59,18 +60,15 @@ export interface XOnlineCharacter {
   x: number;
   y: number;
   map: MapKey;
-  in: string;
+  in: MapKey | string;
   name: string;
   level: number;
   skin: string;
   server: string;
   secret: string;
-  cx?: {
-    head?: string;
-    hair?: string;
-  };
+  cx?: CharacterEntityCXInfos;
   online: number;
-  home: string;
+  home: `${ServerRegion}${ServerIdentifier}`;
   type: ClassKey;
   id: string;
 }
