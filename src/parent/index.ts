@@ -70,6 +70,7 @@ export interface XOnlineCharacter {
     hair?: string;
   };
   online: number;
+  home: string;
   type: ClassKey;
   id: string;
 }
