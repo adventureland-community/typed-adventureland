@@ -9,7 +9,7 @@ import { ClassKey, MapKey, MonsterKey, NpcKey } from "../../../G";
 
 export type ServerToClient_entities_players = {
   id: string;
-  ctype: ClassKey | NpcKey;
+  ctype: ClassKey;
 
   abs?: boolean;
   angle?: number;
