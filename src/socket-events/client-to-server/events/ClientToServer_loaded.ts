@@ -1,4 +1,4 @@
-export type ClientToServer_loaded = {
+export type ClientToServer_loaded = Partial<{
   /** The height of the monitor's resolution */
   height: number;
 
@@ -8,4 +8,4 @@ export type ClientToServer_loaded = {
   // TODO: Find out what this is
   scale: number;
   success: number | 1;
-};
+}>;
