@@ -75,14 +75,14 @@ export interface XOnlineCharacter {
 
 export interface XServerInfos {
   addr: string;
-  key: string;
-  name: string;
+  key: ServerRegion;
+  name: ServerIdentifier;
   players: number;
   port: number;
   region: string;
 }
 
-export {}; // this is done to make parent a module
+export { }; // this is done to make parent a module
 declare global {
   /** When you access parent via game code, this is what you have access to. */
   interface Window {
