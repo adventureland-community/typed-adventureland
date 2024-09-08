@@ -1,20 +1,18 @@
 export type ClientToServer_auth = {
-  // TODO: Find out where to get this auth string
+  /** User auth token (`parent.user_auth`) */
   auth: string;
-
-  /** NOTE: This is not the name of the player. It's a long number, encoded as a string. */
+  /** User ID (`parent.user_id`)*/
   user: string;
-
-  /** NOTE: This is not the name of the character. It's a long number, encoded as a string. */
+  /** Character ID (`parent.X.characters[].id`) */
   character: string;
-  passphrase: string;
-
-  height: number;
-  width: number;
-  scale: number;
-
-  no_html: "" | "1";
-  no_graphics: "" | "True";
-
+  /** Only used for test servers */
+  passphrase?: string;
+  /** Viewport height (NOTE: No longer used) */
+  height?: number;
+  /** Viewport width (NOTE: No longer used) */
+  width?: number;
+  /** Viewport scale (NOTE: No longer used) */
+  scale?: number;
+  no_html?: "" | "1";
   code_slot?: number;
 };
