@@ -76,8 +76,8 @@ export type ServerToClient_entities_monsters = {
   // TODO: Figure out what this is
   cid: number;
   frequency?: number;
-  going_x: number;
-  going_y: number;
+  going_x?: number;
+  going_y?: number;
   mp?: number;
   speed?: number;
   resistance?: number;
