@@ -1,4 +1,4 @@
-import { MapKey } from "../../../G";
+import { MapKey, SkillKey } from "../../../G";
 
 /** Character used 'blink' */
 export type ServerToClient_disappear_blink = {
@@ -58,10 +58,19 @@ export type ServerToClient_disappear_town = {
   to?: MapKey;
 };
 
+/** Target is dead, or really far away */
+export type ServerToClient_disappear_not_there = {
+  /** Character or monster ID */
+  id: string;
+  place: SkillKey;
+  reason: "not_there";
+};
+
 export type ServerToClient_disappear =
   | ServerToClient_disappear_blink
   | ServerToClient_disappear_invis
   | ServerToClient_disappear_disconnect
   | ServerToClient_disappear_magiport
   | ServerToClient_disappear_door
-  | ServerToClient_disappear_town;
+  | ServerToClient_disappear_town
+  | ServerToClient_disappear_not_there;
