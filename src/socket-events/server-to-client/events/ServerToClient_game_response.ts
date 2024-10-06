@@ -58,6 +58,22 @@ export type CraftGRDataObject = {
   name: ItemKey;
 };
 
+export type DestroyGRDataObject = {
+  place: "destroy";
+  num: number;
+} & (
+  | {
+      success: false;
+      response: string;
+    }
+  | {
+      success: true;
+      name: ItemKey;
+      cevent: "destroy";
+      response: "destroyed";
+    }
+);
+
 export type SkillSuccessGRDataObject = {
   response: "data";
   place: Exclude<SkillKey, "attack" | "taunt" | "heal" | "curse" | "supershot">;
@@ -265,6 +281,7 @@ export type GameResponseDataObject =
   | BuySuccessGRDataObject
   | CooldownGRDataObject
   | CraftGRDataObject
+  | DestroyGRDataObject
   | SkillSuccessGRDataObject
   | ProjectileSkillGRDataObject
   | DefeatedByMonsterGRDataObject
