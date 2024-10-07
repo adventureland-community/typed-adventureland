@@ -512,6 +512,16 @@ declare global {
     >
   >;
   function send_local_cm(to: string, data: any): any;
+
+  /**
+   *
+   * @param to player name
+   * @param subject
+   * @param message
+   * @param item // 0th slot is sent
+   */
+  function send_mail(to: string, subject: string, message: string, item: boolean): any;
+
   /**
    *
    * @param name name could be a player object, name, or id
