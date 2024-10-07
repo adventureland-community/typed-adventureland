@@ -3,7 +3,7 @@ import { GameWithEventsFunctions } from "./game-event";
 export {};
 
 declare global {
-  const game: Game;
+  var game: Game;
 
   type Game = GameWithEventsFunctions & {
     /** indicator if the game is using graphics and we can use PIXI.Graphics for example */
@@ -13,4 +13,8 @@ declare global {
     cli: string;
     listeners: Array<{ id: string; event: string }>;
   };
+
+  interface AdventurelandClient {
+    game: typeof game;
+  }
 }

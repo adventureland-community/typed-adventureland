@@ -676,8 +676,8 @@ declare global {
   function find_npc(id: NpcKey): IPosition;
 
   /** This function uses move() if it can, otherwise it uses smart_move() */
-  export function xmove(entity: PositionReal): Promise<boolean>;
-  export function xmove(x: number, y: number): Promise<boolean>;
+  function xmove(entity: PositionReal): Promise<boolean>;
+  function xmove(x: number, y: number): Promise<boolean>;
 
   /**
    * It validates against the map geometry from G.geometry doing 2d "raycasting" to see if we will hit a wall if we go in a straight line
@@ -685,7 +685,7 @@ declare global {
    * @param entity The moveable entity you want to check is movable
    * @returns TRUE if you can move there, FALSE otherwise
    */
-  export function can_move(
+  function can_move(
     position: IPosition & {
       going_x: number;
       going_y: number;
@@ -697,21 +697,21 @@ declare global {
     }
   ): boolean;
 
-  // export function can_move(position: PositionMovable & { base: EntityBase }): boolean;
+  // function can_move(position: PositionMovable & { base: EntityBase }): boolean;
 
   /**
    * Checks if you can move your character to the given destination on your current map from your current position
    * @param destination A position object containing the destination coordinates
    * @returns TRUE if you can move there, FALSE otherwise
    */
-  export function can_move_to(destination: ICoordReal): boolean;
+  function can_move_to(destination: ICoordReal): boolean;
   /**
    * Checks if you can move your character to the given destination on your current map
    * @param x The x-coordinate that you want to move to
    * @param y The y-coordinate that you want to move to
    * @returns TRUE if you can move there, FALSE otherwise
    */
-  export function can_move_to(x: number, y: number): boolean;
+  function can_move_to(x: number, y: number): boolean;
 
   export type MoveFailureResponse = {
     reason: string | "unable" | "interrupted";
@@ -721,7 +721,7 @@ declare global {
    * @param x
    * @param y
    */
-  export function move(x: number, y: number): Promise<MoveResponse>;
+  function move(x: number, y: number): Promise<MoveResponse>;
   export type MoveResponse = void | MoveFailureResponse;
   export type SmartMoveMapPosition =
     | "town"
@@ -740,7 +740,7 @@ declare global {
   export type SmartMoveSuccess = { success: true };
   export type SmartMoveFailure = { success: false; reason: string | "invalid" };
   export type SmartMoveResponse = SmartMoveSuccess | SmartMoveFailure;
-  export function smart_move(
+  function smart_move(
     destination:
       | SmartMoveToDestination
       | {
@@ -759,10 +759,10 @@ declare global {
    * @param entity The entity to check
    * @returns TRUE if you are not currently transporting, and can walk, FALSE otherwise
    */
-  export function can_walk(entity: Entity): boolean;
+  function can_walk(entity: Entity): boolean;
 
   /** Contains information about smart_move() */
-  let smart: IPosition & {
+  var smart: IPosition & {
     /** If searching and false, we are still searching. If  */
     found: boolean;
     /** If .moving == true, we are moving or searching */
@@ -775,6 +775,116 @@ declare global {
     /** A settable flag. If true, smart_move will use town teleports to move around */
     use_town: boolean;
   };
+
+  interface AdventurelandClient {
+    get_characters: typeof get_characters;
+    is_monster: typeof is_monster;
+    is_character: typeof is_character;
+    resolving_promise: typeof resolving_promise;
+    sleep: typeof sleep;
+    calculate_item_value: typeof calculate_item_value;
+    open_stand: typeof open_stand;
+    close_stand: typeof close_stand;
+    get_party: typeof get_party;
+    is_object: typeof is_object;
+    swap: typeof swap;
+    split: typeof split;
+    shuffle: typeof shuffle;
+    say: typeof say;
+    unmap_key: typeof unmap_key;
+    map_key: typeof map_key;
+    load_code: typeof load_code;
+    accept_magiport: typeof accept_magiport;
+    accept_party_invite: typeof accept_party_invite;
+    accept_party_request: typeof accept_party_request;
+    activate: typeof activate;
+    attack: typeof attack;
+    buy: typeof buy;
+    buy_with_gold: typeof buy_with_gold;
+    buy_with_shells: typeof buy_with_shells;
+    can_attack: typeof can_attack;
+    can_heal: typeof can_heal;
+    can_transport: typeof can_transport;
+    can_use: typeof can_use;
+    can_stack: typeof can_stack;
+    is_door_close: typeof is_door_close;
+    can_use_door: typeof can_use_door;
+    to_pretty_float: typeof to_pretty_float;
+    to_pretty_num: typeof to_pretty_num;
+    smart_num: typeof smart_num;
+    to_shrinked_num: typeof to_shrinked_num;
+    change_target: typeof change_target;
+    clear_drawings: typeof clear_drawings;
+    command_character: typeof command_character;
+    compound: typeof compound;
+    consume: typeof consume;
+    auto_craft: typeof auto_craft;
+    craft: typeof craft;
+    cruise: typeof cruise;
+    damage_multiplier: typeof damage_multiplier;
+    distance: typeof distance;
+    equip: typeof equip;
+    dismantle: typeof dismantle;
+    safe_log: typeof safe_log;
+    game_log: typeof game_log;
+    log: typeof log;
+    get: typeof get;
+    get_targeted_monster: typeof get_targeted_monster;
+    get_target: typeof get_target;
+    get_target_of: typeof get_target_of;
+    get_player: typeof get_player;
+    get_nearest_monster: typeof get_nearest_monster;
+    heal: typeof heal;
+    use_hp_or_mp: typeof use_hp_or_mp;
+    is_pvp: typeof is_pvp;
+    is_in_range: typeof is_in_range;
+    is_transporting: typeof is_transporting;
+    is_moving: typeof is_moving;
+    is_on_cooldown: typeof is_on_cooldown;
+    is_silenced: typeof is_silenced;
+    is_disabled: typeof is_disabled;
+    loot: typeof loot;
+    mssince: typeof mssince;
+    reduce_cooldown: typeof reduce_cooldown;
+    respawn: typeof respawn;
+    sell: typeof sell;
+    send_cm: typeof send_cm;
+    send_gold: typeof send_gold;
+    send_item: typeof send_item;
+    send_local_cm: typeof send_local_cm;
+    send_party_invite: typeof send_party_invite;
+    send_party_request: typeof send_party_request;
+    leave_party: typeof leave_party;
+    get_active_characters: typeof get_active_characters;
+    show_json: typeof show_json;
+    set: typeof set;
+    set_message: typeof set_message;
+    simple_distance: typeof simple_distance;
+    start_character: typeof start_character;
+    stop: typeof stop;
+    stop_character: typeof stop_character;
+    trade_buy: typeof trade_buy;
+    trade_sell: typeof trade_sell;
+    transport: typeof transport;
+    unequip: typeof unequip;
+    leave: typeof leave;
+    upgrade: typeof upgrade;
+    exchange: typeof exchange;
+    trade: typeof trade;
+    wishlist: typeof wishlist;
+    giveaway: typeof giveaway;
+    join_giveaway: typeof join_giveaway;
+    shift: typeof shift;
+    join: typeof join;
+    find_npc: typeof find_npc;
+    xmove: typeof xmove;
+    can_move: typeof can_move;
+    can_move_to: typeof can_move_to;
+    move: typeof move;
+    smart_move: typeof smart_move;
+    can_walk: typeof can_walk;
+    smart: typeof smart;
+  }
 }
 
 /**
