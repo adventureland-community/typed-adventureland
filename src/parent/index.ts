@@ -12,7 +12,7 @@ import {
   MonsterKey,
   SkillKey,
 } from "../G";
-import { ApiCalls } from "../game-event-api-response";
+import { ApiCallRArgs, ApiCalls } from "../game-event-api-response";
 import { PositionReal } from "../position";
 import { ServerIdentifier, ServerRegion } from "../server";
 import { SocketWithEventsFunctions } from "../socket-events";
@@ -100,7 +100,7 @@ declare global {
     api_call<K extends keyof ApiCalls = keyof ApiCalls>(
       call: K,
       arg1?: {},
-      arg2?: { callback: (data: [ApiCalls[K]]) => void }
+      arg2?: ApiCallRArgs<K>
     ): void;
 
     /**
@@ -146,6 +146,9 @@ declare global {
 
     server_identifier: ServerIdentifier;
     server_region: ServerRegion;
+
+    user_id: string;
+    user_auth: string;
 
     socket: Omit<SocketIO.Socket, keyof SocketWithEventsFunctions> & SocketWithEventsFunctions;
 
