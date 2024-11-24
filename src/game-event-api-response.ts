@@ -112,7 +112,7 @@ export type RawApiResponse = ServersAndCharactersApiResponse | MerchantsApiRespo
 export type ApiResponse = BetterUXWrapper<RawApiResponse>;
 
 export interface ApiCalls {
-  servers_and_characters: ServersAndCharactersApiResponse;
+  servers_and_characters: ServersAndCharactersApiResponse[];
   pull_merchants: MerchantsApiResponse;
   pull_friends: FriendsApiResponse;
   pull_mail: PullMailResponse;
