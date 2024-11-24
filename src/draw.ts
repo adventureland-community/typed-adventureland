@@ -34,4 +34,9 @@ declare global {
     thickness?: number,
     color?: number
   ): PIXI.Graphics;
+
+  interface AdventurelandClient {
+    draw_line: typeof draw_line;
+    draw_circle: typeof draw_circle;
+  }
 }

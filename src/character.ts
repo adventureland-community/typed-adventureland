@@ -1,7 +1,11 @@
 import type { BankPackTypeItemsOnly } from "./bank";
 import { CharacterWithEventsFunctions } from "./character-event";
 import type { CharacterEntity } from "./entities/character-entity";
-import type { InventoryExchangeItemInfo, InventoryUpgradeCompoundItemInfo, ItemInfo } from "./items";
+import type {
+  InventoryExchangeItemInfo,
+  InventoryUpgradeCompoundItemInfo,
+  ItemInfo,
+} from "./items";
 import { BetterUXWrapper } from "./types/GTypes/utils";
 
 export type CharacterBankInfos =
@@ -13,7 +17,7 @@ export type CharacterBankInfos =
   | null;
 
 declare global {
-  const character: Character;
+  var character: Character;
 
   //  TODO: validate we have all properties that CharacterEntity does
   type Character = CharacterWithEventsFunctions &
@@ -23,7 +27,11 @@ declare global {
 
       bank?: CharacterBankInfos;
 
-      items: Array<BetterUXWrapper<ItemInfo| InventoryExchangeItemInfo | InventoryUpgradeCompoundItemInfo | null>>;
+      items: Array<
+        BetterUXWrapper<
+          ItemInfo | InventoryExchangeItemInfo | InventoryUpgradeCompoundItemInfo | null
+        >
+      >;
       /** Amount of gold the player has in its inventory */
       gold: number;
       /** Amount of shells */
@@ -118,4 +126,7 @@ declare global {
       fear: number;
       pzazz: number;
     };
+  interface AdventurelandClient {
+    character: typeof character;
+  }
 }

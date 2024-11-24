@@ -155,4 +155,8 @@ declare global {
   // 	}
   // 	socket.emit("skill",{name:"warp",x:target[0],y:target[1],'in':target[2]});
   // }
+
+  interface AdventurelandClient {
+    use_skill: typeof use_skill;
+  }
 }
