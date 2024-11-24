@@ -1,12 +1,55 @@
+import { CharacterEntityCXInfos } from "./entities/character-entity";
 import { TradeSlotType } from "./entity";
-import { MapKey, StandKey } from "./G";
+import { ClassKey, MapKey, StandKey } from "./G";
 import { TradeItemInfo } from "./items";
+import { ServerIdentifier, ServerRegion } from "./server";
 import { BetterUXWrapper } from "./types/GTypes/utils";
 
+export interface ServersAndCharactersGameServer {
+  name: string;
+  region: ServerRegion;
+  players: number;
+  key: string;
+  addr: string;
+  port: number;
+}
+
+export interface ServersAndCharactersCharacter {
+  id: string;
+  name: string;
+  level: number;
+  type: ClassKey;
+  online: number;
+  server?: string;
+  secret?: string;
+  skin: string;
+  cx: CharacterEntityCXInfos;
+  in: MapKey | string;
+  map: MapKey;
+  x: number;
+  y: number;
+  home: `${ServerRegion}${ServerIdentifier}`;
+}
+
+export interface ServersAndCharactersCodeList {
+  [key: string]: [string, number];
+}
+
+export interface ServersAndCharactersTutorial {
+  step: number;
+  completed: string[];
+  finished: boolean;
+  task: boolean;
+  progress: number;
+}
 export type ServersAndCharactersApiResponse = {
   type: "servers_and_characters";
-  servers: [];
-  characters: [];
+  servers: ServersAndCharactersGameServer[];
+  characters: ServersAndCharactersCharacter[];
+  tutorial: ServersAndCharactersTutorial;
+  code_list: ServersAndCharactersCodeList;
+  mail: number;
+  rewards: any[];
 };
 
 export type FriendsApiResponse = {
@@ -69,9 +112,11 @@ export type RawApiResponse = ServersAndCharactersApiResponse | MerchantsApiRespo
 export type ApiResponse = BetterUXWrapper<RawApiResponse>;
 
 export interface ApiCalls {
+  servers_and_characters: ServersAndCharactersApiResponse;
   pull_merchants: MerchantsApiResponse;
   pull_friends: FriendsApiResponse;
   pull_mail: PullMailResponse;
+  read_mail: unknown;
 }
 
 export interface ApiCallRArgs<K extends keyof ApiCalls = keyof ApiCalls> {
