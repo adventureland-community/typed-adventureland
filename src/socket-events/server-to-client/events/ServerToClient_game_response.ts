@@ -63,7 +63,7 @@ export type DestroyGRDataObject = {
   num: number;
 } & (
   | {
-      success: false;
+      failed: true;
       response: string;
     }
   | {
