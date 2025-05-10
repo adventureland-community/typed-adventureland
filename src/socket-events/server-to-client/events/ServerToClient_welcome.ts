@@ -11,10 +11,11 @@ export type ServerToClient_welcome = {
   in: string;
   map: MapKey;
 
-  // TODO: Find out if this is "hardcore" on a hardcore server
-  gameplay: "normal";
+  gameplay: "dungeon" | "hardcore" | "normal" | "test";
 
-  // TODO: Find out what this is
+  version: number;
+
+  // TODO: Find out what this is. Might be related to the tavern.
   info: object;
 
   name: ServerIdentifier;
