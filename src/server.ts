@@ -6,9 +6,9 @@ declare global {
    * @param region The region to change to (e.g. ASIA)
    * @param identifier The server identifier to change to (e.g. PVP)
    */
-  function change_server(
-    region: ServerRegion,
-    identifier: ServerIdentifier
+  function change_server<SR extends ServerRegion>(
+    region: SR,
+    identifier: IdentifierForRegion<SR>
   ): void;
 }
 
@@ -19,8 +19,18 @@ export type Server = {
   id: ServerIdentifier;
 };
 
-// TODO: type it properly so correct server identifiers only exist where valid
-// TODO: Confirm that PVP is actually the identifier for PVP servers
-export type ServerIdentifier = "I" | "II" | "III" | "PVP";
-
 export type ServerRegion = "ASIA" | "US" | "EU";
+
+export type USServerIdentifier = "I" | "II" | "III" | "PVP";
+export type EUServerIdentifier = "I" | "II" | "PVP";
+export type ASIAServerIdentifier = "I";
+
+export type ServerIdentifier = USServerIdentifier | EUServerIdentifier | ASIAServerIdentifier;
+
+export type IdentifierForRegion<SR extends ServerRegion> =
+  SR extends "US" ? USServerIdentifier :
+  SR extends "EU" ? EUServerIdentifier :
+  SR extends "ASIA" ? ASIAServerIdentifier :
+  never;
+
+export type ServerKey = `ASIA${ASIAServerIdentifier}` | `US${USServerIdentifier}` | `EU${EUServerIdentifier}`;

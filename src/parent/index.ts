@@ -15,7 +15,7 @@ import {
 } from "../G";
 import { ApiCallRArgs, ApiCalls } from "../game-event-api-response";
 import { PositionReal } from "../position";
-import { ServerIdentifier, ServerRegion } from "../server";
+import { IdentifierForRegion, ServerIdentifier, ServerKey, ServerRegion } from "../server";
 import { SocketWithEventsFunctions } from "../socket-events";
 import { BetterUXWrapper } from "../types/GTypes/utils";
 import { SEventsInfos } from "./sevent-info";
@@ -68,21 +68,25 @@ export interface XOnlineCharacter {
   secret: string;
   cx?: CharacterEntityCXInfos;
   online: number;
-  home: `${ServerRegion}${ServerIdentifier}`;
+  home: ServerKey;
   type: ClassKey;
   id: string;
 }
 
-export interface XServerInfos {
+interface ServerInfo<SR extends ServerRegion, SI extends IdentifierForRegion<SR>> {
   addr: string;
-  key: ServerRegion;
-  name: ServerIdentifier;
+  key: `${SR}${SI}`;
+  name: SI;
   players: number;
   port: number;
-  region: string;
+  region: SR;
 }
 
-export { }; // this is done to make parent a module
+export type XServerInfos = {
+  [SR in ServerRegion]: ServerInfo<SR, IdentifierForRegion<SR>>;
+}[ServerRegion];
+
+export {}; // this is done to make parent a module
 declare global {
   /** When you access parent via game code, this is what you have access to. */
   interface Window {
