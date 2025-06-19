@@ -182,7 +182,7 @@ export type NotReadyGRDataObject = {
   response: "not_ready";
   failed: true;
   place: "equip" | "use";
-  ms?: number; // TODO: https://github.com/kaansoral/adventureland/pull/154 will add ms to all not_ready responses
+  ms: number;
 };
 
 export type SeashellGRDataObject = {
