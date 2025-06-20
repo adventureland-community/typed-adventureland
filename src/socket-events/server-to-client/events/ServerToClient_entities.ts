@@ -9,7 +9,7 @@ import { ClassKey, MapKey, MonsterKey, NpcKey } from "../../../G";
 
 export type ServerToClient_entities_players = {
   id: string;
-  ctype: ClassKey | NpcKey;
+  ctype: ClassKey;
 
   abs?: boolean;
   angle?: number;
@@ -76,8 +76,8 @@ export type ServerToClient_entities_monsters = {
   // TODO: Figure out what this is
   cid: number;
   frequency?: number;
-  going_x: number;
-  going_y: number;
+  going_x?: number;
+  going_y?: number;
   mp?: number;
   speed?: number;
   resistance?: number;

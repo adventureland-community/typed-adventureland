@@ -1,35 +1,8 @@
-import { CharacterEntityCXInfos } from "./entities/character-entity";
 import { TradeSlotType } from "./entity";
-import { ClassKey, MapKey, StandKey } from "./G";
+import { MapKey, StandKey } from "./G";
 import { TradeItemInfo } from "./items";
-import { ServerIdentifier, ServerRegion } from "./server";
+import { XOnlineCharacter, XServerInfos } from "./index";
 import { BetterUXWrapper } from "./types/GTypes/utils";
-
-export interface ServersAndCharactersGameServer {
-  name: string;
-  region: ServerRegion;
-  players: number;
-  key: string;
-  addr: string;
-  port: number;
-}
-
-export interface ServersAndCharactersCharacter {
-  id: string;
-  name: string;
-  level: number;
-  type: ClassKey;
-  online: number;
-  server?: string;
-  secret?: string;
-  skin: string;
-  cx: CharacterEntityCXInfos;
-  in: MapKey | string;
-  map: MapKey;
-  x: number;
-  y: number;
-  home: `${ServerRegion}${ServerIdentifier}`;
-}
 
 export interface ServersAndCharactersCodeList {
   [key: string]: [string, number];
@@ -42,10 +15,11 @@ export interface ServersAndCharactersTutorial {
   task: boolean;
   progress: number;
 }
+
 export type ServersAndCharactersApiResponse = {
   type: "servers_and_characters";
-  servers: ServersAndCharactersGameServer[];
-  characters: ServersAndCharactersCharacter[];
+  servers: XServerInfos[];
+  characters: XOnlineCharacter[];
   tutorial: ServersAndCharactersTutorial;
   code_list: ServersAndCharactersCodeList;
   mail: number;

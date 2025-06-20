@@ -1,4 +1,5 @@
 import { BankPacksInfos } from "../bank";
+import { CharacterEntityCXInfos } from "../entities/character-entity";
 import { CharacterEntity, MonsterEntity, NpcEntity, TradeSlotType } from "../entity";
 import { PartyCharacter } from "../functions";
 import {
@@ -14,7 +15,7 @@ import {
 } from "../G";
 import { ApiCallRArgs, ApiCalls } from "../game-event-api-response";
 import { PositionReal } from "../position";
-import { ServerIdentifier, ServerRegion } from "../server";
+import { IdentifierForRegion, ServerIdentifier, ServerKey, ServerRegion } from "../server";
 import { SocketWithEventsFunctions } from "../socket-events";
 import { BetterUXWrapper } from "../types/GTypes/utils";
 import { SEventsInfos } from "./sevent-info";
@@ -59,29 +60,31 @@ export interface XOnlineCharacter {
   x: number;
   y: number;
   map: MapKey;
-  in: string;
+  in: MapKey | string;
   name: string;
   level: number;
   skin: string;
   server: string;
   secret: string;
-  cx?: {
-    head?: string;
-    hair?: string;
-  };
+  cx?: CharacterEntityCXInfos;
   online: number;
+  home: ServerKey;
   type: ClassKey;
   id: string;
 }
 
-export interface XServerInfos {
+interface ServerInfo<SR extends ServerRegion, SI extends IdentifierForRegion<SR>> {
   addr: string;
-  key: string;
-  name: string;
+  key: `${SR}${SI}`;
+  name: SI;
   players: number;
   port: number;
-  region: string;
+  region: SR;
 }
+
+export type XServerInfos = {
+  [SR in ServerRegion]: ServerInfo<SR, IdentifierForRegion<SR>>;
+}[ServerRegion];
 
 export {}; // this is done to make parent a module
 declare global {

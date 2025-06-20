@@ -8,26 +8,27 @@ import type {
   ClientToServer_cm,
   ClientToServer_compound,
   ClientToServer_craft,
+  ClientToServer_destroy,
   ClientToServer_dismantle,
   ClientToServer_donate,
   ClientToServer_emotion,
   ClientToServer_enter,
   ClientToServer_equip,
   ClientToServer_eval,
-  ClientToServer_exchange_buy,
   ClientToServer_exchange,
+  ClientToServer_exchange_buy,
   ClientToServer_friend,
   ClientToServer_heal,
   ClientToServer_imove,
   ClientToServer_interaction,
-  ClientToServer_join_giveaway,
   ClientToServer_join,
+  ClientToServer_join_giveaway,
   ClientToServer_leave,
   ClientToServer_loaded,
   ClientToServer_lostandfound,
   ClientToServer_magiport,
-  ClientToServer_mail_take_item,
   ClientToServer_mail,
+  ClientToServer_mail_take_item,
   ClientToServer_merchant,
   ClientToServer_monsterhunt,
   ClientToServer_move,
@@ -41,8 +42,8 @@ import type {
   ClientToServer_sbuy,
   ClientToServer_secondhands,
   ClientToServer_sell,
-  ClientToServer_send_updates,
   ClientToServer_send,
+  ClientToServer_send_updates,
   ClientToServer_skill,
   ClientToServer_split,
   ClientToServer_stop,
@@ -70,6 +71,7 @@ export interface ClientToServerEvents {
   cm: ClientToServer_cm;
   compound: ClientToServer_compound;
   craft: ClientToServer_craft;
+  destroy: ClientToServer_destroy;
   dismantle: ClientToServer_dismantle;
   donate: ClientToServer_donate;
   emotion: ClientToServer_emotion;

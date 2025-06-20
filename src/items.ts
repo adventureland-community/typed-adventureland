@@ -42,6 +42,9 @@ export type ItemInfo = {
   /** Checked to determine Ponty prices. */
   cash?: number;
 
+  /** When the item will expire (used for boosters) */
+  expires?: string;
+
   /** Unique id used for trading. */
   rid?: string;
 

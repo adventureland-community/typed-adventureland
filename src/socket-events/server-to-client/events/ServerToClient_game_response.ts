@@ -58,6 +58,22 @@ export type CraftGRDataObject = {
   name: ItemKey;
 };
 
+export type DestroyGRDataObject = {
+  place: "destroy";
+  num: number;
+} & (
+  | {
+      failed: true;
+      response: string;
+    }
+  | {
+      success: true;
+      name: ItemKey;
+      cevent: "destroy";
+      response: "destroyed";
+    }
+);
+
 export type SkillSuccessGRDataObject = {
   response: "data";
   place: Exclude<SkillKey, "attack" | "taunt" | "heal" | "curse" | "supershot">;
@@ -162,6 +178,13 @@ export type NoTargetGRDataObject = {
   /** TODO: See what else gets returned */
 };
 
+export type NotReadyGRDataObject = {
+  response: "not_ready";
+  failed: true;
+  place: "equip" | "use";
+  ms: number;
+};
+
 export type SeashellGRDataObject = {
   response: "seashell_success";
   suffix: string | "";
@@ -258,6 +281,7 @@ export type GameResponseDataObject =
   | BuySuccessGRDataObject
   | CooldownGRDataObject
   | CraftGRDataObject
+  | DestroyGRDataObject
   | SkillSuccessGRDataObject
   | ProjectileSkillGRDataObject
   | DefeatedByMonsterGRDataObject
@@ -275,6 +299,7 @@ export type GameResponseDataObject =
   | NoItemGRDataObject
   | NoMPGRDataObject
   | NoTargetGRDataObject
+  | NotReadyGRDataObject
   | SeashellGRDataObject
   | SkillStatusGRDataObject
   | TargetLockGRDataObject
@@ -328,6 +353,8 @@ export type GameResponseDataString =
   | "friend_rsent"
   /** When you try to sell a locked item */
   | "item_locked"
+  /** When you try to loot a chest while invisible, or in the bank */
+  | "loot_failed"
   /** When you try to loot a chest with items but there's no space in your inventory to loot */
   | "loot_no_space"
   /** When you try to look at the lost and found, but haven't donated enough */
