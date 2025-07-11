@@ -4,9 +4,14 @@ export type OrbKey =
   | "charmer" // Charmer
   | "ftrinket" // Trinket of Faith
   | "jacko" // Jack-o Lantern
+  | "orba" // Orb of Adventures
   | "orbg" // Orb of Beginnings
   | "orbofdex" // Orb of Dexterity
+  | "orboffire" // Orb of Fire
+  | "orboffrost" // Orb of Frost
   | "orbofint" // Orb of Intelligence
+  | "orbofplague" // Orb of Plague
+  | "orbofresolve" // Orb of Resolve
   | "orbofsc" // Orb of Second Chances
   | "orbofstr" // Orb of Strength
   | "orbofvit" // Orb of Vitality
@@ -28,9 +33,13 @@ export interface GOrb {
     attr0?: number;
     courage?: number;
     dex?: number;
+    firesistance?: number;
+    fzresistance?: number;
     int?: number;
     luck?: number;
     mp?: number;
+    phresistance?: number;
+    pnresistance?: number;
     rpiercing?: number;
     speed?: number;
     str?: number;
@@ -61,6 +70,8 @@ export interface GOrb {
   /** The full display name of an item. */
   name: string;
   pcourage?: number;
+  phresistance?: number;
+  pnresistance?: number;
   rpiercing?: number;
   /** The set this item is part of `G.sets.wanderers`. */
   set?: SetKey;

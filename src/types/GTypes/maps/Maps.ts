@@ -19,15 +19,12 @@ export type MapKey =
   | "cgallery" // Cosmetics Gallery
   | "crypt" // The Crypt [Cave]
   | "cyberland" // Cyberland
-  | "d_a1" // Dungeon
-  | "d_a2" // Dungeon
-  | "d_b1" // Dungeon
   | "d_e" // Dungeon [Entrance]
-  | "d_g" // Dungeon [Gateway]
   | "d2" // Dark World
   | "desertland" // Desertland
   | "duelland" // Duelland
   | "dungeon0" // Dungeon
+  | "gateway" // Underground [Gateway]
   | "goobrawl" // Goo Brawl!
   | "halloween" // Spooky Forest
   | "hut" // The Hut
@@ -42,6 +39,7 @@ export type MapKey =
   | "level4" // Underground [Abyss]
   | "main" // Mainland
   | "mansion" // The Mansion
+  | "mforest" // Mystical Forest
   | "mtunnel" // Underground [Tunnel]
   | "old_bank" // The Bank
   | "old_main" // Old Town
@@ -50,11 +48,14 @@ export type MapKey =
   | "resort_e" // Holo Resort
   | "shellsisland" // New Town!
   | "ship0" // The Pirate Ship
+  | "spider_instance" // The Spider Den
   | "spookytown" // Spooky Town
   | "tavern" // The Tavern
   | "test" // Test
   | "tomb" // The Tomb
   | "tunnel" // Mining Tunnel
+  | "ucliffs" // Underground [Cliffs]
+  | "uhills" // Underground [Hills]
   | "winter_cave" // Frozen Cave
   | "winter_cove" // Frozen Cove
   | "winter_inn" // Wanderers' Inn

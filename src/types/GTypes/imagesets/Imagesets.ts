@@ -1,4 +1,9 @@
-export type ImagesetKey = "custom" | "pack_1a" | "pack_20" | "skills";
+export type ImagesetKey =
+  | "community"
+  | "custom"
+  | "pack_1a"
+  | "pack_20"
+  | "skills";
 
 export interface GImageset {
   rows: number;

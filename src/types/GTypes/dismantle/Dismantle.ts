@@ -9,6 +9,7 @@ export type DismantleKey =
   | "essenceoflife"
   | "essenceofnature"
   | "fireblade"
+  | "firebow"
   | "firestaff"
   | "firestars"
   | "goldenegg"

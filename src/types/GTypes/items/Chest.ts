@@ -18,16 +18,16 @@ export type ChestKey =
   | "mwarmor" // Armor of the Hunter Warrior
   | "pyjamas" // Legacy Pyjamas
   | "sweaterhs" // Super Sweater
-  | "tshirt0" // T-Shirt
-  | "tshirt1" // T-Shirt
-  | "tshirt2" // T-Shirt
-  | "tshirt3" // T-Shirt
-  | "tshirt4" // T-Shirt
-  | "tshirt6" // T-Shirt
-  | "tshirt7" // T-Shirt
-  | "tshirt8" // T-Shirt
-  | "tshirt88" // T-Shirt
-  | "tshirt9" // T-Shirt
+  | "tshirt0" // T-Shirt (Int)
+  | "tshirt1" // T-Shirt (Dex)
+  | "tshirt2" // T-Shirt (Str)
+  | "tshirt3" // T-Shirt (XP)
+  | "tshirt4" // T-Shirt (Speed)
+  | "tshirt6" // T-Shirt (Res. Piercing)
+  | "tshirt7" // T-Shirt (Armor Piercing)
+  | "tshirt8" // T-Shirt (Attack MP Cost)
+  | "tshirt88" // T-Shirt (Lucky)
+  | "tshirt9" // T-Shirt (Manasteal)
   | "vattire" // Spike's Attire
   | "warpvest" // Warp Vest
   | "wattire" // Wanderer's Attire
