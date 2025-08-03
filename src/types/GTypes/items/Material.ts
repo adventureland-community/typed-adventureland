@@ -36,7 +36,7 @@ export type MaterialKey =
   | "ink" // Ink
   | "lotusf" // Lotus Flower
   | "lspores" // Large Spores
-  | "mbones" // Mummy Bones
+  | "mbones" // Bones
   | "networkcard" // Network Card
   | "nheart" // Heartwood Core
   | "platinumingot" // Platinum Ingot

@@ -1,6 +1,7 @@
 export type DungeonKeyKey =
   | "cryptkey" // The Crypt Key
   | "frozenkey" // The Frozen Cave Key
+  | "spiderkey" // The Spider Key
   | "stonekey" // The Stone Key
   | "tombkey"; // The Tomb Key
 

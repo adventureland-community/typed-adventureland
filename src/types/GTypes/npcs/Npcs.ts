@@ -116,6 +116,7 @@ export type NpcKey =
   | "rewards" // Werdars
   | "santa" // Santa
   | "scrolls" // Lucas
+  | "scrollsmith" // Sir Bob
   | "secondhands" // Ponty
   | "shellsguy" // Mr. Dworf
   | "ship"
@@ -189,6 +190,7 @@ export type NpcName =
   | "Rose"
   | "Santa"
   | "Scarf"
+  | "Sir Bob"
   | "Smith"
   | "Stewart"
   | "Timmy"
@@ -279,6 +281,7 @@ export type NpcRole =
   | "resort"
   | "rewards"
   | "santa"
+  | "scrollsmith"
   | "secondhands"
   | "shells"
   | "ship"

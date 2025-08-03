@@ -8,6 +8,7 @@ export type ProjectileKey =
   | "crossbowarrow"
   | "cupid"
   | "curse"
+  | "dartgun"
   | "firearrow"
   | "fireball"
   | "frostarrow"

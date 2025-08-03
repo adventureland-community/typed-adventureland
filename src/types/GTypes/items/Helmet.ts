@@ -23,6 +23,7 @@ export type HelmetKey =
   | "partyhat" // Party Hat
   | "phelmet" // Pumpkin Head
   | "rednose" // Rudolph's Red Nose
+  | "spikedhelmet" // Spiked Helmet
   | "tigerhelmet" // Helmet of the Tiger
   | "wcap" // Wanderer's Cap
   | "xhelmet" // Darkforge Helmet
@@ -42,6 +43,7 @@ export interface GHelmet {
   crit?: number;
   cuteness?: number;
   dex?: number;
+  dreturn?: number;
   evasion?: number;
   explanation?: string;
   extra_stat?: number;
@@ -99,10 +101,11 @@ export interface GHelmet {
     crit?: number;
     cuteness?: number;
     dex?: number;
+    dreturn?: number;
     evasion?: number;
     int?: number;
     reflection?: number;
-    resistance: number;
+    resistance?: number;
     rpiercing?: number;
     stat: number;
     str?: number;

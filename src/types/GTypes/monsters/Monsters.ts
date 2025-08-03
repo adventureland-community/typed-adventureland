@@ -32,6 +32,7 @@ export type MonsterKey =
   | "d_wiz" // Dark Wizard
   | "dknight2" // Dark Knight
   | "dragold" // Dragold
+  | "dryad" // Dryad
   | "eelemental" // Earth Elemental
   | "ent" // Ent
   | "felemental" // Fire Elemental
@@ -45,6 +46,7 @@ export type MonsterKey =
   | "ghost" // Ghost
   | "goblin" // Sneaky Goblin
   | "goldenbat" // Golden Bat
+  | "goldenbot" // Golden Bot
   | "goo" // Goo
   | "gpurplepro" // Protector of Darkness
   | "gredpro" // Protector of Fire
@@ -73,6 +75,7 @@ export type MonsterKey =
   | "nelemental" // Nature Elemental
   | "nerfedbat" // Bat
   | "nerfedmummy" // Mummy
+  | "odino" // Dino
   | "oneeye" // One Eye
   | "osnake" // Snake
   | "phoenix" // Phoenix
@@ -98,7 +101,11 @@ export type MonsterKey =
   | "slenderman" // Slenderman
   | "snake" // Snake
   | "snowman" // Snowman
+  | "sparkbot" // Spark Bot
   | "spider" // Spider
+  | "spiderbl" // Black Spider Queen
+  | "spiderbr" // Brown Spider Queen
+  | "spiderr" // Red Spider Queen
   | "squig" // Squig
   | "squigtoad" // Squigtoad
   | "stompy" // Stompy
@@ -110,6 +117,7 @@ export type MonsterKey =
   | "target_ar900" // Target Automatron
   | "target_r500" // Target Automatron
   | "target_r750" // Target Automatron
+  | "targetron" // Targetron
   | "tiger" // Tiger
   | "tinyp" // Fairy
   | "tortoise" // Tortoise
@@ -134,8 +142,10 @@ export type MonsterName =
   | "Bee"
   | "Bill"
   | "Black Scorpion"
+  | "Black Spider Queen"
   | "Boo Boo"
   | "Brawl Goo"
+  | "Brown Spider Queen"
   | "Chicken"
   | "Croc"
   | "Cute Bee"
@@ -143,8 +153,10 @@ export type MonsterName =
   | "Dark Knight"
   | "Dark Mage"
   | "Dark Wizard"
+  | "Dino"
   | "Dracul"
   | "Dragold"
+  | "Dryad"
   | "Earth Elemental"
   | "Elena"
   | "Ent"
@@ -157,6 +169,7 @@ export type MonsterName =
   | "Ghost"
   | "Giga Crab"
   | "Golden Bat"
+  | "Golden Bot"
   | "Goo"
   | "Green Jr."
   | "Grinch"
@@ -195,6 +208,7 @@ export type MonsterName =
   | "Rainbow Goo"
   | "Rat"
   | "Rebel Harpy"
+  | "Red Spider Queen"
   | "Reindeer"
   | "Scorpion"
   | "Skeletor"
@@ -202,6 +216,7 @@ export type MonsterName =
   | "Snake"
   | "Sneaky Goblin"
   | "Snowman"
+  | "Spark Bot"
   | "Spider"
   | "Spike"
   | "Sprawling"
@@ -210,6 +225,7 @@ export type MonsterName =
   | "Stompy"
   | "Stone Worm"
   | "Target Automatron"
+  | "Targetron"
   | "Tiger"
   | "Tiny Crab"
   | "Tortoise"
