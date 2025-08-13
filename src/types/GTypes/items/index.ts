@@ -161,9 +161,9 @@ export type ItemKey =
   | XPKey;
 
 type GItemDynamic = {
-  buy: boolean | undefined;
-  upgrade: Partial<Record<StatType, number>>;
-  compound: Partial<Record<StatType, number>>;
+  buy?: boolean | undefined;
+  upgrade?: Partial<Record<StatType, number>>;
+  compound?: Partial<Record<StatType, number>>;
 };
 
 export type GItemRaw = GItemDynamic &
