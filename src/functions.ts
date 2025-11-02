@@ -452,7 +452,8 @@ declare global {
   }): MonsterEntity | null;
 
   function heal(target: Entity): any;
-  function use_hp_or_mp(): void;
+  function use_hp_or_mp(): Promise<unknown>;
+  function use_nearest_door(): Promise<unknown> 
   /** Checks whether or not we can attack other players */
   function is_pvp(): boolean;
   function is_in_range(entity: Entity, skill?: SkillKey): boolean;
