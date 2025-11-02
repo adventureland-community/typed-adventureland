@@ -260,6 +260,15 @@ export type EquipFailedGRDataObject = {
   failed: true;
 };
 
+/** When the exchange process starts (will take time to complete) */
+export type ExchangeInProgressGRDataObject = {
+  place: "exchange";
+  success: false;
+  in_progress: true;
+  /** Inventory slot */
+  num: number;
+}
+
 export type ExchangeNotEnoughGRDataObject = {
   response: "exchange_notenough";
   place: "exchange_buy";
@@ -282,6 +291,7 @@ export type GameResponseDataObject =
   | CooldownGRDataObject
   | CraftGRDataObject
   | DestroyGRDataObject
+  | ExchangeInProgressGRDataObject
   | SkillSuccessGRDataObject
   | ProjectileSkillGRDataObject
   | DefeatedByMonsterGRDataObject
