@@ -417,7 +417,7 @@ declare global {
   function get_target_of(entity: Entity): Entity | null;
   function get_player(name: string): CharacterEntity;
 
-  function get_nearest_monster(args: {
+  function get_nearest_monster(args?: {
     /**
      * Maximum attack the monster should have.
      */
