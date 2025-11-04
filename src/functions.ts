@@ -20,6 +20,11 @@ export interface CanStackArgs {
 export {};
 // TODO: ALL of theese types need to be validated and verified. and potentially extracted out into meaningfull files
 declare global {
+  function get_entity(id: string) : Entity | null;
+  function get_monster(monster_id: any) : MonsterEntity | null;
+  
+  function quantity(item_name: string) : number;
+
   function get_characters(): OnlineCharacter[];
 
   function is_monster(entity: Entity): entity is MonsterEntity;
