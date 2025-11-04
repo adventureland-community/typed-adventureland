@@ -132,8 +132,10 @@ declare global {
    * Skills expecting a target will default to the current target if none is explicitely specified.
    */
   function use_skill(name: SkillKey_TargetParameter, target?: SkillTarget): Promise<unknown>;
+  function use_skill(name: SkillKey_ItemAndTargetNeeded, target?: SkillTarget): Promise<unknown>;
 
   function use_skill(name: SkillKey_NoParameter): Promise<unknown>;
+  function use_skill(name: SkillKey_ItemNeeded): Promise<unknown>;
 
   // TODO: warp?
   // else if(name=="warp")
