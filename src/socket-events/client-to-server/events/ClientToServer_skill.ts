@@ -37,11 +37,21 @@ export type ClientToServer_skill =
   /** Other special skills */
   | {
       name: Extract<SkillKey, "3shot">;
-      ids: [string, string, string];
+      /**
+       * Only the first 3 ids are considered if more are passed.
+       * If less than 3 ids are passed, the skill is not used to its full potential.
+       * Using the same ID more than once does not result in multiple shots at that target.
+       */
+      ids: string[];
     }
   | {
       name: Extract<SkillKey, "5shot">;
-      ids: [string, string, string, string, string];
+      /**
+       * Only the first 5 ids are considered if more are passed.
+       * If less than 5 ids are passed, the skill is not used to its full potential.
+       * Using the same ID more than once does not result in multiple shots at that target.
+       */
+      ids: string[];
     }
   | {
       name: Extract<SkillKey, "cburst">;

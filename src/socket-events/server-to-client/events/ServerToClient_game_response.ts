@@ -227,8 +227,16 @@ export type TransportGRDataObject =
       place: "transport";
     }
   | {
-      success: false;
-      response: "cant_escape";
+      failed: true;
+      response:
+        | "bank_opi"
+        | "cant_enter"
+        | "cant_escape"
+        | "transport_cant_dampened"
+        | "transport_cant_locked"
+        | "transport_cant_protection"
+        | "transport_cant_reach"
+        | "transport_failed";
       place: "transport";
     };
 
@@ -267,7 +275,7 @@ export type ExchangeInProgressGRDataObject = {
   in_progress: true;
   /** Inventory slot */
   num: number;
-}
+};
 
 export type ExchangeNotEnoughGRDataObject = {
   response: "exchange_notenough";
