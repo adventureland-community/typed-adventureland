@@ -5,7 +5,8 @@ import type { ItemKey } from "../items/index";
 import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { ThrowKey } from "../items/Throw";
 import type { WeaponType } from "../items/index";
-import { StatType } from "../../../items";
+import type { StatType } from "../../../items";
+import type { SlotType } from "../../../entity";
 
 export type SkillKey =
   | "3shot" // 3-Shot
@@ -163,7 +164,7 @@ export interface GSkill {
   share?: SkillKey;
   skin?: string;
   skins?: [string, string, string];
-  slot?: Array<[string, ItemKey]>;
+  slot?: Array<[SlotType, ItemKey]>;
   target?: boolean | string;
   toggle?: boolean;
   type?: string;
