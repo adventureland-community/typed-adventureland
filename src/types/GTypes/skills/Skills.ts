@@ -93,6 +93,7 @@ export type SkillKey =
   | "supershot" // Supershot
   | "tangle" // Tangle
   | "taunt" // Taunt
+  | "temporalsurge" // Temporal Surge
   | "throw" // Throw Stuff
   | "toggle_character" // Toggle Character
   | "toggle_code" // Toggle Code

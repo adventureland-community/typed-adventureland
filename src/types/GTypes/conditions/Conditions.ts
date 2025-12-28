@@ -42,6 +42,7 @@ export type ConditionKey =
   | "mshield" // Mana Shield
   | "newcomersblessing" // Newcomers' Blessing
   | "notverified" // Not Verified
+  | "patronsgrace" // Patron's Grace
   | "penalty_cd" // Penalty Cooldown
   | "phasedout" // Phased Out
   | "pickpocket" // Pickpocket

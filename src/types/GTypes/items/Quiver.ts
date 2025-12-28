@@ -1,4 +1,5 @@
 export type QuiverKey =
+  | "alloyquiver" // Alloy Quiver
   | "quiver" // Quiver
   | "t2quiver"; // Agile Quiver
 
