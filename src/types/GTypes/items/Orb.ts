@@ -14,6 +14,7 @@ export type OrbKey =
   | "orbofresolve" // Orb of Resolve
   | "orbofsc" // Orb of Second Chances
   | "orbofstr" // Orb of Strength
+  | "orboftemporal" // Orb of Temporal Forces
   | "orbofvit" // Orb of Vitality
   | "rabbitsfoot" // Rabbit's Foot
   | "talkingskull" // Yorick the Talking Skull

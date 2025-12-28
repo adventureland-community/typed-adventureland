@@ -47,6 +47,7 @@ export type WeaponKey =
   | "ololipop" // Lolipop Mace
   | "oozingterror" // Oozing Terror
   | "ornamentstaff" // Ornament Staff
+  | "pclaw" // Poison Claw
   | "pinkie" // Pink Wand
   | "pmace" // Priest's Mace
   | "pmaceofthedead" // Hand of the Dead
@@ -55,6 +56,7 @@ export type WeaponKey =
   | "scythe" // Skeletor's Scythe
   | "slimestaff" // Slime Staff
   | "snowflakes" // Snowflakes
+  | "sparkstaff" // Spark Staff
   | "spear" // Spear
   | "spearofthedead" // Spear of the Dead
   | "staff" // Staff

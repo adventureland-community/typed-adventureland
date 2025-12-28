@@ -1,5 +1,5 @@
 export type ThrowKey =
-  | "confetti" // Pack of Confetti's
+  | "confetti" // Pack of Confetti
   | "firecrackers" // Firecracker
   | "smoke" // Pouch of Poof
   | "snowball"; // Snowball

@@ -1,8 +1,8 @@
 import { CodeMessageEvent } from "./codemessage";
 import { ItemInfo } from "./items";
 import { TypedEventEmitter } from "./TypedEventEmitter";
-import { ItemKey } from "./types/GTypes/items";
-import { MapKey } from "./types/GTypes/maps";
+import type { ItemKey } from "./types/GTypes/items";
+import type { MapKey } from "./types/GTypes/maps";
 import { BetterUXWrapper } from "./types/GTypes/utils";
 
 export type CharacterWithEventsFunctions = Pick<

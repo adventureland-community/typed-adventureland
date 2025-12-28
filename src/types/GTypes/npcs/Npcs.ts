@@ -31,6 +31,7 @@ export type NpcKey =
   | "craftsman" // Leo
   | "exchange" // Xyn
   | "fancypots" // Ernis
+  | "favors" // Favoré
   | "firstc"
   | "fisherman" // Tristian
   | "friendtokens" // Fvona
@@ -150,6 +151,7 @@ export type NpcName =
   | "Divian"
   | "Ernis"
   | "Faith"
+  | "Favoré"
   | "Fredric"
   | "Fvona"
   | "Gabriel"
@@ -258,6 +260,7 @@ export type NpcRole =
   | "cx"
   | "events"
   | "exchange"
+  | "favors"
   | "friendtokens"
   | "funtokens"
   | "gold"

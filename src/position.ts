@@ -1,4 +1,4 @@
-import { MapKey } from "./types/GTypes/maps";
+import type { MapKey } from "./types/GTypes/maps";
 export interface ICoord {
   x: number;
   y: number;

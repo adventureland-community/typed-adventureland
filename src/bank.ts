@@ -1,4 +1,4 @@
-import { MapKey } from "./types/GTypes/maps";
+import type { MapKey } from "./types/GTypes/maps";
 
 export type BankPacksInfos = Record<
   BankPackTypeItemsOnly,
