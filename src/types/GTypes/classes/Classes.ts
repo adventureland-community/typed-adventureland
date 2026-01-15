@@ -3,6 +3,7 @@ import type { WeaponKey } from "../items/Weapon";
 import type { OffhandType, WeaponType } from "../items/index";
 import { Tuple } from "../utils";
 import { CharacterEntityCXInfos } from "../../../entities/character-entity";
+import { DamageType } from "../../../entity";
 
 export type ClassKey =
   | "mage"
@@ -26,7 +27,7 @@ export interface GClass {
   bmresistance?: number;
   brave?: boolean;
   courage: number;
-  damage_type: string;
+  damage_type: DamageType;
   description: string;
   // TODO: How to handle "great_sword"? No weapon exists with this type yet.
   doublehand: {

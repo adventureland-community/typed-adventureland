@@ -1,3 +1,4 @@
+import { DamageType } from "../../../entity";
 import type { ClassKey } from "../classes/Classes";
 import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { SetKey } from "../sets/Sets";
@@ -105,7 +106,7 @@ export interface GWeapon {
     lightborder?: boolean;
     scale?: number;
   };
-  damage_type: string;
+  damage_type: DamageType;
   delia?: string;
   dex?: number;
   evasion?: number;
