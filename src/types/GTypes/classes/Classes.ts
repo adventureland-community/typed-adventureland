@@ -5,14 +5,7 @@ import { Tuple } from "../utils";
 import { CharacterEntityCXInfos } from "../../../entities/character-entity";
 import { DamageType } from "../../../entity";
 
-export type ClassKey =
-  | "mage"
-  | "merchant"
-  | "paladin"
-  | "priest"
-  | "ranger"
-  | "rogue"
-  | "warrior";
+export type ClassKey = "mage" | "merchant" | "paladin" | "priest" | "ranger" | "rogue" | "warrior";
 
 export interface GClass {
   armor: number;
