@@ -1,6 +1,7 @@
 import type { ConditionKey } from "../conditions/Conditions";
 import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { WeaponKey } from "../items/Weapon";
+import { DamageType } from "../../../entity";
 
 export type MonsterKey =
   | "a1" // Spike
@@ -348,7 +349,7 @@ export interface GMonster {
   cooperative?: boolean;
   crit?: number;
   cute?: boolean;
-  damage_type: string;
+  damage_type: DamageType;
   /** A multiplier for monsters' gold drops */
   difficulty?: number;
   dreturn?: number;

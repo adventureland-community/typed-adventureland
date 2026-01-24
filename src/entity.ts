@@ -19,8 +19,8 @@ export type { CharacterEntity, MonsterEntity, NpcEntity };
 //   vn: number;
 // };
 
-// TODO: Get all types (from G?)
-export type DamageType = "magical" | "physical" | "heal";
+// TODO: There's probably a better place for this
+export type DamageType = "heal" | "magical" | "physical" | "pure" | "none";
 
 export type RawEntity = MonsterEntity | CharacterEntity | NpcEntity | Character;
 export type Entity = BetterUXWrapper<RawEntity>;

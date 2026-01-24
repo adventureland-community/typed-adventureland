@@ -6,7 +6,7 @@ import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { ThrowKey } from "../items/Throw";
 import type { WeaponType } from "../items/index";
 import type { StatType } from "../../../items";
-import type { SlotType } from "../../../entity";
+import type { DamageType, SlotType } from "../../../entity";
 
 export type SkillKey =
   | "3shot" // 3-Shot
@@ -126,7 +126,7 @@ export interface GSkill {
   cooldown_multiplier?: number;
   damage?: number;
   damage_multiplier?: number;
-  damage_type?: string;
+  damage_type?: DamageType;
   duration?: number;
   duration_max?: number;
   duration_min?: number;

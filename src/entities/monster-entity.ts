@@ -1,3 +1,4 @@
+import { DamageType } from "../entity";
 import { ItemInfo } from "../items";
 import { GMonsterAbilities, MonsterKey, MonsterName } from "../types/GTypes/monsters";
 import { EntityBase } from "./base-entity";
@@ -45,7 +46,7 @@ export interface MonsterEntity extends EntityBase {
   cskin: string;
   cx?: {};
   cxc?: {};
-  damage_type: string;
+  damage_type: DamageType;
   /** true when the monster is defeated
    * "dead" can have string values too, such as "map" / "vision"
    * Indicating the reason why the monster is as good as dead to you.
