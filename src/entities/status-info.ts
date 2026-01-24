@@ -55,14 +55,14 @@ export type StatusInfo = {
     ms: number;
     s: number;
   };
-  citizen0aura: {
+  citizen0aura?: {
     citizens: boolean;
     luck: number;
     ms: number;
     name: string;
     skin: string;
   };
-  citizen4aura: {
+  citizen4aura?: {
     citizens: boolean;
     gold: number;
     ms: number;
