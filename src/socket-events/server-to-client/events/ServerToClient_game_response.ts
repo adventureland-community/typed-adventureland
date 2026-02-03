@@ -140,6 +140,7 @@ export type ItemLockedGRDataObject = {
 };
 
 export type ItemSentGRDataObject = {
+  place: "send";
   response: "item_sent";
   name: string;
   item: ItemKey;
