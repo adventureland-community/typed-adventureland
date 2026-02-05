@@ -10,13 +10,13 @@ export interface ICoordReal {
 }
 
 export type IPosition = {
-  /**
-   * Contains the name of the map
-   */
   map?: MapKey;
+  /** Instance ID (if different than `map`) */
+  in?: string;
   x: number;
   y: number;
 };
+
 export type PositionReal = IPosition & {
   map: MapKey;
   real_x: number;
