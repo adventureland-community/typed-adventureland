@@ -1,3 +1,4 @@
+import { BankPackTypeItemsOnly } from "../../../bank";
 import { SlotType } from "../../../entity";
 import { ItemKey, MonsterKey, SkillKey } from "../../../G";
 import { ItemInfo } from "../../../items";
@@ -25,6 +26,16 @@ export type BankOPXGRDataObject = {
   name: string;
   reason: "mounted";
 };
+
+export type BankSwapGRDataObject = {
+  response: "data";
+  place: "bank";
+  operation: "swap";
+  success: true;
+  inv: number;
+  pack: BankPackTypeItemsOnly;
+  str: number
+}
 
 export type BankRestrictionsGRDataObject = {
   response: "bank_restrictions";
@@ -330,7 +341,8 @@ export type GameResponseDataObject =
   | EquipGRDataObject
   | ExchangeNotEnoughGRDataObject
   | UpgradeCompoundGRDataObject
-  | BankOperationGRDataObject;
+  | BankOperationGRDataObject
+  | BankSwapGRDataObject;
 
 export type GameResponseDataString =
   | "bank_restrictions"
