@@ -1,4 +1,4 @@
-import { BankPackType } from "../../../bank";
+import { BankPackTypeItemsOnly } from "../../../bank";
 
 export type ClientToServer_bank =
   | {
@@ -8,12 +8,12 @@ export type ClientToServer_bank =
   | {
       inv: number;
       operation: "swap";
-      pack: BankPackType;
+      pack: BankPackTypeItemsOnly;
       str: number;
     }
   | {
       operation: "move";
       a: number;
       b: number;
-      pack: BankPackType;
+      pack: BankPackTypeItemsOnly;
     };
