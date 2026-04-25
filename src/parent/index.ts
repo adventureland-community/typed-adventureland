@@ -74,11 +74,11 @@ export interface XOnlineCharacter {
 }
 
 interface ServerInfo<SR extends ServerRegion, SI extends IdentifierForRegion<SR>> {
-  addr: string;
-  key: `${SR}${SI}`;
+  address: string;
+  key: `SR_${SR}${SI}`;
   name: SI;
+  path: string;
   players: number;
-  port: number;
   region: SR;
 }
 
