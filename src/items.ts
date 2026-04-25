@@ -1,4 +1,5 @@
-import { ElixirKey, ItemKey } from "./types/GTypes/items";
+import { Attribute } from "./entities/attributes";
+import { ElixirKey, GItem, ItemKey } from "./types/GTypes/items";
 
 declare global {
   /**
@@ -9,7 +10,26 @@ declare global {
 
   /** Returns the inventory position of the item, or -1 if it's not found */
   function locate_item(item: ItemKey): number; // should this live in "inventory"?
+
+  /**
+   * Returns the calculated properties of an item, or `null` if the item is missing or invalid
+   * @example item_properties(character.items[0])
+   */
+  function item_properties(item: ItemInfo): ItemProperties | null;
 }
+
+/**
+ * Result of `item_properties` / `calculate_item_properties`.
+ * It is the item's `G.items` definition with every stat field filled in
+ * (defaulting to 0), plus the derived `level`, `set`, and `class` fields.
+ */
+export type ItemProperties = GItem &
+  Partial<Record<StatType, number>> &
+  Partial<Record<Attribute, number>> & {
+    level: number;
+    set: string | null;
+    class: string | null;
+  };
 
 export type HealthPotion = "hpot0" | "hpot1" | "hpotx";
 export type ManaPotion = "mpot0" | "mpot1" | "mpotx";
