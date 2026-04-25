@@ -17,13 +17,18 @@ export interface ServersAndCharactersTutorial {
 }
 
 export type ServersAndCharactersApiResponse = {
-  type: "servers_and_characters";
-  servers: XServerInfos[];
-  characters: XOnlineCharacter[];
-  tutorial: ServersAndCharactersTutorial;
-  code_list: ServersAndCharactersCodeList;
-  mail: number;
-  rewards: any[];
+  success: true;
+  infs: [
+    {
+      type: "servers_and_characters";
+      servers: XServerInfos[];
+      characters: XOnlineCharacter[];
+      tutorial: ServersAndCharactersTutorial;
+      code_list: ServersAndCharactersCodeList;
+      mail: number;
+      rewards: any[];
+    }
+  ];
 };
 
 export type FriendsApiResponse = {
