@@ -1,50 +1,52 @@
 // export interface BaseAttribute {}
-export interface Attribute {
-  apiercing;
-  armor;
-  attack;
-  attr0;
-  attr1;
-  awesomeness;
-  blast;
-  bling;
-  breaks;
-  charisma;
-  courage;
-  crit;
-  critdamage;
-  cuteness;
-  dex;
-  dreturn;
-  evasion;
-  explosion;
-  firesistance;
-  for;
-  frequency;
-  fzresistance;
-  gold;
-  hp;
-  int;
-  level;
-  lifesteal;
-  luck;
-  manasteal;
-  mcourage;
-  miss;
-  mp;
-  mp_cost;
-  mp_reduction;
-  output;
-  pcourage;
-  pnresistance;
-  range;
-  reflection;
-  resistance;
-  rpiercing;
-  speed;
-  stat;
-  str;
-  stun;
-  vit;
-  xp;
-}
+export type Attribute =
+  | "apiercing"
+  | "armor"
+  | "attack"
+  | "attr0"
+  | "attr1"
+  | "awesomeness"
+  | "blast"
+  | "bling"
+  | "breaks"
+  | "charisma"
+  | "courage"
+  | "crit"
+  | "critdamage"
+  | "cuteness"
+  | "dex"
+  | "dreturn"
+  | "evasion"
+  | "explosion"
+  | "firesistance"
+  | "for"
+  | "frequency"
+  | "fzresistance"
+  | "gold"
+  | "hp"
+  | "incdmgamp"
+  | "int"
+  | "level"
+  | "lifesteal"
+  | "luck"
+  | "manasteal"
+  | "mcourage"
+  | "miss"
+  | "mp"
+  | "mp_cost"
+  | "mp_reduction"
+  | "output"
+  | "pcourage"
+  | "phresistance"
+  | "pnresistance"
+  | "range"
+  | "reflection"
+  | "resistance"
+  | "rpiercing"
+  | "speed"
+  | "stat"
+  | "str"
+  | "stresistance"
+  | "stun"
+  | "vit"
+  | "xp";
