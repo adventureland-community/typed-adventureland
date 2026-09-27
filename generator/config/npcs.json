@@ -2,6 +2,9 @@
   "GKey": "npcs",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {
+    "aspeed": "\"slow\" | \"slower\" | \"fast\""
+  },
   "extractedTypes": {
     "name": "NpcName",
     "role": "NpcRole"

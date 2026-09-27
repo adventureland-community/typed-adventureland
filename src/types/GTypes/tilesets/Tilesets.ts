@@ -1,12 +1,14 @@
 export type TilesetKey =
   | "ash"
   | "beach"
+  | "biocaves"
   | "castle"
   | "custom"
   | "custom_a"
   | "custom2"
   | "dark"
   | "doors"
+  | "dreamsv3"
   | "dungeon"
   | "fort"
   | "house"
@@ -26,7 +28,7 @@ export type TilesetKey =
 
 export interface GTileset {
   file: string;
-  frames?: number;
   frame_width?: number;
+  frames?: number;
   light?: string;
 }

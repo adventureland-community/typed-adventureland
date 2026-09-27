@@ -412,6 +412,12 @@ export type GameResponseDataString =
   /** When you try to sell an item to another merchant, but there's no space on that merchant */
   | "trade_bspace"
   | "trade_get_closer"
+  /** Item-for-item listing was refused (invalid/missing want) */
+  | "trade_offer_invalid"
+  /** Item given for a trade offer does not match the merchant's want */
+  | "trade_swap_match"
+  /** Not enough inventory space to complete an item-for-item trade swap */
+  | "trade_swap_space"
   /** When you try to enter a dungeon, but you don't have a key */
   | "transport_cant_item"
   /** When you try to go through a door you haven't unlocked yet (e.g. lower bank) */

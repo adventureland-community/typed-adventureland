@@ -2,7 +2,7 @@ import type { GameKey } from "../games/Games";
 import type { ImagesetKey } from "../imagesets/Imagesets";
 import type { DungeonKeyKey, ItemKey } from "../items";
 import type { MonsterKey } from "../monsters/Monsters";
-import type { NpcKey } from "../npcs/Npcs";
+import type { NpcKey, NpcRole } from "../npcs/Npcs";
 import type { TilesetKey } from "../tilesets/Tilesets";
 import type { Tuple } from "../utils";
 import { EventKey } from "../events";
@@ -68,6 +68,13 @@ export type MapZoneKey = "fishing" | "mining";
 
 export interface GMap {
   animatables?: {
+    dreams_gate?: {
+      collision?: Array<[number, number, number, number]>;
+      position: string;
+      role?: NpcRole;
+      x: number;
+      y: number;
+    };
     the_door?: {
       position: string;
       x: number;

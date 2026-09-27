@@ -224,6 +224,32 @@ export type GItemRaw = GItemDynamic &
 
 export type GItem = BetterUXWrapper<GItemRaw>;
 
+/** Values of `G.items.*.ability` — item procs, not always `SkillKey`. */
+export type ItemAbility =
+  | "burn"
+  | "charm"
+  | "fanofknives"
+  | "freeze"
+  | "frenzy"
+  | "hex"
+  | "petrify"
+  | "poison"
+  | "poke"
+  | "power"
+  | "restore_mp"
+  | "scare"
+  | "secondchance"
+  | "shatter"
+  | "shelter"
+  | "sugarrush"
+  | "sunder"
+  | "tangle"
+  | "temporalsurge"
+  | "warp"
+  | "weave"
+  | "xpower"
+  | "zapperzap";
+
 export type ItemType =
   | "activator"
   | "amulet"

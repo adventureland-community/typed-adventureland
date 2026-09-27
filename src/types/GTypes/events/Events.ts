@@ -8,7 +8,9 @@ export type EventKey =
   | "holidayseason" // Holiday Season
   | "icegolem" // Ice Golem
   | "lunarnewyear" // Lunar New Year
-  | "valentines"; // Valentines
+  | "valentines" // Valentines
+  | "anniversary" // Ten Years of Adventure Land
+  | "dreams" // Cave of Many Dreams;
 
 export interface GEvent {
   duration: number;

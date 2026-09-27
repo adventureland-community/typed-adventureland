@@ -1,7 +1,8 @@
 import type { Tuple } from "../utils";
 import { ItemKey } from "../items";
 
-export type GameKey = "dice" | "slots" | "tarot" | "wheel";
+export type GameKey = "dice" | "slots" | "tarot" | "wheel"
+  | "poker";
 
 export interface GGame {
   gold?: number;

@@ -37,7 +37,14 @@ export type ProjectileKey =
   | "stone_k"
   | "supershot"
   | "wandy"
-  | "wmomentum";
+  | "wmomentum"
+  | "arcane_needle"
+  | "fanofknives"
+  | "reunionarrow"
+  | "rimehelix"
+  | "rimeshatter"
+  | "shield_slam"
+  | "worldroot";
 
 export interface GProjectile {
   hit_animation?: AnimationKey;

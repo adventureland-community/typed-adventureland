@@ -1,13 +1,20 @@
+import type { ClassKey } from "../classes/Classes";
 import type { SetKey } from "../sets/Sets";
+import type { ItemAbility } from "./index";
 
 export type AmuletKey =
   | "amuletofm" // Amulet of Mystery
   | "bfangamulet" // Ghastly Bat Fang
   | "dexamulet" // Amulet of Dexterity
+  | "gloampendant" // Gloam Pendant
+  | "gnomecap" // Gnomish Capacitor
+  | "heartwoodlocket" // Heartwood Locket
   | "hpamulet" // Amulet of HP
   | "intamulet" // Amulet of Intelligence
+  | "keepsakependant" // Keepsake Pendant
   | "mpxamulet" // Amulet of MP
   | "northstar" // The North Star
+  | "paleclaw" // Paleclaw Totem
   | "sanguine" // Sanguine Amulet
   | "skullamulet" // Skull Amulet
   | "snring" // Stompy's Nose Ring
@@ -20,26 +27,36 @@ export type AmuletKey =
 
 export interface GAmulet {
   a?: boolean;
+  ability?: ItemAbility;
   apiercing?: number;
   armor?: number;
   attr0?: number;
+  attr1?: number;
   aura?: AmuletKey;
+  /** An array of classes that can use this item. */
+  class?: [ClassKey];
   /** Contains information about what stats the item will gain with each compound level. Set if the item is compoundable. */
   compound?: {
     apiercing?: number;
     armor?: number;
     attr0?: number;
+    attr1?: number;
     crit?: number;
     critdamage?: number;
     dex?: number;
     dreturn?: number;
     evasion?: number;
     for?: number;
+    frequency?: number;
+    gold?: number;
     hp?: number;
     int?: number;
     lifesteal?: number;
+    luck?: number;
+    mp?: number;
     mp_cost?: number;
     mp_reduction?: number;
+    reflection?: number;
     resistance?: number;
     str?: number;
     vit?: number;
@@ -47,12 +64,17 @@ export interface GAmulet {
   };
   crit?: number;
   critdamage?: number;
+  cx?: {
+    accent: string;
+  };
   dex?: number;
   dreturn?: number;
   edge?: number;
   evasion?: number;
+  exclusive?: boolean;
   explanation?: string;
   for?: number;
+  frequency?: number;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   gold?: number;
@@ -63,6 +85,7 @@ export interface GAmulet {
   lifesteal?: number;
   luck?: number;
   manasteal?: number;
+  mp?: number;
   mp_cost?: number;
   mp_reduction?: number;
   /** The full display name of an item. */

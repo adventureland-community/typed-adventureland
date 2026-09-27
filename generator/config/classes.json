@@ -2,7 +2,12 @@
   "GKey": "classes",
   "groupKey": null,
   "nameOverride": {},
-  "overrides": {},
+  "overrides": {
+    "damage_type": "DamageType"
+  },
+  "imports": {
+    "DamageType": "../../../entity"
+  },
   "extractedTypes": {},
   "description": {}
 }

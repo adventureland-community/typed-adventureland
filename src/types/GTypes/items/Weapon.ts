@@ -2,7 +2,7 @@ import { DamageType } from "../../../entity";
 import type { ClassKey } from "../classes/Classes";
 import type { ProjectileKey } from "../projectiles/Projectiles";
 import type { SetKey } from "../sets/Sets";
-import type { WeaponType } from "./index";
+import type { WeaponType, ItemAbility } from "./index";
 
 export type WeaponKey =
   | "axe3" // T3 Axe
@@ -12,11 +12,20 @@ export type WeaponKey =
   | "bow" // Bow
   | "bow4" // T4 Bow
   | "bowofthedead" // Bow of the Dead
+  | "brinefang" // Brinefang
   | "broom" // Broom
   | "candycanesword" // Candy Cane Sword
   | "carrotsword" // Carrot Sword
+  | "cave_backstabber" // Last Word
+  | "cave_blackstaff" // Nightjudge
+  | "cave_deepaxe" // Deepvein Axe
+  | "cave_locktooth" // Locktooth
+  | "cave_reedscythe" // Reed Scythe
+  | "cave_tunnelaxe" // Tunnel Axe
   | "cclaw" // Crab Claw
+  | "cinderwand" // Cinder Wand
   | "claw" // Claw
+  | "concordmace" // Concord Mace
   | "crossbow" // Crossbow
   | "cupid" // Cupid's Bow
   | "dagger" // Dagger
@@ -40,11 +49,13 @@ export type WeaponKey =
   | "hbow" // Hunting Bow
   | "hdagger" // Dagger of Hallowing
   | "heartwood" // Heartwood
+  | "ledgerlight" // Ledgerlight
   | "lmace" // Lunar Mace
   | "mace" // Mace
   | "maceofthedead" // Mace of the Dead
   | "merry" // Bow of The Merry Ranger
   | "mushroomstaff" // Mushroom Staff
+  | "nighttill" // Night Till
   | "ololipop" // Lolipop Mace
   | "oozingterror" // Oozing Terror
   | "ornamentstaff" // Ornament Staff
@@ -52,8 +63,11 @@ export type WeaponKey =
   | "pinkie" // Pink Wand
   | "pmace" // Priest's Mace
   | "pmaceofthedead" // Hand of the Dead
+  | "pollenbow" // Pollen Bow
   | "pouchbow" // Poucher
   | "rapier" // Rapier
+  | "reunionbow" // Reunion Bow
+  | "rimeknuckles" // Rime Knuckles
   | "scythe" // Skeletor's Scythe
   | "slimestaff" // Slime Staff
   | "snowflakes" // Snowflakes
@@ -66,26 +80,33 @@ export type WeaponKey =
   | "staff4" // T4 Staff
   | "staffofthedead" // Staff of the Dead
   | "stinger" // Stinger
+  | "surety" // Surety
   | "swifty" // Swifty
   | "sword" // Short Sword
   | "swordofthedead" // Sword of the Dead
   | "t2bow" // Well-Crafted Bow
   | "t3bow" // Artisan's Bow
+  | "threadneedle" // Threadneedle
   | "throwingstars" // Throwing Stars
+  | "tollkeeperspike" // Tollkeeper's Pike
+  | "valourdirk" // Valour Dirk
   | "vdagger" // Vampiric Dagger
   | "vhammer" // Vampiric Hammer
   | "vstaff" // Vampiric Staff
   | "vsword" // Vampiric Sword
   | "wand" // Wand
+  | "waxe" // Wooden Axe
+  | "waybill" // Waybill
   | "wbasher" // Wooden Basher
   | "wblade" // Ethereal Blade of Destiny
   | "weaver" // Bow of the Weaver
   | "woodensword" // Wooden Sword
+  | "worldrootcrook" // Worldroot Crook
   | "xmace"; // Merry Mace
 
 export interface GWeapon {
   a?: boolean | number;
-  ability?: string;
+  ability?: ItemAbility;
   apiercing?: number;
   armor?: number;
   attack: number;
@@ -95,7 +116,8 @@ export interface GWeapon {
   blast?: number;
   charisma?: number;
   /** An array of classes that can use this item. */
-  class?: [ClassKey];
+  class?: Array<ClassKey>;
+  courage?: number;
   crit?: number;
   critdamage?: number;
   cx?: {
@@ -109,6 +131,7 @@ export interface GWeapon {
   damage_type: DamageType;
   delia?: string;
   dex?: number;
+  dreturn?: number;
   evasion?: number;
   event?: boolean;
   exclusive?: boolean;
@@ -116,19 +139,25 @@ export interface GWeapon {
   explosion?: number;
   firesistance?: number;
   for?: number;
+  frequency?: number;
+  fzresistance?: number;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
+  hp?: number;
   ignore?: boolean;
   int?: number;
   lifesteal?: number;
   luck?: number;
+  manasteal?: number;
+  mp?: number;
   mp_cost?: number;
   mp_reduction?: number;
   /** The full display name of an item. */
   name: string;
   nopo?: string;
+  pnresistance?: number;
   projectile?: ProjectileKey;
   projectile_test?: ProjectileKey;
   range: number;
@@ -143,6 +172,7 @@ export interface GWeapon {
   skin_r?: string;
   speed?: number;
   str?: number;
+  stresistance?: number;
   stun?: number;
   /** The tier of the item. */
   tier: number;
@@ -159,10 +189,19 @@ export interface GWeapon {
     awesomeness?: number;
     blast?: number;
     crit?: number;
+    critdamage?: number;
     dex?: number;
+    dreturn?: number;
     evasion?: number;
     explosion?: number;
+    for?: number;
+    hp?: number;
     int?: number;
+    lifesteal?: number;
+    manasteal?: number;
+    mp?: number;
+    mp_reduction?: number;
+    pnresistance?: number;
     range: number;
     reflection?: number;
     resistance?: number;

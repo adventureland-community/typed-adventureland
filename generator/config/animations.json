@@ -3,7 +3,9 @@
   "GKey": "animations",
   "groupKey": null,
   "nameOverride": {},
-  "overrides": {},
+  "overrides": {
+    "aspeed": "\"slow\" | \"mild\" | \"fast\""
+  },
   "extractedTypes": {},
   "description": {}
 }

@@ -11,7 +11,8 @@ export type TitleKey =
   | "shiny"
   | "sniper"
   | "stomped"
-  | "superfast";
+  | "superfast"
+  | "cavefound";
 
 export interface GTitle {
   type: string;

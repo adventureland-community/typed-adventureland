@@ -9,11 +9,14 @@ import type {
   ClientToServer_compound,
   ClientToServer_craft,
   ClientToServer_destroy,
+  ClientToServer_destat,
   ClientToServer_dismantle,
   ClientToServer_donate,
+  ClientToServer_duel,
   ClientToServer_emotion,
   ClientToServer_enter,
   ClientToServer_equip,
+  ClientToServer_equip_batch,
   ClientToServer_eval,
   ClientToServer_exchange,
   ClientToServer_exchange_buy,
@@ -36,6 +39,7 @@ import type {
   ClientToServer_party,
   ClientToServer_ping_trig,
   ClientToServer_players,
+  ClientToServer_poker,
   ClientToServer_property,
   ClientToServer_respawn,
   ClientToServer_say,
@@ -44,14 +48,17 @@ import type {
   ClientToServer_sell,
   ClientToServer_send,
   ClientToServer_send_updates,
+  ClientToServer_set_home,
   ClientToServer_skill,
   ClientToServer_split,
   ClientToServer_stop,
+  ClientToServer_tavern,
   ClientToServer_town,
   ClientToServer_tracker,
   ClientToServer_trade_buy,
   ClientToServer_trade_history,
   ClientToServer_trade_sell,
+  ClientToServer_trade_swap,
   ClientToServer_trade_wishlist,
   ClientToServer_transport,
   ClientToServer_unequip,
@@ -72,11 +79,14 @@ export interface ClientToServerEvents {
   compound: ClientToServer_compound;
   craft: ClientToServer_craft;
   destroy: ClientToServer_destroy;
+  destat: ClientToServer_destat;
   dismantle: ClientToServer_dismantle;
   donate: ClientToServer_donate;
+  duel: ClientToServer_duel;
   emotion: ClientToServer_emotion;
   enter: ClientToServer_enter;
   equip: ClientToServer_equip;
+  equip_batch: ClientToServer_equip_batch;
   eval: ClientToServer_eval;
   exchange_buy: ClientToServer_exchange_buy;
   exchange: ClientToServer_exchange;
@@ -99,6 +109,7 @@ export interface ClientToServerEvents {
   party: ClientToServer_party;
   ping_trig: ClientToServer_ping_trig;
   players: ClientToServer_players;
+  poker: ClientToServer_poker;
   property: ClientToServer_property;
   respawn: ClientToServer_respawn;
   say: ClientToServer_say;
@@ -107,14 +118,17 @@ export interface ClientToServerEvents {
   sell: ClientToServer_sell;
   send_updates: ClientToServer_send_updates;
   send: ClientToServer_send;
+  set_home: ClientToServer_set_home;
   skill: ClientToServer_skill;
   split: ClientToServer_split;
   stop: ClientToServer_stop;
+  tavern: ClientToServer_tavern;
   town: ClientToServer_town;
   tracker: ClientToServer_tracker;
   trade_buy: ClientToServer_trade_buy;
   trade_history: ClientToServer_trade_history;
   trade_sell: ClientToServer_trade_sell;
+  trade_swap: ClientToServer_trade_swap;
   trade_wishlist: ClientToServer_trade_wishlist;
   transport: ClientToServer_transport;
   unequip: ClientToServer_unequip;

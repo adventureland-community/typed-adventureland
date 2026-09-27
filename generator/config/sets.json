@@ -3,7 +3,10 @@
   "groupKey": null,
   "nameOverride": {},
   "overrides": {
-    "items": "ItemsKey[]"
+    "items": "Array<ItemKey>"
+  },
+  "imports": {
+    "ItemKey": "../items"
   },
   "extractedTypes": {},
   "description": {}
