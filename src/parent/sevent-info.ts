@@ -1,7 +1,56 @@
 import { MapKey } from "../G";
+import type { CharacterEntityCXInfos } from "../entities/character-entity";
 import { BetterUXWrapper } from "../types/GTypes/utils";
 
 /** NOTE: Some event monsters don't have x and y (e.g.: Slenderman) */
+
+/**
+ * Live `parent.S.anniversary` while the season is on (`E.anniversary` from server).
+ * Deleted from `S` when the season is inactive. Not joinable via `join()`.
+ * @see node/logic/anniversary_event.js `tick()`
+ */
+export type AnniversarySEvent = {
+  active: true;
+  /** True when a featured host is currently selected for the round. */
+  live: boolean;
+  /** Epoch ms of the next selection slot. */
+  next: number;
+  /** Slot / round id while a host is live. */
+  round?: number;
+  /** Epoch ms when this host window ends. */
+  expires?: number;
+  /** Host character name. */
+  target?: string;
+  /** Host character id. */
+  id?: string;
+  /** Whether the featured host is still eligible / online. */
+  available?: boolean;
+  skin?: string;
+  cx?: CharacterEntityCXInfos;
+  map?: MapKey;
+  x?: number;
+  y?: number;
+};
+
+/**
+ * Per-character eligibility snapshot (`character.anniversary`), not broadcast to strangers.
+ * `null` when the season is off.
+ */
+export type CharacterAnniversaryStatus = {
+  realm: string;
+  round: number | null;
+  target: string | null;
+  reason:
+    | "no_round"
+    | "claimed"
+    | "realmfatigue"
+    | "hopsickness"
+    | "merchant_home"
+    | "host"
+    | "ready"
+    | "no_visit"
+    | string;
+};
 
 export type SMonsterEventLive = {
   /** Is the monster currently available? */
@@ -115,4 +164,10 @@ export type SEventsInfos = {
    * icegolem is located on a closed island, make sure to not get stuck when the event is over.
    * read more: https://adventure.land/docs/ref/event-icegolem */
   icegolem: SMonsterEventWithCoordinates;
+
+  /**
+   * Ten Years of Adventure Land — present only while the season is active.
+   * Use for kiss targets / Mira; do not call `join("anniversary")`.
+   */
+  anniversary?: AnniversarySEvent;
 };

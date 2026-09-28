@@ -1,4 +1,5 @@
 import { MapKey, MonsterKey } from "../../../G";
+import type { AnniversarySEvent } from "../../../parent/sevent-info";
 
 export type ServerToClient_server_info_event = {
   /** A date string of when the event will end */
@@ -35,6 +36,8 @@ export type ServerToClient_server_info = Partial<
   holidayseason?: boolean;
   lunarnewyear?: boolean;
   valentines?: boolean;
+  /** Present only while the anniversary season is active. */
+  anniversary?: AnniversarySEvent;
 } & {
   goobrawl?: ServerToClient_server_info_event;
 } & {

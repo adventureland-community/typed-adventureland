@@ -4,7 +4,7 @@ import { SlotType, TradeSlotType } from "./entities/slots";
 import { Entity } from "./entity";
 import { ItemInfo, TradeWant } from "./items";
 import { IPosition, PositionReal, PositionSmart, ICoordReal } from "./position";
-import { EventKey } from "./types/GTypes/events";
+import { JoinableEventKey } from "./types/GTypes/events";
 import { BoosterKey, ItemKey } from "./types/GTypes/items";
 import { MapKey } from "./types/GTypes/maps";
 import { MonsterKey } from "./types/GTypes/monsters";
@@ -839,7 +839,12 @@ declare global {
    */
   function shift(inventoryPosition: number, toBooster: BoosterKey): Promise<ShiftResult>;
 
-  function join(eventName: EventKey): Promise<any>;
+  /**
+   * Join a live joinable event (server transports you near it).
+   * Only `abtesting` | `goobrawl` | `crabxx` | `franky` | `icegolem` — see {@link JoinableEventKey}.
+   * Anniversary / dreams / seasonal flags are not joined this way.
+   */
+  function join(eventName: JoinableEventKey): Promise<any>;
   /**
    * MOVEMENT METHODS
    */
