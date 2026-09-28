@@ -1,4 +1,4 @@
-// TODO: theese types probably belongs a more common place
+// TODO: these types probably belong in a more common place
 export type SlotType =
   | "amulet"
   | "belt"
@@ -17,6 +17,7 @@ export type SlotType =
   | "ring2"
   | "shoes";
 
+/** Merchant stand trade slots (`trade1`…`trade48`). `pull_merchants` walks all 48. */
 export type TradeSlotType =
   | "trade1"
   | "trade2"
@@ -47,4 +48,22 @@ export type TradeSlotType =
   | "trade27"
   | "trade28"
   | "trade29"
-  | "trade30";
+  | "trade30"
+  | "trade31"
+  | "trade32"
+  | "trade33"
+  | "trade34"
+  | "trade35"
+  | "trade36"
+  | "trade37"
+  | "trade38"
+  | "trade39"
+  | "trade40"
+  | "trade41"
+  | "trade42"
+  | "trade43"
+  | "trade44"
+  | "trade45"
+  | "trade46"
+  | "trade47"
+  | "trade48";

@@ -99,12 +99,18 @@ declare global {
     start_runner(): void;
     stop_runner(): void;
 
-    /** The response is given via game.on('api_response',function(data){ where data.type is equal to for example merchants */
+    /**
+     * POST `/api/{method}`. Live always returns a Promise of the HTTP body
+     * (`infs` are stripped and also emitted on `game.on("api_response", …)`).
+     * @example
+     * const bank = await parent.api_call("load_bank");
+     * parent.api_call("pull_merchants");
+     */
     api_call<K extends keyof ApiCalls = keyof ApiCalls>(
       call: K,
-      arg1?: {},
+      arg1?: Record<string, unknown>,
       arg2?: ApiCallRArgs<K>
-    ): void;
+    ): Promise<ApiCalls[K]>;
 
     /**
      * Joins a giveaway for the specified item

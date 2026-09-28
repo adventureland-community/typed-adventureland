@@ -72,6 +72,16 @@ declare global {
   function load_code(nameOrSlot: string | number, onerror?: any): void;
 
   /**
+   * Upload source into an account code slot (`parent.api_call("save_code", …)`).
+   * Prefer local storage for data; use slots sparingly.
+   */
+  function upload_code(
+    slot_number: number | string,
+    slot_name: string,
+    code_string: string
+  ): Promise<unknown>;
+
+  /**
    * Accept a magiport request from a mage
    * @param name The name of the mage offering a magiport
    */

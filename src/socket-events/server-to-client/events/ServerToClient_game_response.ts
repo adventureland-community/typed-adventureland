@@ -19,6 +19,13 @@ export type BankOperationGRDataObject = {
   success?: true;
 };
 
+/** Gold deposit/withdraw deferred bank success payloads. */
+export type BankGoldMoveGRDataObject = {
+  response: "bank_store" | "bank_withdraw";
+  gold: number;
+  cevent?: true;
+};
+
 /** When you try to enter the bank, but another one of your characters is already inside. */
 export type BankOPXGRDataObject = {
   response: "bank_opx";
@@ -34,8 +41,29 @@ export type BankSwapGRDataObject = {
   success: true;
   inv: number;
   pack: BankPackTypeItemsOnly;
-  str: number
-}
+  str: number;
+};
+
+/** Gold unlock settles on deferred `bank` + this game_response; shells emit this after purchase. */
+export type BankNewPackGRDataObject = {
+  response: "bank_new_pack";
+  pack: BankPackTypeItemsOnly;
+  gold?: number;
+  shells?: number;
+  request_id?: string;
+  success?: true;
+  cevent?: true | "bank_new_pack";
+};
+
+export type BankNewPackFailedGRDataObject = {
+  response: "bank_new_pack_failed";
+  pack: BankPackTypeItemsOnly;
+  shells?: number;
+  request_id?: string;
+  failed: true;
+  reason?: string;
+  cevent?: "bank_new_pack_failed";
+};
 
 export type BankRestrictionsGRDataObject = {
   response: "bank_restrictions";
@@ -342,10 +370,19 @@ export type GameResponseDataObject =
   | ExchangeNotEnoughGRDataObject
   | UpgradeCompoundGRDataObject
   | BankOperationGRDataObject
-  | BankSwapGRDataObject;
+  | BankGoldMoveGRDataObject
+  | BankSwapGRDataObject
+  | BankNewPackGRDataObject
+  | BankNewPackFailedGRDataObject;
 
 export type GameResponseDataString =
   | "bank_restrictions"
+  /** Pack already unlocked when calling `open_bank_pack` / bank unlock */
+  | "already_unlocked"
+  /** Another bank operation is in progress (e.g. shell unlock) */
+  | "bank_opi"
+  /** Must be inside the bank for this action */
+  | "only_in_bank"
   /** When you attempt to place a bet while after you drank an xshot */
   | "bet_xshot"
   /** When you attempt to blink to a spot you can't reach. */
