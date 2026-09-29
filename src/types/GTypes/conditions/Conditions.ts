@@ -67,7 +67,29 @@ export type ConditionKey =
   | "withdrawal" // Withdrawal
   | "woven" // Woven
   | "xpower" // Power
-  | "xshotted"; // X-Shot
+  | "xshotted" // X-Shot
+  | "aether_shield" // Aether Shield
+  | "anniversary_kiss" // Anniversary Kiss
+  | "anniversary_visit" // Anniversary Visit
+  | "beacon_of_resolve" // Beacon of Resolve
+  | "encouragement_lonewolf" // Lone Wolf
+  | "encouragement_new" // New Player
+  | "encouragement_returning" // Welcome Back
+  | "exposed" // Exposed
+  | "frenzied" // Primal Frenzy
+  | "guardians_oath" // Guardian's Oath
+  | "massexchange" // Mass exchange
+  | "massexchangepp" // Mass exchange++
+  | "paladin_aura_bulwark" // Aura of the Bulwark
+  | "paladin_aura_sanctuary" // Aura of Sanctuary
+  | "paladin_aura_warding" // Aura of Warding
+  | "paladin_aura_zeal" // Aura of Zeal
+  | "realmfatigue" // Realm Fatigue
+  | "rimeexposed" // Cracked Shell
+  | "rimeshell" // Rime Shell
+  | "sheltered" // Sheltered
+  | "stonebreak" // Crumbling
+  | "sundered" // Sundered;
 
 export interface GCondition {
   armor?: number;

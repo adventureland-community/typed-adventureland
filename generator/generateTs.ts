@@ -116,6 +116,22 @@ export function makeUInterface(
   return lines.join("\n");
 }
 
+function addOverrideImports(typeExpr: string, config: GeneratorConfig, imports: Array<string>) {
+  if (!config.imports) {
+    return;
+  }
+
+  // Match capitalized type names used in the override expression.
+  const names = typeExpr.match(/\b[A-Z][A-Za-z0-9_]*\b/g) ?? [];
+
+  for (const name of unique(names)) {
+    const modulePath = config.imports[name];
+    if (modulePath) {
+      imports.push(`import type { ${name} } from ${JSON.stringify(modulePath)};`);
+    }
+  }
+}
+
 export function makeInterface(
   fields: FieldsAnalysis,
   config: GeneratorConfig,
@@ -139,7 +155,12 @@ export function makeInterface(
 
     line += ": ";
 
-    if (name === config.groupKey) {
+    const override = config.overrides?.[name];
+
+    if (override) {
+      addOverrideImports(override, config, imports);
+      line += override;
+    } else if (name === config.groupKey) {
       line += JSON.stringify(analysis.group);
     } else {
       line += entry.types

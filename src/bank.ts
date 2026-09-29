@@ -69,7 +69,7 @@ declare global {
 
   /**
    * bank_retrieve("items0",0) -> retrieves the first item from bank's "items0"
-	 * bank_retrieve("items0",0,12) -> you can optionally specify where to retrieve the item in inventory
+   * bank_retrieve("items0",0,12) -> you can optionally specify where to retrieve the item in inventory
    * @param pack The bank pack to retrieve the item from
    * @param pack_slot The pack index where the item is located
    * @param inventoryIndex The player inventory where the item should be added to. The server interprets -1 as first slot available
@@ -78,13 +78,13 @@ declare global {
     pack: BankPackTypeItemsOnly,
     pack_slot: number,
     inventoryIndex?: number
-  ): Promise<void>;
+  ): Promise<unknown>;
 
   /**
    * Deposits the given amount of gold in the bank. You must be in the bank to actually deposit gold.
    * @param amount The amount of gold to deposit
    */
-  function bank_deposit(amount: number): void;
+  function bank_deposit(amount: number): Promise<unknown>;
 
   /**
    * Deposits the given item in to the given bank. If no `pack` and `packPosition` is given, the game will try to deposit in to the first available slot. You must be in the bank to actually deposit items.
@@ -96,11 +96,30 @@ declare global {
     inventoryPosition: number,
     pack?: BankPackTypeItemsOnly,
     packPosition?: number
-  ): Promise<void>;
+  ): Promise<unknown>;
 
   /**
    * Withdraws the given amount of gold from the bank. You must be in the bank to actually withdraw gold.
    * @param amount The amount of gold to withdraw
    */
-  function bank_withdraw(amount: number): void;
+  function bank_withdraw(amount: number): Promise<unknown>;
+
+  /**
+   * Swaps two slots inside a bank pack.
+   * @example bank_swap("items0", 0, 1)
+   */
+  function bank_swap(pack: BankPackTypeItemsOnly, a: number, b: number): Promise<unknown>;
+
+  /**
+   * Unlocks a bank pack on the current bank map (`bank` socket `operation: "unlock"`).
+   * Gold path settles on the deferred bank response; shells wait for `bank_new_pack` /
+   * `bank_new_pack_failed` on `game_response`.
+   * @param pack Pack key, e.g. `"items2"`
+   * @param currency `"gold"` or `"shells"`
+   */
+  function open_bank_pack(
+    pack: BankPackTypeItemsOnly,
+    currency: "gold" | "shells",
+    timeout_ms?: number
+  ): Promise<unknown>;
 }

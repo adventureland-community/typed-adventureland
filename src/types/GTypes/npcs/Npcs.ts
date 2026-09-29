@@ -131,7 +131,20 @@ export type NpcKey =
   | "weapons"
   | "witch" // Witch
   | "wizardrepeater" // Wizard
-  | "wnpc"; // Wizard
+  | "wnpc" // Wizard
+  | "anniversary_baker" // Mira
+  | "cavalry_mage" // Cavalry II
+  | "cavalry_paladin" // Cavalry I
+  | "cavalry_priest" // Cavalry IV
+  | "cavalry_warrior" // Cavalry III
+  | "citizen17" // Rook
+  | "citizen18" // Patch
+  | "citizen19" // Moss
+  | "citizen20" // Wick
+  | "citizen21" // Brio
+  | "citizen22" // Merrit
+  | "dreamkeeper" // Dorr
+  | "pokerdealer" // Venn;
 
 export type NpcName =
   | "Ace"
@@ -151,8 +164,7 @@ export type NpcName =
   | "Divian"
   | "Ernis"
   | "Faith"
-  | "Favoré"
-  | "Fredric"
+    | "Fredric"
   | "Fvona"
   | "Gabriel"
   | "Gabriella"
@@ -248,7 +260,21 @@ export type NpcName =
   | "X8"
   | "X9"
   | "Xyn"
-  | "Z";
+  | "Z"
+  | "Brio"
+  | "Cavalry I"
+  | "Cavalry II"
+  | "Cavalry III"
+  | "Cavalry IV"
+  | "Dorr"
+  | "Favoré"
+  | "Merrit"
+  | "Mira"
+  | "Moss"
+  | "Patch"
+  | "Rook"
+  | "Venn"
+  | "Wick";
 
 export type NpcRole =
   | "blocker"
@@ -294,11 +320,15 @@ export type NpcRole =
   | "tease"
   | "thesearch"
   | "transport"
-  | "witch";
+  | "witch"
+  | "anniversary_crafter"
+  | "cavalry"
+  | "dreamkeeper"
+  | "pokerdealer";
 
 export interface GNpc {
   allow?: boolean;
-  aspeed?: string;
+  aspeed?: "slow" | "slower" | "fast";
   attack?: number;
   atype?: string;
   aura?: {

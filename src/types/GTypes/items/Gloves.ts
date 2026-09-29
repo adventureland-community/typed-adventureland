@@ -1,5 +1,6 @@
 import type { ClassKey } from "../classes/Classes";
 import type { SetKey } from "../sets/Sets";
+import type { ItemAbility } from "./index";
 
 export type GloveKey =
   | "fierygloves" // Fiery Gloves
@@ -9,6 +10,7 @@ export type GloveKey =
   | "handofmidas" // Hand of Midas
   | "hgloves" // Heavy Gloves
   | "mcgloves" // Gloves of the Hunter Merchant
+  | "mirrorsteelgauntlet" // Mirrorsteel Gauntlet
   | "mittens" // Mittens
   | "mmgloves" // Gloves of the Hunter Mage
   | "mpgloves" // Gloves of the Hunter Priest
@@ -18,23 +20,33 @@ export type GloveKey =
   | "mwgloves" // Gloves of the Hunter Warrior
   | "poker" // Poker
   | "powerglove" // Power Glove
+  | "silkgrips" // Silkgrips
+  | "softstepgloves" // Softstep Gloves
   | "supermittens" // Super Mittens
+  | "thundergrips" // Thundergrips
   | "vgloves" // Vampiric Gloves
+  | "vowkeepergloves" // Vowkeeper Gloves
   | "wgloves" // Wanderer's Gloves
   | "xgloves"; // Darkforge Gloves
 
 export interface GGlove {
   a?: number | boolean;
-  ability?: string;
+  ability?: ItemAbility;
   apiercing?: number;
   armor: number;
   attr0?: number;
   charge?: number;
   /** An array of classes that can use this item. */
-  class?: [ClassKey];
+  class?: Array<ClassKey>;
   crit?: number;
+  cx?: {
+    accent: string;
+  };
+  evasion?: number;
+  exclusive?: boolean;
   explanation?: string;
   extra_stat?: number;
+  for?: number;
   frequency?: number;
   fzresistance?: number;
   /** Cost of the item in gold, if an NPC were to sell this item. */
@@ -43,9 +55,11 @@ export interface GGlove {
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
   int?: number;
+  mp?: number;
   /** The full display name of an item. */
   name: string;
   output?: number;
+  reflection?: number;
   resistance: number;
   rpiercing?: number;
   scroll?: boolean;
@@ -65,10 +79,14 @@ export interface GGlove {
     apiercing?: number;
     armor: number;
     attr0?: number;
+    evasion?: number;
+    for?: number;
     frequency?: number;
     gold?: number;
+    mp?: number;
     resistance: number;
     rpiercing?: number;
+    speed?: number;
     stat?: number;
   };
 }

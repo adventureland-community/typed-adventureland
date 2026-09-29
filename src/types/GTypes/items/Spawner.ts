@@ -12,7 +12,7 @@ export interface GSpawner {
   name: string;
   note?: string;
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
-  s: number;
+  s?: number;
   /** The skin of the item. */
   skin: SpawnerKey;
   spawn: string;

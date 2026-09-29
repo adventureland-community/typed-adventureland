@@ -1,5 +1,6 @@
 export type MaterialKey =
   | "ascale" // Armadillo Scale
+  | "ashleaf" // Ash Leaf
   | "bandages" // Bandages
   | "bcandle" // Burning Candle
   | "beewings" // Bee Wings
@@ -11,6 +12,7 @@ export type MaterialKey =
   | "btusk" // Boar Tusk
   | "bwing" // Bat Wing
   | "carrot" // Carrot
+  | "cave_amber" // Cave Amber
   | "cocoon" // Cocoon
   | "crabclaw" // Crab Claw
   | "cscale" // Croc Scale
@@ -19,6 +21,7 @@ export type MaterialKey =
   | "dstones" // Digestive Stones
   | "ectoplasm" // Ectoplasm
   | "electronics" // Electronics
+  | "embercore" // Ember Core
   | "emptyheart" // Empty Heart
   | "essenceofether" // Ethereal Essence
   | "essenceoffire" // Essence of Fire
@@ -29,6 +32,7 @@ export type MaterialKey =
   | "feather0" // Magical Feather
   | "feather1" // Harpy Feather
   | "frogt" // Frog Tongue
+  | "frostcore" // Frost Core
   | "goldingot" // Gold Ingot
   | "goldnugget" // Gold Nugget
   | "gslime" // Slime Core
@@ -44,22 +48,34 @@ export type MaterialKey =
   | "pleather" // Porcupine Leather
   | "pstem" // Pumpkin Stem
   | "rattail" // Rat Tail
+  | "reefglass" // Reef Glass
   | "rfangs" // Rat Fangs
   | "rfur" // Rat Fur
+  | "rimeglass" // Rimeglass
+  | "slice_blueberry" // Blueberry Slice
+  | "slice_citrus" // Citrus Slice
+  | "slice_honey" // Honey Slice
+  | "slice_mint" // Mint Slice
+  | "slice_nightberry" // Nightberry Slice
+  | "slice_strawberry" // Strawberry Slice
   | "smush" // Small Mushroom
   | "snakefang" // Snake Fang
   | "spidersilk" // Spider Silk
   | "spores" // Spores
   | "sstinger" // Scorpion Stinger
+  | "stormfeather" // Storm Feather
   | "svenom" // Scorpion Venom
   | "trinkets" // Trinkets
   | "tshell" // Turtle Shell
+  | "verdantcore" // Verdant Core
+  | "voidthread" // Void Thread
   | "watercore" // Water Core
   | "whiteegg"; // White Egg
 
 export interface GMaterial {
   action?: string;
   event?: boolean;
+  exclusive?: boolean;
   explanation?: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;

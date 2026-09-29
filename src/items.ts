@@ -140,6 +140,23 @@ export type InventoryUpgradeCompoundItemInfo = ItemInfo & {
   };
 };
 
+/**
+ * What a merchant wants in exchange for a listed item (item-for-item trade).
+ * A plain `ItemKey` string accepts any instance of that item.
+ * Missing `level` / `p` on the object form means any.
+ */
+export type TradeWant =
+  | ItemKey
+  | {
+      name: ItemKey;
+      /** Required upgrade/compound level; omit to accept any */
+      level?: number;
+      /** Required special modifier (e.g. shiny); omit to accept any */
+      p?: ItemInfoPValues | string;
+      /** Required quantity for stackables */
+      q?: number;
+    };
+
 export type TradeItemInfo = ItemInfo & {
   /** If true, the entity is buying this item */
   b?: boolean;
@@ -153,7 +170,16 @@ export type TradeItemInfo = ItemInfo & {
 
   /** If set, the item is for sale, or purchase */
   rid: string;
-  price: number;
+  /**
+   * Gold price when listing for gold / wishlist.
+   * Omitted (or unused) when the listing is an item-for-item {@link want} offer.
+   */
+  price?: number;
+  /**
+   * Item-for-item offer: the merchant wants this in exchange for the listed item
+   * (see {@link trade_offer} / {@link trade_swap}).
+   */
+  want?: TradeWant;
   gf?: string; // TODO figure out.
 };
 

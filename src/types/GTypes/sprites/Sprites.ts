@@ -178,7 +178,13 @@ export type SpriteKey =
   | "wolf1"
   | "wolf2"
   | "xschar2"
-  | "xxschar2";
+  | "xxschar2"
+  | "aniv2"
+  | "cavechest"
+  | "jubchan"
+  | "lavaglass"
+  | "rimedjinn"
+  | "stormhead";
 
 export interface GSprite {
   rows: number;

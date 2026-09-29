@@ -2,9 +2,13 @@ import type { ClassKey } from "../classes/Classes";
 import type { SetKey } from "../sets/Sets";
 
 export type HelmetKey =
+  | "bogcrown" // Bog Crown
   | "bunnyears" // Legacy Bunny Ears
   | "cyber" // Cybernetic Implants
+  | "djinncrown" // Djinn Crown
+  | "duskweavehood" // Duskweave Hood
   | "eears" // Bunny Ears
+  | "emberhood" // Ember Hood
   | "fury" // Band of Fury
   | "ghatb" // Hat of Generosity
   | "ghatp" // Hat of Generosity
@@ -12,7 +16,9 @@ export type HelmetKey =
   | "helmet" // Helmet
   | "helmet1" // Rugged Helmet
   | "hhelmet" // Heavy Helmet
+  | "homecominghelm" // Homecoming Helm
   | "mageshood" // Mage's Hood
+  | "marketwatch" // Marketwatch Visor
   | "mchat" // Hat of the Hunter Merchant
   | "mmhat" // Hat of the Hunter Mage
   | "mphat" // Hat of the Hunter Priest
@@ -23,6 +29,7 @@ export type HelmetKey =
   | "partyhat" // Party Hat
   | "phelmet" // Pumpkin Head
   | "rednose" // Rudolph's Red Nose
+  | "resolutesallet" // Resolute Sallet
   | "spikedhelmet" // Spiked Helmet
   | "tigerhelmet" // Helmet of the Tiger
   | "wcap" // Wanderer's Cap
@@ -42,12 +49,17 @@ export interface GHelmet {
   };
   crit?: number;
   cuteness?: number;
+  cx?: {
+    accent: string;
+  };
   dex?: number;
   dreturn?: number;
   evasion?: number;
+  exclusive?: boolean;
   explanation?: string;
   extra_stat?: number;
   firesistance?: number;
+  for?: number;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
@@ -65,6 +77,8 @@ export interface GHelmet {
   lifesteal?: number;
   luck?: number;
   mcourage?: number;
+  mp?: number;
+  mp_reduction?: number;
   /** The full display name of an item. */
   name: string;
   output?: number;
@@ -103,7 +117,9 @@ export interface GHelmet {
     dex?: number;
     dreturn?: number;
     evasion?: number;
+    for?: number;
     int?: number;
+    mp?: number;
     reflection?: number;
     resistance?: number;
     rpiercing?: number;

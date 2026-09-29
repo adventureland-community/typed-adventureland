@@ -19,7 +19,10 @@ export type SetKey =
   | "vampires" // Vampires
   | "wanderers" // Wanderer's Set
   | "wt3" // Heavy Armor
-  | "wt4"; // Darkforge Armor
+  | "wt4" // Darkforge Armor
+  | "homecoming" // Homecoming
+  | "oathkeeper" // Oathkeeper Set
+  | "watchers" // Watcher's Eyes;
 
 export type GSet = {
   explanation?: string;

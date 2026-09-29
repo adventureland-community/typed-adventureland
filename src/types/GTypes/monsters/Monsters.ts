@@ -132,7 +132,27 @@ export type MonsterKey =
   | "xmagen" // Mage
   | "xmagex" // Dark Mage
   | "xscorpion" // Scorpion
-  | "zapper0"; // Zapper
+  | "zapper0" // Zapper
+  | "cave_bat" // Cave Bat
+  | "cave_broodmother" // Amber Broodmother
+  | "cave_crab" // Cave Crab
+  | "cave_darkmage" // Dark Mage
+  | "cave_guard" // Cave Guard
+  | "cave_lockbreaker" // Lockbreaker
+  | "cave_mothkeeper" // Moth Keeper
+  | "cave_npc" // Cave Traveler
+  | "cave_rat" // Cave Rat
+  | "cave_rogue" // Cornered Rogue
+  | "cave_scorpion" // Cave Scorpion
+  | "cave_sentinel" // Counterweight Sentinel
+  | "cave_snake" // Cave Snake
+  | "cave_spider" // Cave Spider
+  | "cave_wolf" // Cave Wolf
+  | "kobold" // Kobold
+  | "manyeye" // Many Eye
+  | "mimic" // Mimic
+  | "paledino" // Pale Dino
+  | "rimedjinn" // Rime Djinn;
 
 export type MonsterName =
   | "Angel"
@@ -237,7 +257,26 @@ export type MonsterName =
   | "Water Spirit"
   | "White Wolf"
   | "Wild Boar"
-  | "Zapper";
+  | "Zapper"
+  | "Amber Broodmother"
+  | "Cave Bat"
+  | "Cave Crab"
+  | "Cave Guard"
+  | "Cave Rat"
+  | "Cave Scorpion"
+  | "Cave Snake"
+  | "Cave Spider"
+  | "Cave Traveler"
+  | "Cave Wolf"
+  | "Cornered Rogue"
+  | "Counterweight Sentinel"
+  | "Kobold"
+  | "Lockbreaker"
+  | "Many Eye"
+  | "Mimic"
+  | "Moth Keeper"
+  | "Pale Dino"
+  | "Rime Djinn";
 
 export type GMonsterAbilities = {
   anger?: {
@@ -296,6 +335,14 @@ export type GMonsterAbilities = {
   putrid?: {
     curse: boolean;
     poison: boolean;
+  };
+  rimeshell?: {
+    break_fraction: number;
+    duration: number;
+    exposed_duration: number;
+    range: number;
+    targets: number;
+    threshold: number;
   };
   self_healing?: {
     cooldown: number;

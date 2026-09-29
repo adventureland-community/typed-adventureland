@@ -2,8 +2,19 @@ import path from "path";
 
 export const root = path.resolve(__dirname, "..", "..", "src", "types", "GTypes");
 
+/** Active emit root; set via setGTypesRoot when generating into a temp dir. */
+let gTypesRoot = root;
+
+export function setGTypesRoot(dir: string) {
+  gTypesRoot = path.resolve(dir);
+}
+
+export function getGTypesRoot() {
+  return gTypesRoot;
+}
+
 export function filepath(GKey: string, category: string) {
-  return path.resolve(root, GKey, `${category}.ts`);
+  return path.resolve(gTypesRoot, GKey, `${category}.ts`);
 }
 
 export function filedir(GKey: string, category: string) {
@@ -29,7 +40,7 @@ export function relative(
 
 export function relativeTo(from: { GKey: string; category: string }, to: string) {
   const fromPath = filepath(from.GKey, from.category);
-  const toPath = path.resolve(root, to);
+  const toPath = path.resolve(gTypesRoot, to);
 
   const relativePath = path
     .relative(fromPath, toPath)

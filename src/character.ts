@@ -2,6 +2,7 @@ import type { BankPackTypeItemsOnly } from "./bank";
 import { CharacterWithEventsFunctions } from "./character-event";
 import type { CharacterEntity } from "./entities/character-entity";
 import type { InventoryExchangeItemInfo, InventoryUpgradeCompoundItemInfo, ItemInfo } from "./items";
+import type { CharacterAnniversaryStatus } from "./parent/sevent-info";
 import { BetterUXWrapper } from "./types/GTypes/utils";
 
 export type CharacterBankInfos =
@@ -22,6 +23,12 @@ declare global {
       proxy_character: boolean;
 
       bank?: CharacterBankInfos;
+
+      /**
+       * Personal anniversary eligibility (`visitStatus`), not shown to other players.
+       * `null` when the season is off.
+       */
+      anniversary?: CharacterAnniversaryStatus | null;
 
       items: Array<BetterUXWrapper<ItemInfo| InventoryExchangeItemInfo | InventoryUpgradeCompoundItemInfo | null>>;
       /** Amount of gold the player has in its inventory */

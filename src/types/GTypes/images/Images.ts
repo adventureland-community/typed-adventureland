@@ -211,7 +211,18 @@ export type ImageKey =
   | "/images/tiles/monsters/stompy3.png"
   | "/images/tiles/monsters/tiger.png"
   | "/images/tiles/monsters/tinyfairies.png"
-  | "/images/tiles/monsters/vampire2d.png";
+  | "/images/tiles/monsters/vampire2d.png"
+  | "/images/cosmetics/hats/aniv2_anim.png"
+  | "/images/cosmetics/makeup/lavaglass_anim.png"
+  | "/images/cosmetics/makeup/stormhead_anim.png"
+  | "/images/tiles/characters/jubchan_1.png"
+  | "/images/tiles/items/cave-chest.png"
+  | "/images/tiles/items/items_40_remastered.png"
+  | "/images/tiles/items/raw_items.png"
+  | "/images/tiles/items/teasers.png"
+  | "/images/tiles/map/biocaves.png"
+  | "/images/tiles/map/dreams-v3.png"
+  | "/images/tiles/monsters/femaledjinn_1.png";
 
 export interface GImage {
   width: number;

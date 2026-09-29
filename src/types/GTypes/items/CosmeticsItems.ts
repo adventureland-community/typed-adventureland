@@ -5,7 +5,8 @@ export type CosmeticItemKey =
   | "cosmo1" // New Make-up
   | "cosmo2" // New Hairdo
   | "cosmo3" // New Hat
-  | "cosmo4"; // New Accessory
+  | "cosmo4" // New Accessory
+  | "cosmo5"; // New Misc.
 
 export interface GCosmeticItem {
   cash: number;

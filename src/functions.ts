@@ -2,9 +2,9 @@ import { CharacterEntity } from "./entities/character-entity";
 import { MonsterEntity } from "./entities/monster-entity";
 import { SlotType, TradeSlotType } from "./entities/slots";
 import { Entity } from "./entity";
-import { ItemInfo } from "./items";
+import { ItemInfo, TradeWant } from "./items";
 import { IPosition, PositionReal, PositionSmart, ICoordReal } from "./position";
-import { EventKey } from "./types/GTypes/events";
+import { JoinableEventKey } from "./types/GTypes/events";
 import { BoosterKey, ItemKey } from "./types/GTypes/items";
 import { MapKey } from "./types/GTypes/maps";
 import { MonsterKey } from "./types/GTypes/monsters";
@@ -70,6 +70,16 @@ declare global {
   function unmap_key(key: string): void;
   function map_key(key: string, thing: string, arg?: string): void;
   function load_code(nameOrSlot: string | number, onerror?: any): void;
+
+  /**
+   * Upload source into an account code slot (`parent.api_call("save_code", …)`).
+   * Prefer local storage for data; use slots sparingly.
+   */
+  function upload_code(
+    slot_number: number | string,
+    slot_name: string,
+    code_string: string
+  ): Promise<unknown>;
 
   /**
    * Accept a magiport request from a mage
@@ -610,7 +620,7 @@ declare global {
   }>;
 
   /**
-   * Lists an item as selling in the merchant stand.
+   * Lists an item as selling in the merchant stand for gold.
    * @param inventoryPosition
    * @param tradeSlot
    * @param price
@@ -620,16 +630,38 @@ declare global {
     inventoryPosition: number,
     tradeSlot: number | TradeSlotType,
     price: number,
-    quantity: number
+    quantity?: number
   ): unknown;
 
   /**
-   * Lists an item as wanted in the merchant stand.
-   * @param slot
-   * @param name
-   * @param price
-   * @param q
-   * @param level
+   * Lists inventory[num] on a trade slot as an item-for-item offer (not gold).
+   * `want` is an item name, or `{ name, level?, p?, q? }` — missing level/p accepts any.
+   * @example trade_offer(0, "trade3", { name: "staff", level: 8 })
+   */
+  function trade_offer(
+    num: number,
+    trade_slot: number | TradeSlotType,
+    want: TradeWant,
+    quantity?: number
+  ): Promise<unknown>;
+
+  /**
+   * Gives inventory[num] for a target merchant's item-for-item offer.
+   * The offered item must match `target.slots[trade_slot].want`.
+   */
+  function trade_swap(
+    target: Entity,
+    trade_slot: TradeSlotType,
+    num: number
+  ): Promise<unknown>;
+
+  /**
+   * Creates a buy listing in a merchant trade slot.
+   * @param slot Trade slot (`"trade1"`… or `1`…`16`)
+   * @param name Item key to buy
+   * @param price Gold to pay per listing unit
+   * @param level Required item level; omit for any
+   * @param q Quantity (stackables); defaults to 1 in CODE
    */
   function wishlist(
     slot: TradeSlotType | number,
@@ -656,6 +688,143 @@ declare global {
    */
   function join_giveaway(characterName: string, slot_name: TradeSlotType, rid: string): unknown;
 
+  // --- Cave of Many Dreams ---
+  /** Enter the Cave of Many Dreams (`cave_request("enter")`). */
+  function cave_enter(): Promise<unknown>;
+  /** Leave the current cave visit (`cave_request("exit")`). */
+  function cave_exit(): Promise<unknown>;
+  /** Current cave visit payload (`cave_request("info")` → `data.visit`). */
+  function cave_info(): Promise<unknown>;
+  /** Buy / claim a cave room (`cave_request("buy", { room })`). */
+  function cave_buy(room: string | number): Promise<unknown>;
+  /**
+   * Submit a cave choice / vote.
+   * CODE name is `cave_reply`; the underlying `cave_request` event is `"vote"`.
+   */
+  function cave_reply(choice: string | number, option?: string | number): Promise<unknown>;
+  /** Talk to a cave actor (`cave_request("talk", { room, actor })`). */
+  function cave_talk(room: string | number, actor?: string): Promise<unknown>;
+
+  // --- Tavern gambling ---
+  /** Fortune's Wheel: even money on `"sun"` or `"moon"`. */
+  function bet_wheel(
+    side: "sun" | "moon" | string,
+    gold: number,
+    timeout_ms?: number
+  ): Promise<unknown>;
+  /** Spends 1,000,000 gold at the tavern slots machine; waits for the spin result. */
+  function play_slots(timeout_ms?: number): Promise<unknown>;
+  /** Tavern house edge (%) and largest coverable win (gold), without opening the panel. */
+  function get_tavern_info(timeout_ms?: number): Promise<unknown>;
+
+  /** Low-level poker request; prefer the helpers below. */
+  function poker_request(
+    data: {
+      event: string;
+      gold?: number;
+      seat?: number;
+      action?: string;
+      amount?: number;
+      request_id?: string;
+      [key: string]: unknown;
+    },
+    timeout_ms?: number
+  ): Promise<unknown>;
+  /** Public table state: blinds, buy-in window, seats, hand in progress. */
+  function get_poker_table(timeout_ms?: number): Promise<unknown>;
+  /** Buy in for gold (40–200 big blinds) at an empty seat, or top up between hands. */
+  function poker_join(gold: number, seat?: number, timeout_ms?: number): Promise<unknown>;
+  /** Leave the Hold'em table (immediate between hands; otherwise after the current hand). */
+  function poker_leave(timeout_ms?: number): Promise<unknown>;
+  /**
+   * @param action `"fold"` | `"check"` | `"call"` | `"bet"` | `"raise"` | `"allin"`
+   * @param amount For bet/raise, total to put in on this street
+   */
+  function poker_act(
+    action: "fold" | "check" | "call" | "bet" | "raise" | "allin" | string,
+    amount?: number,
+    timeout_ms?: number
+  ): Promise<unknown>;
+  /** Sit out: keep seat and stack, skip being dealt into following hands. */
+  function poker_sit_out(timeout_ms?: number): Promise<unknown>;
+  /** Return to the deal after sitting out (needs ≥1 big blind on the seat). */
+  function poker_sit_in(timeout_ms?: number): Promise<unknown>;
+
+  // --- Progression / Mainframe ---
+  /**
+   * Progression Guide advice (equipment projects, farms, live opportunities).
+   * Synchronous client-side read (not a socket wait); returns guide data, not a Promise.
+   */
+  function get_progression(options?: Record<string, unknown>): unknown;
+  /** Run a Mainframe / eval command; settles on `game_response` with place `"mainframe"`. */
+  function mainframe_command(command: string, timeout_ms?: number): Promise<unknown>;
+
+  // --- Duels ---
+  /** Challenge an online character to a duel. Pass a name or `{ name }`. */
+  function send_duel_challenge(
+    name: string | { name: string },
+    timeout_ms?: number
+  ): Promise<unknown>;
+  /**
+   * Accept a live duel challenge from the named character.
+   * Party members get the normal duel invite after leaders enter.
+   */
+  function accept_duel_challenge(
+    name: string | { name: string },
+    timeout_ms?: number
+  ): Promise<unknown>;
+  /** Enter a pending party duel by its duel id. */
+  function enter_duel(id: string, timeout_ms?: number): Promise<unknown>;
+
+  // --- Recovered-item shops ---
+  /** Ron's Lost and Found listings (unlooted chests); each entry has an `rid` for buying. */
+  function get_lost_and_found(timeout_ms?: number): Promise<unknown>;
+  /** Buy one Lost and Found listing by `rid` (or the listing object). */
+  function buy_lost_and_found(
+    rid: string | { rid: string },
+    timeout_ms?: number
+  ): Promise<unknown>;
+  /** Ponty's recovered-item listings; each entry has an `rid` for buying. */
+  function get_secondhands(timeout_ms?: number): Promise<unknown>;
+  /** Buy one Ponty listing by `rid` (or the listing object). */
+  function buy_secondhand(rid: string | { rid: string }, timeout_ms?: number): Promise<unknown>;
+
+  /**
+   * At Scrollsmith (desertland): remove `stat_type` from inventory[num] and refund
+   * the matching pscrolls. Costs gold; does not change item level.
+   */
+  function destat_item(num: number, timeout_ms?: number): Promise<unknown>;
+
+  // --- Misc recent helpers ---
+  /** Equip several items in one request (max 15). `slot` optional like `equip`. */
+  function equip_batch(
+    data: Array<{ num: number; slot?: SlotType }>
+  ): Promise<unknown>;
+  /**
+   * Sets the character's home server to the current server (`region` + `server_name`).
+   * Server enforces a 36-hour cooldown (`sh_time` / `home_set` via `game_response`).
+   * Does not change map spawn / town position.
+   */
+  function set_home(): Promise<unknown>;
+  /**
+   * Spends 1,200 shells to bless the current server for three days.
+   * Settles on `game_response` (`blessed` / `blessed_fail`).
+   */
+  function bless_server(timeout_ms?: number): Promise<unknown>;
+  /** Locksmith: lock an item (`l: "l"`) so it can't be sold/destroyed ordinarily. Costs gold; requires proximity. */
+  function lock_item(num: number): Promise<unknown>;
+  /**
+   * Locksmith: seal an item (`l: "s"`). Unlocking a seal starts a 2-day wait (`l: "u"` + `ld`).
+   * Costs gold; requires proximity.
+   */
+  function seal_item(num: number): Promise<unknown>;
+  /**
+   * Locksmith: unlock / begin unsealing an item.
+   * While sealed-unsealing is in progress may resolve with
+   * `{ hours, success: false, in_progress: true }`.
+   */
+  function unlock_item(num: number): Promise<unknown>;
+
   export type ShiftResult = {
     name: BoosterKey;
     success: boolean;
@@ -670,7 +839,12 @@ declare global {
    */
   function shift(inventoryPosition: number, toBooster: BoosterKey): Promise<ShiftResult>;
 
-  function join(eventName: EventKey): Promise<any>;
+  /**
+   * Join a live joinable event (server transports you near it).
+   * Only `abtesting` | `goobrawl` | `crabxx` | `franky` | `icegolem` — see {@link JoinableEventKey}.
+   * Anniversary / dreams / seasonal flags are not joined this way.
+   */
+  function join(eventName: JoinableEventKey): Promise<any>;
   /**
    * MOVEMENT METHODS
    */
