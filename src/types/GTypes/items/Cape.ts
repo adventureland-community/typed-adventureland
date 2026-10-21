@@ -1,30 +1,56 @@
+import type { ClassKey } from "../classes/Classes";
 import type { SetKey } from "../sets/Sets";
 
 export type CapeKey =
   | "angelwings" // Angel Wings
   | "bcape" // Well-Crafted Cape
+  | "beastmantle" // Beast Mantle
   | "cape" // Cape
+  | "covemantle" // Cove Mantle
   | "ecape" // Fluffy Blanket
   | "fcape" // Fiery Cape
   | "gcape" // Grinch's Cape
+  | "homecomingcape" // Homecoming Cape
+  | "horsecape" // Horse Leather Cape
+  | "horsecapeg" // Horse Leather Cape
+  | "starcloak" // Starcloak
   | "stealthcape" // Stealth Cape
   | "tigercape" // Cape of the Tiger
-  | "vcape"; // Vampiric Cape
+  | "vcape" // Vampiric Cape
+  | "witchlightmantle"; // Witchlight Mantle
 
 export interface GCape {
   a?: boolean;
   action?: string;
   armor?: number;
+  cave?: {
+    attack: number;
+    lifesteal: number;
+  };
+  /** An array of classes that can use this item. */
+  class?: Array<ClassKey>;
   cuteness?: number;
+  cx?: {
+    accent: string;
+  };
   dex?: number;
   evasion?: number;
+  exclusive?: boolean;
   explanation?: string;
   extra_stat?: number;
   firesistance?: number;
+  for?: number;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
+  gold?: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
+  /** Spooky Forest map-local bonuses (Witchlight Mantle). */
+  halloween?: {
+    evasion?: number;
+  };
+  mp?: number;
+  mp_reduction?: number;
   /** The full display name of an item. */
   name: string;
   onclick?: string;
@@ -37,6 +63,10 @@ export interface GCape {
   /** The skin of the item. */
   skin: string;
   speed?: number;
+  /** Spooky Town map-local bonuses (Witchlight Mantle). */
+  spookytown?: {
+    evasion?: number;
+  };
   stat: number;
   str?: number;
   /** The tier of the item. */
@@ -49,6 +79,8 @@ export interface GCape {
     cuteness?: number;
     evasion?: number;
     firesistance?: number;
+    gold?: number;
+    mp?: number;
     pnresistance?: number;
     resistance?: number;
     speed?: number;

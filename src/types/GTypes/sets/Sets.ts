@@ -3,8 +3,10 @@ import type { ItemKey } from "../items/index";
 
 export type SetKey =
   | "bunny" // Bunny Set
+  | "crookedkeys" // Skeleton Keys
   | "fury" // Rage and Fury
   | "holidays" // Holiday Spirit
+  | "homecoming" // Homecoming
   | "legends" // The Legends
   | "mmage" // Monster Hunter Mage
   | "mmerchant" // Monster Hunter Merchant
@@ -13,11 +15,13 @@ export type SetKey =
   | "mranger" // Monster Hunter Ranger
   | "mrogue" // Monster Hunter Rogue
   | "mwarrior" // Monster Hunter Warrior
+  | "oathkeeper" // Oathkeeper Set
   | "rugged" // Rugged Set
   | "swift" // Swift Judgement
   | "tiger" // Tigers'
   | "vampires" // Vampires
   | "wanderers" // Wanderer's Set
+  | "watchers" // Watcher's Eyes
   | "wt3" // Heavy Armor
   | "wt4"; // Darkforge Armor
 

@@ -15,6 +15,9 @@ export interface CharacterEntityCXInfos {
   head?: string;
   makeup?: string;
   upper?: string;
+  back?: string;
+  tail?: string;
+  gravestone?: string;
 }
 
 export type CharacterEntitySlotsInfos = {

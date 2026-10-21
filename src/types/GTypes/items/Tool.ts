@@ -1,9 +1,16 @@
+import { DamageType } from "../../../entity";
+
 export type ToolKey =
+  | "molehook" // Molehook
   | "pickaxe" // Pickaxe
   | "rod"; // Fishing Rod
 
 export interface GTool {
+  attack?: number;
   breaks: number;
+  damage_type?: DamageType;
+  exclusive?: boolean;
+  explanation?: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
@@ -12,13 +19,16 @@ export interface GTool {
   name: string;
   /** The skin of the item. */
   skin: ToolKey;
+  str?: number;
   /** The tier of the item. */
   tier: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: "tool";
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {
+    attack?: number;
     breaks: number;
+    str?: number;
   };
   /** The type of `weapon` `wand` `axe` `mace`... */
   wtype: ToolKey;

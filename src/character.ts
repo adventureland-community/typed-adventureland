@@ -2,6 +2,11 @@ import type { BankPackTypeItemsOnly } from "./bank";
 import { CharacterWithEventsFunctions } from "./character-event";
 import type { CharacterEntity } from "./entities/character-entity";
 import type { InventoryExchangeItemInfo, InventoryUpgradeCompoundItemInfo, ItemInfo } from "./items";
+import type {
+  CharacterAnniversaryStatus,
+  CharacterTrickOrTreatStatus,
+  CharacterWitchCipherStatus,
+} from "./parent/sevent-info";
 import { BetterUXWrapper } from "./types/GTypes/utils";
 
 export type CharacterBankInfos =
@@ -22,6 +27,21 @@ declare global {
       proxy_character: boolean;
 
       bank?: CharacterBankInfos;
+
+      /**
+       * Personal anniversary eligibility (`visitStatus`), not shown to other players.
+       * `null` when the season is off.
+       */
+      anniversary?: CharacterAnniversaryStatus | null;
+
+      /**
+       * Witch's Cipher account-day status while a round is live on this realm.
+       * Cleared when the round ends.
+       */
+      witchcipher?: CharacterWitchCipherStatus | null;
+
+      /** Halloween Trick or Treat knock progress for today. */
+      trickortreat?: CharacterTrickOrTreatStatus | null;
 
       items: Array<BetterUXWrapper<ItemInfo| InventoryExchangeItemInfo | InventoryUpgradeCompoundItemInfo | null>>;
       /** Amount of gold the player has in its inventory */

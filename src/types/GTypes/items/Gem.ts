@@ -1,4 +1,8 @@
+import type { NpcKey } from "../npcs/Npcs";
+
 export type GemKey =
+  | "anniversarygift" // Anniversary Gift
+  | "brownenvelope" // Brown Envelope
   | "candy0" // Rare Candy
   | "candy0v2" // Rare Candy [h2]
   | "candy0v3" // Rare Candy
@@ -13,23 +17,32 @@ export type GemKey =
   | "gift0" // Rare Gift
   | "gift1" // Gift
   | "greenenvelope" // Green Envelope
+  | "marketparcel" // Market Parcel
   | "mistletoe" // Mistletoe
   | "redenvelope" // Red Envelope
   | "redenvelopev2" // Red Envelope
   | "redenvelopev3" // Red Envelope
-  | "redenvelopev4"; // Red Envelope
+  | "redenvelopev4" // Red Envelope
+  | "sixcake" // Sixfold Cake
+  | "witchparcel"; // Witch's Parcel
 
 export interface GGem {
-  a?: number | boolean;
+  a?: boolean | number;
+  cx?: {
+    accent: string;
+  };
   /** Refers to how many items are needed to exchange (see .quest as well!) */
   e?: number;
   event?: boolean;
+  exclusive?: boolean;
   explanation: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   ignore?: boolean;
   /** The full display name of an item. */
   name: string;
+  /** Exchange NPC / shrine quest key when set (e.g. Witch's Parcel → `"witch"`). */
+  quest?: NpcKey;
   /** Indicates how many of this items you can stack. Set if the item is stackable. */
   s: number;
   /** The skin of the item. */

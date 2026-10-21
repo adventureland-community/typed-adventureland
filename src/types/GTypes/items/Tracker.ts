@@ -3,6 +3,18 @@ export type TrackerKey = "tracker"; // Tracktrix
 export interface GTracker {
   acolor: string;
   action: string;
+  cavalry: {
+    cooldown_base: number;
+    cooldown_per_level: number;
+    duration: number;
+    max_targets: number;
+    min_level: number;
+    newcomer_duration: number;
+    newcomer_level: number;
+    newcomer_targets: number;
+    range: number;
+    veteran_range: number;
+  };
   explanation: string;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;

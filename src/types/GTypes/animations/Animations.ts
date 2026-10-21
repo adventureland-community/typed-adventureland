@@ -79,13 +79,33 @@ export type AnimationKey =
   | "transport"
   | "typing"
   | "wandy"
-  | "wslash";
+  | "wslash"
+  | "arcane_needle_impact"
+  | "arcane_needle_projectile"
+  | "beacon_of_resolve"
+  | "cleansing_light"
+  | "fanknife"
+  | "fanknife_hit"
+  | "guardians_oath"
+  | "ikissyou_fx"
+  | "makeawish_overlay"
+  | "merrit_bonus"
+  | "poker_win"
+  | "reunionarrow"
+  | "reunionarrow_hit"
+  | "rimehelix_impact"
+  | "rimehelix_travel"
+  | "rimeshatter_travel"
+  | "rimeshell_cast"
+  | "worldroot_impact"
+  | "worldroot_projectile";
 
 export interface GAnimation {
+  above?: boolean;
   frames: number;
   file: string;
   alpha?: number;
-  aspeed?: string;
+  aspeed?: "slow" | "mild" | "fast";
   tiling?: boolean;
   fade?: boolean;
   directional?: boolean;

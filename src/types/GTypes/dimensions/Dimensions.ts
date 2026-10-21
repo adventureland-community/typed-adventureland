@@ -72,7 +72,14 @@ export type DimensionKey =
   | "wabbit"
   | "wolf"
   | "wolfie"
-  | "xscorpion";
+  | "xscorpion"
+  | "cave_bat"
+  | "cave_rat"
+  | "cave_sentinel"
+  | "cave_wolf"
+  | "chestx"
+  | "manyeye"
+  | "rimedjinn";
 
 export type GDimension =
   | [number, number]

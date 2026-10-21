@@ -7,6 +7,7 @@ export type ElixirKey =
   | "bunnyelixir" // Bunny Energy Drink
   | "cake" // Piece of Cake
   | "candypop" // Candy Pop
+  | "cipherdraught" // Cipher Draught
   | "eggnog" // Eggnog
   | "elixirdex0" // Elixir of Dexterity
   | "elixirdex1" // Elixir of Greater Dexterity
@@ -47,11 +48,13 @@ export interface GElixir {
   e?: number;
   eat?: boolean;
   evasion?: number;
+  exclusive?: boolean;
   explanation?: string;
   firesistance?: number;
   fzresistance?: number;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
+  gold?: number;
   hp?: number;
   int?: number;
   lifesteal?: number;
@@ -77,4 +80,5 @@ export interface GElixir {
   type: "elixir";
   vit?: number;
   withdrawal?: ConditionKey;
+  xp?: number;
 }

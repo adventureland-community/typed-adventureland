@@ -1,6 +1,5 @@
 export type JarKey =
   | "cxjar" // CX Jar
-  | "emotionjar" // Emotion Jar
   | "emptyjar"; // Empty Jar
 
 export interface GJar {

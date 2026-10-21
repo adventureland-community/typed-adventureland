@@ -1,13 +1,16 @@
 import type { ClassKey } from "../classes/Classes";
 import type { SetKey } from "../sets/Sets";
-import type { SkillKey } from "../skills/Skills";
+import type { ItemAbility } from "./index";
 
 export type ChestKey =
+  | "caravanbrigandine" // Caravan Brigandine
+  | "cave_ambercoat" // Amberweave Coat
   | "cdragon" // Dragon Armor
   | "coat" // Coat
   | "coat1" // Rugged Coat
   | "epyjamas" // Pyjamas
   | "harmor" // Heavy Armor
+  | "homecomingcoat" // Homecoming Coat
   | "luckyt" // Lucky T-Shirt
   | "mcape" // Dracul's Attire
   | "mcarmor" // Armor of the Hunter Merchant
@@ -16,7 +19,10 @@ export type ChestKey =
   | "mrarmor" // Armor of the Hunter Rogue
   | "mrnarmor" // Armor of the Hunter Ranger
   | "mwarmor" // Armor of the Hunter Warrior
+  | "oathplate" // Oathplate
   | "pyjamas" // Legacy Pyjamas
+  | "ratworkcoat" // Ratwork Coat
+  | "reefvest" // Reef Vest
   | "sweaterhs" // Super Sweater
   | "tshirt0" // T-Shirt (Int)
   | "tshirt1" // T-Shirt (Dex)
@@ -36,20 +42,27 @@ export type ChestKey =
 
 export interface GChest {
   a?: number | boolean;
-  ability?: SkillKey;
+  ability?: ItemAbility;
   apiercing?: number;
   armor?: number;
   charge?: number;
   charisma?: number;
   /** An array of classes that can use this item. */
-  class?: [ClassKey];
+  class?: Array<ClassKey>;
+  courage?: number;
+  cx?: {
+    accent: string;
+  };
   dex?: number;
   dreturn?: number;
   edge?: number;
   evasion?: number;
+  exclusive?: boolean;
   explanation?: string;
   extra_stat?: number;
+  for?: number;
   frequency?: number;
+  fzresistance?: number;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
@@ -59,6 +72,7 @@ export interface GChest {
   lifesteal?: number;
   luck?: number;
   manasteal?: number;
+  mcourage?: number;
   mp?: number;
   mp_cost?: number;
   /** The full display name of an item. */
@@ -89,6 +103,7 @@ export interface GChest {
     lifesteal?: number;
     luck?: number;
     manasteal?: number;
+    mp?: number;
     mp_cost?: number;
     resistance?: number;
     rpiercing?: number;

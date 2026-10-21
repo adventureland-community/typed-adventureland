@@ -10,7 +10,7 @@ import { capitalize } from "./helpers/capitalize";
 import { singular } from "./helpers/singular";
 import { UnionRegistry } from "./UnionRegistry";
 import { unique } from "./helpers/unique";
-import { filedir, filepath, root } from "./helpers/filepath";
+import { filedir, filepath, getGTypesRoot, setGTypesRoot } from "./helpers/filepath";
 
 const prettierOptions = { parser: "typescript" };
 
@@ -18,13 +18,24 @@ export interface GeneratorConfig {
   /** true if the config is disabled */
   disabled?: boolean;
 
-  /** Overrides the generated type for specific fields. */
+  /**
+   * Overrides the generated type for specific fields (top-level interface props).
+   * Value is a TypeScript type expression, e.g. `DamageType` or `"slow" | "fast"`.
+   * Pair with `imports` when the type is not a generated Key union.
+   */
   overrides: Record<string, string>;
+
+  /**
+   * Extra `import type` lines keyed by exported type name.
+   * Paths are relative to the emitted file (same style as hand-written GTypes).
+   * Example: `{ "DamageType": "../../../entity" }`
+   */
+  imports?: Record<string, string>;
 
   /** Extracts all values of the key into a type union named as the value. */
   extractedTypes: Record<string, string>;
 
-  /** Extracts all values of the key into a type union named as the value. */
+  /** JSDoc descriptions keyed by field name. */
   description: Record<string, string>;
 
   /** Mapping to override the generated category names. */
@@ -46,6 +57,7 @@ export class Generator {
   constructor(targetDir: string) {
     ensureDirectory(targetDir);
     this.targetDir = targetDir;
+    setGTypesRoot(targetDir);
   }
 
   loadConfig(configDir: string) {
@@ -241,7 +253,7 @@ export class Generator {
       cleanAnalysis(analysis);
 
       ensureDirectory(path.join(tmpDir, GKey));
-      ensureDirectory(path.resolve(root, GKey));
+      ensureDirectory(path.resolve(getGTypesRoot(), GKey));
 
       writeFileSync(path.join(tmpDir, GKey, "grouped.json"), JSON.stringify(grouped, null, 2));
 

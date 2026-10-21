@@ -2,6 +2,12 @@
   "GKey": "monsters",
   "groupKey": null,
   "nameOverride": {},
+  "overrides": {
+    "damage_type": "DamageType"
+  },
+  "imports": {
+    "DamageType": "../../../entity"
+  },
   "extractedTypes": {
     "name": "MonsterName"
   },

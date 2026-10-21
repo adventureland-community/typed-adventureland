@@ -96,6 +96,15 @@ export type StatusInfo = {
     strong?: boolean;
   };
   monsterhunt?: MonsterHuntStatusInfo;
+  /**
+   * Invitation to kiss the featured anniversary host this round.
+   * Server also sets `round`, `realm`, and `expires` on the condition object.
+   */
+  anniversary_visit?: StatusInfoBase & {
+    round: number;
+    realm: string;
+    expires: number;
+  };
   multi_burn?: {
     ms: number;
     ability: boolean;

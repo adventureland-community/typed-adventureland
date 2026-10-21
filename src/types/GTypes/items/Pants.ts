@@ -13,6 +13,7 @@ export type PantKey =
   | "mwpants" // Underarmor of the Hunter Warrior
   | "pants" // Pants
   | "pants1" // Rugged Pants
+  | "reedpants" // Reed Pants
   | "starkillers" // Star Killer's Pants
   | "wbreeches" // Wanderer's Breeches
   | "xmaspants" // Xmas Pants
@@ -25,6 +26,7 @@ export interface GPant {
   class?: Array<ClassKey>;
   crit?: number;
   dex?: number;
+  exclusive?: boolean;
   explanation?: string;
   extra_stat?: number;
   frequency?: number;

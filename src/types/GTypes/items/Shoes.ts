@@ -2,15 +2,21 @@ import type { ClassKey } from "../classes/Classes";
 import type { SetKey } from "../sets/Sets";
 
 export type ShoeKey =
+  | "bogwalkers" // Bogwalkers
+  | "candleboots" // Candlewick Boots
+  | "cave_mothsteps" // Mothstep Boots
+  | "cinderboots" // Cinder Boots
   | "eslippers" // Fluffy Slippers
   | "hboots" // Heavy Boots
   | "iceskates" // Ice Skates
+  | "ironheelboots" // Ironheel Boots
   | "mcboots" // Boots of the Hunter Merchant
   | "mmshoes" // Shoes of the Hunter Mage
   | "mpshoes" // Shoes of the Hunter Priest
   | "mrboots" // Boots of the Hunter Rogue
   | "mrnboots" // Boots of the Hunter Ranger
   | "mwboots" // Boots of the Hunter Warrior
+  | "rimeboots" // Rime Boots
   | "shoes" // Shoes
   | "shoes1" // Rugged Shoes
   | "snowboots" // Snow Boots
@@ -23,11 +29,21 @@ export type ShoeKey =
 export interface GShoe {
   a?: number | boolean;
   armor: number;
+  cave?: {
+    evasion: number;
+    speed: number;
+  };
   /** An array of classes that can use this item. */
-  class?: [ClassKey];
+  class?: Array<ClassKey>;
   credit?: string;
   cuteness?: number;
+  cx?: {
+    accent: string;
+  };
   dex?: number;
+  dreturn?: number;
+  evasion?: number;
+  exclusive?: boolean;
   explanation?: string;
   extra_stat?: number;
   firesistance?: number;
@@ -38,8 +54,11 @@ export interface GShoe {
   g: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
+  mcourage?: number;
   /** The full display name of an item. */
   name: string;
+  pcourage?: number;
+  pnresistance?: number;
   resistance?: number;
   scroll: boolean;
   /** The set this item is part of `G.sets.wanderers`. */
@@ -57,6 +76,7 @@ export interface GShoe {
   upgrade: {
     armor: number;
     cuteness?: number;
+    evasion?: number;
     frequency?: number;
     fzresistance?: number;
     resistance?: number;

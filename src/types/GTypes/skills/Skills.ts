@@ -29,7 +29,7 @@ export type SkillKey =
   | "darkblessing" // Dark Blessing
   | "dash" // Dash
   | "deepfreeze" // Deepfreeze
-  | "emotion" // Emotion
+  | "emotion" // Random Emote
   | "energize" // Energize
   | "entangle" // Entangle
   | "esc" // ESC
@@ -111,7 +111,35 @@ export type SkillKey =
   | "weakness_aura" // Weakness
   | "xpower" // Power
   | "zap" // Zap
-  | "zapperzap"; // Zap
+  | "zapperzap" // Zap
+  | "aether_shield" // Aether Shield
+  | "arcane_needle" // Arcane Needle
+  | "beacon_of_resolve" // Beacon of Resolve
+  | "boop" // Boop
+  | "cleansing_light" // Cleansing Light
+  | "drop_egg" // Drop Egg
+  | "fanofknives" // Fan of Knives
+  | "fart" // Fart
+  | "guardians_oath" // Guardian's Oath
+  | "headwiggle" // Head Wiggle
+  | "hearts_single" // Rising Hearts
+  | "highfive" // High Five
+  | "ikissyou" // I Kiss You
+  | "joy" // Joy
+  | "jump" // Jump
+  | "makeawish" // Make a Wish
+  | "massexchange" // Mass Exchange
+  | "massexchangepp" // Mass Exchange++
+  | "mirrordance" // Mirror Disco
+  | "paladin_aura" // Paladin Aura
+  | "pocketstorm" // Pocket Storm
+  | "rimeshatter" // Rime Shatter
+  | "rimeshell" // Rime Shell
+  | "shelter" // Shelter
+  | "shield_slam" // Shield Slam
+  | "spotlight" // Spotlight
+  | "superjump" // Super Jump
+  | "wiggle" // Wiggle;
 
 export interface GSkill {
   action?: string;
@@ -121,6 +149,8 @@ export interface GSkill {
   code?: boolean | string;
   complementary?: string;
   condition?: ConditionKey;
+  /** Extra pure damage per eligible buff/debuff removed (Purify). */
+  condition_damage?: number;
   consume?: ItemKey;
   cooldown?: number;
   cooldown_multiplier?: number;
@@ -166,6 +196,10 @@ export interface GSkill {
   skin?: string;
   skins?: [string, string, string];
   slot?: Array<[SlotType, ItemKey]>;
+  /** Cap on Rogue-stack bonus damage (Purify). */
+  stack_bonus_cap?: number;
+  /** Pure damage per Rogue stack on the target (Purify). */
+  stack_damage?: number;
   target?: boolean | string;
   toggle?: boolean;
   type?: string;

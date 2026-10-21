@@ -13,11 +13,28 @@
     "xp": "XP"
   },
   "overrides": {
-    "wtype": "WeaponType"
+    "wtype": "WeaponType",
+    "damage_type": "DamageType",
+    "ability": "ItemAbility",
+    "unlocks": "MapKey",
+    "projectile": "ProjectileKey",
+    "projectile_test": "ProjectileKey",
+    "set": "SetKey",
+    "class": "Array<ClassKey>"
+  },
+  "imports": {
+    "DamageType": "../../../entity",
+    "MapKey": "../maps/Maps",
+    "ProjectileKey": "../projectiles/Projectiles",
+    "SetKey": "../sets/Sets",
+    "ClassKey": "../classes/Classes",
+    "ItemAbility": "./index",
+    "WeaponType": "./index"
   },
   "extractedTypes": {
     "type": "ItemType",
-    "wtype": "WeaponType"
+    "wtype": "WeaponType",
+    "ability": "ItemAbility"
   },
   "description": {
     "class": "An array of classes that can use this item.",

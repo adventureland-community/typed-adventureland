@@ -1,7 +1,124 @@
 import { MapKey } from "../G";
+import type { CharacterEntityCXInfos } from "../entities/character-entity";
 import { BetterUXWrapper } from "../types/GTypes/utils";
 
 /** NOTE: Some event monsters don't have x and y (e.g.: Slenderman) */
+
+/**
+ * Live `parent.S.anniversary` while the season is on (`E.anniversary` from server).
+ * Deleted from `S` when the season is inactive. Not joinable via `join()`.
+ * @see node/logic/anniversary_event.js `tick()`
+ */
+export type AnniversarySEvent = {
+  active: true;
+  /** True when a featured host is currently selected for the round. */
+  live: boolean;
+  /** Epoch ms of the next selection slot. */
+  next: number;
+  /** Slot / round id while a host is live. */
+  round?: number;
+  /** Epoch ms when this host window ends. */
+  expires?: number;
+  /** Host character name. */
+  target?: string;
+  /** Host character id. */
+  id?: string;
+  /** Whether the featured host is still eligible / online. */
+  available?: boolean;
+  skin?: string;
+  cx?: CharacterEntityCXInfos;
+  map?: MapKey;
+  x?: number;
+  y?: number;
+};
+
+/**
+ * Per-character eligibility snapshot (`character.anniversary`), not broadcast to strangers.
+ * `null` when the season is off.
+ */
+export type CharacterAnniversaryStatus = {
+  realm: string;
+  round: number | null;
+  target: string | null;
+  reason:
+    | "no_round"
+    | "claimed"
+    | "realmfatigue"
+    | "hopsickness"
+    | "merchant_home"
+    | "host"
+    | "ready"
+    | "no_visit"
+    | string;
+};
+
+/**
+ * Account-day Witch's Cipher status on `character.witchcipher` while a round is live.
+ * @see node/logic/witch_cipher.js `witch_cipher_status`
+ */
+export type CharacterWitchCipherStatus = {
+  day?: string;
+  mixes: number;
+  mixes_left: number;
+  parcels: number;
+  /** Present when today's mixes belong to another realm (this realm has `mixes_left: 0`). */
+  server?: string;
+};
+
+/**
+ * Result of CODE `witch_cipher_info()` / interaction `action: "info"`.
+ * @see node/logic/witch_cipher.js `witch_cipher_info`
+ */
+export type WitchCipherInfo = {
+  mixes: number;
+  mixes_left: number;
+  parcels: number;
+  live: boolean;
+  server?: string;
+};
+
+/**
+ * Live `parent.S.witchcipher` while the cauldron round runs.
+ * @see node/logic/witch_cipher.js `witch_cipher_public`
+ */
+export type WitchCipherSEvent = {
+  live: boolean;
+  phase?: "gathering" | "brewing" | string;
+  id?: string;
+  start?: number;
+  gather_end?: number;
+  end?: number;
+  board?: Array<{ mix: string[]; right: number }>;
+  possible?: number;
+  mixes?: number;
+  cracks?: number;
+};
+
+/**
+ * Halloween Trick or Treat progress on `character.trickortreat`.
+ * @see node/logic/halloween_events.js `trick_or_treat_status`
+ */
+export type CharacterTrickOrTreatStatus = {
+  doors: number[];
+  doors_left: number;
+  stamps: number;
+};
+
+/** Graveyard Rising broadcast on `parent.S` / `E.graveyard`. */
+export type GraveyardSEvent = {
+  live: true;
+  map: MapKey;
+  x: number;
+  y: number;
+  start?: number;
+  wave?: number;
+  waves?: number;
+  left?: number;
+  /** Gargoyle fight stats when the boss is up. */
+  hp?: number;
+  max_hp?: number;
+  target?: string | null;
+};
 
 export type SMonsterEventLive = {
   /** Is the monster currently available? */
@@ -75,6 +192,15 @@ export type SEventsInfos = {
   mrpumpkin: SMonsterEventWithCoordinates;
   mrgreen: SMonsterEventWithCoordinates;
   slenderman: SMonsterEvent;
+  /** Headless Horseman (Halloween nightly). */
+  horseman?: SMonsterEventWithCoordinates;
+  /** Graveyard Rising waves + Gargoyle (Halloween). */
+  graveyard?: GraveyardSEvent;
+  /**
+   * Witch's Cipher cauldron round. Deleted when the round ends.
+   * Use `brew` / `witch_cipher_info`, not `join("witchcipher")`.
+   */
+  witchcipher?: WitchCipherSEvent | null;
 
   /** read more: https://adventure.land/docs/ref/event-goobrawl */
   goobrawl: {
@@ -115,4 +241,10 @@ export type SEventsInfos = {
    * icegolem is located on a closed island, make sure to not get stuck when the event is over.
    * read more: https://adventure.land/docs/ref/event-icegolem */
   icegolem: SMonsterEventWithCoordinates;
+
+  /**
+   * Ten Years of Adventure Land — present only while the season is active.
+   * Use for kiss targets / Mira; do not call `join("anniversary")`.
+   */
+  anniversary?: AnniversarySEvent;
 };
