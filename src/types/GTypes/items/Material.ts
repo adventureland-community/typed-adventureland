@@ -21,6 +21,7 @@ export type MaterialKey =
   | "dstones" // Digestive Stones
   | "ectoplasm" // Ectoplasm
   | "electronics" // Electronics
+  | "embercoal" // Ember Coal
   | "embercore" // Ember Core
   | "emptyheart" // Empty Heart
   | "essenceofether" // Ethereal Essence
@@ -33,6 +34,8 @@ export type MaterialKey =
   | "feather1" // Harpy Feather
   | "frogt" // Frog Tongue
   | "frostcore" // Frost Core
+  | "frostscale" // Frost Scale
+  | "gloomfeather" // Gloom Feather
   | "goldingot" // Gold Ingot
   | "goldnugget" // Gold Nugget
   | "gslime" // Slime Core
@@ -68,6 +71,7 @@ export type MaterialKey =
   | "trinkets" // Trinkets
   | "tshell" // Turtle Shell
   | "verdantcore" // Verdant Core
+  | "verdantspore" // Verdant Spore
   | "voidthread" // Void Thread
   | "watercore" // Water Core
   | "whiteegg"; // White Egg

@@ -8,6 +8,7 @@ export type ShieldKey =
   | "dawnwardaegis" // Dawnward Aegis
   | "lanternshield" // Lantern Shield
   | "mshield" // Shield M
+  | "patchbuckler" // Patchwork Buckler
   | "ratkingbuckler" // Ratking Buckler
   | "shield" // Shield
   | "sshield" // Spiked Shield
@@ -40,9 +41,11 @@ export interface GShield {
   hp?: number;
   int?: number;
   luck?: number;
+  mcourage?: number;
   mp?: number;
   /** The full display name of an item. */
   name: string;
+  pcourage?: number;
   phresistance?: number;
   resistance?: number;
   /** The set this item is part of `G.sets.wanderers`. */
@@ -59,11 +62,14 @@ export interface GShield {
   /** Contains information about what stats the item will gain with each upgrade level. Set if the item is upgradable. */
   upgrade: {
     armor?: number;
+    courage?: number;
     dreturn?: number;
     for?: number;
     hp?: number;
     luck?: number;
+    mcourage?: number;
     mp?: number;
+    pcourage?: number;
     resistance?: number;
     stat?: number;
     str?: number;

@@ -17,6 +17,7 @@ export type HelmetKey =
   | "helmet1" // Rugged Helmet
   | "hhelmet" // Heavy Helmet
   | "homecominghelm" // Homecoming Helm
+  | "horsemanpumpkin" // Horseman's Pumpkin
   | "mageshood" // Mage's Hood
   | "marketwatch" // Marketwatch Visor
   | "mchat" // Hat of the Hunter Merchant

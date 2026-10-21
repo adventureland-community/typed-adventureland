@@ -52,6 +52,74 @@ export type CharacterAnniversaryStatus = {
     | string;
 };
 
+/**
+ * Account-day Witch's Cipher status on `character.witchcipher` while a round is live.
+ * @see node/logic/witch_cipher.js `witch_cipher_status`
+ */
+export type CharacterWitchCipherStatus = {
+  day?: string;
+  mixes: number;
+  mixes_left: number;
+  parcels: number;
+  /** Present when today's mixes belong to another realm (this realm has `mixes_left: 0`). */
+  server?: string;
+};
+
+/**
+ * Result of CODE `witch_cipher_info()` / interaction `action: "info"`.
+ * @see node/logic/witch_cipher.js `witch_cipher_info`
+ */
+export type WitchCipherInfo = {
+  mixes: number;
+  mixes_left: number;
+  parcels: number;
+  live: boolean;
+  server?: string;
+};
+
+/**
+ * Live `parent.S.witchcipher` while the cauldron round runs.
+ * @see node/logic/witch_cipher.js `witch_cipher_public`
+ */
+export type WitchCipherSEvent = {
+  live: boolean;
+  phase?: "gathering" | "brewing" | string;
+  id?: string;
+  start?: number;
+  gather_end?: number;
+  end?: number;
+  board?: Array<{ mix: string[]; right: number }>;
+  possible?: number;
+  mixes?: number;
+  cracks?: number;
+};
+
+/**
+ * Halloween Trick or Treat progress on `character.trickortreat`.
+ * @see node/logic/halloween_events.js `trick_or_treat_status`
+ */
+export type CharacterTrickOrTreatStatus = {
+  doors: number[];
+  doors_left: number;
+  stamps: number;
+};
+
+/** Graveyard Rising broadcast on `parent.S` / `E.graveyard`. */
+export type GraveyardSEvent = {
+  live: true;
+  map: MapKey;
+  x: number;
+  y: number;
+  start?: number;
+  wave?: number;
+  waves?: number;
+  left?: number;
+  /** Gargoyle fight stats when the boss is up. */
+  hp?: number;
+  max_hp?: number;
+  target?: string | null;
+};
+
 export type SMonsterEventLive = {
   /** Is the monster currently available? */
   live: true;
@@ -124,6 +192,15 @@ export type SEventsInfos = {
   mrpumpkin: SMonsterEventWithCoordinates;
   mrgreen: SMonsterEventWithCoordinates;
   slenderman: SMonsterEvent;
+  /** Headless Horseman (Halloween nightly). */
+  horseman?: SMonsterEventWithCoordinates;
+  /** Graveyard Rising waves + Gargoyle (Halloween). */
+  graveyard?: GraveyardSEvent;
+  /**
+   * Witch's Cipher cauldron round. Deleted when the round ends.
+   * Use `brew` / `witch_cipher_info`, not `join("witchcipher")`.
+   */
+  witchcipher?: WitchCipherSEvent | null;
 
   /** read more: https://adventure.land/docs/ref/event-goobrawl */
   goobrawl: {

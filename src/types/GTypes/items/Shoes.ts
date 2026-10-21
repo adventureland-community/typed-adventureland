@@ -3,6 +3,7 @@ import type { SetKey } from "../sets/Sets";
 
 export type ShoeKey =
   | "bogwalkers" // Bogwalkers
+  | "candleboots" // Candlewick Boots
   | "cave_mothsteps" // Mothstep Boots
   | "cinderboots" // Cinder Boots
   | "eslippers" // Fluffy Slippers
@@ -53,8 +54,10 @@ export interface GShoe {
   g: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
+  mcourage?: number;
   /** The full display name of an item. */
   name: string;
+  pcourage?: number;
   pnresistance?: number;
   resistance?: number;
   scroll: boolean;

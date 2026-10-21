@@ -222,8 +222,8 @@ export type ImageKey =
   | "/images/tiles/items/teasers.png"
   | "/images/tiles/map/biocaves.png"
   | "/images/tiles/map/dreams-v3.png"
-  | "/images/tiles/monsters/femaledjinn_1.png";
-
+  | "/images/tiles/monsters/femaledjinn_1.png"
+  | "/images/cosmetics/makeup/makeup120_anim.png";
 export interface GImage {
   width: number;
   type: string;

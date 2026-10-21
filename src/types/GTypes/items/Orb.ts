@@ -10,6 +10,7 @@ export type OrbKey =
   | "harpyecho" // Harpy's Echo
   | "jacko" // Jack-o Lantern
   | "mimicgrin" // Mimic's Grin
+  | "blackcatbell" // Black Cat's Bell
   | "orba" // Orb of Adventures
   | "orbg" // Orb of Beginnings
   | "orbofdex" // Orb of Dexterity

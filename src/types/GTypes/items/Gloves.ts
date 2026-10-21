@@ -8,6 +8,7 @@ export type GloveKey =
   | "gloves1" // Rugged Gloves
   | "goldenpowerglove" // Golden Power Glove
   | "handofmidas" // Hand of Midas
+  | "hexweavegloves" // Hexweave Gloves
   | "hgloves" // Heavy Gloves
   | "mcgloves" // Gloves of the Hunter Merchant
   | "mirrorsteelgauntlet" // Mirrorsteel Gauntlet

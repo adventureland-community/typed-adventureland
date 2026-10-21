@@ -13,6 +13,7 @@ export type BeltKey =
   | "lbelt" // Belt
   | "mbelt" // Well-Crafted Belt
   | "mpxbelt" // Belt of MP Reduction
+  | "nightmarketsash" // Nightmarket Sash
   | "santasbelt" // Santa's Belt
   | "sbelt" // Belt of Hallowed Trials
   | "strbelt" // Belt of Strength
@@ -31,6 +32,7 @@ export interface GBelt {
     dreturn?: number;
     firesistance?: number;
     fzresistance?: number;
+    gold?: number;
     hp?: number;
     int?: number;
     mcourage?: number;
@@ -40,6 +42,7 @@ export interface GBelt {
     resistance?: number;
     speed?: number;
     str?: number;
+    vit?: number;
   };
   courage?: number;
   cx?: {
@@ -55,11 +58,16 @@ export interface GBelt {
   fzresistance?: number;
   /** Cost of the item in gold, if an NPC were to sell this item. */
   g: number;
+  gold?: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades?: [number, number, number, number];
   hp?: number;
   int?: number;
   mcourage?: number;
+  /** Map-local bonuses while trading as a merchant (e.g. Nightmarket Sash). */
+  merchant?: {
+    gold?: number;
+  };
   mp_cost?: number;
   mp_reduction?: number;
   /** The full display name of an item. */
@@ -73,6 +81,9 @@ export interface GBelt {
   skin: BeltKey;
   speed?: number;
   str?: number;
+  /** The tier of the item. */
+  tier?: number;
   /** The type of item, `shield`, `weapon`, `gloves`... */
   type: "belt";
+  vit?: number;
 }

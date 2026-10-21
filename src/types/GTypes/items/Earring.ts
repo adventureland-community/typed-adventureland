@@ -6,6 +6,7 @@ export type EarringKey =
   | "blightcap" // Blightcap Stud
   | "cearring" // Earring of The Crypt
   | "cloverstud" // Clover Stud
+  | "crookedkey" // Crooked Key Earring
   | "dexearring" // Earring of Dexterity
   | "dexearringx" // Enchanted Earring
   | "frostfang" // Frostfang Earring
@@ -40,6 +41,7 @@ export interface GEarring {
     int?: number;
     luck?: number;
     mp?: number;
+    rpiercing?: number;
     str?: number;
     vit?: number;
   };
@@ -68,6 +70,7 @@ export interface GEarring {
   name: string;
   /** Indicates the `quest` that this item is needed to complete. */
   quest?: EarringKey;
+  rpiercing?: number;
   /** The set this item is part of `G.sets.wanderers`. */
   set?: SetKey;
   /** The skin of the item. */

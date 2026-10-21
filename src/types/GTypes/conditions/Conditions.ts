@@ -56,6 +56,7 @@ export type ConditionKey =
   | "shocked" // Shocked
   | "sleeping" // Sleeping
   | "slowness" // Slowness
+  | "spooked" // Spooked!
   | "stack" // Pure Damage
   | "stoned" // Stoned
   | "stunned" // Stunned

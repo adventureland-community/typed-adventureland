@@ -184,8 +184,8 @@ export type SpriteKey =
   | "jubchan"
   | "lavaglass"
   | "rimedjinn"
-  | "stormhead";
-
+  | "stormhead"
+  | "makeup120";
 export interface GSprite {
   rows: number;
   type?: string;

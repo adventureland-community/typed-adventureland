@@ -4,6 +4,7 @@ import { SlotType, TradeSlotType } from "./entities/slots";
 import { Entity } from "./entity";
 import { ItemInfo, TradeWant } from "./items";
 import { IPosition, PositionReal, PositionSmart, ICoordReal } from "./position";
+import type { WitchCipherInfo } from "./parent/sevent-info";
 import { JoinableEventKey } from "./types/GTypes/events";
 import { BoosterKey, ItemKey } from "./types/GTypes/items";
 import { MapKey } from "./types/GTypes/maps";
@@ -705,6 +706,24 @@ declare global {
   /** Talk to a cave actor (`cave_request("talk", { room, actor })`). */
   function cave_talk(room: string | number, actor?: string): Promise<unknown>;
 
+  // --- Witch's Cipher / Trick or Treat ---
+  /**
+   * Brew five ingredient item keys (in order) at the Witch while a Cipher round is live.
+   * Emits `interaction` `{ type: "witchcipher", action: "brew", items }`.
+   * @example brew(["verdantspore","frostscale","embercoal","gloomfeather","verdantspore"])
+   */
+  function brew(ingredients: ItemKey[]): Promise<unknown>;
+  /**
+   * Account-day Cipher snapshot: mixes / mixes_left / parcels / live / server?
+   * Emits `interaction` `{ type: "witchcipher", action: "info" }`.
+   */
+  function witch_cipher_info(): Promise<WitchCipherInfo>;
+  /**
+   * Halloween Trick or Treat: knock on the door you are standing at, or a door index.
+   * Emits `interaction` `{ type: "knock", door }`.
+   */
+  function knock(door?: number): Promise<unknown>;
+
   // --- Tavern gambling ---
   /** Fortune's Wheel: even money on `"sun"` or `"moon"`. */
   function bet_wheel(
@@ -841,7 +860,8 @@ declare global {
 
   /**
    * Join a live joinable event (server transports you near it).
-   * Only `abtesting` | `goobrawl` | `crabxx` | `franky` | `icegolem` — see {@link JoinableEventKey}.
+   * Only joinable keys — see {@link JoinableEventKey} (includes `horseman` / `graveyard`).
+   * Witch's Cipher uses {@link brew} / {@link witch_cipher_info}, not `join`.
    * Anniversary / dreams / seasonal flags are not joined this way.
    */
   function join(eventName: JoinableEventKey): Promise<any>;

@@ -16,7 +16,8 @@ export type CapeKey =
   | "starcloak" // Starcloak
   | "stealthcape" // Stealth Cape
   | "tigercape" // Cape of the Tiger
-  | "vcape"; // Vampiric Cape
+  | "vcape" // Vampiric Cape
+  | "witchlightmantle"; // Witchlight Mantle
 
 export interface GCape {
   a?: boolean;
@@ -44,6 +45,10 @@ export interface GCape {
   gold?: number;
   /** The first number refers to what level the item begins being `high` grade, the second for `rare`. */
   grades: [number, number, number, number];
+  /** Spooky Forest map-local bonuses (Witchlight Mantle). */
+  halloween?: {
+    evasion?: number;
+  };
   mp?: number;
   mp_reduction?: number;
   /** The full display name of an item. */
@@ -58,6 +63,10 @@ export interface GCape {
   /** The skin of the item. */
   skin: string;
   speed?: number;
+  /** Spooky Town map-local bonuses (Witchlight Mantle). */
+  spookytown?: {
+    evasion?: number;
+  };
   stat: number;
   str?: number;
   /** The tier of the item. */
