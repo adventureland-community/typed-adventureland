@@ -149,6 +149,8 @@ export interface GSkill {
   code?: boolean | string;
   complementary?: string;
   condition?: ConditionKey;
+  /** Extra pure damage per eligible buff/debuff removed (Purify). */
+  condition_damage?: number;
   consume?: ItemKey;
   cooldown?: number;
   cooldown_multiplier?: number;
@@ -194,6 +196,10 @@ export interface GSkill {
   skin?: string;
   skins?: [string, string, string];
   slot?: Array<[SlotType, ItemKey]>;
+  /** Cap on Rogue-stack bonus damage (Purify). */
+  stack_bonus_cap?: number;
+  /** Pure damage per Rogue stack on the target (Purify). */
+  stack_damage?: number;
   target?: boolean | string;
   toggle?: boolean;
   type?: string;
