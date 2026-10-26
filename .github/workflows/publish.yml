@@ -32,9 +32,11 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
+          # Node 24 ships npm >= 11.5.1 (required for OIDC trusted publishing).
           node-version: "24"
-          registry-url: "https://registry.npmjs.org"
-          # Release builds must not reuse a cached install tree.
+          # Do not set registry-url: setup-node writes an empty _authToken line that
+          # can prevent npm from using OIDC (ENEEDAUTH). Registry comes from
+          # package.json publishConfig.
           package-manager-cache: false
 
       - name: Check Node and npm versions
