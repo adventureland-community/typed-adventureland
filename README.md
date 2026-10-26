@@ -18,18 +18,18 @@ Add `"./node_modules/typed-adventureland"` to the `"include"` array in your `tsc
 
 | Branch | Role |
 | --- | --- |
-| `main` | What is published on npm. The tip of `main` should match the latest release on [npm](https://www.npmjs.com/package/typed-adventureland). |
-| `dev` | Day-to-day development. Open feature PRs against `dev`. |
+| `main` | Exact tip that is published on [npm](https://www.npmjs.com/package/typed-adventureland). No day-to-day commits. |
+| `dev` | Development default. Open feature PRs against `dev`. |
 
-Do not land unfinished work on `main`. Promote from `dev` only when cutting a release.
+GitHub's default branch is `dev`. Promote `dev` → `main` only when cutting a release so `main` stays equal to the latest npm version.
 
 ## Releasing
 
-Publishes run from GitHub Actions on `v*` tags via npm Trusted Publishing (OIDC). There is no long-lived `NPM_TOKEN`.
+Publishes run from GitHub Actions on `v*` tags via npm Trusted Publishing (OIDC). There is no `NPM_TOKEN`.
 
 1. On `dev`, bump `version` in `package.json` and `package-lock.json` to the next version after the registry (for example `0.0.58`).
-2. Merge `dev` into `main` (PR or fast-forward). After this merge, `main` is the release candidate.
-3. From the release commit on `main`, tag and push:
+2. Merge `dev` into `main` (PR or fast-forward). `main` is now the release candidate.
+3. From that commit on `main`, tag and push:
 
    ```bash
    git checkout main
@@ -41,5 +41,28 @@ Publishes run from GitHub Actions on `v*` tags via npm Trusted Publishing (OIDC)
    The tag must match `package.json` or the workflow fails.
 4. Approve the `npm-publish` environment deployment on GitHub if prompted.
 5. Confirm the new version (and provenance) on https://www.npmjs.com/package/typed-adventureland.
+6. Leave `main` at that release tip. Keep developing on `dev`.
 
-Trusted Publisher setup (one-time, before the first OIDC publish) lives in the maintainer notes on the publish PR / workflow comments. npm requires a first successful publish within **2 days** of creating the trust entry. Details: https://docs.npmjs.com/trusted-publishers/
+### One-time Trusted Publisher setup
+
+Do this only when you are ready to tag within **2 days** (unused trust entries expire).
+
+As an npm owner (`thmsn`), either:
+
+```bash
+npm trust github typed-adventureland \
+  --file publish.yml \
+  --repo adventureland-community/typed-adventureland \
+  --env npm-publish \
+  --allow-publish
+```
+
+or on https://www.npmjs.com/package/typed-adventureland → **Settings** → **Trusted Publisher** → GitHub Actions:
+
+- Organization or user: `adventureland-community`
+- Repository: `typed-adventureland`
+- Workflow filename: `publish.yml`
+- Environment name: `npm-publish`
+- Allow `npm publish`
+
+Details: https://docs.npmjs.com/trusted-publishers/
