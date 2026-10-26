@@ -1,13 +1,19 @@
 {
   "name": "typed-adventureland",
-  "version": "0.0.55",
+  "version": "0.0.57",
   "description": "Strong TypeScript declarations for the game AdventureLand",
-  "repository": "adventureland-community/typed-adventureland",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adventureland-community/typed-adventureland.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adventureland-community/typed-adventureland/issues"
+  },
+  "homepage": "https://github.com/adventureland-community/typed-adventureland#readme",
   "main": "dist/src/index.d.ts",
   "types": "dist/src/index.d.ts",
   "files": [
-    "dist/**/*.d.ts",
-    "index.d.ts"
+    "dist/**/*.d.ts"
   ],
   "keywords": [
     "AdventureLand",
@@ -18,6 +24,10 @@
   ],
   "author": "adventureland-community",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "tsc && echo Emitted declaration files",
     "clean": "rm -rf ./dist && echo Cleaned dist",
