@@ -1,6 +1,11 @@
 # Publishes to npm via Trusted Publishing (OIDC). No NPM_TOKEN.
 # Configure the matching Trusted Publisher on npmjs.com before the first tag.
 # First successful publish must happen within 2 days of creating that trust entry.
+#
+# Release process:
+# 1. Bump package.json + package-lock.json version (next after registry, e.g. 0.0.58)
+# 2. Merge to the release branch
+# 3. git tag vX.Y.Z && git push origin vX.Y.Z
 name: Publish Package
 
 on:
